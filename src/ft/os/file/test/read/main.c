@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Updated: 2023/01/07 17:24:38 by Juyeong Maing    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_os_fork.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-t_err	ft_os_fork_multiple(
-	size_t count,
-	pid_t *out,
-	size_t *out_index,
-	size_t *out_count
-)
+#include "ft_os_file.h"
+
+int	main(int argc, char **argv)
 {
-	size_t	i;
+	char	*read;
 
-	i = -1;
-	while (++i < count)
-	{
-		if (ft_os_fork(&out[i]))
-		{
-			*out_count = i;
-			return (true);
-		}
-		if (out[i] == 0)
-		{
-			*out_index = i;
-			return (false);
-		}
-	}
-	*out_index = -1;
-	return (false);
+	if (argc < 2)
+		return (EXIT_FAILURE);
+	read = ft_os_file_read(argv[1]);
+	if (!read)
+		return (EXIT_FAILURE);
+	printf("%s\n", read);
+	free(read);
+	return (EXIT_SUCCESS);
 }

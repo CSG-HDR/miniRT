@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   minirt_hooks_exit.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Created: 2022/09/01 22:46:43 by Juyeong Maing     #+#    #+#             */
+/*   Updated: 2023/01/07 16:12:06 by Juyeong Maing    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wrap.h"
+#include "minirt_hooks.h"
 
-#include <unistd.h>
+#include <stdlib.h>
 
-int	wrap_pipe(int fds[2])
+#include "ft_exit.h"
+
+int	minirt_hooks_exit(int unused, t_minirt *param)
 {
-	return (pipe(fds));
+	(void)unused;
+	(void)param;
+	ft_exit(EXIT_SUCCESS);
+	return (0);
 }

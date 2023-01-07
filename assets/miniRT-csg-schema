@@ -1,0 +1,275 @@
+{
+  "$id": "miniRT-csg-schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "miniRT CSG map",
+  "description": "CSG map for miniRT",
+  "unevaluatedProperties": false,
+  "properties": {
+    "model": {
+      "$ref": "#/$defs/model"
+    },
+    "camera": {
+      "properties": {
+        "position": {
+          "$ref": "#/$defs/position"
+        },
+        "rotation": {
+          "$ref": "#/$defs/rotation"
+        },
+        "fov": {
+          "type": "number",
+          "description": "radius of sphere",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "position",
+        "rotation",
+        "fov"
+      ]
+    }
+  },
+  "required": [
+    "model",
+    "camera"
+  ],
+  "$defs": {
+    "model": {
+      "$ref": "#/$defs/model"
+    },
+    "csg": {
+      "oneOf": [
+        {
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "type of operation",
+              "enum": [
+                "union",
+                "intersection"
+              ]
+            },
+            "children": {
+              "type": "array",
+              "description": "operand of operation",
+              "items": {
+                "$ref": "#/$defs/model"
+              },
+              "minItems": 2
+            }
+          },
+          "required": [
+            "type",
+            "children"
+          ]
+        },
+        {
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "type of operation",
+              "enum": [
+                "difference"
+              ]
+            },
+            "from": {
+              "$ref": "#/$defs/model"
+            },
+            "subtract": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/csg"
+                },
+                {
+                  "$ref": "#/$defs/primitive"
+                }
+              ]
+            }
+          },
+          "required": [
+            "type",
+            "from",
+            "subtract"
+          ]
+        }
+      ]
+    },
+    "primitive": {
+      "oneOf": [
+        {
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "type of solid geometry",
+              "enum": [
+                "sphere"
+              ]
+            },
+            "position": {
+              "$ref": "#/$defs/position"
+            },
+            "radius": {
+              "type": "number",
+              "description": "radius of sphere",
+              "exclusiveMinimum": 0
+            }
+          },
+          "required": [
+            "type",
+            "position",
+            "radius"
+          ]
+        },
+        {
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "type of solid geometry",
+              "enum": [
+                "cube"
+              ]
+            },
+            "position": {
+              "$ref": "#/$defs/position"
+            },
+            "size": {
+              "$ref": "#/$defs/size"
+            },
+            "rotation": {
+              "$ref": "#/$defs/rotation"
+            }
+          },
+          "required": [
+            "type",
+            "position",
+            "size",
+            "rotation"
+          ]
+        }
+      ]
+    },
+    "position": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "description": "coordinates of the position [x, y, z]"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "size": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "description": "size [w, h, d]",
+        "exclusiveMinimum": 0
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "rotation": {
+      "oneOf": [
+        {
+          "properties": {
+            "angle": {
+              "$ref": "#/$defs/angle"
+            }
+          },
+          "required": [
+            "angle"
+          ]
+        },
+        {
+          "properties": {
+            "normal": {
+              "$ref": "#/$defs/normal"
+            }
+          },
+          "required": [
+            "normal"
+          ]
+        }
+      ]
+    },
+    "angle": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "description": "(rotation) angle for [x axis, y axis, z axis]",
+        "minimum": 0,
+        "exclusiveMaximum": 1
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "normal": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "description": "(rotation) normal for [x, y, z]",
+        "minimum": -1,
+        "inclusiveMaximum": 1
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "texture": {
+      "oneOf": [
+        {
+          "properties": {
+            "rgb": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "description": "color value [red, green, black]",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "minItems": 3,
+              "maxItems": 3
+            }
+          },
+          "required": [
+            "rgb"
+          ]
+        },
+        {
+          "properties": {
+            "hsv": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "description": "color value [hue, saturation, value]",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "minItems": 3,
+              "maxItems": 3
+            }
+          },
+          "required": [
+            "hsv"
+          ]
+        },
+        {
+          "properties": {
+            "hsl": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "description": "color value [hue, saturation, lightness]",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "minItems": 3,
+              "maxItems": 3
+            }
+          },
+          "required": [
+            "hsl"
+          ]
+        }
+      ]
+    }
+  }
+}

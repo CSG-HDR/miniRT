@@ -10,19 +10,38 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_os_process.h"
+#include "ft_os_file.h"
 
-#include <sys/wait.h>
+#include <fcntl.h>
 
+#include "ft_stringbuilder.h"
 #include "wrap.h"
 
-int	ft_os_process_wait_pids(pid_t *pids, size_t count)
-{
-	size_t	i;
-	int		last_stat_loc;
+#define BUFFER_SIZE 1024
 
-	i = -1;
-	while (++i < count)
-		wrap_waitpid(pids[i], &last_stat_loc, 0);
-	return (WEXITSTATUS(last_stat_loc));
+char	*ft_os_file_read(const char *filename)
+{
+	const int				fd = wrap_open(filename, O_RDONLY);
+	t_stringbuilder *const	sb = new_stringbuilder(BUFFER_SIZE);
+	char					buf[BUFFER_SIZE];
+	ssize_t					bytes_read;
+	char					*result;
+
+	if (fd < 0 && sb)
+		stringbuilder_free(sb);
+	if (!sb && fd >= 0)
+		wrap_close(fd);
+	if (!sb || fd < 0)
+		return (NULL);
+	bytes_read = wrap_read(fd, buf, BUFFER_SIZE);
+	while (bytes_read)
+	{
+		if (bytes_read < 0 || stringbuilder_append(sb, bytes_read, buf))
+			return (stringbuilder_free(sb), wrap_close(fd), NULL);
+		bytes_read = wrap_read(fd, buf, BUFFER_SIZE);
+	}
+	result = stringbuilder_to_string(sb, 0);
+	stringbuilder_free(sb);
+	wrap_close(fd);
+	return (result);
 }

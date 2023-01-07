@@ -8,7 +8,16 @@
   },
   "files.associations": {
     "*.h": "c",
+    "*.rt": "json",
   },
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "*.rt"
+      ],
+      "url": "./assets/miniRT-csg-schema",
+    },
+  ],
   "clangd.detectExtensionConflicts": false,
   "C_Cpp.autocomplete": "Disabled",
   "C_Cpp.intelliSenseEngine": "Disabled",
@@ -16,6 +25,15 @@
   "cSpell.words": [
     "Juyeong",
     "Maing",
-    "pipex",
+    "seongyle",
+    "minirt",
+    "vlength",
+    "vplus",
+    "vminus",
+    "vmult",
+    "vdivide",
+    "vdot",
+    "vcross",
+    "vunit",
   ],
 }

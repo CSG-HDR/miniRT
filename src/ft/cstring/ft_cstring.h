@@ -48,15 +48,6 @@ size_t		ft_strnlen_until_map(
 				size_t max_len,
 				const t_byte *map);
 
-size_t		ft_strnchp(
-				const char *str,
-				size_t max_len,
-				char ch);
-size_t		ft_strnrchp(
-				const char *str,
-				size_t max_len,
-				char ch);
-
 int			ft_cstring_compare(
 				const char *a,
 				const char *b);

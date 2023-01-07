@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   minirt_hooks_init.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Created: 2022/09/01 23:52:02 by Juyeong Maing     #+#    #+#             */
+/*   Updated: 2023/01/07 16:11:44 by Juyeong Maing    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wrap.h"
+#include "minirt_hooks.h"
 
-#include <sys/wait.h>
-
-pid_t	wrap_wait(int *stat_loc)
+int	minirt_hooks_init(t_minirt *param)
 {
-	return (wait(stat_loc));
+	minirt_render(param);
+	return (0);
 }

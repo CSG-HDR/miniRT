@@ -9,6 +9,10 @@ ARFLAGS := cr$(if $(filter 3,$(V) $(VERBOSE)),v,)
 CPPFLAGS += $(shell find . -type d -mindepth 1 | grep -v /test/ | sed "s/^/-I /" | xargs)
 CFLAGS := -Wall -Wextra -Werror -std=c99 -pedantic $(CPPFLAGS)
 
+# mlx
+CFLAGS += -I.cache/mlx/minilibx_opengl_20191021
+LDFLAGS += -L.cache/mlx/minilibx_opengl_20191021 -lmlx -framework OpenGL -framework AppKit
+
 SRC_DIR := .
 OBJ_DIR := .cache
 
@@ -33,6 +37,14 @@ re:
 test:
 	$(Q1)find . -type d -mindepth 1 -name "test" | xargs -L1 -I {} $(MAKE) -C {} test
 .PHONY: all bonus clean fclean re test
+
+.cache/mlx:
+	mkdir -p .cache/mlx.tmp
+	tar xf ../assets/minilibx_opengl.tgz -C .cache/mlx.tmp
+	rm -rf .cache/mlx
+	mv .cache/mlx.tmp .cache/mlx
+.cache/mlx/minilibx_opengl_20191021/libmlx.dylib: .cache/mlx
+	make -C .cache/mlx/minilibx_opengl_20191021 -j 1
 
 PROFILE ?= release
 ifeq ($(PROFILE),release)
@@ -59,10 +71,10 @@ LDFLAGS += $(if $(SANITIZER),-fsanitize=$(SANITIZER),)
 $(OBJ_DIR)/%.a:
 	$(Q3)mkdir -p $(@D)
 	$(Q2)$(AR) $(ARFLAGS) $@ $^
-$(OBJ_DIR)/%.exe: $(OBJ_DIR)/libwrap$(SUFFIX).a $(OBJ_DIR)/libft$(SUFFIX).a $(OBJ_DIR)/libfto$(SUFFIX).a
+$(OBJ_DIR)/%.exe: $(OBJ_DIR)/libwrap$(SUFFIX).a $(OBJ_DIR)/libft$(SUFFIX).a $(OBJ_DIR)/libfto$(SUFFIX).a | .cache/mlx/minilibx_opengl_20191021/libmlx.dylib
 	$(Q3)mkdir -p $(@D)
 	$(Q2)$(CC) $(LDFLAGS) -o $@ $^
-$(OBJ_DIR)/%$(SUFFIX).o: %.c
+$(OBJ_DIR)/%$(SUFFIX).o: %.c | .cache/mlx
 	$(Q3)mkdir -p $(@D)
 	$(Q2)$(CC) $(CFLAGS) -MJ $@.compile_commands.part.json -MMD -o $@ -c $<
 

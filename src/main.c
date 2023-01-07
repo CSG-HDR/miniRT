@@ -12,8 +12,13 @@
 
 #include "minirt.h"
 
-int	main(void)
+#include <mlx.h>
+
+int	main(int argc, char **argv)
 {
-	minirt_hello();
+	t_minirt	minirt;
+
+	minirt_init(&minirt, argc, argv);
+	mlx_loop(minirt.mlx_context);
 	return (0);
 }

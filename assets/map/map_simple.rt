@@ -1,0 +1,26 @@
+{
+  "type": "difference",
+  "from": {
+    "type": "cube",
+    "position": [1, 2, 3],
+    "size": [1, 2, 3],
+    "rotation": { "angle": [0, 0.5, 0.8] }
+  },
+  "subtract": {
+    "type": "intersection",
+    "children": [
+      {
+        "type": "cube",
+        "position": [1.5, 3.5, 5.5],
+        "size": [1, 2, 3],
+        "rotation": { "angle": [0, 0.5, 0.8] }
+      },
+      {
+        "type": "cube",
+        "position": [1, 2, 3],
+        "size": [1, 2, 3],
+        "rotation": { "angle": [0, 0.5, 0.8] }
+      }
+    ]
+  }
+}

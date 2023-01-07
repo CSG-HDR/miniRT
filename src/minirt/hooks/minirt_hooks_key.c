@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   minirt_hooks_key.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Created: 2022/09/01 22:47:32 by Juyeong Maing     #+#    #+#             */
+/*   Updated: 2023/01/07 16:11:22 by Juyeong Maing    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wrap.h"
+#include "minirt_hooks.h"
 
-#include <unistd.h>
+#include <stdlib.h>
 
-int	wrap_unlink(const char *pathname)
+#include "ft_exit.h"
+
+int	minirt_hooks_key(int keycode, t_minirt *param)
 {
-	return (unlink(pathname));
+	(void)param;
+	if (keycode == MLX_KEY_ESC)
+		ft_exit(EXIT_SUCCESS);
+	return (0);
 }

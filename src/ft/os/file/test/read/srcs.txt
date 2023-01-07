@@ -1,0 +1,12 @@
+main.c
+../../ft_os_file_read.c
+../../../../../wrap/wrap_open.c
+../../../../../wrap/wrap_close.c
+../../../../../wrap/wrap_read.c
+../../../../../wrap/wrap_malloc.c
+../../../../../wrap/wrap_free.c
+../../../../stringbuilder/ft_stringbuilder_new.c
+../../../../stringbuilder/ft_stringbuilder_free.c
+../../../../stringbuilder/ft_stringbuilder_append.c
+../../../../stringbuilder/ft_stringbuilder_to_string.c
+../../../../memory/ft_memory_copy.c

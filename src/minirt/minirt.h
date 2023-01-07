@@ -13,6 +13,16 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-void	minirt_hello(void);
+typedef struct s_minirt
+{
+	void				*mlx_context;
+	void				*mlx_window;
+	void				*pre_image;
+	void				*final_image;
+}	t_minirt;
+
+void	minirt_init(t_minirt *minirt, int argc, char **argv);
+
+void	minirt_render(t_minirt *param);
 
 #endif

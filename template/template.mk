@@ -12,6 +12,7 @@ OBJS = $(OBJS_MINIRT) $(OBJS_LIBWRAP) $(OBJS_LIBFT) $(OBJS_LIBFTO)
 OTHER_USEFUL_FILES = .editorconfig .gitignore
 
 CFLAGS = -Wall -Wextra -Werror -O
+LDFLAGS := -lmlx -framework OpenGL -framework AppKit
 ARFLAGS = cr
 
 
