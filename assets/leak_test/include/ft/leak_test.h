@@ -1,0 +1,61 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
+/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef LEAK_TEST_H
+# define LEAK_TEST_H
+
+# include <stddef.h>
+# include <stdbool.h>
+
+typedef void	t_leak_test_iterator;
+
+typedef bool	(*t_leak_test)(const void *context);
+typedef void	(*t_leak_test_handler)(
+					t_leak_test_iterator *iterator,
+					const void *context);
+typedef struct s_leak_test_options
+{
+	size_t				maximum_count;
+	size_t				minimum_count;
+	bool				allow_empty;
+	t_leak_test_handler	on_leak;
+}	t_leak_test_options;
+
+int			leak_test(
+				t_leak_test target,
+				const void *context,
+				t_leak_test_options *options);
+void		leak_test_start(void);
+void		leak_test_end(void);
+const char	*leak_test_error(int errno);
+
+bool		leak_test_iterator_has_next(t_leak_test_iterator *self);
+bool		leak_test_iterator_next(t_leak_test_iterator *self);
+
+// OK. No error.
+# define FT_LEAK_TEST_RESULT_OK 0
+// At least one leak was found.
+# define FT_LEAK_TEST_RESULT_LEAK 1
+// No malloc() call. Possibly wrong test function.
+# define FT_LEAK_TEST_RESULT_NO_ALLOCATION 2
+// Test function returned an error, or allocation failed.
+# define FT_LEAK_TEST_RESULT_ERROR -1
+// Too many tries. Avoid allocations after allocation failures.
+# define FT_LEAK_TEST_RESULT_ERROR_TOO_MANY -2
+// malloc() call in malloc hook was failed.
+# define FT_LEAK_TEST_RESULT_ERROR_ALLOCATION_FAILURE -3
+// Test function NOT always do same thing even with same malloc() result.
+# define FT_LEAK_TEST_RESULT_ERROR_WRONG_TEST -4
+// malloc() called count is smaller than minimum count
+# define FT_LEAK_TEST_RESULT_ERROR_TOO_SMALL -5
+
+#endif

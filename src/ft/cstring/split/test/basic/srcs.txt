@@ -1,0 +1,9 @@
+main.c
+test.c
+../../ft_cstring_split.c
+../../ft_cstring_split_count.c
+../../ft_cstring_split_free.c
+../../../duplicate/ft_cstring_duplicate_length.c
+../../../find/ft_cstring_find_one_of.c
+../../../../../wrap/wrap_malloc.c
+../../../../../wrap/wrap_free.c

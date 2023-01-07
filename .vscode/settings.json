@@ -1,0 +1,21 @@
+{
+  "files.exclude": {
+    ".vscode": true,
+    "**/.cache": true,
+    "**/*.{exe,dSYM}": true,
+    "**/compile_commands.json": true,
+    "**/*.part.json": true
+  },
+  "files.associations": {
+    "*.h": "c",
+  },
+  "clangd.detectExtensionConflicts": false,
+  "C_Cpp.autocomplete": "Disabled",
+  "C_Cpp.intelliSenseEngine": "Disabled",
+  "sonarlint.pathToCompileCommands": "${workspaceFolder}/compile_commands.json",
+  "cSpell.words": [
+    "Juyeong",
+    "Maing",
+    "pipex",
+  ],
+}

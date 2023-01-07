@@ -1,0 +1,2 @@
+main.c
+../../ft_types_convert_strict_string_to_long_double.c

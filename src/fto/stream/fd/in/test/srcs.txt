@@ -1,0 +1,10 @@
+main.c
+../fto_stream_fd_in_new.c
+../fto_stream_fd_in_v_read.c
+../fto_stream_fd_in_v_read_all.c
+../fto_stream_fd_in_v_end.c
+../fto_stream_fd_in_v_free.c
+../../../../../wrap/wrap_malloc.c
+../../../../../wrap/wrap_free.c
+../../../../../wrap/wrap_read.c
+../../../../../wrap/wrap_close.c

@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug pipex",
+      "program": "${workspaceFolder}/src/.cache/pipex.production.debug.address.exe",
+      "cwd": "${workspaceFolder}/src",
+      "args": ["Makefile", "cat", "test.txt"],
+      "preLaunchTask": "build pipex (debug)",
+    },

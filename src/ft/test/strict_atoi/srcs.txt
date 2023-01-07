@@ -1,0 +1,2 @@
+main.c
+../../ft_strict_atoi.c
