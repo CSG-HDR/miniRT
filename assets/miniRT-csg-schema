@@ -29,7 +29,7 @@
           "type": "number",
           "description": "field of view",
           "exclusiveMinimum": 0,
-          "exclusiveMaximum": 1
+          "exclusiveMaximum": 0.5
         }
       },
       "required": [
