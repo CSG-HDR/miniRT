@@ -5,8 +5,17 @@
   "description": "CSG map for miniRT",
   "unevaluatedProperties": false,
   "properties": {
-    "model": {
-      "$ref": "#/$defs/model"
+    "models": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/model"
+      }
+    },
+    "lights": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/light"
+      }
     },
     "camera": {
       "properties": {
@@ -18,8 +27,9 @@
         },
         "fov": {
           "type": "number",
-          "description": "radius of sphere",
-          "exclusiveMinimum": 0
+          "description": "field of view",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1
         }
       },
       "required": [
@@ -27,15 +37,49 @@
         "rotation",
         "fov"
       ]
+    },
+    "viewport": {
+      "properties": {
+        "size": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "description": "size of the viewport [width, height]"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "only": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "description": "render only in [startX, startY, endX, endY]. default is [0, 0, width, height]"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        }
+      },
+      "required": [
+        "size"
+      ]
     }
   },
   "required": [
-    "model",
-    "camera"
+    "models",
+    "lights",
+    "camera",
+    "viewport"
   ],
   "$defs": {
     "model": {
-      "$ref": "#/$defs/model"
+      "oneOf": [
+        {
+          "$ref": "#/$defs/csg"
+        },
+        {
+          "$ref": "#/$defs/primitive"
+        }
+      ]
     },
     "csg": {
       "oneOf": [
@@ -148,6 +192,124 @@
         }
       ]
     },
+    "light": {
+      "oneOf": [
+        {
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "type of light",
+              "enum": [
+                "point"
+              ]
+            },
+            "color": {
+              "$ref": "#/$defs/light-color"
+            },
+            "position": {
+              "$ref": "#/$defs/position"
+            },
+            "range": {
+              "type": "number",
+              "description": "default is infinity",
+              "exclusiveMinimum": 0
+            }
+          },
+          "required": [
+            "type",
+            "color",
+            "position"
+          ]
+        },
+        {
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "type of light",
+              "enum": [
+                "directional"
+              ]
+            },
+            "color": {
+              "$ref": "#/$defs/light-color"
+            },
+            "direction": {
+              "$ref": "#/$defs/rotation"
+            }
+          },
+          "required": [
+            "type",
+            "color",
+            "direction"
+          ]
+        },
+        {
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "type of light",
+              "enum": [
+                "point"
+              ]
+            },
+            "color": {
+              "$ref": "#/$defs/light-color"
+            },
+            "position": {
+              "$ref": "#/$defs/position"
+            },
+            "range": {
+              "type": "number",
+              "description": "default is infinity",
+              "exclusiveMinimum": 0
+            }
+          },
+          "required": [
+            "type",
+            "color",
+            "position"
+          ]
+        },
+        {
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "type of light",
+              "enum": [
+                "spot"
+              ]
+            },
+            "color": {
+              "$ref": "#/$defs/light-color"
+            },
+            "position": {
+              "$ref": "#/$defs/position"
+            },
+            "angle": {
+              "type": "number",
+              "description": "angle for the spot light",
+              "exclusiveMinimum": 0,
+              "exclusiveMaximum": 1
+            },
+            "direction": {
+              "$ref": "#/$defs/rotation"
+            },
+            "range": {
+              "type": "number",
+              "description": "default is infinity",
+              "exclusiveMinimum": 0
+            }
+          },
+          "required": [
+            "type",
+            "color",
+            "position",
+            "angle",
+            "direction"
+          ]
+        }
+      ]
+    },
     "position": {
       "type": "array",
       "items": {
@@ -206,9 +368,19 @@
       "type": "array",
       "items": {
         "type": "number",
-        "description": "(rotation) normal for [x, y, z]",
+        "description": "normal for [x, y, z]",
         "minimum": -1,
         "inclusiveMaximum": 1
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "light-color": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "description": "color value [red, green, blue] in high dynamic range",
+        "minimum": 0
       },
       "minItems": 3,
       "maxItems": 3
@@ -221,9 +393,9 @@
               "type": "array",
               "items": {
                 "type": "number",
-                "description": "color value [red, green, black]",
+                "description": "color value [red, green, blue]",
                 "minimum": 0,
-                "maximum": 1
+                "inclusiveMaximum": 1
               },
               "minItems": 3,
               "maxItems": 3
@@ -241,7 +413,7 @@
                 "type": "number",
                 "description": "color value [hue, saturation, value]",
                 "minimum": 0,
-                "maximum": 1
+                "inclusiveMaximum": 1
               },
               "minItems": 3,
               "maxItems": 3
@@ -259,7 +431,7 @@
                 "type": "number",
                 "description": "color value [hue, saturation, lightness]",
                 "minimum": 0,
-                "maximum": 1
+                "inclusiveMaximum": 1
               },
               "minItems": 3,
               "maxItems": 3
