@@ -10,15 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "t_f3.h"
 
-#include "mlx.h"
-
-int	main(int argc, char **argv)
+t_f3	t_f3_sub(t_f3 a, t_f3 b)
 {
-	t_minirt	minirt;
-
-	minirt_init(&minirt, argc, argv);
-	mlx_loop(minirt.mlx_context);
-	return (0);
+	return ((t_f3){a.x - b.x, a.y - b.y, a.z - b.z});
 }

@@ -10,15 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#ifndef T_F3_H
+# define T_F3_H
 
-#include "mlx.h"
+# include "t_f.h"
 
-int	main(int argc, char **argv)
+typedef struct s_f3
 {
-	t_minirt	minirt;
+	t_f	x;
+	t_f	y;
+	t_f	z;
+}	t_f3;
 
-	minirt_init(&minirt, argc, argv);
-	mlx_loop(minirt.mlx_context);
-	return (0);
-}
+t_f3	t_f3_add(t_f3 a, t_f3 b);
+t_f3	t_f3_sub(t_f3 a, t_f3 b);
+t_f3	t_f3_mul(t_f3 a, t_f b);
+t_f3	t_f3_div(t_f3 a, t_f b);
+t_f3	t_f3_mul3(t_f3 a, t_f3 b);
+t_f3	t_f3_div3(t_f3 a, t_f3 b);
+t_f		t_f3_dot(t_f3 a, t_f3 b);
+t_f3	t_f3_cross(t_f3 a, t_f3 b);
+t_f3	t_f3_neg(t_f3 f);
+t_f3	t_f3_inv(t_f3 f);
+t_f		t_f3_sqr_length(t_f3 f);
+t_f		t_f3_length(t_f3 f);
+t_f		t_f3_unit(t_f3 f);
+
+#endif

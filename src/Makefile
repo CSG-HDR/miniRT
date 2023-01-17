@@ -18,6 +18,7 @@ OBJ_DIR := .cache
 
 SRCS_MINIRT := ./main.c $(shell find . -name "minirt_*.c" | grep -v /test/ | xargs)
 SRCS_LIBWRAP := $(shell find . -name "wrap_*.c" | grep -v /test/ | xargs)
+SRCS_LIBT := $(shell find . -name "t_*.c" | grep -v /test/ | xargs)
 SRCS_LIBFT := $(shell find . -name "ft_*.c" | grep -v /test/ | xargs)
 SRCS_LIBFTO := $(shell find . -name "fto_*.c" | grep -v /test/ | xargs)
 
@@ -71,7 +72,7 @@ LDFLAGS += $(if $(SANITIZER),-fsanitize=$(SANITIZER),)
 $(OBJ_DIR)/%.a:
 	$(Q3)mkdir -p $(@D)
 	$(Q2)$(AR) $(ARFLAGS) $@ $^
-$(OBJ_DIR)/%.exe: $(OBJ_DIR)/libwrap$(SUFFIX).a $(OBJ_DIR)/libft$(SUFFIX).a $(OBJ_DIR)/libfto$(SUFFIX).a | .cache/mlx/minilibx_opengl_20191021/libmlx.dylib
+$(OBJ_DIR)/%.exe: $(OBJ_DIR)/libwrap$(SUFFIX).a $(OBJ_DIR)/libt$(SUFFIX).a $(OBJ_DIR)/libft$(SUFFIX).a $(OBJ_DIR)/libfto$(SUFFIX).a | .cache/mlx/minilibx_opengl_20191021/libmlx.dylib
 	$(Q3)mkdir -p $(@D)
 	$(Q2)$(CC) $(LDFLAGS) -o $@ $^
 $(OBJ_DIR)/%$(SUFFIX).o: %.c | .cache/mlx
@@ -79,6 +80,7 @@ $(OBJ_DIR)/%$(SUFFIX).o: %.c | .cache/mlx
 	$(Q2)$(CC) $(CFLAGS) -MJ $@.compile_commands.part.json -MMD -o $@ -c $<
 
 $(OBJ_DIR)/libwrap$(SUFFIX).a: $(patsubst ./%.c,$(OBJ_DIR)/%$(SUFFIX).o,$(SRCS_LIBWRAP))
+$(OBJ_DIR)/libt$(SUFFIX).a: $(patsubst ./%.c,$(OBJ_DIR)/%$(SUFFIX).o,$(SRCS_LIBT))
 $(OBJ_DIR)/libft$(SUFFIX).a: $(patsubst ./%.c,$(OBJ_DIR)/%$(SUFFIX).o,$(SRCS_LIBFT))
 $(OBJ_DIR)/libfto$(SUFFIX).a: $(patsubst ./%.c,$(OBJ_DIR)/%$(SUFFIX).o,$(SRCS_LIBFTO))
 $(OBJ_DIR)/$(NAME)$(SUFFIX).exe: $(patsubst ./%.c,$(OBJ_DIR)/%$(SUFFIX).o,$(SRCS_MINIRT))

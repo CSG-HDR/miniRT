@@ -10,15 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#ifndef T_F_H
+# define T_F_H
 
-#include "mlx.h"
+# ifndef PRECISION
+#  define PRECISION 3
+# endif
 
-int	main(int argc, char **argv)
-{
-	t_minirt	minirt;
+# if PRECISION == 0
 
-	minirt_init(&minirt, argc, argv);
-	mlx_loop(minirt.mlx_context);
-	return (0);
-}
+typedef long double	t_f;
+
+# elif PRECISION == 1
+
+typedef double		t_f;
+
+# elif PRECISION == 2
+
+typedef float		t_f;
+
+# elif PRECISION == 3
+
+typedef _Float16	t_f;
+
+# endif
+
+t_f	t_f_sqr(t_f f);
+t_f	t_f_sqrt(t_f f);
+
+#endif

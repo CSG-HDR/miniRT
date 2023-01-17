@@ -10,15 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "t_f.h"
 
-#include "mlx.h"
+#include <math.h>
 
-int	main(int argc, char **argv)
+#if PRECISION == 0
+
+t_f	t_f_sqrt(t_f f)
 {
-	t_minirt	minirt;
-
-	minirt_init(&minirt, argc, argv);
-	mlx_loop(minirt.mlx_context);
-	return (0);
+	return (sqrtl(f));
 }
+
+#elif PRECISION == 1
+
+t_f	t_f_sqrt(t_f f)
+{
+	return (sqrt(f));
+}
+
+#elif PRECISION == 2
+
+t_f	t_f_sqrt(t_f f)
+{
+	return (sqrtf(f));
+}
+
+#elif PRECISION == 3
+
+t_f	t_f_sqrt(t_f f)
+{
+	return ((t_f)sqrtf((float)f));
+}
+
+#endif

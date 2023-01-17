@@ -10,15 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "t_f.h"
 
-#include "mlx.h"
-
-int	main(int argc, char **argv)
+t_f	t_f_sqr(t_f f)
 {
-	t_minirt	minirt;
-
-	minirt_init(&minirt, argc, argv);
-	mlx_loop(minirt.mlx_context);
-	return (0);
+	return (f * f);
 }

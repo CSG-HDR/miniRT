@@ -14,7 +14,7 @@
 
 #include <unistd.h>
 
-#include <mlx.h>
+#include "mlx.h"
 
 #include "ft_exit.h"
 #include "ft_io.h"
