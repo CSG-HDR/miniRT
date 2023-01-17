@@ -1,26 +1,99 @@
 {
-  "type": "difference",
-  "from": {
-    "type": "cube",
-    "position": [1, 2, 3],
-    "size": [1, 2, 3],
-    "rotation": { "angle": [0, 0.5, 0.8] }
-  },
-  "subtract": {
-    "type": "intersection",
-    "children": [
-      {
+  "models": [
+    {
+      "type": "difference",
+      "from": {
         "type": "cube",
-        "position": [1.5, 3.5, 5.5],
-        "size": [1, 2, 3],
-        "rotation": { "angle": [0, 0.5, 0.8] }
+        "position": [
+          1,
+          2,
+          3
+        ],
+        "size": [
+          1,
+          2,
+          3
+        ],
+        "rotation": {
+          "angle": [
+            0,
+            0.5,
+            0.8
+          ]
+        }
       },
-      {
-        "type": "cube",
-        "position": [1, 2, 3],
-        "size": [1, 2, 3],
-        "rotation": { "angle": [0, 0.5, 0.8] }
+      "subtract": {
+        "type": "intersection",
+        "children": [
+          {
+            "type": "cube",
+            "position": [
+              1.5,
+              3.5,
+              5.5
+            ],
+            "size": [
+              1,
+              2,
+              3
+            ],
+            "rotation": {
+              "angle": [
+                0,
+                0.5,
+                0.8
+              ]
+            }
+          },
+          {
+            "type": "cube",
+            "position": [
+              1,
+              2,
+              3
+            ],
+            "size": [
+              1,
+              2,
+              3
+            ],
+            "rotation": {
+              "angle": [
+                0,
+                0.5,
+                0.8
+              ]
+            }
+          }
+        ]
       }
+    }
+  ],
+  "lights": [],
+  "camera": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": {
+      "normal": [
+        0,
+        0,
+        1
+      ]
+    },
+    "fov": 0.25
+  },
+  "viewport": {
+    "size": [
+      1920,
+      1080
     ]
-  }
+  },
+  "ambientLight": [
+    1,
+    1,
+    1
+  ]
 }
