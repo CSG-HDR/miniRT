@@ -417,6 +417,15 @@
           "type": "string",
           "description": "path of the texture file"
         },
+        "size": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "description": "size of texture [width, height], default is [1, 1]"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
         "only": {
           "type": "array",
           "items": {
@@ -425,6 +434,10 @@
           },
           "minItems": 2,
           "maxItems": 2
+        },
+        "mirror": {
+          "type": "boolean",
+          "description": "address mode - true: mirror, false: wrap. default is false"
         }
       },
       "required": [
