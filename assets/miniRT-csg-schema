@@ -3,6 +3,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "miniRT CSG map",
   "description": "CSG map for miniRT",
+  "type": "object",
   "unevaluatedProperties": false,
   "properties": {
     "models": {
@@ -18,6 +19,7 @@
       }
     },
     "camera": {
+      "type": "object",
       "unevaluatedProperties": false,
       "properties": {
         "position": {
@@ -40,6 +42,7 @@
       ]
     },
     "viewport": {
+      "type": "object",
       "unevaluatedProperties": false,
       "properties": {
         "size": {
@@ -92,6 +95,7 @@
     "csg": {
       "oneOf": [
         {
+          "type": "object",
           "unevaluatedProperties": false,
           "properties": {
             "type": {
@@ -117,6 +121,7 @@
           ]
         },
         {
+          "type": "object",
           "unevaluatedProperties": false,
           "properties": {
             "type": {
@@ -151,6 +156,7 @@
     "primitive": {
       "oneOf": [
         {
+          "type": "object",
           "unevaluatedProperties": false,
           "properties": {
             "type": {
@@ -176,6 +182,7 @@
           ]
         },
         {
+          "type": "object",
           "unevaluatedProperties": false,
           "properties": {
             "type": {
@@ -223,6 +230,7 @@
     "light": {
       "oneOf": [
         {
+          "type": "object",
           "unevaluatedProperties": false,
           "properties": {
             "type": {
@@ -251,6 +259,7 @@
           ]
         },
         {
+          "type": "object",
           "unevaluatedProperties": false,
           "properties": {
             "type": {
@@ -274,6 +283,7 @@
           ]
         },
         {
+          "type": "object",
           "unevaluatedProperties": false,
           "properties": {
             "type": {
@@ -302,6 +312,7 @@
           ]
         },
         {
+          "type": "object",
           "unevaluatedProperties": false,
           "properties": {
             "type": {
@@ -364,6 +375,7 @@
     "rotation": {
       "oneOf": [
         {
+          "type": "object",
           "unevaluatedProperties": false,
           "properties": {
             "angle": {
@@ -375,6 +387,7 @@
           ]
         },
         {
+          "type": "object",
           "unevaluatedProperties": false,
           "properties": {
             "normal": {
@@ -441,6 +454,7 @@
       ]
     },
     "texture": {
+      "type": "object",
       "unevaluatedProperties": false,
       "properties": {
         "src": {
@@ -479,6 +493,7 @@
       ]
     },
     "material": {
+      "type": "object",
       "unevaluatedProperties": false,
       "properties": {
         "color": {
