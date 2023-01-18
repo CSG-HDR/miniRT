@@ -65,7 +65,20 @@ else
 $(error Bad target)
 endif
 
-SUFFIX := .$(TARGET).$(PROFILE)$(if $(SANITIZER),.$(SANITIZER))
+PRECISION ?= 0
+ifeq ($(PRECISION),3)
+CFLAGS += -DPRECISION=3
+else ifeq ($(PRECISION),2)
+CFLAGS += -DPRECISION=2
+else ifeq ($(PRECISION),1)
+CFLAGS += -DPRECISION=1
+else ifeq ($(PRECISION),0)
+CFLAGS += -DPRECISION=0
+else
+$(error Bad precision)
+endif
+
+SUFFIX := .$(TARGET).$(PROFILE)$(if $(SANITIZER),.$(SANITIZER)).$(PRECISION)
 CFLAGS += $(if $(SANITIZER),-fsanitize=$(SANITIZER),)
 LDFLAGS += $(if $(SANITIZER),-fsanitize=$(SANITIZER),)
 
