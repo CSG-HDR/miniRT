@@ -1,0 +1,10 @@
+{
+  "models": [],
+  "lights": [],
+  "camera": {
+    "position": [0, 0, 0],
+    "rotation": { "normal": [0, 0, 0] },
+    "fov": 0.25
+  },
+  "viewport": { "size": [1920, 1080] }
+}
