@@ -388,62 +388,57 @@
       "minItems": 3,
       "maxItems": 3
     },
-    "texture": {
+    "material-color": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "description": "color value [red, green, blue] in low dynamic range",
+        "minimum": 0
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "map": {
       "oneOf": [
         {
-          "properties": {
-            "rgb": {
-              "type": "array",
-              "items": {
-                "type": "number",
-                "description": "color value [red, green, blue]",
-                "minimum": 0,
-                "inclusiveMaximum": 1
-              },
-              "minItems": 3,
-              "maxItems": 3
-            }
-          },
-          "required": [
-            "rgb"
-          ]
+          "$ref": "#/$defs/material-color"
         },
         {
-          "properties": {
-            "hsv": {
-              "type": "array",
-              "items": {
-                "type": "number",
-                "description": "color value [hue, saturation, value]",
-                "minimum": 0,
-                "inclusiveMaximum": 1
-              },
-              "minItems": 3,
-              "maxItems": 3
-            }
-          },
-          "required": [
-            "hsv"
-          ]
-        },
-        {
-          "properties": {
-            "hsl": {
-              "type": "array",
-              "items": {
-                "type": "number",
-                "description": "color value [hue, saturation, lightness]",
-                "minimum": 0,
-                "inclusiveMaximum": 1
-              },
-              "minItems": 3,
-              "maxItems": 3
-            }
-          },
-          "required": [
-            "hsl"
-          ]
+          "$ref": "#/$defs/texture"
         }
+      ]
+    },
+    "texture": {
+      "properties": {
+        "src": {
+          "type": "string",
+          "description": "path of the texture file"
+        },
+        "only": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "description": "coordinates of texture only in [x, y]"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      },
+      "required": [
+        "src"
+      ]
+    },
+    "material": {
+      "properties": {
+        "color": {
+          "$ref": "#/$defs/map"
+        },
+        "normal": {
+          "$ref": "#/$defs/map"
+        }
+      },
+      "required": [
+        "color"
       ]
     }
   }
