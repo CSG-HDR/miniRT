@@ -464,6 +464,10 @@
           "minItems": 2,
           "maxItems": 2
         },
+        "nearest": {
+          "type": "boolean",
+          "description": "filter mode - true: nearest, false: linear. default is false"
+        },
         "mirror": {
           "type": "boolean",
           "description": "address mode - true: mirror, false: wrap. default is false"
