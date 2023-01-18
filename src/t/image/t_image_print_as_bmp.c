@@ -109,9 +109,9 @@ t_err	t_image_print_as_bmp(t_image *self)
 		x = -1;
 		while (++x < self->width)
 			if (printf("%c%c%c",
-					(unsigned char)(self->extra[self->height * y + x].z * 255),
-					(unsigned char)(self->extra[self->height * y + x].y * 255),
-					(unsigned char)(self->extra[self->height * y + x].x * 255))
+					(unsigned char)(self->extra[self->width * y + x].z * 255),
+					(unsigned char)(self->extra[self->width * y + x].y * 255),
+					(unsigned char)(self->extra[self->width * y + x].x * 255))
 				< 0)
 				return (true);
 		x = -1;
