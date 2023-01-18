@@ -135,14 +135,7 @@
               "$ref": "#/$defs/model"
             },
             "subtract": {
-              "oneOf": [
-                {
-                  "$ref": "#/$defs/csg"
-                },
-                {
-                  "$ref": "#/$defs/primitive"
-                }
-              ]
+              "$ref": "#/$defs/model"
             }
           },
           "required": [
