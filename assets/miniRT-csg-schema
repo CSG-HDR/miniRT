@@ -414,7 +414,8 @@
       "items": {
         "type": "number",
         "description": "color value [red, green, blue] in high dynamic range",
-        "minimum": 0
+        "minimum": 0,
+        "maximum": 1
       },
       "minItems": 3,
       "maxItems": 3
