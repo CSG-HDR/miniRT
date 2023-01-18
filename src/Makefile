@@ -88,5 +88,9 @@ $(EXECUTABLE_TARGETS): %: $(OBJ_DIR)/%$(SUFFIX).exe
 	$(Q1)cp $< $@.exe
 .PHONY: $(EXECUTABLE_TARGETS)
 
+.PHONY: run
+run: .cache/$(NAME)$(SUFFIX).exe
+	$QDYLD_LIBRARY_PATH=.cache/mlx/minilibx_opengl_20191021 ./$< $(ARGS)
+
 # dependencies
 -include $(patsubst ./%.c,$(OBJ_DIR)/%$(SUFFIX).d,$(SRCS))
