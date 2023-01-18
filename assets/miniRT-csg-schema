@@ -187,13 +187,29 @@
             },
             "rotation": {
               "$ref": "#/$defs/rotation"
+            },
+            "material": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/material"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/material"
+                  },
+                  "minItems": 6,
+                  "maxItems": 6
+                }
+              ]
             }
           },
           "required": [
             "type",
             "position",
             "size",
-            "rotation"
+            "rotation",
+            "material"
           ]
         }
       ]
