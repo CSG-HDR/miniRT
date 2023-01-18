@@ -139,9 +139,10 @@ typedef struct s_map_light_spot
 
 typedef union u_map_light
 {
-	t_map_light_point		point;
-	t_map_light_directional	directional;
-	t_map_light_spot		spot;
+	t_map_light_type		*type;
+	t_map_light_point		*point;
+	t_map_light_directional	*directional;
+	t_map_light_spot		*spot;
 }	t_map_light;
 
 ////////// model - primitive
