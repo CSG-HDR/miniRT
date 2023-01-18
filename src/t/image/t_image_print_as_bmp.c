@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "t_image.h"
+#include "t_image.h"
 
-# include <stdio.h>
-# include <stddef.h>
-# include <stdint.h>
+#include <stdio.h>
+#include <stddef.h>
+#include <stdint.h>
 
 static t_err	put_u32(uint32_t i)
 {
