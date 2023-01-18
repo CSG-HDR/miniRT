@@ -65,6 +65,9 @@
     },
     "ambientLight": {
       "$ref": "#/$defs/light-color"
+    },
+    "voidColor": {
+      "$ref": "#/$defs/material-color"
     }
   },
   "required": [
