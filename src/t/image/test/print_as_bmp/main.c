@@ -23,8 +23,8 @@
 
 static t_err	fill_image(void *context, size_t x, size_t y, t_f3 *out)
 {
-	const t_f	x_ratio = x / (WIDTH - 1);
-	const t_f	y_ratio = y / (HEIGHT - 1);
+	const t_f	x_ratio = x / (WIDTH - (t_f)1);
+	const t_f	y_ratio = y / (HEIGHT - (t_f)1);
 
 	(void)context;
 	*out = (t_f3){x_ratio, y_ratio, 1};
