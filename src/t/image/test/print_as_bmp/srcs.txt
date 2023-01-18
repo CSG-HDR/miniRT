@@ -1,0 +1,6 @@
+main.c
+../../t_image_new.c
+../../t_image_fill.c
+../../t_image_print_as_bmp.c
+../../../../wrap/wrap_malloc.c
+../../../../wrap/wrap_free.c

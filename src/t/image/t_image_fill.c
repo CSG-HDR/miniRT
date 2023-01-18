@@ -10,32 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_IMAGE_H
-# define T_IMAGE_H
+#include "t_image.h"
 
-# include <stddef.h>
+#include <stddef.h>
 
-# include "ft_types.h"
-# include "t_f3.h"
-
-typedef struct s_image
-{
-	size_t	width;
-	size_t	height;
-	t_f3	extra[];
-}	t_image;
-
-t_err	t_image_print_as_bmp(t_image *self);
-
-t_image	*t_image_new(
-			size_t width,
-			size_t height,
-			t_err (*fill)(void *context, size_t x, size_t y, t_f3 *out),
-			void *context);
+#include "wrap.h"
+#include "t_f3.h"
 
 t_err	t_image_fill(
-			t_image *self,
-			t_err (*fill)(void *context, size_t x, size_t y, t_f3 *out),
-			void *context);
+	t_image *self,
+	t_err (*fill)(void *context, size_t x, size_t y, t_f3 *out),
+	void *context
+)
+{
+	size_t	y;
+	size_t	x;
 
-#endif
+	y = -1;
+	while (++y < self->height)
+	{
+		x = -1;
+		while (++x < self->width)
+			if (fill(context, x, y, &self->extra[y * self->width + x]))
+				return (true);
+	}
+	return (false);
+}

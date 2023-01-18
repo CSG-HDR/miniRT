@@ -10,32 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_IMAGE_H
-# define T_IMAGE_H
+#include "t_image.h"
 
-# include <stddef.h>
+#include <stddef.h>
 
-# include "ft_types.h"
-# include "t_f3.h"
-
-typedef struct s_image
-{
-	size_t	width;
-	size_t	height;
-	t_f3	extra[];
-}	t_image;
-
-t_err	t_image_print_as_bmp(t_image *self);
+#include "wrap.h"
+#include "t_f3.h"
 
 t_image	*t_image_new(
-			size_t width,
-			size_t height,
-			t_err (*fill)(void *context, size_t x, size_t y, t_f3 *out),
-			void *context);
+	size_t width,
+	size_t height,
+	t_err (*fill)(void *context, size_t x, size_t y, t_f3 *out),
+	void *context
+)
+{
+	const size_t	size = sizeof(t_image) + sizeof(t_f3) * width * height;
+	t_image *const	result = wrap_malloc(size);
 
-t_err	t_image_fill(
-			t_image *self,
-			t_err (*fill)(void *context, size_t x, size_t y, t_f3 *out),
-			void *context);
-
-#endif
+	result->width = width;
+	result->height = height;
+	if (fill && t_image_fill(result, fill, context))
+	{
+		wrap_free(result);
+		return (NULL);
+	}
+	return (result);
+}

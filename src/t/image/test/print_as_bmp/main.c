@@ -10,32 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_IMAGE_H
-# define T_IMAGE_H
+#include <stdlib.h>
 
-# include <stddef.h>
+#include "wrap.h"
+#include "ft_types.h"
+#include "t_f.h"
+#include "t_f3.h"
+#include "t_image.h"
 
-# include "ft_types.h"
-# include "t_f3.h"
+#define WIDTH 1920
+#define HEIGHT 1080
 
-typedef struct s_image
+static t_err	fill_image(void *context, size_t x, size_t y, t_f3 *out)
 {
-	size_t	width;
-	size_t	height;
-	t_f3	extra[];
-}	t_image;
+	const t_f	x_ratio = x / (WIDTH - 1);
+	const t_f	y_ratio = y / (HEIGHT - 1);
 
-t_err	t_image_print_as_bmp(t_image *self);
+	(void)context;
+	*out = (t_f3){x_ratio, y_ratio, 1};
+	return (false);
+}
 
-t_image	*t_image_new(
-			size_t width,
-			size_t height,
-			t_err (*fill)(void *context, size_t x, size_t y, t_f3 *out),
-			void *context);
+int	main(void)
+{
+	t_image *const	image = t_image_new(WIDTH, HEIGHT, fill_image, NULL);
 
-t_err	t_image_fill(
-			t_image *self,
-			t_err (*fill)(void *context, size_t x, size_t y, t_f3 *out),
-			void *context);
-
-#endif
+	if (!image)
+		return (EXIT_FAILURE);
+	t_image_print_as_bmp(image);
+	wrap_free(image);
+}
