@@ -18,8 +18,8 @@
 #include "t_f3.h"
 #include "t_image.h"
 
-#define WIDTH 1920
-#define HEIGHT 1080
+#define WIDTH 2
+#define HEIGHT 2
 
 static t_err	fill_image(void *context, size_t x, size_t y, t_f3 *out)
 {
