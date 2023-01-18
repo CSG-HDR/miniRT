@@ -37,5 +37,8 @@ typedef _Float16	t_f;
 
 t_f	t_f_sqr(t_f f);
 t_f	t_f_sqrt(t_f f);
+t_f	t_f_sin(t_f f);
+t_f	t_f_cos(t_f f);
+t_f	t_f_tan(t_f f);
 
 #endif
