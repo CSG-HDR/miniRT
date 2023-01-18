@@ -75,11 +75,24 @@ static t_err	print_header(t_image *self, size_t *out_row_padding)
 	const size_t	whole_size = row_size * self->height;
 
 	*out_row_padding = row_padding;
-	return (printf("BM") < 0 || put_u32((uint32_t)whole_size + 54) || put_u32(0)
-		|| put_u32(54) || put_u32(40) || put_u32((uint32_t)self->width)
-		|| put_u32((uint32_t)self->width) || put_u16(1) || put_u16(24)
-		|| put_u32(0) || put_u32((uint32_t)whole_size) || put_u32(0)
-		|| put_u32(0) || put_u32(256) || put_u32(0));
+	return (
+		false
+		|| printf("BM") < 0
+		|| put_u32((uint32_t)whole_size + 54)
+		|| put_u32(0)
+		|| put_u32(54)
+		|| put_u32(40)
+		|| put_u32((uint32_t)self->width)
+		|| put_u32((uint32_t)self->width)
+		|| put_u16(1)
+		|| put_u16(24)
+		|| put_u32(0)
+		|| put_u32((uint32_t)whole_size)
+		|| put_u32(0)
+		|| put_u32(0)
+		|| put_u32(256)
+		|| put_u32(0)
+	);
 }
 
 t_err	t_image_print_as_bmp(t_image *self)
