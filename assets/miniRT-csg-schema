@@ -173,12 +173,16 @@
               "type": "number",
               "description": "radius of sphere",
               "exclusiveMinimum": 0
+            },
+            "material": {
+              "$ref": "#/$defs/material"
             }
           },
           "required": [
             "type",
             "position",
-            "radius"
+            "radius",
+            "material"
           ]
         },
         {
