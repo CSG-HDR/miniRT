@@ -428,7 +428,7 @@
         "type": "number",
         "description": "color value [red, green, blue] in high dynamic range",
         "minimum": 0,
-        "maximum": 1
+        "inclusiveMaximum": 1
       },
       "minItems": 3,
       "maxItems": 3
@@ -474,10 +474,10 @@
           "type": "array",
           "items": {
             "type": "number",
-            "description": "coordinates of texture only in [x, y]"
+            "description": "coordinates of texture only in [startX, startY, endX, endY]. default is [0, 0, width, height]"
           },
-          "minItems": 2,
-          "maxItems": 2
+          "minItems": 4,
+          "maxItems": 4
         },
         "nearest": {
           "type": "boolean",
