@@ -54,7 +54,7 @@ pre_dev:
 	$(Q2)find src -type d -name test | xargs -L1 -I {} $(MAKE) -C {} dev
 .PHONY: compile_commands.json
 compile_commands.json: pre_dev
-	$(Q2)$(MAKE) -C src -k PROFILE=debug TARGET=development all bonus ; (printf "[" && find src/.cache -name "*.development.debug.o.compile_commands.part.json" | xargs cat && printf "]") > $@
+	$(Q2)$(MAKE) -C src -k PROFILE=debug TARGET=development PRECISION=0 all bonus ; (printf "[" && find src/.cache -name "*.development.debug.0.o.compile_commands.part.json" | xargs cat && printf "]") > $@
 .PHONY: .vscode/launch.json
 .vscode/launch.json: pre_dev
 	$(Q2)(cat template/launch.json.before.txt && find src -name launch.part.json | xargs cat && cat template/launch.json.after.txt) > $@
