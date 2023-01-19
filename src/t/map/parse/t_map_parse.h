@@ -35,7 +35,7 @@ t_map_spot				t_map_parse_spot(t_ft_json value);
 t_map_camera			t_map_parse_camera(t_ft_json value);
 t_map_viewport			t_map_parse_viewport(t_ft_json value);
 t_map_position			t_map_parse_position(t_ft_json value);
-t_map_size3				t_map_parse_size(t_ft_json value);
+t_map_size				t_map_parse_size(t_ft_json value);
 t_map_rotation			t_map_parse_rotation(t_ft_json value);
 t_map_rotation			t_map_parse_angle(t_ft_json value);
 t_map_rotation			t_map_parse_normal(t_ft_json value);
