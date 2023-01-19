@@ -440,10 +440,20 @@
       "minItems": 3,
       "maxItems": 3
     },
-    "map": {
+    "color": {
       "oneOf": [
         {
           "$ref": "#/$defs/material-color"
+        },
+        {
+          "$ref": "#/$defs/texture"
+        }
+      ]
+    },
+    "normal-map": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/normal"
         },
         {
           "$ref": "#/$defs/texture"
@@ -494,10 +504,10 @@
       "unevaluatedProperties": false,
       "properties": {
         "color": {
-          "$ref": "#/$defs/map"
+          "$ref": "#/$defs/color"
         },
         "normal": {
-          "$ref": "#/$defs/map"
+          "$ref": "#/$defs/normal-map"
         }
       },
       "required": [
