@@ -15,59 +15,34 @@
 
 # include <stdbool.h>
 
-# include "ft_json_internal.h"
+# include "ft_json.h"
 
-bool	t_map_validate(t_ft_json_value_internal *value);
+bool	t_map_validate(t_ft_json value);
 
-bool	t_map_validate_model(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_constructive(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_union(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_intersection(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_difference(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_primitive(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_sphere(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_cube(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_light(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_point(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_directional(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_spot(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_camera(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_viewport(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_position(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_size(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_rotation(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_angle(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_normal(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_light_color(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_material_color(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_color(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_map(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_texture(
-			t_ft_json_value_internal *value);
-bool	t_map_validate_material(
-			t_ft_json_value_internal *value);
+bool	t_map_validate_model(t_ft_json value);
+bool	t_map_validate_constructive(t_ft_json value);
+bool	t_map_validate_union(t_ft_json value);
+bool	t_map_validate_intersection(t_ft_json value);
+bool	t_map_validate_difference(t_ft_json value);
+bool	t_map_validate_primitive(t_ft_json value);
+bool	t_map_validate_sphere(t_ft_json value);
+bool	t_map_validate_cube(t_ft_json value);
+bool	t_map_validate_light(t_ft_json value);
+bool	t_map_validate_point(t_ft_json value);
+bool	t_map_validate_directional(t_ft_json value);
+bool	t_map_validate_spot(t_ft_json value);
+bool	t_map_validate_camera(t_ft_json value);
+bool	t_map_validate_viewport(t_ft_json value);
+bool	t_map_validate_position(t_ft_json value);
+bool	t_map_validate_size(t_ft_json value);
+bool	t_map_validate_rotation(t_ft_json value);
+bool	t_map_validate_angle(t_ft_json value);
+bool	t_map_validate_normal(t_ft_json value);
+bool	t_map_validate_light_color(t_ft_json value);
+bool	t_map_validate_material_color(t_ft_json value);
+bool	t_map_validate_color(t_ft_json value);
+bool	t_map_validate_map(t_ft_json value);
+bool	t_map_validate_texture(t_ft_json value);
+bool	t_map_validate_material(t_ft_json value);
 
 #endif
