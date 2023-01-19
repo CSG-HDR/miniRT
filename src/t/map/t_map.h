@@ -25,14 +25,6 @@ typedef struct s_map_f2
 	t_f	y;
 }	t_map_f2;
 
-typedef struct s_map_f4
-{
-	t_f	x;
-	t_f	y;
-	t_f	z;
-	t_f	w;
-}	t_map_f4;
-
 // LDR color
 typedef t_f3		t_map_material_color;
 // HDR color
@@ -40,19 +32,15 @@ typedef t_f3		t_map_light_color;
 // normal
 typedef t_f3		t_map_rotation;
 // 3D size
-typedef t_f3		t_map_size3;
+typedef t_f3		t_map_size;
 // position
 typedef t_f3		t_map_position;
-// 2D size
-typedef t_map_f2	t_map_size2;
-// 2D rect
-typedef t_map_f4	t_map_rect;
 
 typedef struct s_map_texture
 {
 	char		*src;
-	t_map_size2	size;
-	t_map_rect	only;
+	t_f			width;
+	t_f			height;
 	bool		nearest;
 	bool		mirror;
 }	t_map_texture;
@@ -182,7 +170,7 @@ typedef struct s_map_sphere
 typedef struct s_map_cube
 {
 	t_map_position	position;
-	t_map_size3		size;
+	t_map_size		size;
 	t_map_rotation	rotation;
 	t_map_material	material_top;
 	t_map_material	material_bottom;
@@ -308,8 +296,12 @@ typedef struct s_map_camera
 
 typedef struct s_map_viewport
 {
-	t_map_size2	size;
-	t_map_rect	only;
+	size_t	width;
+	size_t	height;
+	size_t	start_x;
+	size_t	start_y;
+	size_t	end_x;
+	size_t	end_y;
 }	t_map_viewport;
 
 typedef struct s_map

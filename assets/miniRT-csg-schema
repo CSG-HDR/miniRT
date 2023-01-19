@@ -48,8 +48,9 @@
         "size": {
           "type": "array",
           "items": {
-            "type": "number",
-            "description": "size of the viewport [width, height]"
+            "type": "integer",
+            "description": "size of the viewport [width, height]",
+            "exclusiveMinimum": 0
           },
           "minItems": 2,
           "maxItems": 2
@@ -57,8 +58,9 @@
         "only": {
           "type": "array",
           "items": {
-            "type": "number",
-            "description": "render only in [startX, startY, endX, endY]. default is [0, 0, width, height]"
+            "type": "integer",
+            "description": "render only in [startX, startY, endX, endY]. default is [0, 0, width, height]",
+            "minimum": 0
           },
           "minItems": 4,
           "maxItems": 4
@@ -287,35 +289,6 @@
               "type": "string",
               "description": "type of light",
               "enum": [
-                "point"
-              ]
-            },
-            "color": {
-              "$ref": "#/$defs/light-color"
-            },
-            "position": {
-              "$ref": "#/$defs/position"
-            },
-            "range": {
-              "type": "number",
-              "description": "default is infinity",
-              "exclusiveMinimum": 0
-            }
-          },
-          "required": [
-            "type",
-            "color",
-            "position"
-          ]
-        },
-        {
-          "type": "object",
-          "unevaluatedProperties": false,
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "type of light",
-              "enum": [
                 "spot"
               ]
             },
@@ -476,15 +449,6 @@
           },
           "minItems": 2,
           "maxItems": 2
-        },
-        "only": {
-          "type": "array",
-          "items": {
-            "type": "number",
-            "description": "coordinates of texture only in [startX, startY, endX, endY]. default is [0, 0, width, height]"
-          },
-          "minItems": 4,
-          "maxItems": 4
         },
         "nearest": {
           "type": "boolean",
