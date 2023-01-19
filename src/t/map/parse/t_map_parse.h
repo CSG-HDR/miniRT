@@ -63,6 +63,8 @@ t_map_light_color		t_map_parse_light_color(
 							t_ft_json_value_internal *value);
 t_map_material_color	t_map_parse_material_color(
 							t_ft_json_value_internal *value);
+t_map_color				t_map_parse_color(
+							t_ft_json_value_internal *value);
 t_map_map				t_map_parse_map(
 							t_ft_json_value_internal *value);
 t_map_texture			t_map_parse_texture(

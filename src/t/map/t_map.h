@@ -57,17 +57,42 @@ typedef struct s_map_texture
 	bool		mirror;
 }	t_map_texture;
 
+typedef enum e_map_color_type
+{
+	T_MAP_COLOR_TYPE_COLOR,
+	T_MAP_COLOR_TYPE_TEXTURE,
+}	t_map_color_type;
+
+typedef struct s_map_color_color
+{
+	t_map_color_type		type;
+	t_map_material_color	color;
+}	t_map_color_color;
+
+typedef struct s_map_color_texture
+{
+	t_map_color_type	type;
+	t_map_texture		texture;
+}	t_map_color_texture;
+
+typedef union u_map_color
+{
+	t_map_color_type	*type;
+	t_map_color_color	*color;
+	t_map_color_texture	*texture;
+}	t_map_color;
+
 typedef enum e_map_map_type
 {
-	T_MAP_MAP_TYPE_COLOR,
+	T_MAP_MAP_TYPE_NORMAL,
 	T_MAP_MAP_TYPE_TEXTURE,
 }	t_map_map_type;
 
-typedef struct s_map_map_color
+typedef struct s_map_map_normal
 {
-	t_map_map_type			type;
-	t_map_material_color	color;
-}	t_map_map_color;
+	t_map_map_type	type;
+	t_map_rotation	normal;
+}	t_map_map_normal;
 
 typedef struct s_map_map_texture
 {
@@ -78,13 +103,13 @@ typedef struct s_map_map_texture
 typedef union u_map_map
 {
 	t_map_map_type		*type;
-	t_map_map_color		*color;
+	t_map_map_normal	*normal;
 	t_map_map_texture	*texture;
 }	t_map_map;
 
 typedef struct s_map_material
 {
-	t_map_map	color;
+	t_map_color	color;
 	t_map_map	normal;
 }	t_map_material;
 

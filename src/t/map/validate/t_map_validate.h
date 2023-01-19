@@ -61,6 +61,8 @@ bool	t_map_validate_light_color(
 			t_ft_json_value_internal *value);
 bool	t_map_validate_material_color(
 			t_ft_json_value_internal *value);
+bool	t_map_validate_color(
+			t_ft_json_value_internal *value);
 bool	t_map_validate_map(
 			t_ft_json_value_internal *value);
 bool	t_map_validate_texture(
