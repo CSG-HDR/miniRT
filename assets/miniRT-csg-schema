@@ -414,7 +414,7 @@
         "type": "number",
         "description": "normal for [x, y, z]",
         "minimum": -1,
-        "inclusiveMaximum": 1
+        "maximum": 1
       },
       "minItems": 3,
       "maxItems": 3
@@ -435,7 +435,7 @@
         "type": "number",
         "description": "color value [red, green, blue] in low dynamic range",
         "minimum": 0,
-        "inclusiveMaximum": 1
+        "maximum": 1
       },
       "minItems": 3,
       "maxItems": 3
