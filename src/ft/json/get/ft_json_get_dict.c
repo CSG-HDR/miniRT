@@ -10,36 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_json.h"
+
 #include "ft_json_internal.h"
 
-t_err	ft_json_parse_internal(
-	const char *str,
-	t_ft_json_value_internal *out
-)
+static bool	ft_cstring_equals(const char *a, const char *b)
 {
-	t_ft_json_token_list		token_list;
-	t_ft_json_token_list_node	*head;
+	while (*a && *a == *b)
+	{
+		a++;
+		b++;
+	}
+	return (!*a && !*b);
+}
 
-	if (ft_json_tokenize(str, &token_list))
-		return (true);
-	if (!token_list.head)
+t_ft_json	ft_json_get_dict(t_ft_json value, const char *key)
+{
+	t_ft_json_value_internal *const	self = value;
+	t_ft_json_dict_node				*current;
+
+	current = self->dict.value.head;
+	while (current)
 	{
-		out->type = FT_JSON_VALUE_TYPE_ERROR;
-		return (false);
+		if (ft_cstring_equals(current->key, key))
+			return (current->value);
+		current = current->next;
 	}
-	head = token_list.head;
-	if (ft_json_parse_value(&head, out))
-	{
-		ft_json_tokenize_free(token_list);
-		return (true);
-	}
-	if (*head->value.type != FT_JSON_TOKEN_TYPE_EOF)
-	{
-		ft_json_tokenize_free(token_list);
-		ft_json_value_internal_free(out);
-		out->type = FT_JSON_VALUE_TYPE_ERROR;
-		return (false);
-	}
-	ft_json_tokenize_free(token_list);
-	return (false);
+	return (NULL);
 }

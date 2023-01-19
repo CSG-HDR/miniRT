@@ -181,7 +181,7 @@ typedef t_err	(*t_ft_json_tokenizer_state_function)(
 t_err	ft_json_tokenize(
 			const char *str,
 			t_ft_json_token_list *out);
-void	ft_json_token_list_free(
+void	ft_json_tokenize_free(
 			t_ft_json_token_list list);
 t_err	ft_json_tokenize_default(
 			char c,

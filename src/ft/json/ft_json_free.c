@@ -10,36 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_json.h"
+
+#include <stdlib.h>
+
 #include "ft_json_internal.h"
+#include "ft_types.h"
 
-t_err	ft_json_parse_internal(
-	const char *str,
-	t_ft_json_value_internal *out
-)
+void	ft_json_free(t_ft_json value)
 {
-	t_ft_json_token_list		token_list;
-	t_ft_json_token_list_node	*head;
+	t_ft_json_value_internal *const	original = value;
 
-	if (ft_json_tokenize(str, &token_list))
-		return (true);
-	if (!token_list.head)
-	{
-		out->type = FT_JSON_VALUE_TYPE_ERROR;
-		return (false);
-	}
-	head = token_list.head;
-	if (ft_json_parse_value(&head, out))
-	{
-		ft_json_tokenize_free(token_list);
-		return (true);
-	}
-	if (*head->value.type != FT_JSON_TOKEN_TYPE_EOF)
-	{
-		ft_json_tokenize_free(token_list);
-		ft_json_value_internal_free(out);
-		out->type = FT_JSON_VALUE_TYPE_ERROR;
-		return (false);
-	}
-	ft_json_tokenize_free(token_list);
-	return (false);
+	ft_json_value_internal_free(original);
+	free(original);
 }

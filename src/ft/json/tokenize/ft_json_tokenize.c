@@ -47,8 +47,8 @@ t_err	ft_json_tokenize(
 	t_ft_json_token_list *out
 )
 {
-	t_s						current_state;
-	size_t					i;
+	t_s		current_state;
+	size_t	i;
 
 	current_state.state = FT_JSON_TOKENIZER_STATE_DEFAULT;
 	current_state.data = NULL;
@@ -60,13 +60,13 @@ t_err	ft_json_tokenize(
 		if (g_state_functions[current_state.state](
 			str[i], out, current_state.data, &current_state))
 		{
-			ft_json_token_list_free(*out);
+			ft_json_tokenize_free(*out);
 			return (true);
 		}
 	}
 	if (current_state.state == FT_JSON_TOKENIZER_STATE_ERROR)
 	{
-		ft_json_token_list_free(*out);
+		ft_json_tokenize_free(*out);
 		*out = (t_ft_json_token_list){NULL, NULL};
 	}
 	return (false);

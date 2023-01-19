@@ -26,16 +26,14 @@ static char	unescape(char c)
 		return (c);
 	if (c == 'b')
 		return ('\b');
-	if (c == 'b')
-		return ('\b');
 	if (c == 'f')
-		return ('\b');
+		return ('\f');
 	if (c == 'n')
-		return ('\b');
+		return ('\n');
 	if (c == 'r')
-		return ('\b');
+		return ('\r');
 	if (c == 't')
-		return ('\b');
+		return ('\t');
 	return (0);
 }
 

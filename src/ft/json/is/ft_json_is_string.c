@@ -10,17 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_json.h"
+
+#include <stdbool.h>
+
 #include "ft_json_internal.h"
 
-#include <stdlib.h>
-
-void	ft_json_token_list_free(t_ft_json_token_list list)
+bool	ft_json_is_string(t_ft_json value)
 {
-	while (list.head)
-	{
-		list.tail = list.head;
-		list.head = list.head->next;
-		list.tail->free_value(list.tail->value);
-		free(list.tail);
-	}
+	t_ft_json_value_internal *const	self = value;
+
+	return (self->type == FT_JSON_VALUE_TYPE_STRING);
 }
