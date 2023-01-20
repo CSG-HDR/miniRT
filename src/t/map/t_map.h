@@ -281,6 +281,8 @@ typedef struct s_map_model_constructive
 	t_map_constructive	constructive;
 }	t_map_model_constructive;
 
+// t_map_model is designed to be used with its pointer type
+// because of type recursion issue
 typedef union u_map_model
 {
 	t_map_model_type			type;
@@ -310,7 +312,7 @@ typedef struct s_map_viewport
 typedef struct s_map
 {
 	size_t					model_count;
-	t_map_model				*models;
+	t_map_model				**models;
 	size_t					light_count;
 	t_map_light				*lights;
 	t_map_camera			camera;
