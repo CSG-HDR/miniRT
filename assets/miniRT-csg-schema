@@ -445,7 +445,8 @@
           "type": "array",
           "items": {
             "type": "number",
-            "description": "size of texture [width, height], default is [1, 1]"
+            "description": "size of texture [width, height], default is [1, 1]",
+            "exclusiveMinimum": 0
           },
           "minItems": 2,
           "maxItems": 2
