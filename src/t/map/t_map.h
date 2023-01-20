@@ -107,6 +107,7 @@ typedef struct s_map_point
 {
 	t_map_light_color	color;
 	t_map_position		position;
+	bool				has_range;
 	t_f					range;
 }	t_map_point;
 
@@ -122,6 +123,7 @@ typedef struct s_map_spot
 	t_map_position		position;
 	t_map_rotation		direction;
 	t_f					angle;
+	bool				has_range;
 	t_f					range;
 }	t_map_spot;
 
