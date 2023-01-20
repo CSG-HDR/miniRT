@@ -70,35 +70,36 @@ typedef union u_map_color
 	t_map_color_texture	*texture;
 }	t_map_color;
 
-typedef enum e_map_map_type
+typedef enum e_map_normal_map_type
 {
-	T_MAP_MAP_TYPE_NORMAL,
-	T_MAP_MAP_TYPE_TEXTURE,
-}	t_map_map_type;
+	T_MAP_NORMAL_MAP_TYPE_NORMAL,
+	T_MAP_NORMAL_MAP_TYPE_TEXTURE,
+}	t_map_normal_map_type;
 
-typedef struct s_map_map_normal
+typedef struct s_map_normal_map_normal
 {
-	t_map_map_type	type;
-	t_map_rotation	normal;
-}	t_map_map_normal;
+	t_map_normal_map_type	type;
+	t_map_rotation			normal;
+}	t_map_normal_map_normal;
 
-typedef struct s_map_map_texture
+typedef struct s_map_normal_map_texture
 {
-	t_map_map_type	type;
-	t_map_texture	texture;
-}	t_map_map_texture;
+	t_map_normal_map_type	type;
+	t_map_texture			texture;
+}	t_map_normal_map_texture;
 
-typedef union u_map_map
+typedef union u_map_normal_map
 {
-	t_map_map_type		*type;
-	t_map_map_normal	*normal;
-	t_map_map_texture	*texture;
-}	t_map_map;
+	t_map_normal_map_type		*type;
+	t_map_normal_map_normal		*normal;
+	t_map_normal_map_texture	*texture;
+}	t_map_normal_map;
 
 typedef struct s_map_material
 {
-	t_map_color	color;
-	t_map_map	normal;
+	t_map_color			color;
+	bool				has_normal;
+	t_map_normal_map	normal;
 }	t_map_material;
 
 ////////// light

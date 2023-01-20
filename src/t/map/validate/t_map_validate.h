@@ -41,7 +41,7 @@ bool	t_map_validate_normal(t_ft_json value);
 bool	t_map_validate_light_color(t_ft_json value);
 bool	t_map_validate_material_color(t_ft_json value);
 bool	t_map_validate_color(t_ft_json value);
-bool	t_map_validate_map(t_ft_json value);
+bool	t_map_validate_normal_map(t_ft_json value);
 bool	t_map_validate_texture(t_ft_json value);
 bool	t_map_validate_material(t_ft_json value);
 

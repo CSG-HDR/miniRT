@@ -42,7 +42,7 @@ t_map_rotation			t_map_parse_normal(t_ft_json value);
 t_map_light_color		t_map_parse_light_color(t_ft_json value);
 t_map_material_color	t_map_parse_material_color(t_ft_json value);
 t_map_color				t_map_parse_color(t_ft_json value);
-t_map_map				t_map_parse_map(t_ft_json value);
+t_map_normal_map		t_map_parse_normal_map(t_ft_json value);
 t_map_texture			t_map_parse_texture(t_ft_json value);
 t_map_material			t_map_parse_material(t_ft_json value);
 
