@@ -743,9 +743,9 @@
               "description": "type of operation",
               "enum": [
                 "add",
-                "minimum",
+                "multiply",
                 "maximum",
-                "multiply"
+                "minimum"
               ]
             },
             "children": {
