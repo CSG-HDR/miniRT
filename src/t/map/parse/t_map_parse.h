@@ -102,6 +102,7 @@ void	t_map_parse_get_optional_color_material(
 			t_ft_json value, t_map_color_material *out);
 void	t_map_parse_get_optional_range(
 			t_ft_json value, bool *out_has_range, t_f *out_range);
+t_err	t_map_parse_get_default_color(t_map_color **out);
 t_err	t_map_parse_get_default_material(t_map_material *out);
 void	t_map_parse_get_default_color_material(t_map_color_material *out);
 

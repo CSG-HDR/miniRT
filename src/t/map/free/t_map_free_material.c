@@ -10,27 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_parse.h"
+#include "t_map_free.h"
 
 #include "wrap.h"
 #include "t_map.h"
-#include "t_map_free.h"
 
-t_err	t_map_parse_get_default_material(t_map_material *out)
+void	t_map_free_material(t_map_material value)
 {
-	if (t_map_parse_get_default_color(&out->ambient))
-		return (true);
-	if (t_map_parse_get_default_color(&out->diffuse))
-	{
-		t_map_free_color(out->ambient);
-		return (true);
-	}
-	if (t_map_parse_get_default_color(&out->specular))
-	{
-		t_map_free_color(out->ambient);
-		t_map_free_color(out->diffuse);
-		return (true);
-	}
-	out->specular_lobe = (t_f)1;
-	return (false);
+	t_map_free_color(value.ambient);
+	t_map_free_color(value.diffuse);
+	t_map_free_color(value.specular);
+	if (value.has_normal)
+		t_map_free_normal_map(value.normal);
 }
