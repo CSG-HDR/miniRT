@@ -34,6 +34,7 @@ t_f3	t_f3_neg(t_f3 f);
 t_f3	t_f3_inv(t_f3 f);
 t_f		t_f3_sqr_length(t_f3 f);
 t_f		t_f3_length(t_f3 f);
-t_f		t_f3_unit(t_f3 f);
+t_f3	t_f3_unit(t_f3 f);
+t_f3	t_f3_to_angle(t_f3 normal);
 
 #endif

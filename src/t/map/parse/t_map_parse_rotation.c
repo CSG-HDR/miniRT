@@ -10,36 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_F_H
-# define T_F_H
+#include "t_map_parse.h"
 
-# ifndef PRECISION
-#  define PRECISION 3
-# endif
+#include "ft_json.h"
+#include "t_f.h"
+#include "t_f3.h"
+#include "t_map.h"
 
-# if PRECISION == 0
-
-typedef long double	t_f;
-
-# elif PRECISION == 1
-
-typedef double		t_f;
-
-# elif PRECISION == 2
-
-typedef float		t_f;
-
-# elif PRECISION == 3
-
-typedef _Float16	t_f;
-
-# endif
-
-t_f	t_f_sqr(t_f f);
-t_f	t_f_sqrt(t_f f);
-t_f	t_f_rad(t_f f);
-t_f	t_f_sin(t_f f);
-t_f	t_f_cos(t_f f);
-t_f	t_f_tan(t_f f);
-
-#endif
+void	t_map_parse_rotation(t_ft_json value, t_map_rotation *out)
+{
+	if (ft_json_dict_has_key(value, "angle"))
+	{
+		out->x = t_f_rad((t_f)ft_json_get_number(
+					ft_json_get_list(ft_json_get_dict(value, "angle"), 0)));
+		out->y = t_f_rad((t_f)ft_json_get_number(
+					ft_json_get_list(ft_json_get_dict(value, "angle"), 1)));
+		out->z = t_f_rad((t_f)ft_json_get_number(
+					ft_json_get_list(ft_json_get_dict(value, "angle"), 2)));
+	}
+	else
+	{
+		t_map_parse_normal(ft_json_get_dict(value, "dict"), out);
+		*out = t_f3_to_angle(*out);
+	}
+}

@@ -19,19 +19,15 @@
 # include "t_f.h"
 # include "t_f3.h"
 
-typedef struct s_map_f2
-{
-	t_f	x;
-	t_f	y;
-}	t_map_f2;
-
+// angle in radian
+typedef t_f			t_map_angle;
 // LDR color
 typedef t_f3		t_map_material_color;
 // HDR color
 typedef t_f3		t_map_light_color;
 // normal
 typedef t_f3		t_map_normal;
-// rotation
+// rotation in radian
 typedef t_f3		t_map_rotation;
 // 3D size
 typedef t_f3		t_map_size;
@@ -104,7 +100,7 @@ typedef struct s_map_material
 	t_map_normal_map	normal;
 }	t_map_material;
 
-////////// light
+////////////////////////////////////////////////////////////////////////// light
 
 typedef struct s_map_point
 {
@@ -125,7 +121,7 @@ typedef struct s_map_spot
 	t_map_light_color	color;
 	t_map_position		position;
 	t_map_normal		direction;
-	t_f					angle;
+	t_map_angle			angle;
 	bool				has_range;
 	t_f					range;
 }	t_map_spot;
@@ -163,7 +159,7 @@ typedef union u_map_light
 	t_map_light_spot		*spot;
 }	t_map_light;
 
-////////// model - primitive
+////////////////////////////////////////////////////////////// model - primitive
 
 typedef struct s_map_sphere
 {
@@ -210,7 +206,7 @@ typedef union u_map_primitive
 	t_map_primitive_cube	*cube;
 }	t_map_primitive;
 
-////////// model - constructive
+/////////////////////////////////////////////////////////// model - constructive
 
 typedef struct s_map_union
 {
@@ -263,7 +259,7 @@ typedef union u_map_constructive
 	t_map_constructive_difference	*difference;
 }	t_map_constructive;
 
-////////// model
+////////////////////////////////////////////////////////////////////////// model
 
 typedef enum e_map_model_type
 {
@@ -283,8 +279,7 @@ typedef struct s_map_model_constructive
 	t_map_constructive	constructive;
 }	t_map_model_constructive;
 
-// t_map_model is designed to be used with its pointer type
-// because of type recursion issue
+// designed to be used with its pointer type for avoid type recursion issue
 typedef union u_map_model
 {
 	t_map_model_type			type;
@@ -292,13 +287,13 @@ typedef union u_map_model
 	t_map_model_constructive	constructive;
 }	t_map_model;
 
-////////// etc
+//////////////////////////////////////////////////////////////////////////// etc
 
 typedef struct s_map_camera
 {
 	t_map_position	position;
 	t_map_rotation	rotation;
-	t_f				fov;
+	t_map_angle		fov;
 }	t_map_camera;
 
 typedef struct s_map_viewport

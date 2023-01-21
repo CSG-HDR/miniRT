@@ -13,8 +13,6 @@
 #ifndef T_MAP_PARSE_H
 # define T_MAP_PARSE_H
 
-# include <stdbool.h>
-
 # include "ft_json.h"
 # include "t_map.h"
 
@@ -41,7 +39,6 @@ void	t_map_parse_viewport(t_ft_json value, t_map_viewport *out);
 void	t_map_parse_position(t_ft_json value, t_map_position *out);
 void	t_map_parse_size(t_ft_json value, t_map_size *out);
 void	t_map_parse_rotation(t_ft_json value, t_map_rotation *out);
-void	t_map_parse_angle(t_ft_json value, t_map_rotation *out);
 void	t_map_parse_normal(t_ft_json value, t_map_rotation *out);
 void	t_map_parse_light_color(t_ft_json value, t_map_light_color *out);
 void	t_map_parse_material_color(t_ft_json value, t_map_material_color *out);
