@@ -35,7 +35,7 @@ bool	t_map_validate_spot(t_ft_json value)
 		&& ft_json_get_number(ft_json_get_dict(value, "angle")) > 0
 		&& ft_json_get_number(ft_json_get_dict(value, "angle")) < 1
 		&& ft_json_dict_has_key(value, "direction")
-		&& t_map_validate_rotation(ft_json_get_dict(value, "direction"))
+		&& t_map_validate_normal(ft_json_get_dict(value, "direction"))
 		&& (!ft_json_dict_has_key(value, "range") || (true
 				&& ft_json_is_number(ft_json_get_dict(value, "range"))
 				&& ft_json_get_number(ft_json_get_dict(value, "range")) > 0))

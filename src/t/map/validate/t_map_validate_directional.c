@@ -29,6 +29,6 @@ bool	t_map_validate_directional(t_ft_json value)
 		&& ft_json_dict_has_key(value, "color")
 		&& t_map_validate_light_color(ft_json_get_dict(value, "color"))
 		&& ft_json_dict_has_key(value, "direction")
-		&& t_map_validate_rotation(ft_json_get_dict(value, "direction"))
+		&& t_map_validate_normal(ft_json_get_dict(value, "direction"))
 	);
 }

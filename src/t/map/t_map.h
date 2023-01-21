@@ -30,6 +30,8 @@ typedef t_f3		t_map_material_color;
 // HDR color
 typedef t_f3		t_map_light_color;
 // normal
+typedef t_f3		t_map_normal;
+// rotation
 typedef t_f3		t_map_rotation;
 // 3D size
 typedef t_f3		t_map_size;
@@ -79,7 +81,7 @@ typedef enum e_map_normal_map_type
 typedef struct s_map_normal_map_normal
 {
 	t_map_normal_map_type	type;
-	t_map_rotation			normal;
+	t_map_normal			normal;
 }	t_map_normal_map_normal;
 
 typedef struct s_map_normal_map_texture
@@ -115,14 +117,14 @@ typedef struct s_map_point
 typedef struct s_map_directional
 {
 	t_map_light_color	color;
-	t_map_rotation		direction;
+	t_map_normal		direction;
 }	t_map_directional;
 
 typedef struct s_map_spot
 {
 	t_map_light_color	color;
 	t_map_position		position;
-	t_map_rotation		direction;
+	t_map_normal		direction;
 	t_f					angle;
 	bool				has_range;
 	t_f					range;

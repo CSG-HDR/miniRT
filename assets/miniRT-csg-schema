@@ -272,7 +272,7 @@
               "$ref": "#/$defs/light-color"
             },
             "direction": {
-              "$ref": "#/$defs/rotation"
+              "$ref": "#/$defs/normal"
             }
           },
           "required": [
@@ -305,7 +305,7 @@
               "exclusiveMaximum": 1
             },
             "direction": {
-              "$ref": "#/$defs/rotation"
+              "$ref": "#/$defs/normal"
             },
             "range": {
               "type": "number",
