@@ -10,17 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_validate.h"
+#include "t_map_parse.h"
 
-#include <stdbool.h>
-
+#include "wrap.h"
 #include "ft_json.h"
+#include "t_map.h"
 
-bool	t_map_validate_normal_map(t_ft_json value)
+t_err	t_map_parse_normal_map(t_ft_json value, t_map_normal_map *out)
 {
-	return (
-		false
-		|| t_map_validate_normal(value)
-		|| t_map_validate_color(value)
-	);
+	if (ft_json_is_dict(value))
+	{
+		out->color = wrap_malloc(sizeof(t_map_normal_map_color));
+		if (!out->color)
+			return (true);
+		out->color->type = T_MAP_NORMAL_MAP_TYPE_COLOR;
+		if (t_map_parse_color(value, &out->color->color))
+		{
+			wrap_free(out->color);
+			return (true);
+		}
+		return (false);
+	}
+	else
+	{
+		out->normal = wrap_malloc(sizeof(t_map_normal_map_normal));
+		if (!out->color)
+			return (true);
+		out->color->type = T_MAP_NORMAL_MAP_TYPE_NORMAL;
+		t_map_parse_normal(value, &out->normal->normal);
+		return (false);
+	}
 }

@@ -685,7 +685,7 @@
           "$ref": "#/$defs/normal"
         },
         {
-          "$ref": "#/$defs/texture"
+          "$ref": "#/$defs/color"
         }
       ]
     },

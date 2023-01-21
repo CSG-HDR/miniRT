@@ -136,7 +136,7 @@ typedef union u_map_color
 typedef enum e_map_normal_map_type
 {
 	T_MAP_NORMAL_MAP_TYPE_NORMAL,
-	T_MAP_NORMAL_MAP_TYPE_TEXTURE,
+	T_MAP_NORMAL_MAP_TYPE_COLOR,
 }	t_map_normal_map_type;
 
 typedef struct s_map_normal_map_normal
@@ -145,17 +145,17 @@ typedef struct s_map_normal_map_normal
 	t_map_normal			normal;
 }	t_map_normal_map_normal;
 
-typedef struct s_map_normal_map_texture
+typedef struct s_map_normal_map_color
 {
 	t_map_normal_map_type	type;
-	t_map_texture			texture;
-}	t_map_normal_map_texture;
+	t_map_color				*color;
+}	t_map_normal_map_color;
 
 typedef union u_map_normal_map
 {
-	t_map_normal_map_type		*type;
-	t_map_normal_map_normal		*normal;
-	t_map_normal_map_texture	*texture;
+	t_map_normal_map_type	*type;
+	t_map_normal_map_normal	*normal;
+	t_map_normal_map_color	*color;
 }	t_map_normal_map;
 
 typedef struct s_map_material

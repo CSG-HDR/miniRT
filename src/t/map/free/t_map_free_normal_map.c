@@ -10,17 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_validate.h"
+#include "t_map_free.h"
 
-#include <stdbool.h>
+#include "wrap.h"
+#include "t_map.h"
 
-#include "ft_json.h"
-
-bool	t_map_validate_normal_map(t_ft_json value)
+void	t_map_free_normal_map(t_map_normal_map value)
 {
-	return (
-		false
-		|| t_map_validate_normal(value)
-		|| t_map_validate_color(value)
-	);
+	if (*value.type == T_MAP_NORMAL_MAP_TYPE_COLOR)
+	{
+		t_map_free_color(value.color->color);
+		wrap_free(value.color);
+	}
+	else
+		wrap_free(value.normal);
 }
