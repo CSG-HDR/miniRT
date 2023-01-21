@@ -12,7 +12,7 @@
 
 #include "t_map_free.h"
 
-#include <stdlib.h>
+#include <stddef.h>
 
 #include "wrap.h"
 #include "t_map.h"
@@ -22,5 +22,5 @@ void	t_map_free_models(t_map_model **value, size_t count)
 {
 	while (count--)
 		t_map_free_model(value[count]);
-	free(value);
+	wrap_free(value);
 }

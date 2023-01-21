@@ -13,7 +13,7 @@
 #include "t_map_parse.h"
 
 #include <stdbool.h>
-#include <stdlib.h>
+#include <stddef.h>
 
 #include "wrap.h"
 #include "ft_json.h"
@@ -70,14 +70,14 @@ t_err	t_map_parse(t_ft_json value, t_map **out)
 	if (t_map_parse_models(ft_json_get_dict(value, "models"),
 			&result->models, &result->model_count))
 	{
-		free(result);
+		wrap_free(result);
 		return (true);
 	}
 	result->lights = l(ft_json_get_dict(value, "lights"), &result->light_count);
 	if (!result->lights)
 	{
 		t_map_free_models(result->models, result->model_count);
-		free(result);
+		wrap_free(result);
 		return (true);
 	}
 	t_map_parse_camera(

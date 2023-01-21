@@ -10,28 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_MAP_FREE_H
-# define T_MAP_FREE_H
+#include "t_map_free.h"
 
-# include <stddef.h>
-# include "t_map.h"
+#include "wrap.h"
+#include "t_map.h"
+#include "t_map_free.h"
 
-void	t_map_free(t_map *value);
-
-void	t_map_free_models(t_map_model **value, size_t count);
-void	t_map_free_model(t_map_model *value);
-void	t_map_free_constructive(t_map_constructive value);
-void	t_map_free_union(t_map_union value);
-void	t_map_free_intersection(t_map_intersection value);
-void	t_map_free_difference(t_map_difference value);
-void	t_map_free_primitive(t_map_primitive value);
-void	t_map_free_sphere(t_map_sphere value);
-void	t_map_free_cube(t_map_cube value);
-void	t_map_free_lights(t_map_light *value, size_t count);
-void	t_map_free_light(t_map_light value);
-void	t_map_free_color(t_map_color value);
-void	t_map_free_normal_map(t_map_normal_map value);
-void	t_map_free_texture(t_map_texture value);
-void	t_map_free_material(t_map_material value);
-
-#endif
+void	t_map_free_constructive(t_map_constructive value)
+{
+	if (*value.type == T_MAP_CONSTRUCTIVE_UNION)
+	{
+		t_map_free_union(value._union->_union);
+		wrap_free(value._union);
+	}
+	else if (*value.type == T_MAP_CONSTRUCTIVE_INTERSECTION)
+	{
+		t_map_free_intersection(value.intersection->intersection);
+		wrap_free(value.intersection);
+	}
+	else
+	{
+		t_map_free_difference(value.difference->difference);
+		wrap_free(value.difference);
+	}
+}

@@ -12,8 +12,6 @@
 
 #include "t_map_free.h"
 
-#include <stdlib.h>
-
 #include "wrap.h"
 #include "t_map.h"
 #include "t_map_free.h"
@@ -22,5 +20,5 @@ void	t_map_free(t_map *out)
 {
 	t_map_free_models(out->models, out->model_count);
 	t_map_free_lights(out->lights, out->light_count);
-	free(out);
+	wrap_free(out);
 }

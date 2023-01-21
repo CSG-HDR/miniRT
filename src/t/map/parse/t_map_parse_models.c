@@ -13,7 +13,7 @@
 #include "t_map_parse.h"
 
 #include <stdbool.h>
-#include <stdlib.h>
+#include <stddef.h>
 
 #include "wrap.h"
 #include "ft_json.h"

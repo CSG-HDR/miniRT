@@ -33,9 +33,9 @@ t_err	t_map_parse_cube(t_ft_json value, t_map_cube *out);
 t_err	t_map_parse_lights(
 			t_ft_json value, t_map_light *out, size_t *out_count);
 t_err	t_map_parse_light(t_ft_json value, t_map_light *out);
-t_err	t_map_parse_point(t_ft_json value, t_map_point *out);
-t_err	t_map_parse_directional(t_ft_json value, t_map_directional *out);
-t_err	t_map_parse_spot(t_ft_json value, t_map_spot *out);
+void	t_map_parse_point(t_ft_json value, t_map_point *out);
+void	t_map_parse_directional(t_ft_json value, t_map_directional *out);
+void	t_map_parse_spot(t_ft_json value, t_map_spot *out);
 void	t_map_parse_camera(t_ft_json value, t_map_camera *out);
 void	t_map_parse_viewport(t_ft_json value, t_map_viewport *out);
 void	t_map_parse_position(t_ft_json value, t_map_position *out);
