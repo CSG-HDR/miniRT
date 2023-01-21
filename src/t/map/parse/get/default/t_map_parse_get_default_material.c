@@ -12,16 +12,38 @@
 
 #include "t_map_parse.h"
 
-#include "ft_json.h"
+#include "wrap.h"
 #include "t_f.h"
+#include "t_f3.h"
 #include "t_map.h"
+#include "t_map_free.h"
 
-void	t_map_parse_spot(t_ft_json value, t_map_spot *out)
+static t_map_color	*color(void)
 {
-	t_map_parse_get_color(value, &out->color);
-	t_map_parse_get_position(value, &out->position);
-	t_map_parse_get_direction(value, &out->direction);
-	out->angle = t_f_rad(
-			(t_f)ft_json_get_number(ft_json_get_dict(value, "angle")));
-	t_map_parse_get_optional_range(value, &out->has_range, &out->range);
+	t_map_color *const	result = wrap_malloc(sizeof(t_map_color));
+
+	if (!result)
+		return (NULL);
+	result->color.type = T_MAP_COLOR_TYPE_COLOR;
+	result->color.color = (t_f3){(t_f)1, (t_f)1, (t_f)1};
+	return (result);
+}
+
+t_err	t_map_parse_get_default_material(t_map_material *out)
+{
+	out->ambient = color();
+	out->diffuse = color();
+	out->specular = color();
+	if (!out->ambient || !out->diffuse || !out->specular)
+	{
+		if (!out->ambient)
+			t_map_free_color(out->ambient);
+		if (!out->diffuse)
+			t_map_free_color(out->diffuse);
+		if (!out->specular)
+			t_map_free_color(out->specular);
+		return (true);
+	}
+	out->specular_lobe = (t_f)1;
+	return (false);
 }

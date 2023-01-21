@@ -13,15 +13,11 @@
 #include "t_map_parse.h"
 
 #include "ft_json.h"
-#include "t_f.h"
 #include "t_map.h"
 
-void	t_map_parse_spot(t_ft_json value, t_map_spot *out)
+t_err	t_map_parse_get_optional_material(t_ft_json value, t_map_material *out)
 {
-	t_map_parse_get_color(value, &out->color);
-	t_map_parse_get_position(value, &out->position);
-	t_map_parse_get_direction(value, &out->direction);
-	out->angle = t_f_rad(
-			(t_f)ft_json_get_number(ft_json_get_dict(value, "angle")));
-	t_map_parse_get_optional_range(value, &out->has_range, &out->range);
+	if (ft_json_dict_has_key(value, "material"))
+		return (t_map_parse_material(ft_json_get_dict(value, "material"), out));
+	return (t_map_parse_get_default_material(out));
 }

@@ -13,9 +13,9 @@
 #include "t_map_parse.h"
 
 #include "wrap.h"
-#include "ft_cstring.h"
 #include "ft_json.h"
 #include "t_map.h"
+#include "t_map_validate.h"
 
 static void	parse_color(
 	t_ft_json value,
@@ -58,26 +58,25 @@ t_err	t_map_parse_color(t_ft_json value, t_map_color **out)
 {
 	t_map_color *const	result = wrap_malloc(sizeof(t_map_color));
 
-	if (ft_cstring_equals(ft_json_get_dict(value, "type"), "color"))
+	if (t_map_validate_has_type(value, "color"))
 	{
 		parse_color(value, &result->color);
-		*out = result;
-		return (false);
 	}
-	else if (ft_cstring_equals(ft_json_get_dict(value, "type"), "texture"))
+	else if (t_map_validate_has_type(value, "texture"))
 	{
 		if (parse_texture(value, &result->texture))
 		{
 			wrap_free(result);
 			return (true);
 		}
-		*out = result;
-		return (false);
 	}
-	if (parse_blend(value, &result->blend))
+	else
 	{
-		wrap_free(result);
-		return (true);
+		if (parse_blend(value, &result->blend))
+		{
+			wrap_free(result);
+			return (true);
+		}
 	}
 	*out = result;
 	return (false);

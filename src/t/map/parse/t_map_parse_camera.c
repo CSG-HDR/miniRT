@@ -18,7 +18,7 @@
 
 void	t_map_parse_camera(t_ft_json value, t_map_camera *out)
 {
-	t_map_parse_position(ft_json_get_dict(value, "position"), &out->position);
-	t_map_parse_rotation(ft_json_get_dict(value, "rotation"), &out->rotation);
+	t_map_parse_get_position(value, &out->position);
+	t_map_parse_get_rotation(value, &out->rotation);
 	out->fov = t_f_rad((t_f)ft_json_get_number(ft_json_get_dict(value, "fov")));
 }

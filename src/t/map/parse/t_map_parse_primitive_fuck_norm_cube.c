@@ -12,16 +12,26 @@
 
 #include "t_map_parse.h"
 
+#include "wrap.h"
 #include "ft_json.h"
-#include "t_f.h"
 #include "t_map.h"
 
-void	t_map_parse_spot(t_ft_json value, t_map_spot *out)
+t_err	t_map_parse_primitive_internal_fuck_norm_cube(
+	t_ft_json value,
+	t_map_primitive_cube **out
+)
 {
-	t_map_parse_get_color(value, &out->color);
-	t_map_parse_get_position(value, &out->position);
-	t_map_parse_get_direction(value, &out->direction);
-	out->angle = t_f_rad(
-			(t_f)ft_json_get_number(ft_json_get_dict(value, "angle")));
-	t_map_parse_get_optional_range(value, &out->has_range, &out->range);
+	t_map_primitive_cube *const	result
+		= wrap_malloc(sizeof(t_map_primitive_cube));
+
+	if (!result)
+		return (true);
+	result->type = T_MAP_PRIMITIVE_CUBE;
+	if (t_map_parse_cube(value, &result->cube))
+	{
+		wrap_free(result);
+		return (true);
+	}
+	*out = result;
+	return (false);
 }

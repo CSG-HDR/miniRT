@@ -13,9 +13,9 @@
 #include "t_map_parse.h"
 
 #include "wrap.h"
-#include "ft_cstring.h"
 #include "ft_json.h"
 #include "t_map.h"
+#include "t_map_validate.h"
 
 static t_err	parse_point(
 	t_ft_json value,
@@ -67,9 +67,9 @@ static t_err	parse_spot(
 
 t_err	t_map_parse_light(t_ft_json value, t_map_light *out)
 {
-	if (ft_cstring_equals(ft_json_get_dict(value, "type"), "point"))
+	if (t_map_validate_has_type(value, "point"))
 		return (parse_point(value, &out->point));
-	if (ft_cstring_equals(ft_json_get_dict(value, "type"), "directional"))
+	if (t_map_validate_has_type(value, "directional"))
 		return (parse_directional(value, &out->directional));
 	return (parse_spot(value, &out->spot));
 }

@@ -119,6 +119,8 @@ t_err	t_map_parse_cube(t_ft_json value, t_map_cube *out)
 	t_map_parse_position(ft_json_get_dict(value, "position"), &out->position);
 	t_map_parse_size(ft_json_get_dict(value, "size"), &out->size);
 	t_map_parse_rotation(ft_json_get_dict(value, "rotation"), &out->rotation);
+	if (!ft_json_dict_has_key(value, "material"))
+		return (t_map_parse_cube_internal_by_fucking_norm(out));
 	if (ft_json_is_list(ft_json_get_dict(value, "material")))
 		return (multiple(ft_json_get_dict(value, "material"), out));
 	return (single(ft_json_get_dict(value, "material"), out));

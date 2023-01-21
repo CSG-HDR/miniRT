@@ -20,6 +20,5 @@ t_err	t_map_parse_sphere(t_ft_json value, t_map_sphere *out)
 {
 	t_map_parse_position(ft_json_get_dict(value, "position"), &out->position);
 	out->radius = (t_f)ft_json_get_number(ft_json_get_dict(value, "radius"));
-	return (t_map_parse_material(
-			ft_json_get_dict(value, "material"), &out->material));
+	return (t_map_parse_get_optional_material(value, &out->material));
 }
