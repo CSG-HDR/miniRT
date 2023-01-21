@@ -14,7 +14,7 @@
 
 #include "t_map.h"
 
-void	t_map_free_union(t_map_union value)
+void	t_map_free_intersection(t_map_intersection value)
 {
 	t_map_free_models(value.children, value.children_count);
 }

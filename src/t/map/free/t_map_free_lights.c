@@ -16,7 +16,6 @@
 
 #include "wrap.h"
 #include "t_map.h"
-#include "t_map_free.h"
 
 void	t_map_free_lights(t_map_light *value, size_t count)
 {

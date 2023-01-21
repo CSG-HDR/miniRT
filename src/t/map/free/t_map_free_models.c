@@ -16,7 +16,6 @@
 
 #include "wrap.h"
 #include "t_map.h"
-#include "t_map_free.h"
 
 void	t_map_free_models(t_map_model **value, size_t count)
 {

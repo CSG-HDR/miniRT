@@ -10,11 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_free.h"
+#include "t_map_parse.h"
 
+#include "ft_json.h"
 #include "t_map.h"
 
-void	t_map_free_union(t_map_union value)
+t_err	t_map_parse_intersection(t_ft_json value, t_map_intersection *out)
 {
-	t_map_free_models(value.children, value.children_count);
+	return (
+		t_map_parse_models(
+			ft_json_get_dict(value, "children"),
+			&out->children,
+			&out->children_count
+		)
+	);
 }

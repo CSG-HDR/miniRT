@@ -14,7 +14,6 @@
 
 #include "wrap.h"
 #include "t_map.h"
-#include "t_map_free.h"
 
 void	t_map_free_constructive(t_map_constructive value)
 {
