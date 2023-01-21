@@ -571,14 +571,7 @@
           "required": [
             "A",
             "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "J"
+            "C"
           ]
         }
       ]
@@ -692,6 +685,9 @@
         },
         {
           "$ref": "#/$defs/texture"
+        },
+        {
+          "$ref": "#/$defs/blend"
         }
       ]
     },
@@ -734,6 +730,34 @@
       },
       "required": [
         "src"
+      ]
+    },
+    "blend": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "type of operation",
+          "enum": [
+            "add",
+            "subtract",
+            "minimum",
+            "maximum",
+            "multiply"
+          ]
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/color",
+            "minItems": 2
+          }
+        }
+      },
+      "required": [
+        "operation",
+        "children"
       ]
     },
     "material": {
