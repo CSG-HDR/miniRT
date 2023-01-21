@@ -17,10 +17,11 @@
 
 t_err	t_map_parse_plane(t_ft_json value, t_map_plane *out)
 {
-	t_map_parse_position(ft_json_get_dict(value, "position"), &out->position);
-	t_map_parse_normal(ft_json_get_dict(value, "normal"), &out->normal);
-	if (t_map_parse_material(
-			ft_json_get_dict(value, "material"), &out->material))
-		return (true);
+	t_map_parse_position(
+		ft_json_get_dict(value, "position"), &out->position);
+	t_map_parse_normal(
+		ft_json_get_dict(value, "normal"), &out->normal);
+	t_map_parse_color_material(
+		ft_json_get_dict(value, "material"), &out->material);
 	return (false);
 }

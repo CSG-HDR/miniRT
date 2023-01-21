@@ -46,6 +46,7 @@ bool	t_map_validate_angle(t_ft_json value);
 bool	t_map_validate_normal(t_ft_json value);
 bool	t_map_validate_light_color(t_ft_json value);
 bool	t_map_validate_material_color(t_ft_json value);
+bool	t_map_validate_color_material(t_ft_json value);
 bool	t_map_validate_colors(t_ft_json value);
 bool	t_map_validate_color(t_ft_json value);
 bool	t_map_validate_texture(t_ft_json value);

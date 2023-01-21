@@ -49,6 +49,7 @@ void	t_map_parse_rotation(t_ft_json value, t_map_rotation *out);
 void	t_map_parse_normal(t_ft_json value, t_map_rotation *out);
 void	t_map_parse_light_color(t_ft_json value, t_map_light_color *out);
 void	t_map_parse_material_color(t_ft_json value, t_map_material_color *out);
+void	t_map_parse_color_material(t_ft_json value, t_map_color_material *out);
 t_err	t_map_parse_colors(
 			t_ft_json value, t_map_color ***out, size_t *out_count);
 t_err	t_map_parse_color(t_ft_json value, t_map_color **out);
