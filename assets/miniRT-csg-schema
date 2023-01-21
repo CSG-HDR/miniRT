@@ -705,6 +705,13 @@
       "type": "object",
       "unevaluatedProperties": false,
       "properties": {
+        "type": {
+          "type": "string",
+          "description": "texture, or type of blend operation",
+          "enum": [
+            "texture"
+          ]
+        },
         "src": {
           "type": "string",
           "description": "path of the texture file"
@@ -729,6 +736,7 @@
         }
       },
       "required": [
+        "type",
         "src"
       ]
     },
@@ -738,9 +746,9 @@
           "type": "object",
           "unevaluatedProperties": false,
           "properties": {
-            "operation": {
+            "type": {
               "type": "string",
-              "description": "type of operation",
+              "description": "texture, or type of blend operation",
               "enum": [
                 "add",
                 "multiply",
@@ -757,7 +765,7 @@
             }
           },
           "required": [
-            "operation",
+            "type",
             "children"
           ]
         },
@@ -765,9 +773,9 @@
           "type": "object",
           "unevaluatedProperties": false,
           "properties": {
-            "operation": {
+            "type": {
               "type": "string",
-              "description": "type of operation",
+              "description": "texture, or type of blend operation",
               "enum": [
                 "subtract"
               ]
@@ -780,7 +788,7 @@
             }
           },
           "required": [
-            "operation",
+            "type",
             "from",
             "subtract"
           ]
