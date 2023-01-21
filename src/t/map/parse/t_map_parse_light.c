@@ -17,68 +17,56 @@
 #include "ft_json.h"
 #include "t_map.h"
 
-static t_err	parse_union(
+static t_err	parse_point(
 	t_ft_json value,
-	t_map_constructive_union **out
+	t_map_light_point **out
 )
 {
-	t_map_constructive_union *const	result
-		= wrap_malloc(sizeof(t_map_constructive_union));
+	t_map_light_point *const	result
+		= wrap_malloc(sizeof(t_map_light_point));
 
 	if (!result)
 		return (true);
-	if (t_map_parse_union(value, &result->_union))
-	{
-		wrap_free(result);
-		return (true);
-	}
+	t_map_parse_point(value, &result->point);
 	*out = result;
 	return (false);
 }
 
-static t_err	parse_intersection(
+static t_err	parse_directional(
 	t_ft_json value,
-	t_map_constructive_intersection **out
+	t_map_light_directional **out
 )
 {
-	t_map_constructive_intersection *const	result
-		= wrap_malloc(sizeof(t_map_constructive_intersection));
+	t_map_light_directional *const	result
+		= wrap_malloc(sizeof(t_map_light_directional));
 
 	if (!result)
 		return (true);
-	if (t_map_parse_intersection(value, &result->intersection))
-	{
-		wrap_free(result);
-		return (true);
-	}
+	t_map_parse_directional(value, &result->directional);
 	*out = result;
 	return (false);
 }
 
-static t_err	parse_difference(
+static t_err	parse_spot(
 	t_ft_json value,
-	t_map_constructive_difference **out
+	t_map_light_spot **out
 )
 {
-	t_map_constructive_difference *const	result
-		= wrap_malloc(sizeof(t_map_constructive_difference));
+	t_map_light_spot *const	result
+		= wrap_malloc(sizeof(t_map_light_spot));
 
 	if (!result)
 		return (true);
-	if (t_map_parse_difference(value, &result->difference))
-	{
-		wrap_free(result);
-		return (true);
-	}
+	t_map_parse_spot(value, &result->spot);
 	*out = result;
 	return (false);
 }
 
-t_err	t_map_parse_constructive(t_ft_json value, t_map_constructive *out)
+t_err	t_map_parse_light(t_ft_json value, t_map_light *out)
 {
-	if (ft_cstring_equals(ft_json_get_dict(value, "type"), "union"))
-		return (parse_union(value, &out->_union));
-	if (ft_cstring_equals(ft_json_get_dict(value, "type"), "intersection"))
-		return (parse_intersection(value, &out->intersection));
-	return (parse_difference(value, &out->difference));
+	if (ft_cstring_equals(ft_json_get_dict(value, "type"), "point"))
+		return (parse_point(value, &out->point));
+	if (ft_cstring_equals(ft_json_get_dict(value, "type"), "directional"))
+		return (parse_directional(value, &out->directional));
+	return (parse_spot(value, &out->spot));
 }

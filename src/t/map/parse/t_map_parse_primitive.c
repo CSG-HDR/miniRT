@@ -17,17 +17,17 @@
 #include "ft_json.h"
 #include "t_map.h"
 
-static t_err	parse_union(
+static t_err	parse_sphere(
 	t_ft_json value,
-	t_map_constructive_union **out
+	t_map_primitive_sphere **out
 )
 {
-	t_map_constructive_union *const	result
-		= wrap_malloc(sizeof(t_map_constructive_union));
+	t_map_primitive_sphere *const	result
+		= wrap_malloc(sizeof(t_map_primitive_sphere));
 
 	if (!result)
 		return (true);
-	if (t_map_parse_union(value, &result->_union))
+	if (t_map_parse_sphere(value, &result->sphere))
 	{
 		wrap_free(result);
 		return (true);
@@ -36,17 +36,17 @@ static t_err	parse_union(
 	return (false);
 }
 
-static t_err	parse_intersection(
+static t_err	parse_cube(
 	t_ft_json value,
-	t_map_constructive_intersection **out
+	t_map_primitive_cube **out
 )
 {
-	t_map_constructive_intersection *const	result
-		= wrap_malloc(sizeof(t_map_constructive_intersection));
+	t_map_primitive_cube *const	result
+		= wrap_malloc(sizeof(t_map_primitive_cube));
 
 	if (!result)
 		return (true);
-	if (t_map_parse_intersection(value, &result->intersection))
+	if (t_map_parse_cube(value, &result->cube))
 	{
 		wrap_free(result);
 		return (true);
@@ -55,30 +55,9 @@ static t_err	parse_intersection(
 	return (false);
 }
 
-static t_err	parse_difference(
-	t_ft_json value,
-	t_map_constructive_difference **out
-)
+t_err	t_map_parse_primitive(t_ft_json value, t_map_primitive *out)
 {
-	t_map_constructive_difference *const	result
-		= wrap_malloc(sizeof(t_map_constructive_difference));
-
-	if (!result)
-		return (true);
-	if (t_map_parse_difference(value, &result->difference))
-	{
-		wrap_free(result);
-		return (true);
-	}
-	*out = result;
-	return (false);
-}
-
-t_err	t_map_parse_constructive(t_ft_json value, t_map_constructive *out)
-{
-	if (ft_cstring_equals(ft_json_get_dict(value, "type"), "union"))
-		return (parse_union(value, &out->_union));
-	if (ft_cstring_equals(ft_json_get_dict(value, "type"), "intersection"))
-		return (parse_intersection(value, &out->intersection));
-	return (parse_difference(value, &out->difference));
+	if (ft_cstring_equals(ft_json_get_dict(value, "type"), "sphere"))
+		return (parse_sphere(value, &out->sphere));
+	return (parse_cube(value, &out->cube));
 }
