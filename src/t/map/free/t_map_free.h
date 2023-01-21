@@ -28,6 +28,7 @@ bool	t_map_free_difference(t_map_difference value);
 bool	t_map_free_primitive(t_map_primitive value);
 bool	t_map_free_sphere(t_map_sphere value);
 bool	t_map_free_cube(t_map_cube value);
+bool	t_map_free_lights(t_map_light *value, size_t count);
 bool	t_map_free_light(t_map_light value);
 bool	t_map_free_point(t_map_point value);
 bool	t_map_free_directional(t_map_directional value);
