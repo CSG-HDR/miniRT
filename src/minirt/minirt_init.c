@@ -21,27 +21,28 @@
 
 #include "minirt_hooks.h"
 
-#define W 1920
-#define H 1080
 #define TITLE "CSG+HDR minirt!"
 
 void	minirt_init(t_minirt *minirt, int argc, char **argv)
 {
+	t_minirt_load_map_error	error;
+
 	(void)argv;
 	if (argc < 2)
-	{
-		ft_write(STDOUT_FILENO, "Error: no input file\n", 21);
-		ft_exit(1);
-	}
-	minirt->mlx_context = mlx_init();
-	if (!minirt->mlx_context)
-	{
-		ft_write(STDOUT_FILENO, "Error: no input file\n", 21);
-		ft_exit(1);
-	}
-	minirt->mlx_window = mlx_new_window(minirt->mlx_context, W, H, TITLE);
-	minirt->pre_image = mlx_new_image(minirt->mlx_context, W, H);
-	minirt->final_image = mlx_new_image(minirt->mlx_context, W, H);
+		minirt_die("Error: no input file\n");
+	minirt_assert(&minirt->mlx_context, mlx_init(), "Error: on init mlx");
+	error = minirt_load_map(argv[1], &minirt->map);
+	if (error)
+		minirt_load_map_die(error);
+	minirt_assert(&minirt->mlx_window, mlx_new_window(minirt->mlx_context,
+			minirt->map->viewport.actual_width, minirt->map->viewport
+			.actual_height, TITLE), "Error: on init mlx window");
+	minirt_assert(&minirt->pre_image, mlx_new_image(minirt->mlx_context,
+			minirt->map->viewport.actual_width, minirt->map->viewport
+			.actual_height), "Error: on init mlx image (1/2)");
+	minirt_assert(&minirt->final_image, mlx_new_image(minirt->mlx_context,
+			minirt->map->viewport.actual_width, minirt->map->viewport
+			.actual_height), "Error: on init mlx image (2/2)");
 	mlx_expose_hook(minirt->mlx_window, &minirt_hooks_init, minirt);
 	mlx_hook(minirt->mlx_window, MLX_EVENT_ON_DESTROY,
 		0, &minirt_hooks_exit, minirt);

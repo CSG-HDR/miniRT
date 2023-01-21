@@ -10,36 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "minirt.h"
 
-#include "ft_types.h"
-# include "t_map.h"
+#include "t_map_validate.h"
+#include "wrap.h"
+#include "ft_os_file.h"
+#include "ft_json.h"
+#include "t_map_parse.h"
 
-typedef struct s_minirt
+t_minirt_load_map_error	minirt_load_map(const char *path, t_map **out)
 {
-	void	*mlx_context;
-	void	*mlx_window;
-	void	*pre_image;
-	void	*final_image;
-	t_map	*map;
-}	t_minirt;
+	char *const	file_contents = ft_os_file_read(path);
+	t_ft_json	json;
 
-typedef enum e_minirt_load_map_error
-{
-	MINIRT_LOAD_MAP_ERROR_SUCCESS = 0,
-	MINIRT_LOAD_MAP_ERROR_READ_FILE,
-	MINIRT_LOAD_MAP_ERROR_INVALID_JSON_FORMAT,
-	MINIRT_LOAD_MAP_ERROR_INVALID_RT_SCHEMA,
-	MINIRT_LOAD_MAP_ERROR_MALLOC,
-}	t_minirt_load_map_error;
-
-void					minirt_die(const char *message);
-void					minirt_assert(
-							void **dest, void *value, const char *message);
-void					minirt_init(t_minirt *minirt, int argc, char **argv);
-t_minirt_load_map_error	minirt_load_map(const char *path, t_map **out);
-void					minirt_load_map_die(t_minirt_load_map_error error);
-void					minirt_render(t_minirt *param);
-
-#endif
+	if (!file_contents)
+		return (MINIRT_LOAD_MAP_ERROR_READ_FILE);
+	if (ft_json_parse(file_contents, &json))
+	{
+		wrap_free(file_contents);
+		return (MINIRT_LOAD_MAP_ERROR_MALLOC);
+	}
+	wrap_free(file_contents);
+	if (!json)
+		return (MINIRT_LOAD_MAP_ERROR_INVALID_JSON_FORMAT);
+	if (!t_map_validate(json))
+		return (MINIRT_LOAD_MAP_ERROR_INVALID_RT_SCHEMA);
+	if (t_map_parse(json, out))
+	{
+		ft_json_free(json);
+		return (MINIRT_LOAD_MAP_ERROR_MALLOC);
+	}
+	ft_json_free(json);
+	return (MINIRT_LOAD_MAP_ERROR_SUCCESS);
+}

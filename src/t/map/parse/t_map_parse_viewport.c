@@ -41,4 +41,6 @@ void	t_map_parse_viewport(t_ft_json value, t_map_viewport *out)
 		out->end_x = out->width;
 		out->end_y = out->height;
 	}
+	out->actual_width = out->end_x - out->start_x;
+	out->actual_height = out->end_y - out->start_y;
 }

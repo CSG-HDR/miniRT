@@ -10,36 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "minirt.h"
 
-#include "ft_types.h"
-# include "t_map.h"
-
-typedef struct s_minirt
+void	minirt_load_map_die(t_minirt_load_map_error error)
 {
-	void	*mlx_context;
-	void	*mlx_window;
-	void	*pre_image;
-	void	*final_image;
-	t_map	*map;
-}	t_minirt;
-
-typedef enum e_minirt_load_map_error
-{
-	MINIRT_LOAD_MAP_ERROR_SUCCESS = 0,
-	MINIRT_LOAD_MAP_ERROR_READ_FILE,
-	MINIRT_LOAD_MAP_ERROR_INVALID_JSON_FORMAT,
-	MINIRT_LOAD_MAP_ERROR_INVALID_RT_SCHEMA,
-	MINIRT_LOAD_MAP_ERROR_MALLOC,
-}	t_minirt_load_map_error;
-
-void					minirt_die(const char *message);
-void					minirt_assert(
-							void **dest, void *value, const char *message);
-void					minirt_init(t_minirt *minirt, int argc, char **argv);
-t_minirt_load_map_error	minirt_load_map(const char *path, t_map **out);
-void					minirt_load_map_die(t_minirt_load_map_error error);
-void					minirt_render(t_minirt *param);
-
-#endif
+	if (error == MINIRT_LOAD_MAP_ERROR_READ_FILE)
+		minirt_die("Error: failed to load scene file");
+	if (error == MINIRT_LOAD_MAP_ERROR_INVALID_JSON_FORMAT)
+		minirt_die("Error: given file is not a valid json file");
+	if (error == MINIRT_LOAD_MAP_ERROR_INVALID_RT_SCHEMA)
+		minirt_die("Error: given file is not a valid .rt format");
+	if (error == MINIRT_LOAD_MAP_ERROR_MALLOC)
+		minirt_die("Error: failed to allocate memory for load map");
+}

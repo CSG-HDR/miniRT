@@ -473,6 +473,8 @@ typedef struct s_map_viewport
 	size_t	start_y;
 	size_t	end_x;
 	size_t	end_y;
+	size_t	actual_width;
+	size_t	actual_height;
 }	t_map_viewport;
 
 typedef struct s_map
