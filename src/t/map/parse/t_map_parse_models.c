@@ -10,17 +10,39 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_free.h"
+#include "t_map_parse.h"
 
+#include <stdbool.h>
 #include <stdlib.h>
 
 #include "wrap.h"
+#include "ft_json.h"
 #include "t_map.h"
 #include "t_map_free.h"
 
-void	t_map_free(t_map *out)
+t_err	t_map_parse_models(
+	t_ft_json value,
+	t_map_model ***out,
+	size_t *out_count
+)
 {
-	t_map_free_models(out->models, out->model_count);
-	t_map_free_lights(out->lights, out->light_count);
-	free(out);
+	const size_t		count = ft_json_list_length(value);
+	t_map_model **const	result = wrap_malloc(sizeof(t_map_model *) * count);
+	size_t				i;
+
+	if (!result)
+		return (true);
+	i = 0;
+	while (i != count)
+	{
+		if (t_map_parse_model(ft_json_get_list(value, i), &result[i]))
+		{
+			t_map_free_models(result, count);
+			return (NULL);
+		}
+		i++;
+	}
+	*out = result;
+	*out_count = count;
+	return (false);
 }

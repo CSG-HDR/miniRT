@@ -18,9 +18,9 @@
 #include "t_map.h"
 #include "t_map_free.h"
 
-void	t_map_free(t_map *out)
+void	t_map_free_models(t_map_model **value, size_t count)
 {
-	t_map_free_models(out->models, out->model_count);
-	t_map_free_lights(out->lights, out->light_count);
-	free(out);
+	while (count--)
+		t_map_free_model(value[count]);
+	free(value);
 }
