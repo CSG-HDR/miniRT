@@ -477,12 +477,19 @@
         "specular": {
           "$ref": "#/$defs/color"
         },
+        "specularLobe": {
+          "type": "number",
+          "description": "specular lobe"
+        },
         "normal": {
           "$ref": "#/$defs/normal-map"
         }
       },
       "required": [
-        "color"
+        "ambient",
+        "diffuse",
+        "specular",
+        "specularLobe"
       ]
     }
   }
