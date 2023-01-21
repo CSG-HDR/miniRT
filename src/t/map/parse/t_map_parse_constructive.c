@@ -27,6 +27,7 @@ static t_err	parse_union(
 
 	if (!result)
 		return (true);
+	result->type = T_MAP_CONSTRUCTIVE_UNION;
 	if (t_map_parse_union(value, &result->_union))
 	{
 		wrap_free(result);
@@ -46,6 +47,7 @@ static t_err	parse_intersection(
 
 	if (!result)
 		return (true);
+	result->type = T_MAP_CONSTRUCTIVE_INTERSECTION;
 	if (t_map_parse_intersection(value, &result->intersection))
 	{
 		wrap_free(result);
@@ -65,6 +67,7 @@ static t_err	parse_difference(
 
 	if (!result)
 		return (true);
+	result->type = T_MAP_CONSTRUCTIVE_DIFFERENCE;
 	if (t_map_parse_difference(value, &result->difference))
 	{
 		wrap_free(result);

@@ -10,47 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_parse.h"
+#include "t_map_free.h"
 
 #include "wrap.h"
-#include "ft_cstring.h"
-#include "ft_json.h"
 #include "t_map.h"
 
-static bool	is_constructive(const char *type)
+void	t_map_free_color(t_map_color value)
 {
-	return (
-		false
-		|| ft_cstring_equals(type, "union")
-		|| ft_cstring_equals(type, "intersection")
-		|| ft_cstring_equals(type, "difference")
-	);
-}
-
-t_err	t_map_parse_model(t_ft_json value, t_map_model **out)
-{
-	t_map_model *const	result = wrap_malloc(sizeof(t_map_model));
-
-	if (is_constructive(ft_json_get_dict(value, "type")))
+	if (*value.type == T_MAP_COLOR_TYPE_COLOR)
 	{
-		result->constructive.type = T_MAP_MODEL_CONSTRUCTIVE;
-		if (t_map_parse_constructive(value, &result->constructive.constructive))
-		{
-			wrap_free(result);
-			return (true);
-		}
-		*out = result;
-		return (false);
+		wrap_free(value.color);
 	}
 	else
 	{
-		result->constructive.type = T_MAP_MODEL_PRIMITIVE;
-		if (t_map_parse_primitive(value, &result->primitive.primitive))
-		{
-			wrap_free(result);
-			return (true);
-		}
-		*out = result;
-		return (false);
+		t_map_free_texture(value.texture->texture);
+		wrap_free(value.texture);
 	}
 }

@@ -34,6 +34,8 @@ typedef t_f3		t_map_size;
 // position
 typedef t_f3		t_map_position;
 
+/////////////////////////////////////////////////////////////////////// material
+
 typedef struct s_map_texture
 {
 	char		*src;
@@ -238,19 +240,19 @@ typedef enum e_map_constructive_type
 
 typedef struct s_map_constructive_union
 {
-	t_map_constructive_type	*type;
+	t_map_constructive_type	type;
 	t_map_union				_union;
 }	t_map_constructive_union;
 
 typedef struct s_map_constructive_intersection
 {
-	t_map_constructive_type	*type;
+	t_map_constructive_type	type;
 	t_map_intersection		intersection;
 }	t_map_constructive_intersection;
 
 typedef struct s_map_constructive_difference
 {
-	t_map_constructive_type	*type;
+	t_map_constructive_type	type;
 	t_map_difference		difference;
 }	t_map_constructive_difference;
 

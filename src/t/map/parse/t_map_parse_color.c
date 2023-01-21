@@ -17,18 +17,34 @@
 #include "ft_json.h"
 #include "t_map.h"
 
-static t_err	parse_sphere(
+static t_err	parse_color(
 	t_ft_json value,
-	t_map_primitive_sphere **out
+	t_map_color_color **out
 )
 {
-	t_map_primitive_sphere *const	result
-		= wrap_malloc(sizeof(t_map_primitive_sphere));
+	t_map_color_color *const	result
+		= wrap_malloc(sizeof(t_map_color_color));
 
 	if (!result)
 		return (true);
-	result->type = T_MAP_PRIMITIVE_SPHERE;
-	if (t_map_parse_sphere(value, &result->sphere))
+	result->type = T_MAP_COLOR_TYPE_COLOR;
+	t_map_parse_material_color(value, &result->color);
+	*out = result;
+	return (false);
+}
+
+static t_err	parse_texture(
+	t_ft_json value,
+	t_map_color_texture **out
+)
+{
+	t_map_color_texture *const	result
+		= wrap_malloc(sizeof(t_map_color_texture));
+
+	if (!result)
+		return (true);
+	result->type = T_MAP_COLOR_TYPE_TEXTURE;
+	if (t_map_parse_texture(value, &result->texture))
 	{
 		wrap_free(result);
 		return (true);
@@ -37,29 +53,9 @@ static t_err	parse_sphere(
 	return (false);
 }
 
-static t_err	parse_cube(
-	t_ft_json value,
-	t_map_primitive_cube **out
-)
+t_err	t_map_parse_color(t_ft_json value, t_map_color *out)
 {
-	t_map_primitive_cube *const	result
-		= wrap_malloc(sizeof(t_map_primitive_cube));
-
-	if (!result)
-		return (true);
-	result->type = T_MAP_PRIMITIVE_CUBE;
-	if (t_map_parse_cube(value, &result->cube))
-	{
-		wrap_free(result);
-		return (true);
-	}
-	*out = result;
-	return (false);
-}
-
-t_err	t_map_parse_primitive(t_ft_json value, t_map_primitive *out)
-{
-	if (ft_cstring_equals(ft_json_get_dict(value, "type"), "sphere"))
-		return (parse_sphere(value, &out->sphere));
-	return (parse_cube(value, &out->cube));
+	if (ft_cstring_equals(ft_json_get_dict(value, "type"), "color"))
+		return (parse_color(value, &out->color));
+	return (parse_texture(value, &out->texture));
 }
