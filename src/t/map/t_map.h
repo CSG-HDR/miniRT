@@ -483,6 +483,8 @@ typedef struct s_map
 	t_map_light				*lights;
 	size_t					plane_count;
 	t_map_plane				*planes;
+	size_t					quadric_count;
+	t_map_quadric			*quadrics;
 	t_map_camera			camera;
 	t_map_viewport			viewport;
 	t_map_light_color		ambient_light;

@@ -37,7 +37,7 @@ void	t_map_free_planes(t_map_plane *value, size_t count);
 void	t_map_free_plane(t_map_plane value);
 void	t_map_free_quadrics(t_map_quadric *value, size_t count);
 void	t_map_free_quadric(t_map_quadric value);
-void	t_map_free_colors(t_map_color *value, size_t count);
+void	t_map_free_colors(t_map_color **value, size_t count);
 void	t_map_free_color(t_map_color *value);
 void	t_map_free_texture(t_map_texture value);
 void	t_map_free_blend(t_map_blend value);

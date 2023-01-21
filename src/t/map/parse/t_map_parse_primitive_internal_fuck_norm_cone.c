@@ -12,16 +12,26 @@
 
 #include "t_map_parse.h"
 
+#include "wrap.h"
 #include "ft_json.h"
 #include "t_map.h"
 
-t_err	t_map_parse_plane(t_ft_json value, t_map_plane *out)
+t_err	t_map_parse_primitive_internal_fuck_norm_cone(
+	t_ft_json value,
+	t_map_primitive_cone **out
+)
 {
-	t_map_parse_position(
-		ft_json_get_dict(value, "position"), &out->position);
-	t_map_parse_normal(
-		ft_json_get_dict(value, "normal"), &out->normal);
-	t_map_parse_color_material(
-		ft_json_get_dict(value, "material"), &out->material);
-	return (t_map_parse_optional_limit(value, &out->limit));
+	t_map_primitive_cone *const	result
+		= wrap_malloc(sizeof(t_map_primitive_cone));
+
+	if (!result)
+		return (true);
+	result->type = T_MAP_PRIMITIVE_TYPE_CONE;
+	if (t_map_parse_cone(value, &result->cone))
+	{
+		wrap_free(result);
+		return (true);
+	}
+	*out = result;
+	return (false);
 }

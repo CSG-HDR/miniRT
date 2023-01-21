@@ -12,16 +12,39 @@
 
 #include "t_map_parse.h"
 
+#include <stddef.h>
+
+#include "wrap.h"
 #include "ft_json.h"
 #include "t_map.h"
+#include "t_map_free.h"
 
-t_err	t_map_parse_plane(t_ft_json value, t_map_plane *out)
+t_err	t_map_parse_optional_quadrics(
+	t_ft_json value,
+	t_map_quadric **out,
+	size_t *out_count
+)
 {
-	t_map_parse_position(
-		ft_json_get_dict(value, "position"), &out->position);
-	t_map_parse_normal(
-		ft_json_get_dict(value, "normal"), &out->normal);
-	t_map_parse_color_material(
-		ft_json_get_dict(value, "material"), &out->material);
-	return (t_map_parse_optional_limit(value, &out->limit));
+	size_t		i;
+
+	if (!ft_json_dict_has_key(value, "quadrics"))
+	{
+		*out_count = 0;
+		return (false);
+	}
+	*out_count = ft_json_list_length(value);
+	*out = wrap_malloc(sizeof(t_map_quadric) * *out_count);
+	if (!*out)
+		return (NULL);
+	i = 0;
+	while (i != *out_count)
+	{
+		if (t_map_parse_quadric(ft_json_get_list(value, i), out[i]))
+		{
+			t_map_free_quadrics(*out, *out_count);
+			return (true);
+		}
+		i++;
+	}
+	return (false);
 }

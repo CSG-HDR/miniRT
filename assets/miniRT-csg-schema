@@ -90,8 +90,6 @@
     }
   },
   "required": [
-    "models",
-    "lights",
     "camera",
     "viewport"
   ],
@@ -487,93 +485,83 @@
       ]
     },
     "quadric": {
-      "oneOf": [
-        {
-          "$ref": "#/$defs/quadric-properties"
-        },
-        {
-          "type": "object",
-          "unevaluatedProperties": false,
-          "properties": {
-            "properties": {
-              "$ref": "#/$defs/quadric-properties"
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "properties": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "description": "the property [A, B, C, D, E, F, G, H, I, J] where Ax² + By² + Cz² + Dxy+ Exz + Fyz + Gx + Hy + Iz + J = 0"
+              },
+              "prefixItems": [
+                {
+                  "$ref": "#/$defs/non-zero"
+                },
+                {
+                  "$ref": "#/$defs/non-zero"
+                },
+                {
+                  "$ref": "#/$defs/non-zero"
+                }
+              ],
+              "minItems": 10,
+              "maxItems": 10
             },
-            "material": {
-              "$ref": "#/$defs/color-material"
-            },
-            "limit": {
-              "$ref": "#/$defs/model"
+            {
+              "type": "object",
+              "unevaluatedProperties": false,
+              "properties": {
+                "A": {
+                  "$ref": "#/$defs/non-zero"
+                },
+                "B": {
+                  "$ref": "#/$defs/non-zero"
+                },
+                "C": {
+                  "$ref": "#/$defs/non-zero"
+                },
+                "D": {
+                  "type": "number"
+                },
+                "E": {
+                  "type": "number"
+                },
+                "F": {
+                  "type": "number"
+                },
+                "G": {
+                  "type": "number"
+                },
+                "H": {
+                  "type": "number"
+                },
+                "I": {
+                  "type": "number"
+                },
+                "J": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ]
             }
-          },
-          "required": [
-            "properties"
           ]
-        }
-      ]
-    },
-    "quadric-properties": {
-      "oneOf": [
-        {
-          "type": "array",
-          "items": {
-            "type": "number",
-            "description": "the property [A, B, C, D, E, F, G, H, I, J] where Ax² + By² + Cz² + Dxy+ Exz + Fyz + Gx + Hy + Iz + J = 0"
-          },
-          "prefixItems": [
-            {
-              "$ref": "#/$defs/non-zero"
-            },
-            {
-              "$ref": "#/$defs/non-zero"
-            },
-            {
-              "$ref": "#/$defs/non-zero"
-            }
-          ],
-          "minItems": 10,
-          "maxItems": 10
         },
-        {
-          "type": "object",
-          "unevaluatedProperties": false,
-          "properties": {
-            "A": {
-              "$ref": "#/$defs/non-zero"
-            },
-            "B": {
-              "$ref": "#/$defs/non-zero"
-            },
-            "C": {
-              "$ref": "#/$defs/non-zero"
-            },
-            "D": {
-              "type": "number"
-            },
-            "E": {
-              "type": "number"
-            },
-            "F": {
-              "type": "number"
-            },
-            "G": {
-              "type": "number"
-            },
-            "H": {
-              "type": "number"
-            },
-            "I": {
-              "type": "number"
-            },
-            "J": {
-              "type": "number"
-            }
-          },
-          "required": [
-            "A",
-            "B",
-            "C"
-          ]
+        "material": {
+          "$ref": "#/$defs/color-material"
+        },
+        "limit": {
+          "$ref": "#/$defs/model"
         }
+      },
+      "required": [
+        "properties"
       ]
     },
     "non-zero": {

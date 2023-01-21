@@ -14,14 +14,12 @@
 
 #include "ft_json.h"
 #include "t_map.h"
+#include "t_map_free.h"
 
-t_err	t_map_parse_plane(t_ft_json value, t_map_plane *out)
+t_err	t_map_parse_torus(t_ft_json value, t_map_torus *out)
 {
-	t_map_parse_position(
-		ft_json_get_dict(value, "position"), &out->position);
-	t_map_parse_normal(
-		ft_json_get_dict(value, "normal"), &out->normal);
-	t_map_parse_color_material(
-		ft_json_get_dict(value, "material"), &out->material);
-	return (t_map_parse_optional_limit(value, &out->limit));
+	t_map_parse_position(ft_json_get_dict(value, "position"), &out->position);
+	t_map_parse_size(ft_json_get_dict(value, "size"), &out->size);
+	t_map_parse_rotation(ft_json_get_dict(value, "rotation"), &out->rotation);
+	return (t_map_parse_get_optional_material(value, &out->material));
 }

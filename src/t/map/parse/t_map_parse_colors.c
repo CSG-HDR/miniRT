@@ -12,16 +12,36 @@
 
 #include "t_map_parse.h"
 
+#include <stddef.h>
+
+#include "wrap.h"
 #include "ft_json.h"
 #include "t_map.h"
+#include "t_map_free.h"
 
-t_err	t_map_parse_plane(t_ft_json value, t_map_plane *out)
+t_err	t_map_parse_colors(
+	t_ft_json value,
+	t_map_color ***out,
+	size_t *out_count
+)
 {
-	t_map_parse_position(
-		ft_json_get_dict(value, "position"), &out->position);
-	t_map_parse_normal(
-		ft_json_get_dict(value, "normal"), &out->normal);
-	t_map_parse_color_material(
-		ft_json_get_dict(value, "material"), &out->material);
-	return (t_map_parse_optional_limit(value, &out->limit));
+	const size_t		count = ft_json_list_length(value);
+	t_map_color **const	result = wrap_malloc(sizeof(t_map_color *) * count);
+	size_t				i;
+
+	if (!result)
+		return (true);
+	i = 0;
+	while (i != count)
+	{
+		if (t_map_parse_color(ft_json_get_list(value, i), &result[i]))
+		{
+			t_map_free_colors(result, count);
+			return (NULL);
+		}
+		i++;
+	}
+	*out = result;
+	*out_count = count;
+	return (false);
 }

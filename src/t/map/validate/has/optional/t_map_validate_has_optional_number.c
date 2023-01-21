@@ -10,18 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_parse.h"
+#include "t_map_validate.h"
+
+#include <stdbool.h>
 
 #include "ft_json.h"
-#include "t_map.h"
 
-t_err	t_map_parse_plane(t_ft_json value, t_map_plane *out)
+bool	t_map_validate_has_optional_number(t_ft_json value, const char *key)
 {
-	t_map_parse_position(
-		ft_json_get_dict(value, "position"), &out->position);
-	t_map_parse_normal(
-		ft_json_get_dict(value, "normal"), &out->normal);
-	t_map_parse_color_material(
-		ft_json_get_dict(value, "material"), &out->material);
-	return (t_map_parse_optional_limit(value, &out->limit));
+	return (
+		true
+		&& ft_json_is_dict(value)
+		&& (
+			!ft_json_dict_has_key(value, key)
+			|| ft_json_is_number(ft_json_get_dict(value, key))
+		)
+	);
 }

@@ -12,16 +12,16 @@
 
 #include "t_map_parse.h"
 
+#include <stddef.h>
+
 #include "ft_json.h"
+#include "t_f.h"
 #include "t_map.h"
 
-t_err	t_map_parse_plane(t_ft_json value, t_map_plane *out)
+void	t_map_parse_optional_specular_lobe(t_ft_json value, t_f *out)
 {
-	t_map_parse_position(
-		ft_json_get_dict(value, "position"), &out->position);
-	t_map_parse_normal(
-		ft_json_get_dict(value, "normal"), &out->normal);
-	t_map_parse_color_material(
-		ft_json_get_dict(value, "material"), &out->material);
-	return (t_map_parse_optional_limit(value, &out->limit));
+	if (ft_json_dict_has_key(value, "specularLobe"))
+		*out = ft_json_get_number(ft_json_get_dict(value, "specularLobe"));
+	else
+		*out = (t_f)1;
 }
