@@ -20,8 +20,9 @@
 
 t_map					*t_map_parse(t_ft_json value);
 
+t_map_model				**t_map_parse_models(
+							t_ft_json value, size_t *out_count);
 t_map_model				*t_map_parse_model(t_ft_json value);
-t_map_model				**t_map_parse_models(t_ft_json value, size_t *out_count);
 t_map_constructive		t_map_parse_constructive(t_ft_json value);
 t_map_union				t_map_parse_union(t_ft_json value);
 t_map_intersection		t_map_parse_intersection(t_ft_json value);
@@ -30,7 +31,6 @@ t_map_primitive			t_map_parse_primitive(t_ft_json value);
 t_map_sphere			t_map_parse_sphere(t_ft_json value);
 t_map_cube				t_map_parse_cube(t_ft_json value);
 t_map_light				t_map_parse_light(t_ft_json value);
-t_map_light				*t_map_parse_lights(t_ft_json value, size_t *out_count);
 t_map_point				t_map_parse_point(t_ft_json value);
 t_map_directional		t_map_parse_directional(t_ft_json value);
 t_map_spot				t_map_parse_spot(t_ft_json value);

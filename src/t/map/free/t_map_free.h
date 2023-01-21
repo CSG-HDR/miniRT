@@ -19,8 +19,8 @@
 
 void	t_map_free(t_map *value);
 
-void	t_map_free_model(t_map_model *value);
 void	t_map_free_models(t_map_model **value, size_t count);
+void	t_map_free_model(t_map_model *value);
 bool	t_map_free_constructive(t_map_constructive value);
 bool	t_map_free_union(t_map_union value);
 bool	t_map_free_intersection(t_map_intersection value);
@@ -29,7 +29,6 @@ bool	t_map_free_primitive(t_map_primitive value);
 bool	t_map_free_sphere(t_map_sphere value);
 bool	t_map_free_cube(t_map_cube value);
 bool	t_map_free_light(t_map_light value);
-void	t_map_free_lights(t_map_light **value, size_t count);
 bool	t_map_free_point(t_map_point value);
 bool	t_map_free_directional(t_map_directional value);
 bool	t_map_free_spot(t_map_spot value);

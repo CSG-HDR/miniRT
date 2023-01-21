@@ -19,6 +19,7 @@
 
 bool	t_map_validate(t_ft_json value);
 
+bool	t_map_validate_models(t_ft_json value);
 bool	t_map_validate_model(t_ft_json value);
 bool	t_map_validate_constructive(t_ft_json value);
 bool	t_map_validate_union(t_ft_json value);

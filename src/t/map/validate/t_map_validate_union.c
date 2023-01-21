@@ -17,19 +17,6 @@
 #include "ft_cstring.h"
 #include "ft_json.h"
 
-static bool	validate_children(t_ft_json value)
-{
-	size_t	count;
-
-	if (!ft_json_is_list(value))
-		return (false);
-	count = ft_json_list_length(value);
-	while (count--)
-		if (!t_map_validate_model(value))
-			return (false);
-	return (true);
-}
-
 bool	t_map_validate_union(t_ft_json value)
 {
 	return (
@@ -40,6 +27,6 @@ bool	t_map_validate_union(t_ft_json value)
 		&& ft_cstring_equals(
 			ft_json_get_string(ft_json_get_dict(value, "type")), "union")
 		&& ft_json_dict_has_key(value, "children")
-		&& validate_children(ft_json_get_dict(value, "children"))
+		&& t_map_validate_models(ft_json_get_dict(value, "children"))
 	);
 }

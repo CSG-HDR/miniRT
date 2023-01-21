@@ -17,16 +17,15 @@
 #include "ft_cstring.h"
 #include "ft_json.h"
 
-bool	t_map_validate_intersection(t_ft_json value)
+bool	t_map_validate_models(t_ft_json value)
 {
-	return (
-		true
-		&& ft_json_is_dict(value)
-		&& ft_json_dict_has_key(value, "type")
-		&& ft_json_is_string(ft_json_get_dict(value, "type"))
-		&& ft_cstring_equals(
-			ft_json_get_string(ft_json_get_dict(value, "type")), "intersection")
-		&& ft_json_dict_has_key(value, "children")
-		&& t_map_validate_models(ft_json_get_dict(value, "children"))
-	);
+	size_t	count;
+
+	if (!ft_json_is_list(value))
+		return (false);
+	count = ft_json_list_length(value);
+	while (count--)
+		if (!t_map_validate_model(value))
+			return (false);
+	return (true);
 }
