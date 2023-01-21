@@ -10,15 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_cstring.h"
+#include "t_map_parse.h"
+
 #include "ft_json.h"
+#include "t_map.h"
 
-#include <stdbool.h>
-
-#include "ft_json_internal.h"
-
-bool	ft_json_get_bool(t_ft_json value)
+t_err	t_map_parse_texture(t_ft_json value, t_map_texture *out)
 {
-	t_ft_json_value_internal *const	self = value;
-
-	return (self->boolean.value);
+	if (ft_cstring_duplicate(ft_json_get_string(
+				ft_json_get_dict(value, "src")), &out->src))
+		return (true);
+	out->width = ft_json_get_number(
+			ft_json_get_list(ft_json_get_dict(value, "size"), 0));
+	out->height = ft_json_get_number(
+			ft_json_get_list(ft_json_get_dict(value, "size"), 0));
+	out->nearest = (ft_json_dict_has_key(value, "nearest")
+			&& ft_json_get_bool(ft_json_get_dict(value, "nearest")));
+	out->mirror = (ft_json_dict_has_key(value, "mirror")
+			&& ft_json_get_bool(ft_json_get_dict(value, "mirror")));
+	return (false);
 }

@@ -53,7 +53,7 @@ bool	t_map_validate_color(t_ft_json value);
 bool	t_map_validate_texture(t_ft_json value);
 bool	t_map_validate_blend(t_ft_json value);
 bool	t_map_validate_blend_add(t_ft_json value);
-bool	t_map_validate_blend_multiple(t_ft_json value);
+bool	t_map_validate_blend_multiply(t_ft_json value);
 bool	t_map_validate_blend_maximum(t_ft_json value);
 bool	t_map_validate_blend_minimum(t_ft_json value);
 bool	t_map_validate_blend_subtract(t_ft_json value);

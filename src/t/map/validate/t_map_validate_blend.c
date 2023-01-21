@@ -21,7 +21,7 @@ bool	t_map_validate_blend(t_ft_json value)
 	return (
 		false
 		|| t_map_validate_blend_add(value)
-		|| t_map_validate_blend_multiple(value)
+		|| t_map_validate_blend_multiply(value)
 		|| t_map_validate_blend_maximum(value)
 		|| t_map_validate_blend_minimum(value)
 		|| t_map_validate_blend_subtract(value)
