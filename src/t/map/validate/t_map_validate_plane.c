@@ -14,7 +14,6 @@
 
 #include <stdbool.h>
 
-#include "ft_cstring.h"
 #include "ft_json.h"
 
 bool	t_map_validate_plane(t_ft_json value)

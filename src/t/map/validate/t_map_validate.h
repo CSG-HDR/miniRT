@@ -67,5 +67,6 @@ bool	t_map_validate_has_direction(t_ft_json value);
 bool	t_map_validate_has_color(t_ft_json value);
 bool	t_map_validate_has_optional_range(t_ft_json value);
 bool	t_map_validate_has_optional_material(t_ft_json value);
+bool	t_map_validate_has_optional_specular_lobe(t_ft_json value);
 
 #endif

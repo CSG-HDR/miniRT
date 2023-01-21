@@ -14,7 +14,6 @@
 
 #include <stdbool.h>
 
-#include "ft_cstring.h"
 #include "ft_json.h"
 
 bool	has_optional_material(t_ft_json value)

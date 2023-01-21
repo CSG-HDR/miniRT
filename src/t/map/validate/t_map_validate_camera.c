@@ -14,7 +14,6 @@
 
 #include <stdbool.h>
 
-#include "ft_cstring.h"
 #include "ft_json.h"
 
 static bool	has_fov(t_ft_json value)

@@ -16,14 +16,33 @@
 
 #include "ft_json.h"
 
-bool	t_map_validate_difference(t_ft_json value)
+bool	has_optional_material(t_ft_json value)
+{
+	t_ft_json	material;
+
+	if (!ft_json_dict_has_key(value, "material"))
+		return (true);
+	material = ft_json_get_dict(value, "material");
+	if (t_map_validate_material(material))
+		return (true);
+	return (
+		true
+		&& ft_json_is_list(material)
+		&& ft_json_list_length(material) == 3
+		&& t_map_validate_material(ft_json_get_list(material, 0))
+		&& t_map_validate_material(ft_json_get_list(material, 1))
+		&& t_map_validate_material(ft_json_get_list(material, 2))
+	);
+}
+
+bool	t_map_validate_cylinder(t_ft_json value)
 {
 	return (
 		true
-		&& t_map_validate_has_type(value, "difference")
-		&& ft_json_dict_has_key(value, "from")
-		&& t_map_validate_model(ft_json_get_dict(value, "from"))
-		&& ft_json_dict_has_key(value, "subtract")
-		&& t_map_validate_model(ft_json_get_dict(value, "subtract"))
+		&& t_map_validate_has_type(value, "cylinder")
+		&& t_map_validate_has_position(value)
+		&& t_map_validate_has_size(value)
+		&& t_map_validate_has_rotation(value)
+		&& has_optional_material(value)
 	);
 }

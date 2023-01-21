@@ -16,14 +16,20 @@
 
 #include "ft_json.h"
 
-bool	t_map_validate_difference(t_ft_json value)
+bool	t_map_validate_color_material(t_ft_json value)
 {
 	return (
 		true
-		&& t_map_validate_has_type(value, "difference")
-		&& ft_json_dict_has_key(value, "from")
-		&& t_map_validate_model(ft_json_get_dict(value, "from"))
-		&& ft_json_dict_has_key(value, "subtract")
-		&& t_map_validate_model(ft_json_get_dict(value, "subtract"))
+		&& ft_json_is_dict(value)
+		&& (!ft_json_dict_has_key(value, "ambient")
+			|| t_map_validate_material_color(
+				ft_json_get_dict(value, "ambient")))
+		&& (!ft_json_dict_has_key(value, "diffuse")
+			|| t_map_validate_material_color(
+				ft_json_get_dict(value, "diffuse")))
+		&& (!ft_json_dict_has_key(value, "specular")
+			|| t_map_validate_material_color(
+				ft_json_get_dict(value, "specular")))
+		&& t_map_validate_has_optional_specular_lobe(value)
 	);
 }

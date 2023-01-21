@@ -14,7 +14,6 @@
 
 #include <stdbool.h>
 
-#include "ft_cstring.h"
 #include "ft_json.h"
 
 static bool	validate_angle(t_ft_json value)

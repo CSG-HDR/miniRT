@@ -14,16 +14,16 @@
 
 #include <stdbool.h>
 
-#include "ft_json.h"
+#include "ft_cstring.h"
 
-bool	t_map_validate_difference(t_ft_json value)
+bool	t_map_validate_torus(t_ft_json value)
 {
 	return (
 		true
-		&& t_map_validate_has_type(value, "difference")
-		&& ft_json_dict_has_key(value, "from")
-		&& t_map_validate_model(ft_json_get_dict(value, "from"))
-		&& ft_json_dict_has_key(value, "subtract")
-		&& t_map_validate_model(ft_json_get_dict(value, "subtract"))
+		&& t_map_validate_has_type(value, "torus")
+		&& t_map_validate_has_position(value)
+		&& t_map_validate_has_size(value)
+		&& t_map_validate_has_rotation(value)
+		&& t_map_validate_has_optional_material(value)
 	);
 }
