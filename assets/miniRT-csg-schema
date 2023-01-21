@@ -468,7 +468,13 @@
       "type": "object",
       "unevaluatedProperties": false,
       "properties": {
-        "color": {
+        "ambient": {
+          "$ref": "#/$defs/color"
+        },
+        "diffuse": {
+          "$ref": "#/$defs/color"
+        },
+        "specular": {
           "$ref": "#/$defs/color"
         },
         "normal": {

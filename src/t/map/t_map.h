@@ -95,7 +95,10 @@ typedef union u_map_normal_map
 
 typedef struct s_map_material
 {
-	t_map_color			color;
+	t_map_color			ambient;
+	t_map_color			diffuse;
+	t_map_color			specular;
+	t_f					specular_lobe;
 	bool				has_normal;
 	t_map_normal_map	normal;
 }	t_map_material;
