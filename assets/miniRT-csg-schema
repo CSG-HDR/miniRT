@@ -18,6 +18,12 @@
         "$ref": "#/$defs/light"
       }
     },
+    "planes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/plane"
+      }
+    },
     "camera": {
       "type": "object",
       "unevaluatedProperties": false,
@@ -321,6 +327,26 @@
             "direction"
           ]
         }
+      ]
+    },
+    "plane": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "position": {
+          "$ref": "#/$defs/position"
+        },
+        "normal": {
+          "$ref": "#/$defs/normal"
+        },
+        "material": {
+          "$ref": "#/$defs/material"
+        }
+      },
+      "required": [
+        "position",
+        "normal",
+        "material"
       ]
     },
     "position": {

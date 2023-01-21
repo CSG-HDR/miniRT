@@ -44,11 +44,37 @@ t_map_light	*l(t_ft_json value, size_t *out_count)
 	return (result);
 }
 
-void	optionals(t_ft_json value, t_map *result)
+t_map_plane	*p(t_ft_json value, size_t *out_count)
+{
+	const size_t		count = ft_json_list_length(value);
+	t_map_plane *const	result = wrap_malloc(sizeof(t_map_plane) * count);
+	size_t				i;
+
+	if (!result)
+		return (NULL);
+	i = 0;
+	while (i != count)
+	{
+		if (t_map_parse_plane(ft_json_get_list(value, i), &result[i]))
+		{
+			t_map_free_planes(result, count);
+			return (NULL);
+		}
+		i++;
+	}
+	*out_count = count;
+	return (result);
+}
+
+void	etc(t_ft_json value, t_map *result)
 {
 	const bool	has_ambient_light = ft_json_dict_has_key(value, "ambientLight");
 	const bool	has_void_color = ft_json_dict_has_key(value, "voidColor");
 
+	t_map_parse_camera(
+		ft_json_get_dict(value, "camera"), &result->camera);
+	t_map_parse_viewport(
+		ft_json_get_dict(value, "viewport"), &result->viewport);
 	if (has_ambient_light)
 		t_map_parse_light_color(
 			ft_json_get_dict(value, "ambientLight"), &result->ambient_light);
@@ -74,17 +100,18 @@ t_err	t_map_parse(t_ft_json value, t_map **out)
 		return (true);
 	}
 	result->lights = l(ft_json_get_dict(value, "lights"), &result->light_count);
-	if (!result->lights)
+	result->planes = p(ft_json_get_dict(value, "planes"), &result->plane_count);
+	if (!result->lights || !result->planes)
 	{
 		t_map_free_models(result->models, result->model_count);
+		if (result->lights)
+			t_map_free_lights(result->lights, result->light_count);
+		if (result->planes)
+			t_map_free_planes(result->planes, result->plane_count);
 		wrap_free(result);
 		return (true);
 	}
-	t_map_parse_camera(
-		ft_json_get_dict(value, "camera"), &result->camera);
-	t_map_parse_viewport(
-		ft_json_get_dict(value, "viewport"), &result->viewport);
-	optionals(value, result);
+	etc(value, result);
 	*out = result;
 	return (false);
 }

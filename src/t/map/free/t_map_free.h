@@ -29,6 +29,8 @@ void	t_map_free_sphere(t_map_sphere value);
 void	t_map_free_cube(t_map_cube value);
 void	t_map_free_lights(t_map_light *value, size_t count);
 void	t_map_free_light(t_map_light value);
+void	t_map_free_planes(t_map_plane *value, size_t count);
+void	t_map_free_plane(t_map_plane value);
 void	t_map_free_color(t_map_color value);
 void	t_map_free_normal_map(t_map_normal_map value);
 void	t_map_free_texture(t_map_texture value);

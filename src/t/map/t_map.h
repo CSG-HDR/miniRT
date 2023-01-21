@@ -294,6 +294,13 @@ typedef union u_map_model
 
 //////////////////////////////////////////////////////////////////////////// etc
 
+typedef struct s_map_plane
+{
+	t_map_position	position;
+	t_map_normal	normal;
+	t_map_material	material;
+}	t_map_plane;
+
 typedef struct s_map_camera
 {
 	t_map_position	position;
@@ -317,6 +324,8 @@ typedef struct s_map
 	t_map_model				**models;
 	size_t					light_count;
 	t_map_light				*lights;
+	size_t					plane_count;
+	t_map_plane				*planes;
 	t_map_camera			camera;
 	t_map_viewport			viewport;
 	t_map_light_color		ambient_light;

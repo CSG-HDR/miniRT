@@ -31,6 +31,9 @@ t_err	t_map_parse_cube(t_ft_json value, t_map_cube *out);
 t_err	t_map_parse_lights(
 			t_ft_json value, t_map_light **out, size_t *out_count);
 t_err	t_map_parse_light(t_ft_json value, t_map_light *out);
+t_err	t_map_parse_planes(
+			t_ft_json value, t_map_plane **out, size_t *out_count);
+t_err	t_map_parse_plane(t_ft_json value, t_map_plane *out);
 void	t_map_parse_point(t_ft_json value, t_map_point *out);
 void	t_map_parse_directional(t_ft_json value, t_map_directional *out);
 void	t_map_parse_spot(t_ft_json value, t_map_spot *out);
