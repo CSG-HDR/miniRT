@@ -108,11 +108,12 @@ t_err	t_image_print_as_bmp(t_image *self)
 	{
 		x = -1;
 		while (++x < self->width)
-			if (printf("%c%c%c",
+			if (printf(
+					"%c%c%c",
 					(unsigned char)(self->extra[self->width * y + x].z * 255),
-					(unsigned char)(self->extra[self->width * y + x].y * 255),
-					(unsigned char)(self->extra[self->width * y + x].x * 255))
-				< 0)
+				(unsigned char)(self->extra[self->width * y + x].y * 255),
+					(unsigned char)(self->extra[self->width * y + x].x * 255)
+				) < 0)
 				return (true);
 		x = -1;
 		while (++x < row_padding)
@@ -121,3 +122,5 @@ t_err	t_image_print_as_bmp(t_image *self)
 	}
 	return (false);
 }
+
+// TODO: fix 114th line indentation after norminette fix
