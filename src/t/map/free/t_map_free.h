@@ -26,14 +26,24 @@ void	t_map_free_intersection(t_map_intersection value);
 void	t_map_free_difference(t_map_difference value);
 void	t_map_free_primitive(t_map_primitive value);
 void	t_map_free_sphere(t_map_sphere value);
+void	t_map_free_ellipsoid(t_map_ellipsoid value);
+void	t_map_free_torus(t_map_torus value);
+void	t_map_free_cone(t_map_cone value);
+void	t_map_free_cylinder(t_map_cylinder value);
 void	t_map_free_cube(t_map_cube value);
 void	t_map_free_lights(t_map_light *value, size_t count);
 void	t_map_free_light(t_map_light value);
 void	t_map_free_planes(t_map_plane *value, size_t count);
 void	t_map_free_plane(t_map_plane value);
-void	t_map_free_color(t_map_color value);
-void	t_map_free_normal_map(t_map_normal_map value);
+void	t_map_free_color(t_map_color *value);
 void	t_map_free_texture(t_map_texture value);
+void	t_map_free_blend(t_map_blend value);
+void	t_map_free_blend_add(t_map_blend_add value);
+void	t_map_free_blend_multiply(t_map_blend_multiply value);
+void	t_map_free_blend_maximum(t_map_blend_maximum value);
+void	t_map_free_blend_minimum(t_map_blend_minimum value);
+void	t_map_free_blend_subtract(t_map_blend_subtract value);
+void	t_map_free_normal_map(t_map_normal_map value);
 void	t_map_free_material(t_map_material value);
 
 #endif

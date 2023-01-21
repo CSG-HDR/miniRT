@@ -27,6 +27,10 @@ t_err	t_map_parse_intersection(t_ft_json value, t_map_intersection *out);
 t_err	t_map_parse_difference(t_ft_json value, t_map_difference *out);
 t_err	t_map_parse_primitive(t_ft_json value, t_map_primitive *out);
 t_err	t_map_parse_sphere(t_ft_json value, t_map_sphere *out);
+t_err	t_map_parse_ellipsoid(t_ft_json value, t_map_ellipsoid *out);
+t_err	t_map_parse_torus(t_ft_json value, t_map_torus *out);
+t_err	t_map_parse_cone(t_ft_json value, t_map_cone *out);
+t_err	t_map_parse_cylinder(t_ft_json value, t_map_cylinder *out);
 t_err	t_map_parse_cube(t_ft_json value, t_map_cube *out);
 t_err	t_map_parse_lights(
 			t_ft_json value, t_map_light **out, size_t *out_count);
@@ -45,9 +49,17 @@ void	t_map_parse_rotation(t_ft_json value, t_map_rotation *out);
 void	t_map_parse_normal(t_ft_json value, t_map_rotation *out);
 void	t_map_parse_light_color(t_ft_json value, t_map_light_color *out);
 void	t_map_parse_material_color(t_ft_json value, t_map_material_color *out);
-t_err	t_map_parse_color(t_ft_json value, t_map_color *out);
-t_err	t_map_parse_normal_map(t_ft_json value, t_map_normal_map *out);
+t_err	t_map_parse_colors(
+			t_ft_json value, t_map_color ***out, size_t *out_count);
+t_err	t_map_parse_color(t_ft_json value, t_map_color **out);
 t_err	t_map_parse_texture(t_ft_json value, t_map_texture *out);
+t_err	t_map_parse_blend(t_ft_json value, t_map_blend *out);
+t_err	t_map_parse_blend_add(t_ft_json value, t_map_blend_add *out);
+t_err	t_map_parse_blend_multiply(t_ft_json value, t_map_blend_multiply *out);
+t_err	t_map_parse_blend_maximum(t_ft_json value, t_map_blend_maximum *out);
+t_err	t_map_parse_blend_minimum(t_ft_json value, t_map_blend_minimum *out);
+t_err	t_map_parse_blend_subtract(t_ft_json value, t_map_blend_subtract *out);
+t_err	t_map_parse_normal_map(t_ft_json value, t_map_normal_map *out);
 t_err	t_map_parse_material(t_ft_json value, t_map_material *out);
 
 #endif

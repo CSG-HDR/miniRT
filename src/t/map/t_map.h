@@ -45,10 +45,65 @@ typedef struct s_map_texture
 	bool		mirror;
 }	t_map_texture;
 
+typedef enum e_map_blend_type
+{
+	T_MAP_BLEND_ADD,
+	T_MAP_BLEND_MULTIPLY,
+	T_MAP_BLEND_MINIMUM,
+	T_MAP_BLEND_MAXIMUM,
+	T_MAP_BLEND_SUBTRACT,
+}	t_map_blend_type;
+
+typedef struct s_map_blend_add
+{
+	t_map_blend_type	type;
+	size_t				children_count;
+	union u_map_color	**children;
+}	t_map_blend_add;
+
+typedef struct s_map_blend_multiply
+{
+	t_map_blend_type	type;
+	size_t				children_count;
+	union u_map_color	**children;
+}	t_map_blend_multiply;
+
+typedef struct s_map_blend_minimum
+{
+	t_map_blend_type	type;
+	size_t				children_count;
+	union u_map_color	**children;
+}	t_map_blend_minimum;
+
+typedef struct s_map_blend_maximum
+{
+	t_map_blend_type	type;
+	size_t				children_count;
+	union u_map_color	**children;
+}	t_map_blend_maximum;
+
+typedef struct s_map_blend_subtract
+{
+	t_map_blend_type	type;
+	union u_map_color	*from;
+	union u_map_color	*subtract;
+}	t_map_blend_subtract;
+
+typedef union u_map_blend
+{
+	t_map_blend_type		type;
+	t_map_blend_add			add;
+	t_map_blend_multiply	multiply;
+	t_map_blend_maximum		maximum;
+	t_map_blend_minimum		minimum;
+	t_map_blend_subtract	subtract;
+}	t_map_blend;
+
 typedef enum e_map_color_type
 {
 	T_MAP_COLOR_TYPE_COLOR,
 	T_MAP_COLOR_TYPE_TEXTURE,
+	T_MAP_COLOR_TYPE_BLEND,
 }	t_map_color_type;
 
 typedef struct s_map_color_color
@@ -63,11 +118,19 @@ typedef struct s_map_color_texture
 	t_map_texture		texture;
 }	t_map_color_texture;
 
+typedef struct s_map_color_blend
+{
+	t_map_color_type	type;
+	t_map_blend			blend;
+}	t_map_color_blend;
+
+// designed to be used with its pointer type for avoid type recursion issue
 typedef union u_map_color
 {
-	t_map_color_type	*type;
-	t_map_color_color	*color;
-	t_map_color_texture	*texture;
+	t_map_color_type	type;
+	t_map_color_color	color;
+	t_map_color_texture	texture;
+	t_map_color_blend	blend;
 }	t_map_color;
 
 typedef enum e_map_normal_map_type
@@ -97,13 +160,21 @@ typedef union u_map_normal_map
 
 typedef struct s_map_material
 {
-	t_map_color			ambient;
-	t_map_color			diffuse;
-	t_map_color			specular;
+	t_map_color			*ambient;
+	t_map_color			*diffuse;
+	t_map_color			*specular;
 	t_f					specular_lobe;
 	bool				has_normal;
 	t_map_normal_map	normal;
 }	t_map_material;
+
+typedef struct s_map_color_material
+{
+	t_map_material_color	ambient;
+	t_map_material_color	diffuse;
+	t_map_material_color	specular;
+	t_f						specular_lobe;
+}	t_map_color_material;
 
 ////////////////////////////////////////////////////////////////////////// light
 
@@ -173,6 +244,43 @@ typedef struct s_map_sphere
 	t_map_material	material;
 }	t_map_sphere;
 
+typedef struct s_map_ellipsoid
+{
+	t_map_position	position;
+	t_map_size		size;
+	t_map_rotation	rotation;
+	t_map_material	material;
+}	t_map_ellipsoid;
+
+typedef struct s_map_torus
+{
+	t_map_position	position;
+	t_map_size		size;
+	t_map_rotation	rotation;
+	t_map_material	material;
+}	t_map_torus;
+
+typedef struct s_map_cone
+{
+	t_map_position	position;
+	t_map_size		size;
+	t_f				offset_x;
+	t_f				offset_y;
+	t_map_rotation	rotation;
+	t_map_material	material_side;
+	t_map_material	material_bottom;
+}	t_map_cone;
+
+typedef struct s_map_cylinder
+{
+	t_map_position	position;
+	t_map_size		size;
+	t_map_rotation	rotation;
+	t_map_material	material_side;
+	t_map_material	material_top;
+	t_map_material	material_bottom;
+}	t_map_cylinder;
+
 typedef struct s_map_cube
 {
 	t_map_position	position;
@@ -189,6 +297,10 @@ typedef struct s_map_cube
 typedef enum e_map_primitive_type
 {
 	T_MAP_PRIMITIVE_SPHERE,
+	T_MAP_PRIMITIVE_ELLIPSOID,
+	T_MAP_PRIMITIVE_TORUS,
+	T_MAP_PRIMITIVE_CONE,
+	T_MAP_PRIMITIVE_CYLINDER,
 	T_MAP_PRIMITIVE_CUBE,
 }	t_map_primitive_type;
 
@@ -198,6 +310,30 @@ typedef struct s_map_primitive_sphere
 	t_map_sphere			sphere;
 }	t_map_primitive_sphere;
 
+typedef struct s_map_primitive_ellipsoid
+{
+	t_map_primitive_type	type;
+	t_map_ellipsoid			ellipsoid;
+}	t_map_primitive_ellipsoid;
+
+typedef struct s_map_primitive_torus
+{
+	t_map_primitive_type	type;
+	t_map_torus				torus;
+}	t_map_primitive_torus;
+
+typedef struct s_map_primitive_cone
+{
+	t_map_primitive_type	type;
+	t_map_cone				cone;
+}	t_map_primitive_cone;
+
+typedef struct s_map_primitive_cylinder
+{
+	t_map_primitive_type	type;
+	t_map_cylinder			cylinder;
+}	t_map_primitive_cylinder;
+
 typedef struct s_map_primitive_cube
 {
 	t_map_primitive_type	type;
@@ -206,9 +342,13 @@ typedef struct s_map_primitive_cube
 
 typedef union u_map_primitive
 {
-	t_map_primitive_type	*type;
-	t_map_primitive_sphere	*sphere;
-	t_map_primitive_cube	*cube;
+	t_map_primitive_type		*type;
+	t_map_primitive_sphere		*sphere;
+	t_map_primitive_ellipsoid	*ellipsoid;
+	t_map_primitive_torus		*torus;
+	t_map_primitive_cone		*cone;
+	t_map_primitive_cylinder	*cylinder;
+	t_map_primitive_cube		*cube;
 }	t_map_primitive;
 
 /////////////////////////////////////////////////////////// model - constructive
@@ -296,10 +436,25 @@ typedef union u_map_model
 
 typedef struct s_map_plane
 {
-	t_map_position	position;
-	t_map_normal	normal;
-	t_map_material	material;
+	t_map_position			position;
+	t_map_normal			normal;
+	t_map_color_material	material;
 }	t_map_plane;
+
+typedef struct s_map_quadric
+{
+	t_f						a;
+	t_f						b;
+	t_f						c;
+	t_f						d;
+	t_f						e;
+	t_f						f;
+	t_f						g;
+	t_f						h;
+	t_f						i;
+	t_f						j;
+	t_map_color_material	material;
+}	t_map_quadric;
 
 typedef struct s_map_camera
 {

@@ -27,6 +27,10 @@ bool	t_map_validate_intersection(t_ft_json value);
 bool	t_map_validate_difference(t_ft_json value);
 bool	t_map_validate_primitive(t_ft_json value);
 bool	t_map_validate_sphere(t_ft_json value);
+bool	t_map_validate_ellipsoid(t_ft_json value);
+bool	t_map_validate_torus(t_ft_json value);
+bool	t_map_validate_cone(t_ft_json value);
+bool	t_map_validate_cylinder(t_ft_json value);
 bool	t_map_validate_cube(t_ft_json value);
 bool	t_map_validate_light(t_ft_json value);
 bool	t_map_validate_point(t_ft_json value);
@@ -42,9 +46,16 @@ bool	t_map_validate_angle(t_ft_json value);
 bool	t_map_validate_normal(t_ft_json value);
 bool	t_map_validate_light_color(t_ft_json value);
 bool	t_map_validate_material_color(t_ft_json value);
+bool	t_map_validate_colors(t_ft_json value);
 bool	t_map_validate_color(t_ft_json value);
-bool	t_map_validate_normal_map(t_ft_json value);
 bool	t_map_validate_texture(t_ft_json value);
+bool	t_map_validate_blend(t_ft_json value);
+bool	t_map_validate_blend_add(t_ft_json value);
+bool	t_map_validate_blend_multiple(t_ft_json value);
+bool	t_map_validate_blend_maximum(t_ft_json value);
+bool	t_map_validate_blend_minimum(t_ft_json value);
+bool	t_map_validate_blend_subtract(t_ft_json value);
+bool	t_map_validate_normal_map(t_ft_json value);
 bool	t_map_validate_material(t_ft_json value);
 
 #endif
