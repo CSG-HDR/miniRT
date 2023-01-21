@@ -26,7 +26,7 @@ t_err	t_map_parse_primitive_internal_fuck_norm_cube(
 
 	if (!result)
 		return (true);
-	result->type = T_MAP_PRIMITIVE_CUBE;
+	result->type = T_MAP_PRIMITIVE_TYPE_CUBE;
 	if (t_map_parse_cube(value, &result->cube))
 	{
 		wrap_free(result);

@@ -47,11 +47,11 @@ typedef struct s_map_texture
 
 typedef enum e_map_blend_type
 {
-	T_MAP_BLEND_ADD,
-	T_MAP_BLEND_MULTIPLY,
-	T_MAP_BLEND_MINIMUM,
-	T_MAP_BLEND_MAXIMUM,
-	T_MAP_BLEND_SUBTRACT,
+	T_MAP_BLEND_TYPE_ADD,
+	T_MAP_BLEND_TYPE_MULTIPLY,
+	T_MAP_BLEND_TYPE_MINIMUM,
+	T_MAP_BLEND_TYPE_MAXIMUM,
+	T_MAP_BLEND_TYPE_SUBTRACT,
 }	t_map_blend_type;
 
 typedef struct s_map_blend_add
@@ -204,9 +204,9 @@ typedef struct s_map_spot
 
 typedef enum e_map_light_type
 {
-	T_MAP_LIGHT_POINT,
-	T_MAP_LIGHT_DIRECTIONAL,
-	T_MAP_LIGHT_SPOT,
+	T_MAP_LIGHT_TYPE_POINT,
+	T_MAP_LIGHT_TYPE_DIRECTIONAL,
+	T_MAP_LIGHT_TYPE_SPOT,
 }	t_map_light_type;
 
 typedef struct s_map_light_point
@@ -296,12 +296,12 @@ typedef struct s_map_cube
 
 typedef enum e_map_primitive_type
 {
-	T_MAP_PRIMITIVE_SPHERE,
-	T_MAP_PRIMITIVE_ELLIPSOID,
-	T_MAP_PRIMITIVE_TORUS,
-	T_MAP_PRIMITIVE_CONE,
-	T_MAP_PRIMITIVE_CYLINDER,
-	T_MAP_PRIMITIVE_CUBE,
+	T_MAP_PRIMITIVE_TYPE_SPHERE,
+	T_MAP_PRIMITIVE_TYPE_ELLIPSOID,
+	T_MAP_PRIMITIVE_TYPE_TORUS,
+	T_MAP_PRIMITIVE_TYPE_CONE,
+	T_MAP_PRIMITIVE_TYPE_CYLINDER,
+	T_MAP_PRIMITIVE_TYPE_CUBE,
 }	t_map_primitive_type;
 
 typedef struct s_map_primitive_sphere
@@ -373,9 +373,9 @@ typedef struct s_map_difference
 
 typedef enum e_map_constructive_type
 {
-	T_MAP_CONSTRUCTIVE_UNION,
-	T_MAP_CONSTRUCTIVE_INTERSECTION,
-	T_MAP_CONSTRUCTIVE_DIFFERENCE,
+	T_MAP_CONSTRUCTIVE_TYPE_UNION,
+	T_MAP_CONSTRUCTIVE_TYPE_INTERSECTION,
+	T_MAP_CONSTRUCTIVE_TYPE_DIFFERENCE,
 }	t_map_constructive_type;
 
 typedef struct s_map_constructive_union
@@ -408,8 +408,8 @@ typedef union u_map_constructive
 
 typedef enum e_map_model_type
 {
-	T_MAP_MODEL_PRIMITIVE,
-	T_MAP_MODEL_CONSTRUCTIVE,
+	T_MAP_MODEL_TYPE_PRIMITIVE,
+	T_MAP_MODEL_TYPE_CONSTRUCTIVE,
 }	t_map_model_type;
 
 typedef struct s_map_model_primitive
@@ -438,6 +438,7 @@ typedef struct s_map_plane
 {
 	t_map_position			position;
 	t_map_normal			normal;
+	t_map_model				*limit;
 	t_map_color_material	material;
 }	t_map_plane;
 
@@ -453,6 +454,7 @@ typedef struct s_map_quadric
 	t_f						h;
 	t_f						i;
 	t_f						j;
+	t_map_model				*limit;
 	t_map_color_material	material;
 }	t_map_quadric;
 

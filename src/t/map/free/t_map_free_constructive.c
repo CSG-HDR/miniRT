@@ -17,12 +17,12 @@
 
 void	t_map_free_constructive(t_map_constructive value)
 {
-	if (*value.type == T_MAP_CONSTRUCTIVE_UNION)
+	if (*value.type == T_MAP_CONSTRUCTIVE_TYPE_UNION)
 	{
 		t_map_free_union(value._union->_union);
 		wrap_free(value._union);
 	}
-	else if (*value.type == T_MAP_CONSTRUCTIVE_INTERSECTION)
+	else if (*value.type == T_MAP_CONSTRUCTIVE_TYPE_INTERSECTION)
 	{
 		t_map_free_intersection(value.intersection->intersection);
 		wrap_free(value.intersection);

@@ -14,7 +14,7 @@
 
 #include "t_map.h"
 
-void	t_map_free_plane(t_map_plane value)
+void	t_map_free_quadric(t_map_quadric value)
 {
 	if (value.limit)
 		t_map_free_model(value.limit);

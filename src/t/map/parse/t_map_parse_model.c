@@ -33,7 +33,7 @@ t_err	t_map_parse_model(t_ft_json value, t_map_model **out)
 
 	if (is_constructive(ft_json_get_dict(value, "type")))
 	{
-		result->constructive.type = T_MAP_MODEL_CONSTRUCTIVE;
+		result->constructive.type = T_MAP_MODEL_TYPE_CONSTRUCTIVE;
 		if (t_map_parse_constructive(value, &result->constructive.constructive))
 		{
 			wrap_free(result);
@@ -44,7 +44,7 @@ t_err	t_map_parse_model(t_ft_json value, t_map_model **out)
 	}
 	else
 	{
-		result->constructive.type = T_MAP_MODEL_PRIMITIVE;
+		result->constructive.type = T_MAP_MODEL_TYPE_PRIMITIVE;
 		if (t_map_parse_primitive(value, &result->primitive.primitive))
 		{
 			wrap_free(result);

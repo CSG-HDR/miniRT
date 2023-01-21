@@ -27,7 +27,7 @@ static t_err	parse_point(
 
 	if (!result)
 		return (true);
-	result->type = T_MAP_LIGHT_POINT;
+	result->type = T_MAP_LIGHT_TYPE_POINT;
 	t_map_parse_point(value, &result->point);
 	*out = result;
 	return (false);
@@ -43,7 +43,7 @@ static t_err	parse_directional(
 
 	if (!result)
 		return (true);
-	result->type = T_MAP_LIGHT_DIRECTIONAL;
+	result->type = T_MAP_LIGHT_TYPE_DIRECTIONAL;
 	t_map_parse_directional(value, &result->directional);
 	*out = result;
 	return (false);
@@ -59,7 +59,7 @@ static t_err	parse_spot(
 
 	if (!result)
 		return (true);
-	result->type = T_MAP_LIGHT_SPOT;
+	result->type = T_MAP_LIGHT_TYPE_SPOT;
 	t_map_parse_spot(value, &result->spot);
 	*out = result;
 	return (false);

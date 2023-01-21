@@ -17,7 +17,7 @@
 
 void	t_map_free_model(t_map_model *value)
 {
-	if (value->type == T_MAP_MODEL_CONSTRUCTIVE)
+	if (value->type == T_MAP_MODEL_TYPE_CONSTRUCTIVE)
 		t_map_free_constructive(value->constructive.constructive);
 	else
 		t_map_free_primitive(value->primitive.primitive);

@@ -12,10 +12,14 @@
 
 #include "t_map_free.h"
 
+#include <stddef.h>
+
+#include "wrap.h"
 #include "t_map.h"
 
-void	t_map_free_plane(t_map_plane value)
+void	t_map_free_quadrics(t_map_quadric *value, size_t count)
 {
-	if (value.limit)
-		t_map_free_model(value.limit);
+	while (count--)
+		t_map_free_quadric(value[count]);
+	wrap_free(value);
 }

@@ -17,7 +17,7 @@
 
 void	t_map_free_primitive(t_map_primitive value)
 {
-	if (*value.type == T_MAP_PRIMITIVE_SPHERE)
+	if (*value.type == T_MAP_PRIMITIVE_TYPE_SPHERE)
 	{
 		t_map_free_sphere(value.sphere->sphere);
 		wrap_free(value.sphere);

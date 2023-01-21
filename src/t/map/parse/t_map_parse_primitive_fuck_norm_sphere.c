@@ -26,7 +26,7 @@ t_err	t_map_parse_primitive_internal_fuck_norm_sphere(
 
 	if (!result)
 		return (true);
-	result->type = T_MAP_PRIMITIVE_SPHERE;
+	result->type = T_MAP_PRIMITIVE_TYPE_SPHERE;
 	if (t_map_parse_sphere(value, &result->sphere))
 	{
 		wrap_free(result);
@@ -35,4 +35,3 @@ t_err	t_map_parse_primitive_internal_fuck_norm_sphere(
 	*out = result;
 	return (false);
 }
-
