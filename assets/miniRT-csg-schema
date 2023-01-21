@@ -24,6 +24,12 @@
         "$ref": "#/$defs/plane"
       }
     },
+    "quadrics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/quadric"
+      }
+    },
     "camera": {
       "type": "object",
       "unevaluatedProperties": false,
@@ -182,8 +188,137 @@
           "required": [
             "type",
             "position",
-            "radius",
-            "material"
+            "radius"
+          ]
+        },
+        {
+          "type": "object",
+          "unevaluatedProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "type of solid geometry",
+              "enum": [
+                "ellipsoid",
+                "torus"
+              ]
+            },
+            "position": {
+              "$ref": "#/$defs/position"
+            },
+            "size": {
+              "$ref": "#/$defs/size"
+            },
+            "rotation": {
+              "$ref": "#/$defs/rotation"
+            },
+            "material": {
+              "$ref": "#/$defs/material"
+            }
+          },
+          "required": [
+            "type",
+            "position",
+            "size",
+            "rotation"
+          ]
+        },
+        {
+          "type": "object",
+          "unevaluatedProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "type of solid geometry",
+              "enum": [
+                "cone"
+              ]
+            },
+            "position": {
+              "$ref": "#/$defs/position"
+            },
+            "size": {
+              "$ref": "#/$defs/size"
+            },
+            "offset": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "description": "offset [x, y], default is [0, 0]",
+                "minimum": 0
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "rotation": {
+              "$ref": "#/$defs/rotation"
+            },
+            "material": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/material"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/material",
+                    "description": "material for side, bottom"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                }
+              ]
+            }
+          },
+          "required": [
+            "type",
+            "position",
+            "size",
+            "rotation"
+          ]
+        },
+        {
+          "type": "object",
+          "unevaluatedProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "type of solid geometry",
+              "enum": [
+                "cylinder"
+              ]
+            },
+            "position": {
+              "$ref": "#/$defs/position"
+            },
+            "size": {
+              "$ref": "#/$defs/size"
+            },
+            "rotation": {
+              "$ref": "#/$defs/rotation"
+            },
+            "material": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/material"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/material",
+                    "description": "material for side, top, bottom"
+                  },
+                  "minItems": 3,
+                  "maxItems": 3
+                }
+              ]
+            }
+          },
+          "required": [
+            "type",
+            "position",
+            "size",
+            "rotation"
           ]
         },
         {
@@ -214,7 +349,8 @@
                 {
                   "type": "array",
                   "items": {
-                    "$ref": "#/$defs/material"
+                    "$ref": "#/$defs/material",
+                    "description": "material for top, bottom, left, right, front, back"
                   },
                   "minItems": 6,
                   "maxItems": 6
@@ -226,8 +362,7 @@
             "type",
             "position",
             "size",
-            "rotation",
-            "material"
+            "rotation"
           ]
         }
       ]
@@ -340,13 +475,124 @@
           "$ref": "#/$defs/normal"
         },
         "material": {
-          "$ref": "#/$defs/material"
+          "$ref": "#/$defs/color-material"
+        },
+        "limit": {
+          "$ref": "#/$defs/model"
         }
       },
       "required": [
         "position",
-        "normal",
-        "material"
+        "normal"
+      ]
+    },
+    "quadric": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/quadric-properties"
+        },
+        {
+          "type": "object",
+          "unevaluatedProperties": false,
+          "properties": {
+            "properties": {
+              "$ref": "#/$defs/quadric-properties"
+            },
+            "material": {
+              "$ref": "#/$defs/color-material"
+            },
+            "limit": {
+              "$ref": "#/$defs/model"
+            }
+          },
+          "required": [
+            "properties"
+          ]
+        }
+      ]
+    },
+    "quadric-properties": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "description": "the property [A, B, C, D, E, F, G, H, I, J] where Ax² + By² + Cz² + Dxy+ Exz + Fyz + Gx + Hy + Iz + J = 0"
+          },
+          "prefixItems": [
+            {
+              "$ref": "#/$defs/non-zero"
+            },
+            {
+              "$ref": "#/$defs/non-zero"
+            },
+            {
+              "$ref": "#/$defs/non-zero"
+            }
+          ],
+          "minItems": 10,
+          "maxItems": 10
+        },
+        {
+          "type": "object",
+          "unevaluatedProperties": false,
+          "properties": {
+            "A": {
+              "$ref": "#/$defs/non-zero"
+            },
+            "B": {
+              "$ref": "#/$defs/non-zero"
+            },
+            "C": {
+              "$ref": "#/$defs/non-zero"
+            },
+            "D": {
+              "type": "number"
+            },
+            "E": {
+              "type": "number"
+            },
+            "F": {
+              "type": "number"
+            },
+            "G": {
+              "type": "number"
+            },
+            "H": {
+              "type": "number"
+            },
+            "I": {
+              "type": "number"
+            },
+            "J": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "J"
+          ]
+        }
+      ]
+    },
+    "non-zero": {
+      "oneOf": [
+        {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        {
+          "type": "number",
+          "exclusiveMaximum": 0
+        }
       ]
     },
     "position": {
@@ -510,13 +756,29 @@
         "normal": {
           "$ref": "#/$defs/normal-map"
         }
-      },
-      "required": [
-        "ambient",
-        "diffuse",
-        "specular",
-        "specularLobe"
-      ]
+      }
+    },
+    "color-material": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "ambient": {
+          "$ref": "#/$defs/material-color"
+        },
+        "diffuse": {
+          "$ref": "#/$defs/material-color"
+        },
+        "specular": {
+          "$ref": "#/$defs/material-color"
+        },
+        "specularLobe": {
+          "type": "number",
+          "description": "specular lobe"
+        },
+        "normal": {
+          "$ref": "#/$defs/normal-map"
+        }
+      }
     }
   }
 }
