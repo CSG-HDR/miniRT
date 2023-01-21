@@ -59,4 +59,13 @@ bool	t_map_validate_blend_subtract(t_ft_json value);
 bool	t_map_validate_normal_map(t_ft_json value);
 bool	t_map_validate_material(t_ft_json value);
 
+bool	t_map_validate_has_type(t_ft_json value, const char *type);
+bool	t_map_validate_has_position(t_ft_json value);
+bool	t_map_validate_has_size(t_ft_json value);
+bool	t_map_validate_has_rotation(t_ft_json value);
+bool	t_map_validate_has_direction(t_ft_json value);
+bool	t_map_validate_has_color(t_ft_json value);
+bool	t_map_validate_has_optional_range(t_ft_json value);
+bool	t_map_validate_has_optional_material(t_ft_json value);
+
 #endif

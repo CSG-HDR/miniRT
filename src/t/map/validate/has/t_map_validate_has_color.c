@@ -14,15 +14,14 @@
 
 #include <stdbool.h>
 
-#include "ft_cstring.h"
 #include "ft_json.h"
 
-bool	t_map_validate_color(t_ft_json value)
+bool	t_map_validate_has_color(t_ft_json value)
 {
 	return (
-		false
-		|| t_map_validate_material_color(value)
-		|| t_map_validate_texture(value)
-		|| t_map_validate_blend(value)
+		true
+		&& ft_json_is_dict(value)
+		&& ft_json_dict_has_key(value, "color")
+		&& t_map_validate_light_color(ft_json_get_dict(value, "color"))
 	);
 }

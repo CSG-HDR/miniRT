@@ -17,18 +17,24 @@
 #include "ft_cstring.h"
 #include "ft_json.h"
 
+static bool	has_fov(t_ft_json value)
+{
+	return (
+		true
+		&& ft_json_dict_has_key(value, "fov")
+		&& ft_json_is_number(ft_json_get_dict(value, "fov"))
+		&& ft_json_get_number(ft_json_get_dict(value, "fov")) > 0
+		&& ft_json_get_number(ft_json_get_dict(value, "fov")) < 0.5
+	);
+}
+
 bool	t_map_validate_camera(t_ft_json value)
 {
 	return (
 		true
 		&& ft_json_is_dict(value)
-		&& ft_json_dict_has_key(value, "position")
-		&& t_map_validate_position(ft_json_get_dict(value, "position"))
-		&& ft_json_dict_has_key(value, "rotation")
-		&& t_map_validate_rotation(ft_json_get_dict(value, "rotation"))
-		&& ft_json_dict_has_key(value, "fov")
-		&& ft_json_is_number(ft_json_get_dict(value, "fov"))
-		&& ft_json_get_number(ft_json_get_dict(value, "fov")) > 0
-		&& ft_json_get_number(ft_json_get_dict(value, "fov")) < 0.5
+		&& t_map_validate_has_position(value)
+		&& t_map_validate_has_rotation(value)
+		&& has_fov(value)
 	);
 }

@@ -14,14 +14,13 @@
 
 #include <stdbool.h>
 
-#include "ft_cstring.h"
 #include "ft_json.h"
 
 bool	t_map_validate_texture(t_ft_json value)
 {
 	return (
 		true
-		&& ft_json_is_dict(value)
+		&& t_map_validate_has_type(value, "texture")
 		&& ft_json_dict_has_key(value, "src")
 		&& ft_json_is_string(ft_json_get_dict(value, "src"))
 		&& ft_json_dict_has_key(value, "size")

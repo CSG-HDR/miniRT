@@ -21,11 +21,7 @@ bool	t_map_validate_difference(t_ft_json value)
 {
 	return (
 		true
-		&& ft_json_is_dict(value)
-		&& ft_json_dict_has_key(value, "type")
-		&& ft_json_is_string(ft_json_get_dict(value, "type"))
-		&& ft_cstring_equals(
-			ft_json_get_string(ft_json_get_dict(value, "type")), "difference")
+		&& t_map_validate_has_type(value, "difference")
 		&& ft_json_dict_has_key(value, "from")
 		&& t_map_validate_model(ft_json_get_dict(value, "from"))
 		&& ft_json_dict_has_key(value, "subtract")

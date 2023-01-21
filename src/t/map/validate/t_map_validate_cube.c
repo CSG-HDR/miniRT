@@ -17,20 +17,25 @@
 #include "ft_cstring.h"
 #include "ft_json.h"
 
-bool	validate_material(t_ft_json value)
+bool	has_optional_material(t_ft_json value)
 {
-	if (t_map_validate_material(value))
+	t_ft_json	material;
+
+	if (!ft_json_dict_has_key(value, "material"))
+		return (true);
+	material = ft_json_get_dict(value, "material");
+	if (t_map_validate_material(material))
 		return (true);
 	return (
 		true
-		&& ft_json_is_list(value)
-		&& ft_json_list_length(value) == 6
-		&& t_map_validate_material(ft_json_get_list(value, 0))
-		&& t_map_validate_material(ft_json_get_list(value, 1))
-		&& t_map_validate_material(ft_json_get_list(value, 2))
-		&& t_map_validate_material(ft_json_get_list(value, 3))
-		&& t_map_validate_material(ft_json_get_list(value, 4))
-		&& t_map_validate_material(ft_json_get_list(value, 5))
+		&& ft_json_is_list(material)
+		&& ft_json_list_length(material) == 6
+		&& t_map_validate_material(ft_json_get_list(material, 0))
+		&& t_map_validate_material(ft_json_get_list(material, 1))
+		&& t_map_validate_material(ft_json_get_list(material, 2))
+		&& t_map_validate_material(ft_json_get_list(material, 3))
+		&& t_map_validate_material(ft_json_get_list(material, 4))
+		&& t_map_validate_material(ft_json_get_list(material, 5))
 	);
 }
 
@@ -38,18 +43,10 @@ bool	t_map_validate_cube(t_ft_json value)
 {
 	return (
 		true
-		&& ft_json_is_dict(value)
-		&& ft_json_dict_has_key(value, "type")
-		&& ft_json_is_string(ft_json_get_dict(value, "type"))
-		&& ft_cstring_equals(
-			ft_json_get_string(ft_json_get_dict(value, "type")), "cube")
-		&& ft_json_dict_has_key(value, "position")
-		&& t_map_validate_position(ft_json_get_dict(value, "position"))
-		&& ft_json_dict_has_key(value, "size")
-		&& t_map_validate_size(ft_json_get_dict(value, "size"))
-		&& ft_json_dict_has_key(value, "rotation")
-		&& t_map_validate_rotation(ft_json_get_dict(value, "rotation"))
-		&& ft_json_dict_has_key(value, "material")
-		&& validate_material(ft_json_get_dict(value, "material"))
+		&& t_map_validate_has_type(value, "cube")
+		&& t_map_validate_has_position(value)
+		&& t_map_validate_has_size(value)
+		&& t_map_validate_has_rotation(value)
+		&& has_optional_material(value)
 	);
 }
