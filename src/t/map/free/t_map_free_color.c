@@ -15,15 +15,15 @@
 #include "wrap.h"
 #include "t_map.h"
 
-void	t_map_free_color(t_map_color value)
+void	t_map_free_color(t_map_color *value)
 {
-	if (*value.type == T_MAP_COLOR_TYPE_COLOR)
+	if (value->type == T_MAP_COLOR_TYPE_COLOR)
 	{
-		wrap_free(value.color);
+		t_map_free_texture(value->texture.texture);
 	}
-	else
+	else if (value->type == T_MAP_COLOR_TYPE_BLEND)
 	{
-		t_map_free_texture(value.texture->texture);
-		wrap_free(value.texture);
+		t_map_free_blend(value->blend.blend);
 	}
+	wrap_free(value);
 }
