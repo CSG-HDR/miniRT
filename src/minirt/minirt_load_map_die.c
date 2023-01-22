@@ -19,7 +19,7 @@ void	minirt_load_map_die(t_minirt_load_map_error error)
 	if (error == MINIRT_LOAD_MAP_ERROR_INVALID_JSON_FORMAT)
 		minirt_die("Error: given file is not a valid json file\n");
 	if (error == MINIRT_LOAD_MAP_ERROR_INVALID_RT_SCHEMA)
-		minirt_die("Error: given file is not a valid .rt format\n");
+		minirt_die("Error: given file is not a valid rt file\n");
 	if (error == MINIRT_LOAD_MAP_ERROR_MALLOC)
 		minirt_die("Error: failed to allocate memory for load map\n");
 }
