@@ -28,6 +28,6 @@ t_ft_os_file	*ft_os_file_open(const char *path, int mode);
 t_ft_os_file	*ft_os_file_open2(const char *path, int mode, int permission);
 void			ft_os_file_close(t_ft_os_file *file);
 
-char			*ft_os_file_read(const char *filename);
+char			*ft_os_file_read(const char *filename, size_t *out_length);
 
 #endif

@@ -2,5 +2,11 @@ main.c
 ../../t_image_new.c
 ../../t_image_fill.c
 ../../t_image_print_as_bmp.c
+../../t_image_serialize.c
+../../../../ft/io/le/ft_io_le_convert_u8.c
+../../../../ft/io/le/ft_io_le_convert_u16.c
+../../../../ft/io/le/ft_io_le_convert_u32.c
+../../../../ft/io/ft_io_write.c
+../../../../wrap/wrap_write.c
 ../../../../wrap/wrap_malloc.c
 ../../../../wrap/wrap_free.c

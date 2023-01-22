@@ -20,7 +20,7 @@
 
 t_minirt_load_map_error	minirt_load_map(const char *path, t_map **out)
 {
-	char *const	file_contents = ft_os_file_read(path);
+	char *const	file_contents = ft_os_file_read(path, NULL);
 	t_ft_json	json;
 
 	if (!file_contents)
