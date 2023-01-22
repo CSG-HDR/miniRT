@@ -27,10 +27,10 @@ void	etc(t_ft_json value, t_map *result)
 	const bool	has_ambient_light = ft_json_dict_has_key(value, "ambientLight");
 	const bool	has_void_color = ft_json_dict_has_key(value, "voidColor");
 
-	t_map_parse_camera(
-		ft_json_get_dict(value, "camera"), &result->camera);
 	t_map_parse_viewport(
 		ft_json_get_dict(value, "viewport"), &result->viewport);
+	t_map_parse_camera(
+		ft_json_get_dict(value, "camera"), &result->camera, result->viewport);
 	if (has_ambient_light)
 		t_map_parse_light_color(
 			ft_json_get_dict(value, "ambientLight"), &result->ambient_light);

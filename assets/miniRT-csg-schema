@@ -45,6 +45,16 @@
           "description": "field of view",
           "exclusiveMinimum": 0,
           "exclusiveMaximum": 0.5
+        },
+        "fovType": {
+          "type": "string",
+          "description": "type of fov",
+          "enum": [
+            "max",
+            "min",
+            "x",
+            "y"
+          ]
         }
       },
       "required": [

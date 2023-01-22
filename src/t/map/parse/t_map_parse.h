@@ -60,7 +60,8 @@ t_err	t_map_parse_quadric(t_ft_json value, t_map_quadric *out);
 void	t_map_parse_point(t_ft_json value, t_map_point *out);
 void	t_map_parse_directional(t_ft_json value, t_map_directional *out);
 void	t_map_parse_spot(t_ft_json value, t_map_spot *out);
-void	t_map_parse_camera(t_ft_json value, t_map_camera *out);
+void	t_map_parse_camera(
+			t_ft_json value, t_map_camera *out, t_map_viewport viewport);
 void	t_map_parse_viewport(t_ft_json value, t_map_viewport *out);
 void	t_map_parse_position(t_ft_json value, t_map_position *out);
 void	t_map_parse_size(t_ft_json value, t_map_size *out);

@@ -458,11 +458,22 @@ typedef struct s_map_quadric
 	t_map_color_material	material;
 }	t_map_quadric;
 
+typedef enum e_map_fov_type
+{
+	T_MAP_FOV_TYPE_MAX,
+	T_MAP_FOV_TYPE_MIN,
+	T_MAP_FOV_TYPE_X,
+	T_MAP_FOV_TYPE_Y,
+}	t_map_fov_type;
+
 typedef struct s_map_camera
 {
 	t_map_position	position;
 	t_map_rotation	rotation;
 	t_map_angle		fov;
+	t_map_fov_type	fov_type;
+	t_map_angle		fov_x;
+	t_map_angle		fov_y;
 }	t_map_camera;
 
 typedef struct s_map_viewport

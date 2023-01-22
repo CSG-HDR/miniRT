@@ -14,6 +14,7 @@
 
 #include <stdbool.h>
 
+#include "ft_cstring.h"
 #include "ft_json.h"
 
 static bool	has_fov(t_ft_json value)
@@ -27,6 +28,27 @@ static bool	has_fov(t_ft_json value)
 	);
 }
 
+static bool	has_optional_fov_type(t_ft_json value)
+{
+	if (!ft_json_dict_has_key(value, "fovType"))
+		return (true);
+	if (!ft_json_is_string(ft_json_get_dict(value, "fovType")))
+		return (false);
+	if (
+		true
+		&& !ft_cstring_equals(
+			ft_json_get_string(ft_json_get_dict(value, "fovType")), "max")
+		&& !ft_cstring_equals(
+			ft_json_get_string(ft_json_get_dict(value, "fovType")), "min")
+		&& !ft_cstring_equals(
+			ft_json_get_string(ft_json_get_dict(value, "fovType")), "x")
+		&& !ft_cstring_equals(
+			ft_json_get_string(ft_json_get_dict(value, "fovType")), "y")
+	)
+		return (false);
+	return (true);
+}
+
 bool	t_map_validate_camera(t_ft_json value)
 {
 	return (
@@ -35,5 +57,6 @@ bool	t_map_validate_camera(t_ft_json value)
 		&& t_map_validate_has_position(value)
 		&& t_map_validate_has_rotation(value)
 		&& has_fov(value)
+		&& has_optional_fov_type(value)
 	);
 }
