@@ -86,10 +86,10 @@ bool	t_map_validate(t_ft_json value)
 		&& ft_json_dict_has_key(value, "viewport")
 		&& t_map_validate_viewport(ft_json_get_dict(value, "viewport"))
 		&& (!ft_json_dict_has_key(value, "ambientLight")
-			|| (t_map_validate_light_color(
-					ft_json_get_dict(value, "ambientLight"))))
+			|| t_map_validate_light_color(
+				ft_json_get_dict(value, "ambientLight")))
 		&& (!ft_json_dict_has_key(value, "voidColor")
-			|| (t_map_validate_material_color(
-					ft_json_get_dict(value, "voidColor"))))
+			|| t_map_validate_material_color(
+				ft_json_get_dict(value, "voidColor")))
 	);
 }
