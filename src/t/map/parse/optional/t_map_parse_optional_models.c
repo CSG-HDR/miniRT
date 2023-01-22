@@ -43,7 +43,6 @@ t_err	t_map_parse_optional_models(
 					ft_json_get_dict(value, "models"), i), out[i]))
 		{
 			t_map_free_models(*out, i);
-			wrap_free(*out);
 			return (true);
 		}
 		i++;

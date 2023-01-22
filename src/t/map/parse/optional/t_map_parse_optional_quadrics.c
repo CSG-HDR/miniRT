@@ -43,7 +43,6 @@ t_err	t_map_parse_optional_quadrics(
 					ft_json_get_dict(value, "quadrics"), i), out[i]))
 		{
 			t_map_free_quadrics(*out, i);
-			wrap_free(*out);
 			return (true);
 		}
 		i++;

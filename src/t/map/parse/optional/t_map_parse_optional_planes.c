@@ -43,7 +43,6 @@ t_err	t_map_parse_optional_planes(
 					ft_json_get_dict(value, "planes"), i), out[i]))
 		{
 			t_map_free_planes(*out, i);
-			wrap_free(*out);
 			return (true);
 		}
 		i++;

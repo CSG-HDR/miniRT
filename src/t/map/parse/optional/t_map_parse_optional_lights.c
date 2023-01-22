@@ -43,7 +43,6 @@ t_err	t_map_parse_optional_lights(
 					ft_json_get_dict(value, "lights"), i), out[i]))
 		{
 			t_map_free_lights(*out, i);
-			wrap_free(*out);
 			return (true);
 		}
 		i++;
