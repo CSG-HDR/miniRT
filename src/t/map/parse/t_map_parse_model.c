@@ -31,7 +31,7 @@ t_err	t_map_parse_model(t_ft_json value, t_map_model **out)
 {
 	t_map_model *const	result = wrap_malloc(sizeof(t_map_model));
 
-	if (is_constructive(ft_json_get_dict(value, "type")))
+	if (is_constructive(ft_json_get_string(ft_json_get_dict(value, "type"))))
 	{
 		result->constructive.type = T_MAP_MODEL_TYPE_CONSTRUCTIVE;
 		if (t_map_parse_constructive(value, &result->constructive.constructive))
