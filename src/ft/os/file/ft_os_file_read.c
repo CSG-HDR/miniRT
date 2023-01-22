@@ -19,7 +19,13 @@
 
 #define BUFFER_SIZE 1024
 
-char	*ft_os_file_read(const char *filename)
+static void	notify_length(t_stringbuilder *sb, size_t *out_length)
+{
+	if (out_length)
+		*out_length = sb->length;
+}
+
+char	*ft_os_file_read(const char *filename, size_t *out_length)
 {
 	const int				fd = wrap_open(filename, O_RDONLY);
 	t_stringbuilder *const	sb = new_stringbuilder(BUFFER_SIZE);
@@ -41,6 +47,7 @@ char	*ft_os_file_read(const char *filename)
 		bytes_read = wrap_read(fd, buf, BUFFER_SIZE);
 	}
 	result = stringbuilder_to_string(sb, 0);
+	notify_length(sb, out_length);
 	stringbuilder_free(sb);
 	wrap_close(fd);
 	return (result);

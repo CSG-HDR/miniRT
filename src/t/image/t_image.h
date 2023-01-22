@@ -39,5 +39,6 @@ t_err	t_image_fill(
 			void *context);
 
 t_err	t_image_serialize(t_image *self, char **out, size_t *out_length);
+t_err	t_image_deserialize(const char *str, size_t length, t_image **out);
 
 #endif
