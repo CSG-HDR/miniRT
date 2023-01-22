@@ -15,7 +15,6 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <stdint.h>
-#include <unistd.h>
 
 #include "ft_io.h"
 #include "wrap.h"
