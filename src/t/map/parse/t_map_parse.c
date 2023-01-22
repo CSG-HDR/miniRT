@@ -45,24 +45,24 @@ void	etc(t_ft_json value, t_map *result)
 
 static t_err	pre(t_ft_json value, t_map *out)
 {
-	if (t_map_parse_models(ft_json_get_dict(value, "models"),
-			&out->models, &out->model_count))
+	if (t_map_parse_optional_models(
+			value, &out->models, &out->model_count))
 		return (true);
-	if (t_map_parse_lights(ft_json_get_dict(value, "lights"),
-			&out->lights, &out->light_count))
+	if (t_map_parse_optional_lights(
+			value, &out->lights, &out->light_count))
 	{
 		t_map_free_models(out->models, out->model_count);
 		return (true);
 	}
-	if (t_map_parse_planes(ft_json_get_dict(value, "planes"),
-			&out->planes, &out->plane_count))
+	if (t_map_parse_optional_planes(
+			value, &out->planes, &out->plane_count))
 	{
 		t_map_free_models(out->models, out->model_count);
 		t_map_free_lights(out->lights, out->light_count);
 		return (true);
 	}
-	if (t_map_parse_quadrics(ft_json_get_dict(value, "quadrics"),
-			&out->quadrics, &out->quadric_count))
+	if (t_map_parse_optional_quadrics(
+			value, &out->quadrics, &out->quadric_count))
 	{
 		t_map_free_models(out->models, out->model_count);
 		t_map_free_lights(out->lights, out->light_count);

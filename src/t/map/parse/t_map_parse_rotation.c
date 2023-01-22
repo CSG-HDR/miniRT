@@ -30,7 +30,7 @@ void	t_map_parse_rotation(t_ft_json value, t_map_rotation *out)
 	}
 	else
 	{
-		t_map_parse_normal(ft_json_get_dict(value, "dict"), out);
+		t_map_parse_normal(ft_json_get_dict(value, "normal"), out);
 		*out = t_f3_to_angle(*out);
 	}
 }
