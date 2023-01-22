@@ -2,9 +2,9 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "build pipex (debug)",
+      "label": "build minirt (debug)",
       "type": "shell",
-      "command": "make V=1 PROFILE=debug SANITIZER=address .cache/pipex.production.debug.address.exe",
+      "command": "make V=2 TARGET=development PROFILE=debug SANITIZER=address PRECISION=3 .cache/minirt.development.debug.address.3.exe",
       "options": {
         "cwd": "${workspaceFolder}/src",
       },
