@@ -30,19 +30,19 @@ void	minirt_init(t_minirt *minirt, int argc, char **argv)
 	(void)argv;
 	if (argc < 2)
 		minirt_die("Error: no input file\n");
-	minirt_assert(&minirt->mlx_context, mlx_init(), "Error: on init mlx");
+	minirt_assert(&minirt->mlx_context, mlx_init(), "Error: on init mlx\n");
 	error = minirt_load_map(argv[1], &minirt->map);
 	if (error)
 		minirt_load_map_die(error);
 	minirt_assert(&minirt->mlx_window, mlx_new_window(minirt->mlx_context,
 			minirt->map->viewport.actual_width, minirt->map->viewport
-			.actual_height, TITLE), "Error: on init mlx window");
+			.actual_height, TITLE), "Error: on init mlx window\n");
 	minirt_assert(&minirt->pre_image, mlx_new_image(minirt->mlx_context,
 			minirt->map->viewport.actual_width, minirt->map->viewport
-			.actual_height), "Error: on init mlx image (1/2)");
+			.actual_height), "Error: on init mlx image (1/2)\n");
 	minirt_assert(&minirt->final_image, mlx_new_image(minirt->mlx_context,
 			minirt->map->viewport.actual_width, minirt->map->viewport
-			.actual_height), "Error: on init mlx image (2/2)");
+			.actual_height), "Error: on init mlx image (2/2)\n");
 	mlx_expose_hook(minirt->mlx_window, &minirt_hooks_init, minirt);
 	mlx_hook(minirt->mlx_window, MLX_EVENT_ON_DESTROY,
 		0, &minirt_hooks_exit, minirt);

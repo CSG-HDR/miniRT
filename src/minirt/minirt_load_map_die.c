@@ -15,11 +15,11 @@
 void	minirt_load_map_die(t_minirt_load_map_error error)
 {
 	if (error == MINIRT_LOAD_MAP_ERROR_READ_FILE)
-		minirt_die("Error: failed to load scene file");
+		minirt_die("Error: failed to load scene file\n");
 	if (error == MINIRT_LOAD_MAP_ERROR_INVALID_JSON_FORMAT)
-		minirt_die("Error: given file is not a valid json file");
+		minirt_die("Error: given file is not a valid json file\n");
 	if (error == MINIRT_LOAD_MAP_ERROR_INVALID_RT_SCHEMA)
-		minirt_die("Error: given file is not a valid .rt format");
+		minirt_die("Error: given file is not a valid .rt format\n");
 	if (error == MINIRT_LOAD_MAP_ERROR_MALLOC)
-		minirt_die("Error: failed to allocate memory for load map");
+		minirt_die("Error: failed to allocate memory for load map\n");
 }
