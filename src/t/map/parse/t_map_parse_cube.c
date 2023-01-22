@@ -43,7 +43,7 @@ static t_err	pre_multiple(t_ft_json value, t_map_cube *out)
 
 static t_err	multiple(t_ft_json value, t_map_cube *out)
 {
-	if (!pre_multiple(value, out))
+	if (pre_multiple(value, out))
 		return (true);
 	if (t_map_parse_material(ft_json_get_list(value, 4), &out->material_front))
 	{
@@ -92,7 +92,7 @@ static t_err	pre_single(t_ft_json value, t_map_cube *out)
 
 static t_err	single(t_ft_json value, t_map_cube *out)
 {
-	if (!pre_single(value, out))
+	if (pre_single(value, out))
 		return (true);
 	if (t_map_parse_material(value, &out->material_front))
 	{

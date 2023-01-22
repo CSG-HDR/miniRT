@@ -43,7 +43,7 @@ static t_err	pre(t_map_cube *out)
 
 t_err	t_map_parse_cube_internal_by_fucking_norm(t_map_cube *out)
 {
-	if (!pre(out))
+	if (pre(out))
 		return (true);
 	if (t_map_parse_get_default_material(&out->material_front))
 	{
