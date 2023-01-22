@@ -24,7 +24,7 @@ bool	t_map_validate_models(t_ft_json value)
 		return (false);
 	count = ft_json_list_length(value);
 	while (count--)
-		if (!t_map_validate_model(value))
+		if (!t_map_validate_model(ft_json_get_list(value, count)))
 			return (false);
 	return (true);
 }
