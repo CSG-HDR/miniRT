@@ -16,7 +16,7 @@
 
 #include "ft_json.h"
 
-bool	has_optional_material(t_ft_json value)
+static bool	has_optional_material(t_ft_json value)
 {
 	t_ft_json	material;
 
