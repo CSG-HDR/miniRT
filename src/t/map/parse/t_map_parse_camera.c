@@ -35,25 +35,39 @@ static t_map_fov_type	type(t_ft_json value)
 }
 
 static void	calculate_fov_x(
-	t_map_viewport viewport,
-	t_map_angle fov,
+	t_map_viewport *viewport,
+	t_map_angle fov_x,
 	t_map_camera *result
 )
 {
-	// TODO:
+	const t_f	half_fov_x = fov_x / 2;
+	const t_f	x = t_f_tan(half_fov_x);
+	const t_f	y = x / viewport->width * viewport->height;
+	const t_f	half_fov_y = t_f_atan(y);
+	const t_f	fov_y = half_fov_y * 2;
+
+	result->fov_x = fov_x;
+	result->fov_y = fov_y;
 }
 
 static void	calculate_fov_y(
-	t_map_viewport viewport,
-	t_map_angle fov,
+	t_map_viewport *viewport,
+	t_map_angle fov_y,
 	t_map_camera *result
 )
 {
-	// TODO:
+	const t_f	half_fov_y = fov_y / 2;
+	const t_f	y = t_f_tan(half_fov_y);
+	const t_f	x = y / viewport->height * viewport->width;
+	const t_f	half_fov_x = t_f_atan(x);
+	const t_f	fov_x = half_fov_x * 2;
+
+	result->fov_x = fov_x;
+	result->fov_y = fov_y;
 }
 
 static void	calculate_fov(
-	t_map_viewport viewport,
+	t_map_viewport *viewport,
 	t_map_angle fov,
 	t_map_fov_type type,
 	t_map_camera *result
@@ -61,14 +75,14 @@ static void	calculate_fov(
 {
 	if (type == T_MAP_FOV_TYPE_MAX)
 	{
-		if (viewport.width > viewport.height)
+		if (viewport->width > viewport->height)
 			calculate_fov_x(viewport, fov, result);
 		else
 			calculate_fov_y(viewport, fov, result);
 	}
 	else if (type == T_MAP_FOV_TYPE_MIN)
 	{
-		if (viewport.width < viewport.height)
+		if (viewport->width < viewport->height)
 			calculate_fov_x(viewport, fov, result);
 		else
 			calculate_fov_y(viewport, fov, result);
@@ -86,7 +100,7 @@ static void	calculate_fov(
 void	t_map_parse_camera(
 	t_ft_json value,
 	t_map_camera *out,
-	t_map_viewport viewport
+	t_map_viewport *viewport
 )
 {
 	t_map_parse_get_position(value, &out->position);
