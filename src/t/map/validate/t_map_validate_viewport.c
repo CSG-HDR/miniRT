@@ -40,19 +40,19 @@ static bool	validate_only(t_ft_json value)
 		&& ft_json_is_list(value)
 		&& ft_json_list_length(value) == 4
 		&& ft_json_is_number(ft_json_get_list(value, 0))
-		&& ft_json_get_number(ft_json_get_list(value, 0)) <= 0
+		&& ft_json_get_number(ft_json_get_list(value, 0)) >= 0
 		&& ft_json_get_number(ft_json_get_list(value, 0))
 		== (size_t)ft_json_get_number(ft_json_get_list(value, 0))
 		&& ft_json_is_number(ft_json_get_list(value, 1))
-		&& ft_json_get_number(ft_json_get_list(value, 1)) <= 0
+		&& ft_json_get_number(ft_json_get_list(value, 1)) >= 0
 		&& ft_json_get_number(ft_json_get_list(value, 1))
 		== (size_t)ft_json_get_number(ft_json_get_list(value, 1))
 		&& ft_json_is_number(ft_json_get_list(value, 2))
-		&& ft_json_get_number(ft_json_get_list(value, 2)) <= 0
+		&& ft_json_get_number(ft_json_get_list(value, 2)) >= 0
 		&& ft_json_get_number(ft_json_get_list(value, 2))
 		== (size_t)ft_json_get_number(ft_json_get_list(value, 2))
 		&& ft_json_is_number(ft_json_get_list(value, 3))
-		&& ft_json_get_number(ft_json_get_list(value, 3)) <= 0
+		&& ft_json_get_number(ft_json_get_list(value, 3)) >= 0
 		&& ft_json_get_number(ft_json_get_list(value, 3))
 		== (size_t)ft_json_get_number(ft_json_get_list(value, 3))
 	);
