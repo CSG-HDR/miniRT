@@ -20,6 +20,6 @@
 
 void	minirt_die(const char *message)
 {
-	ft_write(STDOUT_FILENO, message, ft_cstring_length(message));
+	ft_io_write(STDOUT_FILENO, message, ft_cstring_length(message));
 	ft_exit(1);
 }

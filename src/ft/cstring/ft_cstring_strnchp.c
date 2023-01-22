@@ -14,22 +14,14 @@
 
 #ifdef DEVELOPMENT
 
-# include <stdlib.h>
-# include <unistd.h>
-
-# include "ft_io.h"
-# include "ft_exit.h"
+# include "ft_debug.h"
 
 size_t	ft_strnchp(const char *str, size_t max_len, char ch)
 {
 	size_t	result;
 
 	if (!str)
-	{
-		ft_puts(STDERR_FILENO, "ft_strnchp(): wrong parameter given\n");
-		ft_exit(EXIT_FAILURE);
-		return (0);
-	}
+		ft_debug_die("ft_strnchp(): wrong parameter given\n");
 	result = -1;
 	while (++result < max_len && str[result])
 		if (str[result] == ch)
@@ -43,11 +35,7 @@ size_t	ft_strnrchp(const char *str, size_t max_len, char ch)
 	size_t	i;
 
 	if (!str)
-	{
-		ft_puts(STDERR_FILENO, "ft_strnrchp(): wrong parameter given\n");
-		ft_exit(EXIT_FAILURE);
-		return (0);
-	}
+		ft_debug_die("ft_strnrchp(): wrong parameter given\n");
 	i = -1;
 	result = -1;
 	while (++i < max_len && str[i])

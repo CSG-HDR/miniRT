@@ -10,41 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_cstring.h"
+#ifndef FT_DEBUG_H
+# define FT_DEBUG_H
 
-#ifdef DEVELOPMENT
-
-# include "ft_debug.h"
-
-size_t	ft_cstring_find_index_reverse(const char *str, char ch)
-{
-	size_t	result;
-	size_t	i;
-
-	if (!str)
-		ft_debug_die(
-			"ft_cstring_find_index_reverse(): wrong parameter given\n");
-	i = -1;
-	result = -1;
-	while (str[++i])
-		if (str[i] == ch)
-			result = i;
-	return (result);
-}
-
-#else
-
-size_t	ft_cstring_find_index_reverse(const char *str, char ch)
-{
-	size_t	result;
-	size_t	i;
-
-	i = -1;
-	result = -1;
-	while (str[++i])
-		if (str[i] == ch)
-			result = i;
-	return (result);
-}
+void	ft_debug_die(const char *message);
 
 #endif

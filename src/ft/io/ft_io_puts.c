@@ -10,41 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_io.h"
+
 #include "ft_cstring.h"
 
-#ifdef DEVELOPMENT
+#define WRITE_SIZE_MAX 1048576
 
-# include "ft_debug.h"
-
-size_t	ft_cstring_find_index_reverse(const char *str, char ch)
+t_err	ft_io_puts(int fd, const char *str)
 {
-	size_t	result;
-	size_t	i;
-
-	if (!str)
-		ft_debug_die(
-			"ft_cstring_find_index_reverse(): wrong parameter given\n");
-	i = -1;
-	result = -1;
-	while (str[++i])
-		if (str[i] == ch)
-			result = i;
-	return (result);
+	return (ft_io_write(fd, str, ft_cstring_length(str)));
 }
-
-#else
-
-size_t	ft_cstring_find_index_reverse(const char *str, char ch)
-{
-	size_t	result;
-	size_t	i;
-
-	i = -1;
-	result = -1;
-	while (str[++i])
-		if (str[i] == ch)
-			result = i;
-	return (result);
-}
-
-#endif

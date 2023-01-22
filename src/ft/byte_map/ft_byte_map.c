@@ -20,11 +20,7 @@
 
 #ifdef DEVELOPMENT
 
-# include <stdlib.h>
-# include <unistd.h>
-
-# include "ft_io.h"
-# include "ft_exit.h"
+# include "ft_debug.h"
 
 void	ft_byte_map(t_byte *out, bool include_null, const t_byte *set)
 {
@@ -32,10 +28,7 @@ void	ft_byte_map(t_byte *out, bool include_null, const t_byte *set)
 	const t_byte	*tmp;
 
 	if (!out || !set)
-	{
-		ft_puts(STDERR_FILENO, "ft_byte_map(): wrong parameter given\n");
-		ft_exit(EXIT_FAILURE);
-	}
+		ft_debug_die("ft_byte_map(): wrong parameter given\n");
 	i = 0;
 	while (i < 1 << CHAR_BIT)
 		out[i++] = 0;
@@ -54,10 +47,7 @@ void	ft_byte_map_v(t_byte *out, bool include_null, va_list arguments)
 	const t_byte	*tmp;
 
 	if (!out)
-	{
-		ft_puts(STDERR_FILENO, "ft_byte_map_v(): wrong parameter given\n");
-		ft_exit(EXIT_FAILURE);
-	}
+		ft_debug_die("ft_byte_map_v(): wrong parameter given\n");
 	i = 0;
 	while (i < 1 << CHAR_BIT)
 		out[i++] = 0;

@@ -10,41 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_cstring.h"
+#include "ft_io.h"
 
-#ifdef DEVELOPMENT
+#include <stdint.h>
 
-# include "ft_debug.h"
+#include "ft_types.h"
 
-size_t	ft_cstring_find_index_reverse(const char *str, char ch)
+t_err	ft_io_le_write_u64(int fd, uint64_t u64)
 {
-	size_t	result;
-	size_t	i;
+	const uint64_t		test = 42;
+	const char *const	result = (const char *)&u64;
 
-	if (!str)
-		ft_debug_die(
-			"ft_cstring_find_index_reverse(): wrong parameter given\n");
-	i = -1;
-	result = -1;
-	while (str[++i])
-		if (str[i] == ch)
-			result = i;
-	return (result);
+	if (*((char *)&test))
+		return (ft_io_write(fd, result, 8));
+	return (
+		false
+		|| ft_io_write(fd, &result[7], 1)
+		|| ft_io_write(fd, &result[6], 1)
+		|| ft_io_write(fd, &result[5], 1)
+		|| ft_io_write(fd, &result[4], 1)
+		|| ft_io_write(fd, &result[3], 1)
+		|| ft_io_write(fd, &result[2], 1)
+		|| ft_io_write(fd, &result[1], 1)
+		|| ft_io_write(fd, &result[0], 1)
+	);
 }
-
-#else
-
-size_t	ft_cstring_find_index_reverse(const char *str, char ch)
-{
-	size_t	result;
-	size_t	i;
-
-	i = -1;
-	result = -1;
-	while (str[++i])
-		if (str[i] == ch)
-			result = i;
-	return (result);
-}
-
-#endif
