@@ -18,5 +18,10 @@
 
 t_err	ft_io_be_read_u8(int fd, uint8_t *out_u8)
 {
-	return (ft_io_read(fd, out_u8, 1));
+	uint8_t	buffer;
+
+	if (ft_io_read(fd, &buffer, 1))
+		return (true);
+	*out_u8 = ft_io_be_convert_u8(buffer);
+	return (false);
 }

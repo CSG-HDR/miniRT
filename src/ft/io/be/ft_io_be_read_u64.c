@@ -18,20 +18,10 @@
 
 t_err	ft_io_be_read_u64(int fd, uint64_t *out_u64)
 {
-	const uint64_t	test = 42;
-	char *const		buffer = (char *)out_u64;
+	uint64_t	buffer;
 
-	if (!*((char *)&test))
-		return (ft_io_read(fd, buffer, 8));
-	return (
-		false
-		|| ft_io_read(fd, &buffer[7], 1)
-		|| ft_io_read(fd, &buffer[6], 1)
-		|| ft_io_read(fd, &buffer[5], 1)
-		|| ft_io_read(fd, &buffer[4], 1)
-		|| ft_io_read(fd, &buffer[3], 1)
-		|| ft_io_read(fd, &buffer[2], 1)
-		|| ft_io_read(fd, &buffer[1], 1)
-		|| ft_io_read(fd, &buffer[0], 1)
-	);
+	if (ft_io_read(fd, &buffer, 8))
+		return (true);
+	*out_u64 = ft_io_be_convert_u64(buffer);
+	return (false);
 }

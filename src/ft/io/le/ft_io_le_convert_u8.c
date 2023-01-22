@@ -14,11 +14,7 @@
 
 #include <stdint.h>
 
-#include "ft_types.h"
-
-t_err	ft_io_be_write_u64(int fd, uint64_t u64)
+uint8_t	ft_io_le_convert_u8(uint8_t u8)
 {
-	const uint64_t	buffer = ft_io_be_convert_u64(u64);
-
-	return (ft_io_write(fd, &buffer, 8));
+	return (u8);
 }

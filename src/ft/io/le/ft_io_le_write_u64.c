@@ -18,20 +18,7 @@
 
 t_err	ft_io_le_write_u64(int fd, uint64_t u64)
 {
-	const uint64_t		test = 42;
-	const char *const	result = (const char *)&u64;
+	const uint64_t	buffer = ft_io_le_convert_u64(u64);
 
-	if (*((char *)&test))
-		return (ft_io_write(fd, result, 8));
-	return (
-		false
-		|| ft_io_write(fd, &result[7], 1)
-		|| ft_io_write(fd, &result[6], 1)
-		|| ft_io_write(fd, &result[5], 1)
-		|| ft_io_write(fd, &result[4], 1)
-		|| ft_io_write(fd, &result[3], 1)
-		|| ft_io_write(fd, &result[2], 1)
-		|| ft_io_write(fd, &result[1], 1)
-		|| ft_io_write(fd, &result[0], 1)
-	);
+	return (ft_io_write(fd, &buffer, 8));
 }

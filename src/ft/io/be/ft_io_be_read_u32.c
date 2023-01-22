@@ -18,16 +18,10 @@
 
 t_err	ft_io_be_read_u32(int fd, uint32_t *out_u32)
 {
-	const uint32_t	test = 42;
-	char *const		buffer = (char *)out_u32;
+	uint32_t	buffer;
 
-	if (!*((char *)&test))
-		return (ft_io_read(fd, buffer, 4));
-	return (
-		false
-		|| ft_io_read(fd, &buffer[3], 1)
-		|| ft_io_read(fd, &buffer[2], 1)
-		|| ft_io_read(fd, &buffer[1], 1)
-		|| ft_io_read(fd, &buffer[0], 1)
-	);
+	if (ft_io_read(fd, &buffer, 4))
+		return (true);
+	*out_u32 = ft_io_be_convert_u32(buffer);
+	return (false);
 }

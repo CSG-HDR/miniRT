@@ -18,16 +18,7 @@
 
 t_err	ft_io_be_write_u32(int fd, uint32_t u32)
 {
-	const uint32_t		test = 42;
-	const char *const	result = (const char *)&u32;
+	const uint32_t	buffer = ft_io_be_convert_u32(u32);
 
-	if (!*((char *)&test))
-		return (ft_io_write(fd, result, 4));
-	return (
-		false
-		|| ft_io_write(fd, &result[3], 1)
-		|| ft_io_write(fd, &result[2], 1)
-		|| ft_io_write(fd, &result[1], 1)
-		|| ft_io_write(fd, &result[0], 1)
-	);
+	return (ft_io_write(fd, &buffer, 4));
 }

@@ -18,5 +18,7 @@
 
 t_err	ft_io_be_write_u8(int fd, uint8_t u8)
 {
-	return (ft_io_write(fd, &u8, 1));
+	const uint8_t	buffer = ft_io_be_convert_u8(u8);
+
+	return (ft_io_write(fd, &buffer, 1));
 }

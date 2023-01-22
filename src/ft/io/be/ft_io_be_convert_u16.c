@@ -14,11 +14,16 @@
 
 #include <stdint.h>
 
-#include "ft_types.h"
-
-t_err	ft_io_be_write_u64(int fd, uint64_t u64)
+uint16_t	ft_io_be_convert_u16(uint16_t u16)
 {
-	const uint64_t	buffer = ft_io_be_convert_u64(u64);
+	const uint16_t		test = 42;
+	const char *const	source = (const char *)&u16;
+	uint16_t			result;
+	char *const			dest = (char *)&result;
 
-	return (ft_io_write(fd, &buffer, 8));
+	if (!*((char *)&test))
+		return (u16);
+	dest[0] = source[1];
+	dest[1] = source[0];
+	return (result);
 }

@@ -18,14 +18,10 @@
 
 t_err	ft_io_be_read_u16(int fd, uint16_t *out_u16)
 {
-	const uint16_t	test = 42;
-	char *const		buffer = (char *)out_u16;
+	uint16_t	buffer;
 
-	if (!*((char *)&test))
-		return (ft_io_read(fd, buffer, 2));
-	return (
-		false
-		|| ft_io_read(fd, &buffer[1], 1)
-		|| ft_io_read(fd, &buffer[0], 1)
-	);
+	if (ft_io_read(fd, &buffer, 2))
+		return (true);
+	*out_u16 = ft_io_be_convert_u16(buffer);
+	return (false);
 }
