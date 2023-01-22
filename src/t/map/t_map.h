@@ -6,7 +6,7 @@
 /*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 2023/01/22 20:11:52 by seongyle         ###   ########seoul.kr  */
+/*   Updated: 2023/01/23 03:45:59 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -475,6 +475,7 @@ typedef struct s_map_camera
 	t_map_fov_type	fov_type;
 	t_map_angle		fov_x;
 	t_map_angle		fov_y;
+	t_f	focal_len;
 }	t_map_camera;
 
 typedef struct s_map_viewport
