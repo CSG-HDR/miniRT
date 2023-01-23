@@ -69,7 +69,6 @@ t_ray_hit_records	t_ray_union(size_t count, t_ray_hit_records rays);
 t_ray_hit_records	t_ray_intersection(size_t count, t_ray_hit_records rays);
 t_ray_hit_records	t_ray_difference(
 						t_ray_hit_records from, t_ray_hit_records subtract);
-t_ray_hit_records	t_ray_plane(t_ray ray, t_map_plane plane);
 t_ray_hit_records	t_ray_model(t_ray ray, t_map_model *model);
 
 t_ray_hit_records	t_ray_constructive(
@@ -80,6 +79,9 @@ t_ray_hit_records	t_ray_csg_intersection(
 t_ray_hit_records	t_ray_csg_difference(
 						t_ray ray, t_map_difference difference);
 t_ray_hit_records	t_ray_primitive(t_ray ray, t_map_primitive primitive);
+t_ray_hit_records	t_ray_linear_plane(t_ray ray, t_map_linear_plane plane);
+t_ray_hit_records	t_ray_polynomial_plane(
+						t_ray ray, t_map_polynomial_plane plane);
 t_ray_hit_records	t_ray_sphere(t_ray ray, t_map_sphere sphere);
 t_ray_hit_records	t_ray_ellipsoid(t_ray ray, t_map_ellipsoid ellipsoid);
 t_ray_hit_records	t_ray_torus(t_ray ray, t_map_torus torus);

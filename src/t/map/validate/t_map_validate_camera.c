@@ -53,9 +53,8 @@ bool	t_map_validate_camera(t_ft_json value)
 {
 	return (
 		true
-		&& ft_json_is_dict(value)
 		&& t_map_validate_has_position(value)
-		&& t_map_validate_has_rotation(value)
+		&& t_map_validate_camera_rotation(value)
 		&& has_fov(value)
 		&& has_optional_fov_type(value)
 	);

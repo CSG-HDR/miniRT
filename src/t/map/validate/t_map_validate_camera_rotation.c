@@ -16,15 +16,49 @@
 
 #include "ft_json.h"
 
-bool	t_map_validate_plane(t_ft_json value)
+static bool	is_rotation(t_ft_json value)
+{
+	return (
+		true
+		&& ft_json_dict_has_key(value, "rotation")
+		&& t_map_validate_rotation(ft_json_get_dict(value, "rotation"))
+	);
+}
+
+static bool	is_normal(t_ft_json value)
+{
+	return (
+		true
+		&& ft_json_dict_has_key(value, "normal")
+		&& t_map_validate_normal(ft_json_get_dict(value, "normal"))
+	);
+}
+
+static bool	is_look_at(t_ft_json value)
+{
+	return (
+		true
+		&& ft_json_dict_has_key(value, "lookAt")
+		&& t_map_validate_position(ft_json_get_dict(value, "lookAt"))
+	);
+}
+
+static bool	is(t_ft_json value)
+{
+	return (false
+		|| is_rotation(value)
+		|| is_normal(value)
+		|| is_look_at(value)
+	);
+}
+
+bool	t_map_validate_camera_rotation(t_ft_json value)
 {
 	return (
 		true
 		&& ft_json_is_dict(value)
-		&& t_map_validate_has_position(value)
-		&& ft_json_dict_has_key(value, "normal")
-		&& t_map_validate_normal(ft_json_get_dict(value, "normal"))
-		&& ft_json_dict_has_key(value, "material")
-		&& t_map_validate_color_material(ft_json_get_dict(value, "material"))
+		&& ft_json_dict_has_key(value, "rotation")
+		&& ft_json_is_dict(ft_json_get_dict(value, "rotation"))
+		&& is(ft_json_get_dict(value, "rotation"))
 	);
 }
