@@ -10,23 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_validate.h"
+#include "t_color_get.h"
 
-#include <stdbool.h>
+#include "t_map.h"
 
-#include "ft_json.h"
-
-bool	t_map_validate_colors(t_ft_json value)
+t_f3	t_color_get(t_context *context, t_map_color *color, t_f x, t_f y)
 {
-	size_t	count;
-
-	if (!ft_json_is_list(value))
-		return (false);
-	count = ft_json_list_length(value);
-	if (count < 2)
-		return (false);
-	while (count--)
-		if (!t_map_validate_color(ft_json_get_list(value, count)))
-			return (false);
-	return (true);
+	if (color->type == T_MAP_COLOR_TYPE_COLOR)
+		return (color->color.color);
+	if (color->type == T_MAP_COLOR_TYPE_TEXTURE)
+		return (t_color_get_texture(context, color->texture.texture, x, y));
+	else
+		return (t_color_get_blend(context, color->blend.blend, x, y));
 }

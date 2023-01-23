@@ -15,7 +15,10 @@
 #include "ft_cstring.h"
 #include "t_image.h"
 
-t_image	*t_texture_manager_get(t_texture_manager *self, const char *path)
+const t_image	*t_texture_manager_get(
+	t_texture_manager *self,
+	const char *path
+)
 {
 	t_texture_manager_node	*current;
 

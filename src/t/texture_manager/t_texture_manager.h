@@ -39,7 +39,7 @@ void				t_texture_manager_free(
 t_err				t_texture_manager_preload(
 						t_texture_manager *self,
 						const char *path);
-t_image				*t_texture_manager_get(
+const t_image		*t_texture_manager_get(
 						t_texture_manager *self,
 						const char *path);
 

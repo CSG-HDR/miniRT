@@ -10,23 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_validate.h"
+#include "t_color_get.h"
 
-#include <stdbool.h>
+#include "t.h"
+#include "t_f3.h"
+#include "t_map.h"
 
-#include "ft_json.h"
-
-bool	t_map_validate_colors(t_ft_json value)
+t_f3	t_color_get_blend(
+	t_context *context,
+	t_map_blend blend,
+	t_f x,
+	t_f y
+)
 {
-	size_t	count;
-
-	if (!ft_json_is_list(value))
-		return (false);
-	count = ft_json_list_length(value);
-	if (count < 2)
-		return (false);
-	while (count--)
-		if (!t_map_validate_color(ft_json_get_list(value, count)))
-			return (false);
-	return (true);
+	if (blend.type == T_MAP_BLEND_TYPE_ADD)
+		return (t_color_get_add(context, blend.add, x, y));
+	else if (blend.type == T_MAP_BLEND_TYPE_MULTIPLY)
+		return (t_color_get_multiply(context, blend.multiply, x, y));
+	else if (blend.type == T_MAP_BLEND_TYPE_MAXIMUM)
+		return (t_color_get_maximum(context, blend.maximum, x, y));
+	else if (blend.type == T_MAP_BLEND_TYPE_MINIMUM)
+		return (t_color_get_minimum(context, blend.minimum, x, y));
+	else
+		return (t_color_get_subtract(context, blend.subtract, x, y));
 }

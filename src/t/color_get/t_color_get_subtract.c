@@ -10,23 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_validate.h"
+#include "t_color_get.h"
 
-#include <stdbool.h>
+#include "t.h"
+#include "t_f3.h"
+#include "t_map.h"
 
-#include "ft_json.h"
-
-bool	t_map_validate_colors(t_ft_json value)
+t_f3	t_color_get_subtract(
+	t_context *context,
+	t_map_blend_subtract subtract,
+	t_f x,
+	t_f y
+)
 {
-	size_t	count;
+	const t_f3	zero = {(t_f)0, (t_f)0, (t_f)0};
 
-	if (!ft_json_is_list(value))
-		return (false);
-	count = ft_json_list_length(value);
-	if (count < 2)
-		return (false);
-	while (count--)
-		if (!t_map_validate_color(ft_json_get_list(value, count)))
-			return (false);
-	return (true);
+	return (
+		t_f3_max(
+			zero,
+			t_f3_sub(
+				t_color_get(context, subtract.from, x, y),
+				t_color_get(context, subtract.subtract, x, y)
+			)
+		)
+	);
 }

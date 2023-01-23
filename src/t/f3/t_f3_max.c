@@ -10,23 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_validate.h"
+#include "t_f.h"
+#include "t_f3.h"
 
-#include <stdbool.h>
-
-#include "ft_json.h"
-
-bool	t_map_validate_colors(t_ft_json value)
+t_f3	t_f3_max(t_f3 a, t_f3 b)
 {
-	size_t	count;
-
-	if (!ft_json_is_list(value))
-		return (false);
-	count = ft_json_list_length(value);
-	if (count < 2)
-		return (false);
-	while (count--)
-		if (!t_map_validate_color(ft_json_get_list(value, count)))
-			return (false);
-	return (true);
+	return ((t_f3){t_f_max(a.x, b.x), t_f_max(a.y, b.y), t_f_max(a.z, b.z)});
 }

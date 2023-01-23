@@ -10,60 +10,49 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_F_H
-# define T_F_H
+#ifndef T_COLOR_GET_H
+# define T_COLOR_GET_H
 
-# ifndef PRECISION
-#  define PRECISION 3
-# endif
+# include "t.h"
+# include "t_f3.h"
+# include "t_map.h"
 
-# if PRECISION == 0
+t_f3	t_color_get(t_context *context, t_map_color *color, t_f x, t_f y);
 
-typedef long double	t_f;
-
-# elif PRECISION == 1
-
-typedef double		t_f;
-
-# elif PRECISION == 2
-
-typedef float		t_f;
-
-# elif PRECISION == 3
-
-typedef _Float16	t_f;
-
-# endif
-
-t_f	t_f_sqr(t_f f);
-t_f	t_f_sqrt(t_f f);
-t_f	t_f_rad(t_f f);
-t_f	t_f_max(t_f a, t_f b);
-t_f	t_f_min(t_f a, t_f b);
-
-t_f	t_f_sin(t_f f);
-t_f	t_f_cos(t_f f);
-t_f	t_f_tan(t_f f);
-t_f	t_f_cot(t_f f);
-t_f	t_f_sec(t_f f);
-t_f	t_f_csc(t_f f);
-t_f	t_f_sinh(t_f f);
-t_f	t_f_cosh(t_f f);
-t_f	t_f_tanh(t_f f);
-t_f	t_f_coth(t_f f);
-t_f	t_f_sech(t_f f);
-t_f	t_f_csch(t_f f);
-t_f	t_f_asin(t_f f);
-t_f	t_f_acos(t_f f);
-t_f	t_f_atan(t_f f);
-t_f	t_f_acot(t_f f);
-t_f	t_f_asec(t_f f);
-t_f	t_f_acsc(t_f f);
-t_f	t_f_asinh(t_f f);
-t_f	t_f_acosh(t_f f);
-t_f	t_f_atanh(t_f f);
-t_f	t_f_acoth(t_f f);
-t_f	t_f_asech(t_f f);
-t_f	t_f_acsch(t_f f);
+t_f3	t_color_get_texture(
+			t_context *context,
+			t_map_texture texture,
+			t_f x,
+			t_f y);
+t_f3	t_color_get_blend(
+			t_context *context,
+			t_map_blend blend,
+			t_f x,
+			t_f y);
+t_f3	t_color_get_add(
+			t_context *context,
+			t_map_blend_add add,
+			t_f x,
+			t_f y);
+t_f3	t_color_get_multiply(
+			t_context *context,
+			t_map_blend_multiply multiply,
+			t_f x,
+			t_f y);
+t_f3	t_color_get_maximum(
+			t_context *context,
+			t_map_blend_maximum maximum,
+			t_f x,
+			t_f y);
+t_f3	t_color_get_minimum(
+			t_context *context,
+			t_map_blend_minimum minimum,
+			t_f x,
+			t_f y);
+t_f3	t_color_get_subtract(
+			t_context *context,
+			t_map_blend_subtract subtract,
+			t_f x,
+			t_f y);
 
 #endif

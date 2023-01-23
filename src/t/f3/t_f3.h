@@ -30,6 +30,8 @@ t_f3	t_f3_mul3(t_f3 a, t_f3 b);
 t_f3	t_f3_div3(t_f3 a, t_f3 b);
 t_f		t_f3_dot(t_f3 a, t_f3 b);
 t_f3	t_f3_cross(t_f3 a, t_f3 b);
+t_f3	t_f3_min(t_f3 a, t_f3 b);
+t_f3	t_f3_max(t_f3 a, t_f3 b);
 t_f3	t_f3_neg(t_f3 f);
 t_f3	t_f3_inv(t_f3 f);
 t_f		t_f3_sqr_length(t_f3 f);
