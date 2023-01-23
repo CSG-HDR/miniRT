@@ -10,33 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_F3_H
-# define T_F3_H
+#include "t_f.h"
+#include "t_f3.h"
 
-# include "t_f.h"
-
-typedef struct s_f3
+t_f3	t_f3_max(t_f3 a, t_f3 b)
 {
-	t_f	x;
-	t_f	y;
-	t_f	z;
-}	t_f3;
-
-t_f3	t_f3_add(t_f3 a, t_f3 b);
-t_f3	t_f3_sub(t_f3 a, t_f3 b);
-t_f3	t_f3_mul(t_f3 a, t_f b);
-t_f3	t_f3_div(t_f3 a, t_f b);
-t_f3	t_f3_mul3(t_f3 a, t_f3 b);
-t_f3	t_f3_div3(t_f3 a, t_f3 b);
-t_f		t_f3_dot(t_f3 a, t_f3 b);
-t_f3	t_f3_cross(t_f3 a, t_f3 b);
-t_f3	t_f3_min(t_f3 a, t_f3 b);
-t_f3	t_f3_max(t_f3 a, t_f3 b);
-t_f3	t_f3_neg(t_f3 f);
-t_f3	t_f3_inv(t_f3 f);
-t_f		t_f3_sqr_length(t_f3 f);
-t_f		t_f3_length(t_f3 f);
-t_f3	t_f3_unit(t_f3 f);
-t_f3	t_f3_to_angle(t_f3 normal);
-
-#endif
+	return ((t_f3){t_f_max(a.x, b.x), t_f_max(a.y, b.y), t_f_max(a.z, b.z)});
+}
