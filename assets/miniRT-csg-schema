@@ -511,7 +511,47 @@
                   "$ref": "#/$defs/non-zero"
                 },
                 {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "minItems": 10,
+              "maxItems": 10
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "description": "the property [A, B, C, D, E, F, G, H, I, J] where Ax² + By² + Cz² + Dxy+ Exz + Fyz + Gx + Hy + Iz + J = 0"
+              },
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
                   "$ref": "#/$defs/non-zero"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "minItems": 10,
+              "maxItems": 10
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "description": "the property [A, B, C, D, E, F, G, H, I, J] where Ax² + By² + Cz² + Dxy+ Exz + Fyz + Gx + Hy + Iz + J = 0"
+              },
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
                 },
                 {
                   "$ref": "#/$defs/non-zero"
@@ -528,7 +568,89 @@
                   "$ref": "#/$defs/non-zero"
                 },
                 "B": {
+                  "type": "number"
+                },
+                "C": {
+                  "type": "number"
+                },
+                "D": {
+                  "type": "number"
+                },
+                "E": {
+                  "type": "number"
+                },
+                "F": {
+                  "type": "number"
+                },
+                "G": {
+                  "type": "number"
+                },
+                "H": {
+                  "type": "number"
+                },
+                "I": {
+                  "type": "number"
+                },
+                "J": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ]
+            },
+            {
+              "type": "object",
+              "unevaluatedProperties": false,
+              "properties": {
+                "A": {
+                  "type": "number"
+                },
+                "B": {
                   "$ref": "#/$defs/non-zero"
+                },
+                "C": {
+                  "type": "number"
+                },
+                "D": {
+                  "type": "number"
+                },
+                "E": {
+                  "type": "number"
+                },
+                "F": {
+                  "type": "number"
+                },
+                "G": {
+                  "type": "number"
+                },
+                "H": {
+                  "type": "number"
+                },
+                "I": {
+                  "type": "number"
+                },
+                "J": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ]
+            },
+            {
+              "type": "object",
+              "unevaluatedProperties": false,
+              "properties": {
+                "A": {
+                  "type": "number"
+                },
+                "B": {
+                  "type": "number"
                 },
                 "C": {
                   "$ref": "#/$defs/non-zero"
@@ -578,10 +700,12 @@
       "oneOf": [
         {
           "type": "number",
+          "description": "non-zero number",
           "exclusiveMinimum": 0
         },
         {
           "type": "number",
+          "description": "non-zero number",
           "exclusiveMaximum": 0
         }
       ]
