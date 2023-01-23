@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_map.h                                            :+:      :+:    :+:   */
+/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 2023/01/23 03:45:59 by seongyle         ###   ########seoul.kr  */
+/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stddef.h>
 # include <stdbool.h>
 
-#include "ray/t_ray.h"
 # include "t_f.h"
 # include "t_f3.h"
 
@@ -433,31 +432,58 @@ typedef union u_map_model
 	t_map_model_constructive	constructive;
 }	t_map_model;
 
-//////////////////////////////////////////////////////////////////////////// etc
+////////////////////////////////////////////////////////////////////////////////
 
-typedef struct s_map_plane
+typedef struct s_map_linear_plane
 {
 	t_map_position			position;
 	t_map_normal			normal;
 	t_map_model				*limit;
 	t_map_color_material	material;
-}	t_map_plane;
+}	t_map_linear_plane;
 
-typedef struct s_map_quadric
+typedef struct s_map_monomial
 {
-	t_f						a;
-	t_f						b;
-	t_f						c;
-	t_f						d;
-	t_f						e;
-	t_f						f;
-	t_f						g;
-	t_f						h;
-	t_f						i;
-	t_f						j;
+	t_f	coefficient;
+	t_f	degree_of_x;
+	t_f	degree_of_y;
+	t_f	degree_of_z;
+}	t_map_monomial;
+
+typedef struct s_map_polynomial_plane
+{
+	t_map_monomial			*monomials;
+	size_t					monomial_count;
 	t_map_model				*limit;
 	t_map_color_material	material;
-}	t_map_quadric;
+}	t_map_polynomial_plane;
+
+typedef enum e_map_plane_type
+{
+	T_MAP_PLANE_TYPE_LINEAR,
+	T_MAP_PLANE_TYPE_POLYNOMIAL,
+}	t_map_plane_type;
+
+typedef struct s_map_plane_linear
+{
+	t_map_plane_type	type;
+	t_map_linear_plane	linear;
+}	t_map_plane_linear;
+
+typedef struct s_map_plane_polynomial
+{
+	t_map_plane_type		type;
+	t_map_polynomial_plane	polynomial;
+}	t_map_plane_polynomial;
+
+typedef union u_map_plane
+{
+	t_map_plane_type		type;
+	t_map_plane_linear		linear;
+	t_map_plane_polynomial	polynomial;
+}	t_map_plane;
+
+//////////////////////////////////////////////////////////////////////////// etc
 
 typedef enum e_map_fov_type
 {
@@ -475,7 +501,7 @@ typedef struct s_map_camera
 	t_map_fov_type	fov_type;
 	t_map_angle		fov_x;
 	t_map_angle		fov_y;
-	t_f	focal_len;
+	t_f				focal_len;
 }	t_map_camera;
 
 typedef struct s_map_viewport
@@ -498,14 +524,10 @@ typedef struct s_map
 	t_map_light				*lights;
 	size_t					plane_count;
 	t_map_plane				*planes;
-	size_t					quadric_count;
-	t_map_quadric			*quadrics;
 	t_map_camera			camera;
 	t_map_viewport			viewport;
 	t_map_light_color		ambient_light;
 	t_map_material_color	void_color;
-	t_ray					ray;
-	t_hit_record			record;
 }	t_map;
 
 #endif
