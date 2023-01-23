@@ -23,6 +23,8 @@ bool	t_map_validate_colors(t_ft_json value)
 	if (!ft_json_is_list(value))
 		return (false);
 	count = ft_json_list_length(value);
+	if (count < 2)
+		return (false);
 	while (count--)
 		if (!t_map_validate_color(ft_json_get_list(value, count)))
 			return (false);
