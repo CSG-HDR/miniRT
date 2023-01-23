@@ -92,6 +92,13 @@ t_err				t_texture_manager_preload_material(
 t_err				t_texture_manager_preload_normal_map(
 						t_texture_manager *self,
 						t_map_normal_map normal_map);
+t_err				t_texture_manager_preload_colors(
+						t_texture_manager *self,
+						t_map_color **color,
+						size_t count);
+t_err				t_texture_manager_preload_color(
+						t_texture_manager *self,
+						t_map_color *color);
 t_err				t_texture_manager_preload_texture(
 						t_texture_manager *self,
 						t_map_texture texture);
