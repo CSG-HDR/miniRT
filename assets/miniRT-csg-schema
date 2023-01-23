@@ -430,7 +430,7 @@
               "type": "string",
               "description": "type of solid geometry",
               "enum": [
-                "linear"
+                "linear_plane"
               ]
             },
             "position": {
@@ -457,7 +457,7 @@
               "type": "string",
               "description": "type of solid geometry",
               "enum": [
-                "polynomial"
+                "polynomial_plane"
               ]
             },
             "polynomial": {
