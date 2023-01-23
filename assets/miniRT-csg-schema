@@ -498,6 +498,9 @@
                 }
               ]
             },
+            "negate": {
+              "type": "boolean"
+            },
             "material": {
               "$ref": "#/$defs/color-material"
             }
