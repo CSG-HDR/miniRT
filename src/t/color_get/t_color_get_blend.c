@@ -10,24 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_texture_manager.h"
+#include "t_color_get.h"
 
-#include "ft_cstring.h"
-#include "t_image.h"
+#include "t.h"
+#include "t_f3.h"
+#include "t_map.h"
 
-const t_image	*t_texture_manager_get(
-	t_texture_manager *self,
-	const char *path
+t_f3	t_color_get_blend(
+	t_context *context,
+	t_map_blend blend,
+	t_f x,
+	t_f y
 )
 {
-	t_texture_manager_node	*current;
-
-	current = self->head;
-	while (current)
-	{
-		if (ft_cstring_equals(current->path, path))
-			return (current->image);
-		current = current->next;
-	}
-	return (NULL);
+	if (blend.type == T_MAP_BLEND_TYPE_ADD)
+		return (t_color_get_add(context, blend.add, x, y));
+	else if (blend.type == T_MAP_BLEND_TYPE_MULTIPLY)
+		return (t_color_get_multiply(context, blend.multiply, x, y));
+	else if (blend.type == T_MAP_BLEND_TYPE_MAXIMUM)
+		return (t_color_get_maximum(context, blend.maximum, x, y));
+	else if (blend.type == T_MAP_BLEND_TYPE_MINIMUM)
+		return (t_color_get_minimum(context, blend.minimum, x, y));
+	else
+		return (t_color_get_subtract(context, blend.subtract, x, y));
 }

@@ -10,24 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_texture_manager.h"
+#include "t_color_get.h"
 
-#include "ft_cstring.h"
-#include "t_image.h"
+#include "t.h"
+#include "t_f3.h"
+#include "t_map.h"
 
-const t_image	*t_texture_manager_get(
-	t_texture_manager *self,
-	const char *path
+t_f3	t_color_get_subtract(
+	t_context *context,
+	t_map_blend_subtract subtract,
+	t_f x,
+	t_f y
 )
 {
-	t_texture_manager_node	*current;
+	const t_f3	zero = {(t_f)0, (t_f)0, (t_f)0};
 
-	current = self->head;
-	while (current)
-	{
-		if (ft_cstring_equals(current->path, path))
-			return (current->image);
-		current = current->next;
-	}
-	return (NULL);
+	return (
+		t_f3_max(
+			zero,
+			t_f3_sub(
+				t_color_get(context, subtract.from, x, y),
+				t_color_get(context, subtract.subtract, x, y)
+			)
+		)
+	);
 }

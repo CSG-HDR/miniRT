@@ -10,24 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_texture_manager.h"
+#ifndef T_H
+# define T_H
 
-#include "ft_cstring.h"
-#include "t_image.h"
+# include "t_map.h"
+# include "t_texture_manager.h"
 
-const t_image	*t_texture_manager_get(
-	t_texture_manager *self,
-	const char *path
-)
+typedef struct s_context
 {
-	t_texture_manager_node	*current;
+	t_map				*map;
+	t_texture_manager	*text_manager;
+}	t_context;
 
-	current = self->head;
-	while (current)
-	{
-		if (ft_cstring_equals(current->path, path))
-			return (current->image);
-		current = current->next;
-	}
-	return (NULL);
-}
+#endif

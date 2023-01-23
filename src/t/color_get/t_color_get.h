@@ -10,24 +10,49 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_texture_manager.h"
+#ifndef T_COLOR_GET_H
+# define T_COLOR_GET_H
 
-#include "ft_cstring.h"
-#include "t_image.h"
+# include "t.h"
+# include "t_f3.h"
+# include "t_map.h"
 
-const t_image	*t_texture_manager_get(
-	t_texture_manager *self,
-	const char *path
-)
-{
-	t_texture_manager_node	*current;
+t_f3	t_color_get(t_context *context, t_map_color *color, t_f x, t_f y);
 
-	current = self->head;
-	while (current)
-	{
-		if (ft_cstring_equals(current->path, path))
-			return (current->image);
-		current = current->next;
-	}
-	return (NULL);
-}
+t_f3	t_color_get_texture(
+			t_context *context,
+			t_map_texture texture,
+			t_f x,
+			t_f y);
+t_f3	t_color_get_blend(
+			t_context *context,
+			t_map_blend blend,
+			t_f x,
+			t_f y);
+t_f3	t_color_get_add(
+			t_context *context,
+			t_map_blend_add add,
+			t_f x,
+			t_f y);
+t_f3	t_color_get_multiply(
+			t_context *context,
+			t_map_blend_multiply multiply,
+			t_f x,
+			t_f y);
+t_f3	t_color_get_maximum(
+			t_context *context,
+			t_map_blend_maximum maximum,
+			t_f x,
+			t_f y);
+t_f3	t_color_get_minimum(
+			t_context *context,
+			t_map_blend_minimum minimum,
+			t_f x,
+			t_f y);
+t_f3	t_color_get_subtract(
+			t_context *context,
+			t_map_blend_subtract subtract,
+			t_f x,
+			t_f y);
+
+#endif
