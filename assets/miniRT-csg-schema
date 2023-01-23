@@ -24,12 +24,6 @@
         "$ref": "#/$defs/plane"
       }
     },
-    "quadrics": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/quadric"
-      }
-    },
     "camera": {
       "type": "object",
       "unevaluatedProperties": false,
@@ -38,7 +32,68 @@
           "$ref": "#/$defs/position"
         },
         "rotation": {
-          "$ref": "#/$defs/rotation"
+          "oneOf": [
+            {
+              "type": "object",
+              "unevaluatedProperties": false,
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "rotation or normal, or lookAt",
+                  "enum": [
+                    "rotation"
+                  ]
+                },
+                "rotation": {
+                  "$ref": "#/$defs/rotation"
+                }
+              },
+              "required": [
+                "type",
+                "rotation"
+              ]
+            },
+            {
+              "type": "object",
+              "unevaluatedProperties": false,
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "rotation or normal, or lookAt",
+                  "enum": [
+                    "normal"
+                  ]
+                },
+                "normal": {
+                  "$ref": "#/$defs/normal"
+                }
+              },
+              "required": [
+                "type",
+                "normal"
+              ]
+            },
+            {
+              "type": "object",
+              "unevaluatedProperties": false,
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "rotation or normal, or lookAt",
+                  "enum": [
+                    "lookAt"
+                  ]
+                },
+                "lookAt": {
+                  "$ref": "#/$defs/position"
+                }
+              },
+              "required": [
+                "type",
+                "lookAt"
+              ]
+            }
+          ]
         },
         "fov": {
           "type": "number",
@@ -473,240 +528,99 @@
       ]
     },
     "plane": {
-      "type": "object",
-      "unevaluatedProperties": false,
-      "properties": {
-        "position": {
-          "$ref": "#/$defs/position"
-        },
-        "normal": {
-          "$ref": "#/$defs/normal"
-        },
-        "material": {
-          "$ref": "#/$defs/color-material"
-        },
-        "limit": {
-          "$ref": "#/$defs/model"
-        }
-      },
-      "required": [
-        "position",
-        "normal"
-      ]
-    },
-    "quadric": {
-      "type": "object",
-      "unevaluatedProperties": false,
-      "properties": {
-        "properties": {
-          "oneOf": [
-            {
-              "type": "array",
-              "items": {
-                "type": "number",
-                "description": "the property [A, B, C, D, E, F, G, H, I, J] where Ax² + By² + Cz² + Dxy+ Exz + Fyz + Gx + Hy + Iz + J = 0"
-              },
-              "prefixItems": [
-                {
-                  "$ref": "#/$defs/non-zero"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "number"
-                }
-              ],
-              "minItems": 10,
-              "maxItems": 10
-            },
-            {
-              "type": "array",
-              "items": {
-                "type": "number",
-                "description": "the property [A, B, C, D, E, F, G, H, I, J] where Ax² + By² + Cz² + Dxy+ Exz + Fyz + Gx + Hy + Iz + J = 0"
-              },
-              "prefixItems": [
-                {
-                  "type": "number"
-                },
-                {
-                  "$ref": "#/$defs/non-zero"
-                },
-                {
-                  "type": "number"
-                }
-              ],
-              "minItems": 10,
-              "maxItems": 10
-            },
-            {
-              "type": "array",
-              "items": {
-                "type": "number",
-                "description": "the property [A, B, C, D, E, F, G, H, I, J] where Ax² + By² + Cz² + Dxy+ Exz + Fyz + Gx + Hy + Iz + J = 0"
-              },
-              "prefixItems": [
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "$ref": "#/$defs/non-zero"
-                }
-              ],
-              "minItems": 10,
-              "maxItems": 10
-            },
-            {
-              "type": "object",
-              "unevaluatedProperties": false,
-              "properties": {
-                "A": {
-                  "$ref": "#/$defs/non-zero"
-                },
-                "B": {
-                  "type": "number"
-                },
-                "C": {
-                  "type": "number"
-                },
-                "D": {
-                  "type": "number"
-                },
-                "E": {
-                  "type": "number"
-                },
-                "F": {
-                  "type": "number"
-                },
-                "G": {
-                  "type": "number"
-                },
-                "H": {
-                  "type": "number"
-                },
-                "I": {
-                  "type": "number"
-                },
-                "J": {
-                  "type": "number"
-                }
-              },
-              "required": [
-                "A",
-                "B",
-                "C"
-              ]
-            },
-            {
-              "type": "object",
-              "unevaluatedProperties": false,
-              "properties": {
-                "A": {
-                  "type": "number"
-                },
-                "B": {
-                  "$ref": "#/$defs/non-zero"
-                },
-                "C": {
-                  "type": "number"
-                },
-                "D": {
-                  "type": "number"
-                },
-                "E": {
-                  "type": "number"
-                },
-                "F": {
-                  "type": "number"
-                },
-                "G": {
-                  "type": "number"
-                },
-                "H": {
-                  "type": "number"
-                },
-                "I": {
-                  "type": "number"
-                },
-                "J": {
-                  "type": "number"
-                }
-              },
-              "required": [
-                "A",
-                "B",
-                "C"
-              ]
-            },
-            {
-              "type": "object",
-              "unevaluatedProperties": false,
-              "properties": {
-                "A": {
-                  "type": "number"
-                },
-                "B": {
-                  "type": "number"
-                },
-                "C": {
-                  "$ref": "#/$defs/non-zero"
-                },
-                "D": {
-                  "type": "number"
-                },
-                "E": {
-                  "type": "number"
-                },
-                "F": {
-                  "type": "number"
-                },
-                "G": {
-                  "type": "number"
-                },
-                "H": {
-                  "type": "number"
-                },
-                "I": {
-                  "type": "number"
-                },
-                "J": {
-                  "type": "number"
-                }
-              },
-              "required": [
-                "A",
-                "B",
-                "C"
-              ]
-            }
-          ]
-        },
-        "material": {
-          "$ref": "#/$defs/color-material"
-        },
-        "limit": {
-          "$ref": "#/$defs/model"
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
-    "non-zero": {
       "oneOf": [
         {
-          "type": "number",
-          "description": "non-zero number",
-          "exclusiveMinimum": 0
+          "type": "object",
+          "unevaluatedProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "type of plane",
+              "enum": [
+                "linear"
+              ]
+            },
+            "position": {
+              "$ref": "#/$defs/position"
+            },
+            "normal": {
+              "$ref": "#/$defs/normal"
+            },
+            "material": {
+              "$ref": "#/$defs/color-material"
+            },
+            "limit": {
+              "$ref": "#/$defs/model"
+            }
+          },
+          "required": [
+            "type",
+            "position",
+            "normal"
+          ]
         },
         {
-          "type": "number",
-          "description": "non-zero number",
-          "exclusiveMaximum": 0
+          "type": "object",
+          "unevaluatedProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "type of plane",
+              "enum": [
+                "polynomial"
+              ]
+            },
+            "polynomial": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "description": "polynomial like 2xy^2z+3 which equals 0",
+                  "pattern": "^([1-9][0-9]*(\\.[0-9]+)?)?(x(\\^[1-9][0-9]*)?)?(y(\\^[1-9][0-9]*)?)?(z(\\^[1-9][0-9]*)?)?((\\+|\\-)([1-9][0-9]*(\\.[0-9]+)?)?(x(\\^[1-9][0-9]*)?)?(y(\\^[1-9][0-9]*)?)?(z(\\^[1-9][0-9]*)?)?)*(\\=0)?$"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "prefixItems": [
+                    {
+                      "type": "number",
+                      "description": "coefficient"
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "description": "degree of x"
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "description": "degree of y"
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "description": "degree of z"
+                    }
+                  ],
+                  "minItems": 4,
+                  "maxItems": 4
+                }
+              ]
+            },
+            "material": {
+              "$ref": "#/$defs/color-material"
+            },
+            "limit": {
+              "$ref": "#/$defs/model"
+            }
+          },
+          "required": [
+            "type",
+            "polynomial",
+            "position",
+            "normal"
+          ]
         }
       ]
     },
@@ -730,38 +644,10 @@
       "maxItems": 3
     },
     "rotation": {
-      "oneOf": [
-        {
-          "type": "object",
-          "unevaluatedProperties": false,
-          "properties": {
-            "angle": {
-              "$ref": "#/$defs/angle"
-            }
-          },
-          "required": [
-            "angle"
-          ]
-        },
-        {
-          "type": "object",
-          "unevaluatedProperties": false,
-          "properties": {
-            "normal": {
-              "$ref": "#/$defs/normal"
-            }
-          },
-          "required": [
-            "normal"
-          ]
-        }
-      ]
-    },
-    "angle": {
       "type": "array",
       "items": {
         "type": "number",
-        "description": "(rotation) angle for [x axis, y axis, z axis]",
+        "description": "rotation angle for [x axis, y axis, z axis]",
         "minimum": 0,
         "exclusiveMaximum": 1
       },
