@@ -20,7 +20,7 @@
 
 bool	t_map_polynomial_plane_validate(const char *str);
 t_err	t_map_polynomial_plane_parse(
-			const char *str, t_map_polynomial_plane *out);
+			const char *str, t_map_polynomial_plane **out);
 
 typedef struct s_map_polynomial_plane_parse_state_node
 {
@@ -31,7 +31,9 @@ typedef struct s_map_polynomial_plane_parse_state_node
 typedef struct s_map_polynomial_plane_parse_state
 {
 	int										state;
+	double									current_dight;
 	bool									is_coefficient_minus;
+	t_map_monomial							current;
 	t_map_polynomial_plane_parse_state_node	*head;
 	t_map_polynomial_plane_parse_state_node	*tail;
 }	t_map_polynomial_plane_parse_state;
@@ -115,9 +117,19 @@ t_err	t_map_polynomial_plane_parse_state_init(
 			t_map_polynomial_plane_parse_state **out);
 void	t_map_polynomial_plane_parse_state_free(
 			t_map_polynomial_plane_parse_state *state);
+t_err	t_map_polynomial_plane_parse_state_commit(
+			t_map_polynomial_plane_parse_state *state);
+/**
+ * @brief build t_map_polynomial_plane from state, EXCEPT FOR MATERIAL
+ *
+ * @warning material is not initialized
+ */
+t_err	t_map_polynomial_plane_parse_state_build(
+			t_map_polynomial_plane_parse_state *in,
+			t_map_polynomial_plane **out);
 
 t_err	t_map_polynomial_plane_parse_next(
-			int current, t_map_polynomial_plane_parse_state *state, char c);
+			t_map_polynomial_plane_parse_state *state, char c);
 t_err	t_map_polynomial_plane_parse_start(
 			t_map_polynomial_plane_parse_state *state, char c);
 t_err	t_map_polynomial_plane_parse_first_minus(
@@ -190,10 +202,6 @@ t_err	t_map_polynomial_plane_parse_repeat_z_degree_digit_first(
 			t_map_polynomial_plane_parse_state *state, char c);
 t_err	t_map_polynomial_plane_parse_repeat_z_degree_digit_repeat(
 			t_map_polynomial_plane_parse_state *state, char c);
-
-t_err	t_map_polynomial_plane_parse_state_build(
-			t_map_polynomial_plane_parse_state *in,
-			t_map_polynomial_plane **out);
 
 # define T_MAP_POLYNOMIAL_PLANE_PARSE_STATE_ERROR -1
 
