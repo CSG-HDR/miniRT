@@ -22,6 +22,22 @@ bool	t_map_polynomial_plane_validate(const char *str);
 t_err	t_map_polynomial_plane_parse(
 			const char *str, t_map_polynomial_plane **out);
 
+size_t	t_map_polynomial_plane_validate_next_monomial_offset(const char *str);
+bool	t_map_polynomial_plane_validate_has_coefficient(const char *str);
+bool	t_map_polynomial_plane_validate_coefficient(const char *str);
+size_t	t_map_polynomial_plane_validate_coefficient_size(const char *str);
+bool	t_map_polynomial_plane_validate_has_x(const char *str);
+bool	t_map_polynomial_plane_validate_x(const char *str);
+size_t	t_map_polynomial_plane_validate_x_size(const char *str);
+bool	t_map_polynomial_plane_validate_has_y(const char *str);
+bool	t_map_polynomial_plane_validate_y(const char *str);
+size_t	t_map_polynomial_plane_validate_y_size(const char *str);
+bool	t_map_polynomial_plane_validate_has_z(const char *str);
+bool	t_map_polynomial_plane_validate_z(const char *str);
+size_t	t_map_polynomial_plane_validate_z_size(const char *str);
+bool	t_map_polynomial_plane_validate_monomial(const char *str);
+size_t	t_map_polynomial_plane_validate_monomial_size(const char *str);
+
 typedef struct s_map_polynomial_plane_parse_state_node
 {
 	struct s_map_polynomial_plane_parse_state_node	*next;

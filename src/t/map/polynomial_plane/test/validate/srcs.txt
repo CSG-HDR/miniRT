@@ -1,0 +1,16 @@
+main.c
+../../t_map_polynomial_plane_validate.c
+../../t_map_polynomial_plane_validate_monomial.c
+../../t_map_polynomial_plane_validate_next_monomial_offset.c
+../../t_map_polynomial_plane_validate_has_coefficient.c
+../../t_map_polynomial_plane_validate_coefficient.c
+../../t_map_polynomial_plane_validate_coefficient_size.c
+../../t_map_polynomial_plane_validate_has_x.c
+../../t_map_polynomial_plane_validate_x.c
+../../t_map_polynomial_plane_validate_x_size.c
+../../t_map_polynomial_plane_validate_has_y.c
+../../t_map_polynomial_plane_validate_y.c
+../../t_map_polynomial_plane_validate_y_size.c
+../../t_map_polynomial_plane_validate_has_z.c
+../../t_map_polynomial_plane_validate_z.c
+../../t_map_polynomial_plane_validate_z_size.c
