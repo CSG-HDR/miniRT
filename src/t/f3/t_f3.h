@@ -13,6 +13,7 @@
 #ifndef T_F3_H
 # define T_F3_H
 
+# include <math.h>
 # include "t_f.h"
 
 typedef struct s_f3
