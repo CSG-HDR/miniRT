@@ -44,12 +44,23 @@ static t_map_polynomial_plane_parse_state_node	*find_same_degree_node(
 	return (NULL);
 }
 
+static void	pre_init(t_map_polynomial_plane_parse_state *state)
+{
+	if (state->is_coefficient_minus)
+	{
+		state->is_coefficient_minus = false;
+		state->current.coefficient = -state->current.coefficient;
+	}
+	state->current_dight = 1.0;
+}
+
 t_err	t_map_polynomial_plane_parse_state_commit(
 	t_map_polynomial_plane_parse_state *state
 )
 {
 	t_map_polynomial_plane_parse_state_node	*node;
 
+	pre_init(state);
 	node = find_same_degree_node(state);
 	if (node)
 		node->monomial.coefficient += state->current.coefficient;
@@ -66,7 +77,7 @@ t_err	t_map_polynomial_plane_parse_state_commit(
 			state->head = node;
 		state->tail = node;
 	}
-	state->current.coefficient = 0;
+	state->current.coefficient = 1;
 	state->current.degree_of_x = 0;
 	state->current.degree_of_y = 0;
 	state->current.degree_of_z = 0;

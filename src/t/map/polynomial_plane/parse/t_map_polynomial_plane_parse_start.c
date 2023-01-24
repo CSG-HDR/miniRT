@@ -12,27 +12,30 @@
 
 #include "t_map_polynomial_plane.h"
 
-#include "wrap.h"
 #include "ft_types.h"
 
-t_err	t_map_polynomial_plane_parse_state_init(
-	t_map_polynomial_plane_parse_state **out
+t_err	t_map_polynomial_plane_parse_start(
+	t_map_polynomial_plane_parse_state *state,
+	char c
 )
 {
-	t_map_polynomial_plane_parse_state *const	result
-		= wrap_malloc(sizeof(t_map_polynomial_plane_parse_state));
-
-	if (!result)
-		return (true);
-	result->state = T_MAP_POLYNOMIAL_PLANE_PARSE_STATE_START;
-	result->current_dight = 1.0;
-	result->is_coefficient_minus = false;
-	result->current.coefficient = 1;
-	result->current.degree_of_x = 0;
-	result->current.degree_of_y = 0;
-	result->current.degree_of_z = 0;
-	result->head = NULL;
-	result->tail = NULL;
-	*out = result;
+	if ('1' <= c && c <= '9')
+	{
+		state->state
+			= T_MAP_POLYNOMIAL_PLANE_PARSE_STATE_FIRST_COEFFICIENT_DIGIT_FIRST;
+		state->current.coefficient = c - '0';
+	}
+	else if (c == '-')
+	{
+		state->state
+			= T_MAP_POLYNOMIAL_PLANE_PARSE_STATE_FIRST_MINUS;
+		state->is_coefficient_minus = true;
+	}
+	else if (c == 'x')
+		state->state = T_MAP_POLYNOMIAL_PLANE_PARSE_STATE_FIRST_X;
+	else if (c == 'y')
+		state->state = T_MAP_POLYNOMIAL_PLANE_PARSE_STATE_FIRST_Y;
+	else
+		state->state = T_MAP_POLYNOMIAL_PLANE_PARSE_STATE_FIRST_Z;
 	return (false);
 }
