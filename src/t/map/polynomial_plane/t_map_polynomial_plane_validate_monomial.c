@@ -37,16 +37,16 @@ bool	t_map_polynomial_plane_validate_monomial(const char *str)
 		return (false);
 	if (l.has_x)
 		str += t_map_polynomial_plane_validate_x_size(str);
-	l.has_coefficient = t_map_polynomial_plane_validate_has_coefficient(str);
-	if (l.has_coefficient && !t_map_polynomial_plane_validate_coefficient(str))
+	l.has_y = t_map_polynomial_plane_validate_has_y(str);
+	if (l.has_y && !t_map_polynomial_plane_validate_y(str))
 		return (false);
-	if (l.has_coefficient)
-		str += t_map_polynomial_plane_validate_coefficient_size(str);
-	l.has_coefficient = t_map_polynomial_plane_validate_has_coefficient(str);
-	if (l.has_coefficient && !t_map_polynomial_plane_validate_coefficient(str))
+	if (l.has_y)
+		str += t_map_polynomial_plane_validate_y_size(str);
+	l.has_z = t_map_polynomial_plane_validate_has_z(str);
+	if (l.has_z && !t_map_polynomial_plane_validate_z(str))
 		return (false);
-	if (l.has_coefficient)
-		str += t_map_polynomial_plane_validate_coefficient_size(str);
+	if (l.has_z)
+		str += t_map_polynomial_plane_validate_z_size(str);
 	return ((*str == '\0' || *str == '+' || *str == '-')
 		&& (l.has_coefficient || l.has_x || l.has_y || l.has_z));
 }

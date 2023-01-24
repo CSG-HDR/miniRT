@@ -19,7 +19,7 @@ size_t	t_map_polynomial_plane_validate_coefficient_size(const char *str)
 	size_t	result;
 
 	result = 0;
-	while (0 <= str[result] && str[result] <= '9')
+	while ('0' <= str[result] && str[result] <= '9')
 		result++;
 	if (str[result] == '.')
 	{
