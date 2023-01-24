@@ -46,7 +46,6 @@ typedef struct s_map_polynomial_plane_parse_state_node
 
 typedef struct s_map_polynomial_plane_parse_state
 {
-	int										state;
 	double									current_dight;
 	bool									is_coefficient_minus;
 	t_map_monomial							current;

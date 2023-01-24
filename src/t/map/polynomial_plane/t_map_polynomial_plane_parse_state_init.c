@@ -24,7 +24,6 @@ t_err	t_map_polynomial_plane_parse_state_init(
 
 	if (!result)
 		return (true);
-	result->state = T_MAP_POLYNOMIAL_PLANE_PARSE_STATE_START;
 	result->current_dight = 1.0;
 	result->is_coefficient_minus = false;
 	result->current.coefficient = 1;
