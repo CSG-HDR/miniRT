@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include "minirt_math.h"
 #include "t_image.h"
 #include "t_map.h"
 #include "wrap.h"
