@@ -21,6 +21,7 @@ bool	t_map_polynomial_plane_validate(const char *str)
 	str += t_map_polynomial_plane_validate_next_monomial_offset(str);
 	while (*str)
 	{
+		str++;
 		if (!t_map_polynomial_plane_validate_monomial(str))
 			return (false);
 		str += t_map_polynomial_plane_validate_next_monomial_offset(str);

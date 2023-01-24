@@ -40,7 +40,7 @@ bool	t_map_polynomial_plane_validate_coefficient(const char *str)
 			ends_with_zero = (*str == '0');
 		return (!ends_with_zero && is_valid_next(*str));
 	}
-	while (0 <= *str && *str <= '9')
+	while ('0' <= *str && *str <= '9')
 		str++;
 	ends_with_zero = false;
 	if (*str == '.')
