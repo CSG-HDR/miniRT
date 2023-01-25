@@ -10,19 +10,39 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_f3.h"
+#include "t_map_parse.h"
 
-t_f3	t_f3_rotate_to_normal(t_f3 rotate)
+#include <stddef.h>
+
+#include "wrap.h"
+#include "ft_json.h"
+#include "t_map.h"
+#include "t_map_free.h"
+
+t_err	t_map_parse_quadrics(
+	t_ft_json value,
+	t_map_quadric **out,
+	size_t *out_count
+)
 {
-	// rotate (1, 0, 0) by axis for each theta.
-	const t_f	theta_x = 2 * M_PI * rotate.x;
-	const t_f	theta_y = 2 * M_PI * rotate.y;
-	const t_f	theta_z = 2 * M_PI * rotate.z;
+	const size_t			count = ft_json_list_length(value);
+	t_map_quadric *const	result
+		= wrap_malloc(sizeof(t_map_quadric *) * count);
+	size_t					i;
 
-	// TODO: rotated noraml using quaternion
-	t_f3 normal;
-	normal.x = theta_x;
-	normal.y = theta_y;
-	normal.z = theta_z;
-	return (normal);
+	if (!result)
+		return (true);
+	i = 0;
+	while (i != count)
+	{
+		if (t_map_parse_quadric(ft_json_get_list(value, i), &result[i]))
+		{
+			t_map_free_quadrics(result, count);
+			return (NULL);
+		}
+		i++;
+	}
+	*out = result;
+	*out_count = count;
+	return (false);
 }

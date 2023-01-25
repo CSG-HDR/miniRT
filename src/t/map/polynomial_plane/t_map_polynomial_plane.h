@@ -18,6 +18,23 @@
 # include "ft_types.h"
 # include "t_map.h"
 
+typedef struct s_map_monomial
+{
+	t_f	coefficient;
+	t_f	degree_of_x;
+	t_f	degree_of_y;
+	t_f	degree_of_z;
+}	t_map_monomial;
+
+typedef struct s_map_polynomial_plane
+{
+	size_t					monomial_count;
+	t_map_monomial			*monomials;
+	bool					negate;
+	t_map_color_material	material;
+}	t_map_polynomial_plane;
+
+
 bool	t_map_polynomial_plane_validate(const char *str);
 t_err	t_map_polynomial_plane_parse(
 			const char *str, t_map_polynomial_plane **out);

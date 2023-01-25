@@ -18,6 +18,18 @@
         "$ref": "#/$defs/light"
       }
     },
+    "planes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/plane"
+      }
+    },
+    "quadrics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/quadric"
+      }
+    },
     "camera": {
       "type": "object",
       "unevaluatedProperties": false,
@@ -421,96 +433,6 @@
             "size",
             "rotation"
           ]
-        },
-        {
-          "type": "object",
-          "unevaluatedProperties": false,
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "type of solid geometry",
-              "enum": [
-                "linear_plane"
-              ]
-            },
-            "position": {
-              "$ref": "#/$defs/position"
-            },
-            "normal": {
-              "$ref": "#/$defs/normal"
-            },
-            "material": {
-              "$ref": "#/$defs/color-material"
-            }
-          },
-          "required": [
-            "type",
-            "position",
-            "normal"
-          ]
-        },
-        {
-          "type": "object",
-          "unevaluatedProperties": false,
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "type of solid geometry",
-              "enum": [
-                "polynomial_plane"
-              ]
-            },
-            "polynomial": {
-              "oneOf": [
-                {
-                  "type": "string",
-                  "description": "polynomial like 2xy^2z+3 which equals 0",
-                  "pattern": "^\\-?(([1-9][0-9]*(\\.[0-9]*[1-9])?|0\\.[0-9]*[1-9])(x(\\^[1-9][0-9]*)?)?(y(\\^[1-9][0-9]*)?)?(z(\\^[1-9][0-9]*)?)?|(x(\\^[1-9][0-9]*)?(y(\\^[1-9][0-9]*)?)?(z(\\^[1-9][0-9]*)?)?|(x(\\^[1-9][0-9]*)?)?y(\\^[1-9][0-9]*)?(z(\\^[1-9][0-9]*)?)?|(x(\\^[1-9][0-9]*)?)?(y(\\^[1-9][0-9]*)?)?z(\\^[1-9][0-9]*)?))([+-](([1-9][0-9]*(\\.[0-9]*[1-9])?|0\\.[0-9]*[1-9])(x(\\^[1-9][0-9]*)?)?(y(\\^[1-9][0-9]*)?)?(z(\\^[1-9][0-9]*)?)?|(x(\\^[1-9][0-9]*)?(y(\\^[1-9][0-9]*)?)?(z(\\^[1-9][0-9]*)?)?|(x(\\^[1-9][0-9]*)?)?y(\\^[1-9][0-9]*)?(z(\\^[1-9][0-9]*)?)?|(x(\\^[1-9][0-9]*)?)?(y(\\^[1-9][0-9]*)?)?z(\\^[1-9][0-9]*)?)))*$"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "type": "number"
-                  },
-                  "prefixItems": [
-                    {
-                      "type": "number",
-                      "description": "coefficient"
-                    },
-                    {
-                      "type": "integer",
-                      "minimum": 0,
-                      "description": "degree of x"
-                    },
-                    {
-                      "type": "integer",
-                      "minimum": 0,
-                      "description": "degree of y"
-                    },
-                    {
-                      "type": "integer",
-                      "minimum": 0,
-                      "description": "degree of z"
-                    }
-                  ],
-                  "minItems": 4,
-                  "maxItems": 4
-                }
-              ]
-            },
-            "negate": {
-              "type": "boolean"
-            },
-            "material": {
-              "$ref": "#/$defs/color-material"
-            }
-          },
-          "required": [
-            "type",
-            "polynomial",
-            "position",
-            "normal"
-          ]
         }
       ]
     },
@@ -609,6 +531,97 @@
             "direction"
           ]
         }
+      ]
+    },
+    "plane": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "position": {
+          "$ref": "#/$defs/position"
+        },
+        "normal": {
+          "$ref": "#/$defs/normal"
+        },
+        "material": {
+          "$ref": "#/$defs/color-material"
+        },
+        "limit": {
+          "$ref": "#/$defs/model"
+        }
+      },
+      "required": [
+        "position",
+        "normal"
+      ]
+    },
+    "quadric": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "properties": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "description": "the property [A, B, C, D, E, F, G, H, I, J] where Ax² + By² + Cz² + Dxy+ Exz + Fyz + Gx + Hy + Iz + J = 0"
+              },
+              "minItems": 10,
+              "maxItems": 10
+            },
+            {
+              "type": "object",
+              "unevaluatedProperties": false,
+              "properties": {
+                "A": {
+                  "$ref": "number"
+                },
+                "B": {
+                  "type": "number"
+                },
+                "C": {
+                  "type": "number"
+                },
+                "D": {
+                  "type": "number"
+                },
+                "E": {
+                  "type": "number"
+                },
+                "F": {
+                  "type": "number"
+                },
+                "G": {
+                  "type": "number"
+                },
+                "H": {
+                  "type": "number"
+                },
+                "I": {
+                  "type": "number"
+                },
+                "J": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ]
+            }
+          ]
+        },
+        "material": {
+          "$ref": "#/$defs/color-material"
+        },
+        "limit": {
+          "$ref": "#/$defs/model"
+        }
+      },
+      "required": [
+        "properties"
       ]
     },
     "position": {

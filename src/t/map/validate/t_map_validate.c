@@ -42,6 +42,32 @@ static bool	validate_lights(t_ft_json value)
 	return (true);
 }
 
+static bool	validate_planes(t_ft_json value)
+{
+	size_t	count;
+
+	if (!ft_json_is_list(value))
+		return (false);
+	count = ft_json_list_length(value);
+	while (count--)
+		if (!t_map_validate_plane(ft_json_get_list(value, count)))
+			return (false);
+	return (true);
+}
+
+static bool	validate_quadrics(t_ft_json value)
+{
+	size_t	count;
+
+	if (!ft_json_is_list(value))
+		return (false);
+	count = ft_json_list_length(value);
+	while (count--)
+		if (!t_map_validate_quadric(ft_json_get_list(value, count)))
+			return (false);
+	return (true);
+}
+
 bool	t_map_validate(t_ft_json value)
 {
 	return (
@@ -51,6 +77,10 @@ bool	t_map_validate(t_ft_json value)
 			|| validate_models(ft_json_get_dict(value, "models")))
 		&& (!ft_json_dict_has_key(value, "lights")
 			|| validate_lights(ft_json_get_dict(value, "lights")))
+		&& (!ft_json_dict_has_key(value, "planes")
+			|| validate_planes(ft_json_get_dict(value, "planes")))
+		&& (!ft_json_dict_has_key(value, "quadrics")
+			|| validate_quadrics(ft_json_get_dict(value, "quadrics")))
 		&& ft_json_dict_has_key(value, "camera")
 		&& t_map_validate_camera(ft_json_get_dict(value, "camera"))
 		&& ft_json_dict_has_key(value, "viewport")

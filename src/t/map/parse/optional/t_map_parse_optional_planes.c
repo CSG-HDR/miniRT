@@ -10,19 +10,42 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_f3.h"
+#include "t_map_parse.h"
 
-t_f3	t_f3_rotate_to_normal(t_f3 rotate)
+#include <stddef.h>
+
+#include "wrap.h"
+#include "ft_json.h"
+#include "t_map.h"
+#include "t_map_free.h"
+
+t_err	t_map_parse_optional_planes(
+	t_ft_json value,
+	t_map_plane **out,
+	size_t *out_count
+)
 {
-	// rotate (1, 0, 0) by axis for each theta.
-	const t_f	theta_x = 2 * M_PI * rotate.x;
-	const t_f	theta_y = 2 * M_PI * rotate.y;
-	const t_f	theta_z = 2 * M_PI * rotate.z;
+	size_t		i;
 
-	// TODO: rotated noraml using quaternion
-	t_f3 normal;
-	normal.x = theta_x;
-	normal.y = theta_y;
-	normal.z = theta_z;
-	return (normal);
+	if (!ft_json_dict_has_key(value, "planes"))
+	{
+		*out_count = 0;
+		return (false);
+	}
+	*out_count = ft_json_list_length(ft_json_get_dict(value, "planes"));
+	*out = wrap_malloc(sizeof(t_map_plane) * *out_count);
+	if (!*out)
+		return (NULL);
+	i = 0;
+	while (i != *out_count)
+	{
+		if (t_map_parse_plane(ft_json_get_list(
+					ft_json_get_dict(value, "planes"), i), out[i]))
+		{
+			t_map_free_planes(*out, i);
+			return (true);
+		}
+		i++;
+	}
+	return (false);
 }

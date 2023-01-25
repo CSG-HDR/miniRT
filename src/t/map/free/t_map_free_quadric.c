@@ -10,19 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_f3.h"
+#include "t_map_free.h"
 
-t_f3	t_f3_rotate_to_normal(t_f3 rotate)
+#include "t_map.h"
+
+void	t_map_free_quadric(t_map_quadric value)
 {
-	// rotate (1, 0, 0) by axis for each theta.
-	const t_f	theta_x = 2 * M_PI * rotate.x;
-	const t_f	theta_y = 2 * M_PI * rotate.y;
-	const t_f	theta_z = 2 * M_PI * rotate.z;
-
-	// TODO: rotated noraml using quaternion
-	t_f3 normal;
-	normal.x = theta_x;
-	normal.y = theta_y;
-	normal.z = theta_z;
-	return (normal);
+	if (value.limit)
+		t_map_free_model(value.limit);
 }

@@ -19,9 +19,18 @@
 
 void	t_map_parse_rotation(t_ft_json value, t_map_rotation *out)
 {
-	*out = t_f3_unit((t_f3){
-			t_f_rad((t_f)ft_json_get_number(ft_json_get_list(value, 0))),
-			t_f_rad((t_f)ft_json_get_number(ft_json_get_list(value, 1))),
-			t_f_rad((t_f)ft_json_get_number(ft_json_get_list(value, 2))),
-		});
+	if (ft_json_dict_has_key(value, "angle"))
+	{
+		out->x = t_f_rad((t_f)ft_json_get_number(
+					ft_json_get_list(ft_json_get_dict(value, "angle"), 0)));
+		out->y = t_f_rad((t_f)ft_json_get_number(
+					ft_json_get_list(ft_json_get_dict(value, "angle"), 1)));
+		out->z = t_f_rad((t_f)ft_json_get_number(
+					ft_json_get_list(ft_json_get_dict(value, "angle"), 2)));
+	}
+	else
+	{
+		t_map_parse_normal(ft_json_get_dict(value, "normal"), out);
+		*out = t_f3_to_angle(*out);
+	}
 }

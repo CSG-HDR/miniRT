@@ -26,7 +26,5 @@ bool	t_map_validate_primitive(t_ft_json value)
 		|| t_map_validate_cone(value)
 		|| t_map_validate_cylinder(value)
 		|| t_map_validate_cube(value)
-		|| t_map_validate_linear_plane(value)
-		|| t_map_validate_polynomial_plane(value)
 	);
 }

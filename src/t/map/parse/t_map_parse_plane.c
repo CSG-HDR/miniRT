@@ -10,19 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_f3.h"
+#include "t_map_parse.h"
 
-t_f3	t_f3_rotate_to_normal(t_f3 rotate)
+#include "ft_json.h"
+#include "t_map.h"
+
+t_err	t_map_parse_plane(t_ft_json value, t_map_plane *out)
 {
-	// rotate (1, 0, 0) by axis for each theta.
-	const t_f	theta_x = 2 * M_PI * rotate.x;
-	const t_f	theta_y = 2 * M_PI * rotate.y;
-	const t_f	theta_z = 2 * M_PI * rotate.z;
-
-	// TODO: rotated noraml using quaternion
-	t_f3 normal;
-	normal.x = theta_x;
-	normal.y = theta_y;
-	normal.z = theta_z;
-	return (normal);
+	t_map_parse_position(
+		ft_json_get_dict(value, "position"), &out->position);
+	t_map_parse_normal(
+		ft_json_get_dict(value, "normal"), &out->normal);
+	t_map_parse_color_material(
+		ft_json_get_dict(value, "material"), &out->material);
+	return (t_map_parse_optional_limit(value, &out->limit));
 }

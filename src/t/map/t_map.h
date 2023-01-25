@@ -294,29 +294,6 @@ typedef struct s_map_cube
 	t_map_material	material_back;
 }	t_map_cube;
 
-typedef struct s_map_linear_plane
-{
-	t_map_position			position;
-	t_map_normal			normal;
-	t_map_color_material	material;
-}	t_map_linear_plane;
-
-typedef struct s_map_monomial
-{
-	t_f	coefficient;
-	t_f	degree_of_x;
-	t_f	degree_of_y;
-	t_f	degree_of_z;
-}	t_map_monomial;
-
-typedef struct s_map_polynomial_plane
-{
-	size_t					monomial_count;
-	t_map_monomial			*monomials;
-	bool					negate;
-	t_map_color_material	material;
-}	t_map_polynomial_plane;
-
 typedef enum e_map_primitive_type
 {
 	T_MAP_PRIMITIVE_TYPE_SPHERE,
@@ -325,8 +302,6 @@ typedef enum e_map_primitive_type
 	T_MAP_PRIMITIVE_TYPE_CONE,
 	T_MAP_PRIMITIVE_TYPE_CYLINDER,
 	T_MAP_PRIMITIVE_TYPE_CUBE,
-	T_MAP_PRIMITIVE_TYPE_LINEAR_PLANE,
-	T_MAP_PRIMITIVE_TYPE_POLYNOMIAL_PLANE,
 }	t_map_primitive_type;
 
 typedef struct s_map_primitive_sphere
@@ -365,29 +340,15 @@ typedef struct s_map_primitive_cube
 	t_map_cube				cube;
 }	t_map_primitive_cube;
 
-typedef struct s_map_primitive_linear_plane
-{
-	t_map_primitive_type	type;
-	t_map_linear_plane		linear_plane;
-}	t_map_primitive_linear_plane;
-
-typedef struct s_map_primitive_polynomial_plane
-{
-	t_map_primitive_type	type;
-	t_map_polynomial_plane	polynomial_plane;
-}	t_map_primitive_polynomial_plane;
-
 typedef union u_map_primitive
 {
-	t_map_primitive_type				*type;
-	t_map_primitive_sphere				*sphere;
-	t_map_primitive_ellipsoid			*ellipsoid;
-	t_map_primitive_torus				*torus;
-	t_map_primitive_cone				*cone;
-	t_map_primitive_cylinder			*cylinder;
-	t_map_primitive_cube				*cube;
-	t_map_primitive_linear_plane		*linear_plane;
-	t_map_primitive_polynomial_plane	*polynomial_plane;
+	t_map_primitive_type		*type;
+	t_map_primitive_sphere		*sphere;
+	t_map_primitive_ellipsoid	*ellipsoid;
+	t_map_primitive_torus		*torus;
+	t_map_primitive_cone		*cone;
+	t_map_primitive_cylinder	*cylinder;
+	t_map_primitive_cube		*cube;
 }	t_map_primitive;
 
 /////////////////////////////////////////////////////////// model - constructive
@@ -473,6 +434,30 @@ typedef union u_map_model
 
 //////////////////////////////////////////////////////////////////////////// etc
 
+typedef struct s_map_plane
+{
+	t_map_position			position;
+	t_map_normal			normal;
+	t_map_model				*limit;
+	t_map_color_material	material;
+}	t_map_plane;
+
+typedef struct s_map_quadric
+{
+	t_f						a;
+	t_f						b;
+	t_f						c;
+	t_f						d;
+	t_f						e;
+	t_f						f;
+	t_f						g;
+	t_f						h;
+	t_f						i;
+	t_f						j;
+	t_map_model				*limit;
+	t_map_color_material	material;
+}	t_map_quadric;
+
 typedef enum e_map_fov_type
 {
 	T_MAP_FOV_TYPE_MAX,
@@ -489,6 +474,7 @@ typedef struct s_map_camera
 	t_map_fov_type	fov_type;
 	t_map_angle		fov_x;
 	t_map_angle		fov_y;
+	t_f	focal_len;
 }	t_map_camera;
 
 typedef struct s_map_viewport
@@ -509,11 +495,14 @@ typedef struct s_map
 	t_map_model				**models;
 	size_t					light_count;
 	t_map_light				*lights;
+	size_t					plane_count;
+	t_map_plane				*planes;
+	size_t					quadric_count;
+	t_map_quadric			*quadrics;
 	t_map_camera			camera;
 	t_map_viewport			viewport;
 	t_map_light_color		ambient_light;
 	t_map_material_color	void_color;
-	t_f						ray_start_distance;
 }	t_map;
 
 #endif
