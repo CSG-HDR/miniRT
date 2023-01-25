@@ -66,7 +66,7 @@ void	t_map_parse_viewport(t_ft_json value, t_map_viewport *out);
 void	t_map_parse_position(t_ft_json value, t_map_position *out);
 void	t_map_parse_size(t_ft_json value, t_map_size *out);
 void	t_map_parse_rotation(t_ft_json value, t_map_rotation *out);
-void	t_map_parse_normal(t_ft_json value, t_map_rotation *out);
+void	t_map_parse_normal(t_ft_json value, t_map_normal *out);
 void	t_map_parse_light_color(t_ft_json value, t_map_light_color *out);
 void	t_map_parse_material_color(t_ft_json value, t_map_material_color *out);
 void	t_map_parse_color_material(t_ft_json value, t_map_color_material *out);
