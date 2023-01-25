@@ -575,7 +575,7 @@
               "unevaluatedProperties": false,
               "properties": {
                 "A": {
-                  "$ref": "number"
+                  "type": "number"
                 },
                 "B": {
                   "type": "number"
