@@ -12,7 +12,6 @@
 
 #include "t_map_parse.h"
 
-#include <math.h>
 #include "ft_cstring.h"
 #include "ft_json.h"
 #include "t_f.h"
@@ -105,9 +104,8 @@ void	t_map_parse_camera(
 )
 {
 	t_map_parse_get_position(value, &out->position);
-	t_map_parse_get_rotation(value, &out->rotation);
+	t_map_parse_camera_rotation(ft_json_get_dict(value, "rotation"), out);
 	out->fov = t_f_rad((t_f)ft_json_get_number(ft_json_get_dict(value, "fov")));
 	out->fov_type = type(value);
 	calculate_fov(viewport, out->fov, out->fov_type, out);
-	out->focal_len = tan(out->fov / 2.0 * M_PI / 180.0) * viewport->actual_width / 2;
 }

@@ -474,7 +474,6 @@ typedef struct s_map_camera
 	t_map_fov_type	fov_type;
 	t_map_angle		fov_x;
 	t_map_angle		fov_y;
-	t_f	focal_len;
 }	t_map_camera;
 
 typedef struct s_map_viewport

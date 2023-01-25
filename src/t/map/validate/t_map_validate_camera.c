@@ -49,13 +49,32 @@ static bool	has_optional_fov_type(t_ft_json value)
 	return (true);
 }
 
+static bool	is_camera_rotation(t_ft_json value)
+{
+	return (
+		true
+		&& ft_json_is_dict(value)
+		&& (
+			false
+			|| (t_map_validate_has_type(value, "rotation")
+				&& t_map_validate_has_rotation(value))
+			|| (t_map_validate_has_type(value, "direction")
+				&& t_map_validate_has_direction(value))
+			|| (t_map_validate_has_type(value, "lookAt")
+				&& t_map_validate_has_position(value))
+		)
+	);
+}
+
+
 bool	t_map_validate_camera(t_ft_json value)
 {
 	return (
 		true
 		&& ft_json_is_dict(value)
 		&& t_map_validate_has_position(value)
-		&& t_map_validate_has_rotation(value)
+		&& ft_json_dict_has_key(value, "rotation")
+		&& is_camera_rotation(ft_json_get_dict(value, "rotation"))
 		&& has_fov(value)
 		&& has_optional_fov_type(value)
 	);

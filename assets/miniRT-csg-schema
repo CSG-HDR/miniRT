@@ -65,18 +65,18 @@
               "properties": {
                 "type": {
                   "type": "string",
-                  "description": "rotation or normal, or lookAt",
+                  "description": "rotation or direction, or lookAt",
                   "enum": [
-                    "normal"
+                    "direction"
                   ]
                 },
-                "normal": {
+                "direction": {
                   "$ref": "#/$defs/normal"
                 }
               },
               "required": [
                 "type",
-                "normal"
+                "direction"
               ]
             },
             {
@@ -90,13 +90,13 @@
                     "lookAt"
                   ]
                 },
-                "lookAt": {
+                "position": {
                   "$ref": "#/$defs/position"
                 }
               },
               "required": [
                 "type",
-                "lookAt"
+                "position"
               ]
             }
           ]
