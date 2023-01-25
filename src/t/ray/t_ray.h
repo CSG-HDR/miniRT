@@ -85,10 +85,6 @@ t_err	t_ray_csg_difference(
 			t_ray ray, t_map_difference difference, t_ray_hit_records *out);
 t_err	t_ray_primitive(
 			t_ray ray, t_map_primitive primitive, t_ray_hit_records *out);
-t_err	t_ray_linear_plane(
-			t_ray ray, t_map_linear_plane plane, t_ray_hit_records *out);
-t_err	t_ray_polynomial_plane(
-			t_ray ray, t_map_polynomial_plane plane, t_ray_hit_records *out);
 t_err	t_ray_sphere(t_ray ray, t_map_sphere sphere, t_ray_hit_records *out);
 t_err	t_ray_ellipsoid(
 			t_ray ray, t_map_ellipsoid ellipsoid, t_ray_hit_records *out);
@@ -97,11 +93,9 @@ t_err	t_ray_cone(t_ray ray, t_map_cone cone, t_ray_hit_records *out);
 t_err	t_ray_cylinder(
 			t_ray ray, t_map_cylinder cylinder, t_ray_hit_records *out);
 t_err	t_ray_cube(t_ray ray, t_map_cube cube, t_ray_hit_records *out);
-t_err	t_ray_linear_plane(
-			t_ray ray, t_map_linear_plane linear_plane, t_ray_hit_records *out);
-t_err	t_ray_polynomial_plane(
-			t_ray ray,
-			t_map_polynomial_plane polynomial_plane,
-			t_ray_hit_records *out);
+t_err	t_ray_plane(
+			t_ray ray, t_map_plane plane, t_ray_hit_records *out);
+t_err	t_ray_quadric(
+			t_ray ray, t_map_quadric quadric, t_ray_hit_records *out);
 
 #endif

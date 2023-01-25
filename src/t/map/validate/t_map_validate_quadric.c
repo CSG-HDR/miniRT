@@ -23,11 +23,6 @@ static bool	valid_list(t_ft_json value)
 		&& t_map_validate_has_number_list(value, 0)
 		&& t_map_validate_has_number_list(value, 1)
 		&& t_map_validate_has_number_list(value, 2)
-		&& !(false
-			|| ft_json_get_number(ft_json_get_list(value, 0)) != 0
-			|| ft_json_get_number(ft_json_get_list(value, 1)) != 0
-			|| ft_json_get_number(ft_json_get_list(value, 2)) != 0
-		)
 		&& t_map_validate_has_number_list(value, 3)
 		&& t_map_validate_has_number_list(value, 4)
 		&& t_map_validate_has_number_list(value, 5)
@@ -45,11 +40,6 @@ static bool	valid_dict(t_ft_json value)
 		&& t_map_validate_has_number_dict(value, "A")
 		&& t_map_validate_has_number_dict(value, "B")
 		&& t_map_validate_has_number_dict(value, "C")
-		&& !(false
-			|| ft_json_get_number(ft_json_get_dict(value, "A")) != 0
-			|| ft_json_get_number(ft_json_get_dict(value, "B")) != 0
-			|| ft_json_get_number(ft_json_get_dict(value, "C")) != 0
-		)
 		&& t_map_validate_has_optional_number(value, "D")
 		&& t_map_validate_has_optional_number(value, "E")
 		&& t_map_validate_has_optional_number(value, "F")
