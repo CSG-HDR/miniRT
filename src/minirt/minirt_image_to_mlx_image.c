@@ -13,35 +13,29 @@
 #include "minirt.h"
 
 #include <stddef.h>
-#include <stdbool.h>
 
-#include "mlx.h"
+#include "ft_types.h"
 #include "t_image.h"
-#include "t_map.h"
-#include "wrap.h"
 
-static t_err	fill(void *context, size_t x, size_t y, t_f3 *out)
+t_err	minirt_image_to_mlx_image(
+	t_image *param,
+	t_minirt_mlx_image *image
+)
 {
-	t_minirt *const	minirt = (t_minirt *)context;
+	size_t	y;
+	size_t	x;
 
-	(void)x;
-	(void)y;
-	*out = minirt->map->void_color;
+	y = -1;
+	while (++y < param->height)
+	{
+		x = -1;
+		while (++x < param->width)
+		{
+			if (minirt_image_to_mlx_image_pixel(param, image, x, y))
+			{
+				return (true);
+			}
+		}
+	}
 	return (false);
-}
-
-
-void	minirt_render(t_minirt *minirt)
-{
-	const size_t	width = minirt->map->viewport.actual_width;
-	const size_t	height = minirt->map->viewport.actual_height;
-	t_image *const	pre_image = t_image_new(width, height, fill, minirt);
-
-	if (!pre_image)
-		minirt_die("Error: failed to render scene");
-	if (minirt_image_to_mlx_image(pre_image, &minirt->image))
-		minirt_die("Error: unrecognized mlx BPP");
-	mlx_put_image_to_window(
-		minirt->mlx_context, minirt->mlx_window, minirt->mlx_image, 0, 0);
-	wrap_free(pre_image);
 }

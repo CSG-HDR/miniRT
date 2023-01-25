@@ -37,12 +37,12 @@ void	minirt_init(t_minirt *minirt, int argc, char **argv)
 	minirt_assert(&minirt->mlx_window, mlx_new_window(minirt->mlx_context,
 			minirt->map->viewport.actual_width, minirt->map->viewport
 			.actual_height, TITLE), "Error: on init mlx window\n");
-	minirt_assert(&minirt->pre_image, mlx_new_image(minirt->mlx_context,
+	minirt_assert(&minirt->mlx_image, mlx_new_image(minirt->mlx_context,
 			minirt->map->viewport.actual_width, minirt->map->viewport
-			.actual_height), "Error: on init mlx image (1/2)\n");
-	minirt_assert(&minirt->final_image, mlx_new_image(minirt->mlx_context,
-			minirt->map->viewport.actual_width, minirt->map->viewport
-			.actual_height), "Error: on init mlx image (2/2)\n");
+			.actual_height), "Error: on init mlx image\n");
+	minirt->image.data = (unsigned char *)mlx_get_data_addr(minirt->mlx_image,
+			&minirt->image.bits_per_pixel, &minirt->image.size_of_line,
+			&minirt->image.endian);
 	mlx_expose_hook(minirt->mlx_window, &minirt_hooks_init, minirt);
 	mlx_hook(minirt->mlx_window, MLX_EVENT_ON_DESTROY,
 		0, &minirt_hooks_exit, minirt);
