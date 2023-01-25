@@ -31,6 +31,7 @@ typedef struct s_minirt
 	void				*mlx_window;
 	void				*mlx_image;
 	t_minirt_mlx_image	image;
+	t_image				*tmp;
 	t_map				*map;
 }	t_minirt;
 

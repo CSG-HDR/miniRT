@@ -20,32 +20,34 @@
 #include "ft_io.h"
 
 #include "minirt_hooks.h"
+#include "t_image.h"
 
 #define TITLE "CSG+HDR minirt!"
 
-void	minirt_init(t_minirt *minirt, int argc, char **argv)
+void	minirt_init(t_minirt *m, int argc, char **argv)
 {
 	t_minirt_load_map_error	error;
 
-	(void)argv;
 	if (argc < 2)
 		minirt_die("Error: no input file\n");
-	minirt_assert(&minirt->mlx_context, mlx_init(), "Error: on init mlx\n");
-	error = minirt_load_map(argv[1], &minirt->map);
+	minirt_assert(&m->mlx_context, mlx_init(), "Error: on init mlx\n");
+	error = minirt_load_map(argv[1], &m->map);
 	if (error)
 		minirt_load_map_die(error);
-	minirt_assert(&minirt->mlx_window, mlx_new_window(minirt->mlx_context,
-			minirt->map->viewport.actual_width, minirt->map->viewport
-			.actual_height, TITLE), "Error: on init mlx window\n");
-	minirt_assert(&minirt->mlx_image, mlx_new_image(minirt->mlx_context,
-			minirt->map->viewport.actual_width, minirt->map->viewport
-			.actual_height), "Error: on init mlx image\n");
-	minirt->image.data = (unsigned char *)mlx_get_data_addr(minirt->mlx_image,
-			&minirt->image.bits_per_pixel, &minirt->image.size_of_line,
-			&minirt->image.endian);
-	mlx_expose_hook(minirt->mlx_window, &minirt_hooks_init, minirt);
-	mlx_hook(minirt->mlx_window, MLX_EVENT_ON_DESTROY,
-		0, &minirt_hooks_exit, minirt);
-	mlx_hook(minirt->mlx_window, MLX_EVENT_ON_KEYDOWN,
-		0, &minirt_hooks_key, minirt);
+	minirt_assert(&m->mlx_window, mlx_new_window(m->mlx_context,
+			m->map->viewport.actual_width, m->map->viewport.actual_height,
+			TITLE), "Error: on init mlx window\n");
+	minirt_assert(&m->mlx_image, mlx_new_image(m->mlx_context,
+			m->map->viewport.actual_width, m->map->viewport.actual_height),
+		"Error: on init mlx image\n");
+	m->image.data = (unsigned char *)mlx_get_data_addr(m->mlx_image,
+			&m->image.bits_per_pixel, &m->image.size_of_line, &m->image.endian);
+	minirt_assert((void **)&m->tmp, t_image_new(m->map->viewport.actual_width,
+			m->map->viewport.actual_height, NULL, NULL),
+		"Error: on init image\n");
+	mlx_expose_hook(m->mlx_window, &minirt_hooks_init, m);
+	mlx_hook(m->mlx_window, MLX_EVENT_ON_DESTROY,
+		0, &minirt_hooks_exit, m);
+	mlx_hook(m->mlx_window, MLX_EVENT_ON_KEYDOWN,
+		0, &minirt_hooks_key, m);
 }
