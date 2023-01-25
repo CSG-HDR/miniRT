@@ -1,6 +1,6 @@
 {
   "camera": {
-    "position": [0, 0, 0],
+    "position": [0, 1, 0],
     "rotation": { "type": "lookAt", "position": [0, 0, 0] },
     "fov": 0.25
   },
