@@ -647,7 +647,7 @@
       "type": "array",
       "items": {
         "type": "number",
-        "description": "rotation angle for [x axis, y axis, z axis]",
+        "description": "rotation angle for [yaw, pitch, roll]",
         "minimum": 0,
         "exclusiveMaximum": 1
       },

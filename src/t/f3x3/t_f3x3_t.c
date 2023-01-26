@@ -10,33 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_F3_H
-# define T_F3_H
+#include "t_f3.h"
+#include "t_f3x3.h"
 
-# include "t_f.h"
-
-typedef struct s_f3
+t_f3x3	t_f3x3_t(t_f3x3 mat)
 {
-	t_f	x;
-	t_f	y;
-	t_f	z;
-}	t_f3;
-
-t_f3	t_f3_add(t_f3 a, t_f3 b);
-t_f3	t_f3_sub(t_f3 a, t_f3 b);
-t_f3	t_f3_mul(t_f3 a, t_f b);
-t_f3	t_f3_div(t_f3 a, t_f b);
-t_f3	t_f3_mul3(t_f3 a, t_f3 b);
-t_f3	t_f3_div3(t_f3 a, t_f3 b);
-t_f		t_f3_dot(t_f3 a, t_f3 b);
-t_f3	t_f3_cross(t_f3 a, t_f3 b);
-t_f3	t_f3_min(t_f3 a, t_f3 b);
-t_f3	t_f3_max(t_f3 a, t_f3 b);
-t_f3	t_f3_neg(t_f3 f);
-t_f3	t_f3_inv(t_f3 f);
-t_f		t_f3_sqr_length(t_f3 f);
-t_f		t_f3_length(t_f3 f);
-t_f3	t_f3_unit(t_f3 f);
-t_f3	t_f3_rotate(t_f3 point, t_f3 rotation);
-
-#endif
+	return ((t_f3x3){
+		t_f3x3_col_x(mat),
+		t_f3x3_col_y(mat),
+		t_f3x3_col_z(mat),
+	});
+}

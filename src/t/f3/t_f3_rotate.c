@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   t_f3_rotate.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Updated: 2023/01/26 23:22:13 by Juyeong Maing    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_f3.h"
 
-#include "t_f.h"
+#include "t_f3x3.h"
 
-t_f3	t_f3_to_angle(t_f3 normal)
+t_f3	t_f3_rotate(t_f3 point, t_f3 rotation)
 {
-	const t_f3	up = (t_f3){(t_f)0, (t_f)1, (t_f)0};
-	const t_f3	right = t_f3_unit(t_f3_cross(normal, up));
+	const t_f	yaw = rotation.x;
+	const t_f	pitch = rotation.y;
+	const t_f	roll = rotation.z;
 
-	return ((t_f3){
-		0,
-		0,
-		t_f_asin(right.x),
-	});
+	return (t_f3x3_mul_f3_f3x3(point, t_f3x3_rotate(yaw, pitch, roll)));
 }
