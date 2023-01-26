@@ -84,5 +84,5 @@ t_f3x3	t_f3x3_rotate(t_f yaw, t_f pitch, t_f roll)
 	const t_f3x3	mat_pitch = rotate_pitch(pitch);
 	const t_f3x3	mat_roll = rotate_roll(roll);
 
-	return (t_f3x3_mul(t_f3x3_mul(mat_yaw, mat_pitch), mat_roll));
+	return (t_f3x3_mul(t_f3x3_mul(mat_roll, mat_pitch), mat_yaw));
 }
