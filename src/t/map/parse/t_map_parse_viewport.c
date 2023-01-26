@@ -22,7 +22,7 @@ void	t_map_parse_viewport(t_ft_json value, t_map_viewport *out)
 	out->width = (size_t)ft_json_get_number(
 			ft_json_get_list(ft_json_get_dict(value, "size"), 0));
 	out->height = (size_t)ft_json_get_number(
-			ft_json_get_list(ft_json_get_dict(value, "size"), 0));
+			ft_json_get_list(ft_json_get_dict(value, "size"), 1));
 	if (ft_json_dict_has_key(value, "only"))
 	{
 		out->start_x = (size_t)ft_json_get_number(
