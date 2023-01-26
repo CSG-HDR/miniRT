@@ -37,5 +37,5 @@ void	t_map_parse_camera_rotation(t_ft_json value, t_map_camera *out)
 		t_map_parse_get_position(value, &position);
 		direction = t_f3_unit(t_f3_sub(position, out->position));
 	}
-	out->rotation = t_f3_to_angle(direction);
+	out->rotation = t_f3_normal_to_rotation(direction);
 }
