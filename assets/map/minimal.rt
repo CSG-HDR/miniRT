@@ -2,7 +2,7 @@
   "camera": {
     "position": [0, -1, 1],
     "rotation": { "type": "lookAt", "position": [0, 0, 1] },
-    "fov": 0.01
+    "fov": 0.25
   },
   "viewport": { "size": [960, 540], "only": [100, 100, 860, 440] }
 }

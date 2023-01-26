@@ -16,5 +16,5 @@
 
 t_f	t_f_rad(t_f f)
 {
-	return ((t_f)(M_PI * f / 180));
+	return ((t_f)(M_PI * f * 2));
 }
