@@ -1,0 +1,4 @@
+test:
+clean:
+fclean:
+dev:
