@@ -30,7 +30,6 @@ static t_err	fill(void *context, size_t x, size_t y, t_f3 *out)
 	return (false);
 }
 
-
 void	minirt_render(t_minirt *minirt)
 {
 	if (t_image_fill(minirt->tmp, fill, minirt))

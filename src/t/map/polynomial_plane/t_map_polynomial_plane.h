@@ -34,7 +34,6 @@ typedef struct s_map_polynomial_plane
 	t_map_color_material	material;
 }	t_map_polynomial_plane;
 
-
 bool	t_map_polynomial_plane_validate(const char *str);
 t_err	t_map_polynomial_plane_parse(
 			const char *str, t_map_polynomial_plane **out);

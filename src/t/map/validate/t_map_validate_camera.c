@@ -66,7 +66,6 @@ static bool	is_camera_rotation(t_ft_json value)
 	);
 }
 
-
 bool	t_map_validate_camera(t_ft_json value)
 {
 	return (
