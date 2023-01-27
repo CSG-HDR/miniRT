@@ -62,6 +62,7 @@ t_f	t_f_acsc(t_f f);
 t_f	t_f_asinh(t_f f);
 t_f	t_f_acosh(t_f f);
 t_f	t_f_atanh(t_f f);
+t_f t_f_atan2(t_f y, t_f x);
 t_f	t_f_acoth(t_f f);
 t_f	t_f_asech(t_f f);
 t_f	t_f_acsch(t_f f);
