@@ -39,18 +39,18 @@ static t_f3x3	rotate_yaw(t_f rad)
 static t_f3x3	rotate_pitch(t_f rad)
 {
 	const t_f3	x = {
-		t_f_cos(rad),
+		1,
 		0,
-		t_f_sin(rad),
+		0,
 	};
 	const t_f3	y = {
 		0,
-		1,
-		0,
+		t_f_cos(rad),
+		-t_f_sin(rad),
 	};
 	const t_f3	z = {
-		-t_f_sin(rad),
 		0,
+		t_f_sin(rad),
 		t_f_cos(rad),
 	};
 
@@ -60,18 +60,18 @@ static t_f3x3	rotate_pitch(t_f rad)
 static t_f3x3	rotate_roll(t_f rad)
 {
 	const t_f3	x = {
-		1,
+		t_f_cos(rad),
 		0,
-		0,
+		t_f_sin(rad),
 	};
 	const t_f3	y = {
 		0,
-		t_f_cos(rad),
-		t_f_sin(rad),
+		1,
+		0,
 	};
 	const t_f3	z = {
-		0,
 		-t_f_sin(rad),
+		0,
 		t_f_cos(rad),
 	};
 

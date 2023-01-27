@@ -653,20 +653,20 @@
         {
           "type": "number",
           "description": "rotation angle for yaw",
-          "minimum": 0,
+          "exclusiveMinimum": -1,
           "exclusiveMaximum": 1
         },
         {
           "type": "number",
           "description": "rotation angle for pitch",
-          "minimum": 0,
-          "exclusiveMaximum": 1
+          "exclusiveMinimum": -0.25,
+          "exclusiveMaximum": 0.25
         },
         {
           "type": "number",
           "description": "rotation angle for roll",
-          "exclusiveMinimum": -0.25,
-          "exclusiveMaximum": 0.25
+          "exclusiveMinimum": -1,
+          "exclusiveMaximum": 1
         }
       ],
       "minItems": 3,

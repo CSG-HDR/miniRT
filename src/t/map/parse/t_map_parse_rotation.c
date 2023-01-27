@@ -19,15 +19,20 @@
 
 void	t_map_parse_rotation(t_ft_json value, t_map_rotation *out)
 {
-	const t_f	x = (t_f)ft_json_get_number(ft_json_get_list(value, 0));
-	const t_f	y = (t_f)ft_json_get_number(ft_json_get_list(value, 1));
-	const t_f	z = (t_f)ft_json_get_number(ft_json_get_list(value, 2));
-	t_f			real_z;
+	t_f	yaw;
+	t_f	pitch;
+	t_f	roll;
 
-	real_z = z;
-	if (z < 0)
-		real_z = z + 1;
-	out->x = t_f_rad(x);
-	out->y = t_f_rad(y);
-	out->z = t_f_rad(real_z);
+	yaw = (t_f)ft_json_get_number(ft_json_get_list(value, 0));
+	pitch = (t_f)ft_json_get_number(ft_json_get_list(value, 1));
+	roll = (t_f)ft_json_get_number(ft_json_get_list(value, 2));
+	if (yaw < 0)
+		yaw += (t_f)1;
+	if (pitch < 0)
+		pitch += (t_f)1;
+	if (roll < 0)
+		roll += (t_f)1;
+	out->x = t_f_rad(yaw);
+	out->y = t_f_rad(pitch);
+	out->z = t_f_rad(roll);
 }
