@@ -19,7 +19,6 @@
 
 void	t_map_free_quadrics(t_map_quadric *value, size_t count)
 {
-	while (count--)
-		t_map_free_quadric(value[count]);
+	(void)count;
 	wrap_free(value);
 }

@@ -10,12 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_free.h"
+#include "t_ray.h"
 
-#include "t_map.h"
+#include "ft_types.h"
+#include "wrap.h"
 
-void	t_map_free_quadric(t_map_quadric value)
+t_err	t_ray_hit_records_builder_init(t_ray_hit_records_builder **out)
 {
-	if (value.limit)
-		t_map_free_model(value.limit);
+	t_ray_hit_records_builder *const	result
+		= wrap_malloc(sizeof(t_ray_hit_records_builder));
+
+	if (!result)
+		return (true);
+	result->head = NULL;
+	result->tail = NULL;
+	result->count = 0;
+	*out = result;
+	return (false);
 }

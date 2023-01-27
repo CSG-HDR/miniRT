@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   t_ray_material_from_color.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Created: 2023/01/28 00:58:24 by Juyeong Maing     #+#    #+#             */
+/*   Updated: 2023/01/28 01:05:24 by Juyeong Maing    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_free.h"
+#include "t_ray.h"
 
 #include "t_map.h"
 
-void	t_map_free_plane(t_map_plane value)
+t_ray_material	t_ray_material_from_color(
+	t_map_material material
+)
 {
-	if (value.limit)
-		t_map_free_model(value.limit);
+	t_ray_material	result;
+
+	result.color = (t_ray_material_color){
+		T_RAY_MATERIAL_TYPE_COLOR,
+		material,
+	};
+	return (result);
 }

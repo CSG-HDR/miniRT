@@ -57,13 +57,11 @@ static void	dict(t_ft_json value, t_map_quadric *out)
 		out->j = ft_json_get_number(ft_json_get_dict(value, "J"));
 }
 
-t_err	t_map_parse_quadric(t_ft_json value, t_map_quadric *out)
+void	t_map_parse_quadric(t_ft_json value, t_map_quadric *out)
 {
 	if (ft_json_is_list(ft_json_get_dict(value, "properties")))
 		list(ft_json_get_dict(value, "properties"), out);
 	else
 		dict(ft_json_get_dict(value, "properties"), out);
-	t_map_parse_color_material(
-		ft_json_get_dict(value, "material"), &out->material);
-	return (t_map_parse_optional_limit(value, &out->limit));
+	t_map_parse_get_optional_color_material(value, &out->material);
 }

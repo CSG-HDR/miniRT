@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   t_ray_material_from_computed.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Created: 2023/01/28 00:58:24 by Juyeong Maing     #+#    #+#             */
+/*   Updated: 2023/01/28 01:05:05 by Juyeong Maing    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_free.h"
+#include "t_ray.h"
 
-#include <stddef.h>
-
-#include "wrap.h"
 #include "t_map.h"
 
-void	t_map_free_planes(t_map_plane *value, size_t count)
+t_ray_material	t_ray_material_from_computed(
+	t_map_color_material material
+)
 {
-	(void)count;
-	wrap_free(value);
+	t_ray_material	result;
+
+	result.computed = (t_ray_material_computed){
+		T_RAY_MATERIAL_TYPE_COMPUTED,
+		material,
+	};
+	return (result);
 }

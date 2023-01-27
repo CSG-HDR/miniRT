@@ -10,15 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_free.h"
+#include "t_ray.h"
 
-#include <stddef.h>
-
+#include "ft_types.h"
 #include "wrap.h"
-#include "t_map.h"
 
-void	t_map_free_planes(t_map_plane *value, size_t count)
+t_err	t_ray_hit_records_builder_build(
+	t_ray_hit_records_builder *self,
+	t_ray_hit_records *out
+)
 {
-	(void)count;
-	wrap_free(value);
+	t_ray_hit_record *const			nodes
+		= wrap_malloc(sizeof(t_ray_hit_record) * self->count);
+	t_ray_hit_records				result;
+	size_t							i;
+	t_ray_hit_records_builder_node	*current;
+
+	if (!nodes)
+	{
+		wrap_free(nodes);
+		return (true);
+	}
+	i = 0;
+	current = self->head;
+	while (current)
+	{
+		nodes[i++] = current->record;
+		current = current->next;
+	}
+	result.hit_record_count = self->count;
+	result.hit_records = nodes;
+	*out = result;
+	return (false);
 }

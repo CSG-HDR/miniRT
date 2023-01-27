@@ -17,7 +17,6 @@
 #include "wrap.h"
 #include "ft_json.h"
 #include "t_map.h"
-#include "t_map_free.h"
 
 t_err	t_map_parse_optional_planes(
 	t_ft_json value,
@@ -25,27 +24,12 @@ t_err	t_map_parse_optional_planes(
 	size_t *out_count
 )
 {
-	size_t		i;
-
 	if (!ft_json_dict_has_key(value, "planes"))
 	{
 		*out_count = 0;
 		return (false);
 	}
-	*out_count = ft_json_list_length(ft_json_get_dict(value, "planes"));
-	*out = wrap_malloc(sizeof(t_map_plane) * *out_count);
-	if (!*out)
-		return (NULL);
-	i = 0;
-	while (i != *out_count)
-	{
-		if (t_map_parse_plane(ft_json_get_list(
-					ft_json_get_dict(value, "planes"), i), out[i]))
-		{
-			t_map_free_planes(*out, i);
-			return (true);
-		}
-		i++;
-	}
-	return (false);
+	return (
+		t_map_parse_planes(ft_json_get_dict(value, "planes"), out, out_count)
+	);
 }

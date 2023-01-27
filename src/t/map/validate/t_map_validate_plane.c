@@ -24,7 +24,6 @@ bool	t_map_validate_plane(t_ft_json value)
 		&& t_map_validate_has_position(value)
 		&& ft_json_dict_has_key(value, "normal")
 		&& t_map_validate_normal(ft_json_get_dict(value, "normal"))
-		&& ft_json_dict_has_key(value, "material")
-		&& t_map_validate_color_material(ft_json_get_dict(value, "material"))
+		&& t_map_validate_has_optional_color_material(value)
 	);
 }

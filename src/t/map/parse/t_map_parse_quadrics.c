@@ -17,7 +17,6 @@
 #include "wrap.h"
 #include "ft_json.h"
 #include "t_map.h"
-#include "t_map_free.h"
 
 t_err	t_map_parse_quadrics(
 	t_ft_json value,
@@ -27,7 +26,7 @@ t_err	t_map_parse_quadrics(
 {
 	const size_t			count = ft_json_list_length(value);
 	t_map_quadric *const	result
-		= wrap_malloc(sizeof(t_map_quadric *) * count);
+		= wrap_malloc(sizeof(t_map_quadric) * count);
 	size_t					i;
 
 	if (!result)
@@ -35,11 +34,7 @@ t_err	t_map_parse_quadrics(
 	i = 0;
 	while (i != count)
 	{
-		if (t_map_parse_quadric(ft_json_get_list(value, i), &result[i]))
-		{
-			t_map_free_quadrics(result, count);
-			return (NULL);
-		}
+		t_map_parse_quadric(ft_json_get_list(value, i), &result[i]);
 		i++;
 	}
 	*out = result;

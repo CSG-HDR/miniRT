@@ -50,7 +50,7 @@ static bool	valid_dict(t_ft_json value)
 	);
 }
 
-static bool	has_properties(t_ft_json value)
+static bool	is_properties(t_ft_json value)
 {
 	if (ft_json_is_list(value))
 		return (valid_list(value));
@@ -59,16 +59,21 @@ static bool	has_properties(t_ft_json value)
 	return (false);
 }
 
+static bool	has_properties(t_ft_json value)
+{
+	return (
+		true
+		&& ft_json_is_dict(value)
+		&& ft_json_dict_has_key(value, "properties")
+		&& is_properties(ft_json_get_dict(value, "properties"))
+	);
+}
+
 bool	t_map_validate_quadric(t_ft_json value)
 {
 	return (
 		true
 		&& has_properties(value)
-		&& (!ft_json_dict_has_key(value, "material")
-			|| t_map_validate_color_material(
-				ft_json_get_dict(value, "material")))
-		&& (!ft_json_dict_has_key(value, "limit")
-			|| t_map_validate_model(
-				ft_json_get_dict(value, "limit")))
+		&& t_map_validate_has_optional_color_material(value)
 	);
 }

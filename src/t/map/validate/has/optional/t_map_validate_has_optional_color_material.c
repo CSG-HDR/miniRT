@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   t_map_validate_has_optional_color_material.c       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Updated: 2023/01/28 01:24:44 by Juyeong Maing    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_parse.h"
+#include "t_map_validate.h"
 
-#include <stddef.h>
+#include <stdbool.h>
 
-#include "wrap.h"
 #include "ft_json.h"
-#include "t_map.h"
 
-t_err	t_map_parse_optional_limit(t_ft_json value, t_map_model **out)
+bool	t_map_validate_has_optional_color_material(t_ft_json value)
 {
-	if (ft_json_dict_has_key(value, "limit"))
-		return (t_map_parse_model(ft_json_get_dict(value, "limit"), out));
-	*out = NULL;
-	return (false);
+	return (
+		true
+		&& ft_json_is_dict(value)
+		&& (
+			!ft_json_dict_has_key(value, "material")
+			|| t_map_validate_color_material(
+				ft_json_get_dict(value, "material"))
+		)
+	);
 }

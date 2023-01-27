@@ -10,15 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_free.h"
+#include "t_ray.h"
 
-#include <stddef.h>
-
+#include "ft_types.h"
 #include "wrap.h"
-#include "t_map.h"
 
-void	t_map_free_planes(t_map_plane *value, size_t count)
+void	t_ray_hit_records_builder_free(t_ray_hit_records_builder *self)
 {
-	(void)count;
-	wrap_free(value);
+	t_ray_hit_records_builder_node	*to_free;
+
+	while (self->head)
+	{
+		to_free = self->head;
+		self->head = to_free->next;
+		wrap_free(to_free);
+	}
 }

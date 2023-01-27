@@ -438,7 +438,6 @@ typedef struct s_map_plane
 {
 	t_map_position			position;
 	t_map_normal			normal;
-	t_map_model				*limit;
 	t_map_color_material	material;
 }	t_map_plane;
 
@@ -454,7 +453,6 @@ typedef struct s_map_quadric
 	t_f						h;
 	t_f						i;
 	t_f						j;
-	t_map_model				*limit;
 	t_map_color_material	material;
 }	t_map_quadric;
 
