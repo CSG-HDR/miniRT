@@ -647,10 +647,28 @@
       "type": "array",
       "items": {
         "type": "number",
-        "description": "rotation angle for [yaw, pitch, roll]",
-        "minimum": 0,
-        "exclusiveMaximum": 1
+        "description": "rotation angle for [yaw, pitch, roll]"
       },
+      "prefixItems": [
+        {
+          "type": "number",
+          "description": "rotation angle for yaw",
+          "minimum": 0,
+          "exclusiveMaximum": 1
+        },
+        {
+          "type": "number",
+          "description": "rotation angle for pitch",
+          "minimum": 0,
+          "exclusiveMaximum": 1
+        },
+        {
+          "type": "number",
+          "description": "rotation angle for roll",
+          "exclusiveMinimum": -0.25,
+          "exclusiveMaximum": 0.25
+        }
+      ],
       "minItems": 3,
       "maxItems": 3
     },
