@@ -14,11 +14,11 @@
 
 #include "t_f3x3.h"
 
-t_f3	t_f3_rotate(t_f3 point, t_f3 rotation)
+t_f3	t_f3_rotate_from_origin(t_f3 point, t_f3 origin, t_f3 rotation)
 {
-	const t_f	yaw = rotation.x;
-	const t_f	pitch = rotation.y;
-	const t_f	roll = rotation.z;
+	const t_f3	point_minus_origin = t_f3_sub(point, origin);
+	const t_f3	rotated = t_f3_rotate(point_minus_origin, rotation);
+	const t_f3	result = t_f3_add(rotated, origin);
 
-	return (t_f3x3_mul_f3(t_f3x3_rotate(yaw, pitch, roll), point));
+	return (result);
 }

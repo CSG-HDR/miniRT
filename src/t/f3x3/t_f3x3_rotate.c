@@ -70,8 +70,8 @@ static t_f3x3	rotate_roll(t_f rad)
 		t_f_sin(rad),
 	};
 	const t_f3	z = {
-		-t_f_sin(rad),
 		0,
+		-t_f_sin(rad),
 		t_f_cos(rad),
 	};
 
