@@ -17,5 +17,5 @@
 
 void	t_map_parse_get_direction(t_ft_json value, t_map_normal *out)
 {
-	t_map_parse_normal(ft_json_get_dict(value, "normal"), out);
+	t_map_parse_normal(ft_json_get_dict(value, "direction"), out);
 }
