@@ -21,10 +21,10 @@
 #include "t_image.h"
 #include "t_map.h"
 #include "t_ray.h"
-#include "wrap.h"
 
 #define SS_RATE 2
 
+// print normal
 static t_err	ss(t_map *m, size_t x, size_t y, t_f3 *out)
 {
 	const t_f	f_x
@@ -45,7 +45,7 @@ static t_err	ss(t_map *m, size_t x, size_t y, t_f3 *out)
 	return (false);
 }
 
-// print normal
+// super sampling
 static t_err	fill(void *context, size_t x, size_t y, t_f3 *out)
 {
 	t_minirt *const	minirt = context;
