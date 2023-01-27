@@ -20,8 +20,8 @@
 void	t_map_parse_rotation(t_ft_json value, t_map_rotation *out)
 {
 	const t_f	x = (t_f)ft_json_get_number(ft_json_get_list(value, 0));
-	const t_f	y = (t_f)ft_json_get_number(ft_json_get_list(value, 0));
-	const t_f	z = (t_f)ft_json_get_number(ft_json_get_list(value, 0));
+	const t_f	y = (t_f)ft_json_get_number(ft_json_get_list(value, 1));
+	const t_f	z = (t_f)ft_json_get_number(ft_json_get_list(value, 2));
 	t_f			real_z;
 
 	real_z = z;
