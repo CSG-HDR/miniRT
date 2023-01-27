@@ -65,6 +65,11 @@ typedef struct s_ray_hit_records
 	t_ray_hit_record	hit_records;
 }	t_ray_hit_records;
 
+/**
+ * @brief get ray for x, y in [0, 0] to [1, 1]
+ */
+t_ray	t_ray_get(t_map *map, t_f x, t_f y);
+
 void	t_ray_hit_records_free(t_ray_hit_records records);
 t_err	t_ray_union(
 			size_t count, t_ray_hit_records rays, t_ray_hit_records *out);

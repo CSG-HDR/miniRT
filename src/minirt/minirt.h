@@ -16,6 +16,7 @@
 # include "ft_types.h"
 # include "t_image.h"
 # include "t_map.h"
+#include "t_texture_manager.h"
 
 typedef struct s_minirt_mlx_image
 {
@@ -33,6 +34,7 @@ typedef struct s_minirt
 	t_minirt_mlx_image	image;
 	t_image				*tmp;
 	t_map				*map;
+	t_texture_manager	*texture_manager;
 }	t_minirt;
 
 typedef enum e_minirt_load_map_error

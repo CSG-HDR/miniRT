@@ -23,36 +23,50 @@
 #include "t_ray.h"
 #include "wrap.h"
 
-static t_map_normal	get_normal(t_minirt *minirt, t_f f_x, t_f f_y)
-{
-	const t_map_rotation	rotation = minirt->map->camera.rotation;
-	const t_f				w = t_f_tan(minirt->map->camera.fov_x / (t_f)2);
-	const t_f				h = t_f_tan(minirt->map->camera.fov_y / (t_f)2);
-	const t_f				x = w * (2 * (f_x - (t_f)0.5));
-	const t_f				y = h * (2 * (f_y - (t_f)0.5));
+#define SS_RATE 2
 
-	return (t_f3_rotate(t_f3_unit((t_f3){x, 1, -y}), rotation));
+static t_err	ss(t_map *m, size_t x, size_t y, t_f3 *out)
+{
+	const t_f	f_x
+		= (t_f)(m->viewport.start_x * SS_RATE + x)
+		/ (m->viewport.width * SS_RATE - 1);
+	const t_f	f_y
+		= (t_f)(m->viewport.start_y * SS_RATE + y)
+		/ (m->viewport.height * SS_RATE - 1);
+	const t_ray	ray = t_ray_get(m, f_x, f_y);
+
+	out->x = ray.direction.x / 2 + (t_f)0.5;
+	if (ray.direction.x < 0)
+		out->x = 1;
+	out->y = ray.direction.y / 2 + (t_f)0.5;
+	out->z = ray.direction.z / 2 + (t_f)0.5;
+	if (ray.direction.z < 0)
+		out->z = 1;
+	return (false);
 }
 
 // print normal
 static t_err	fill(void *context, size_t x, size_t y, t_f3 *out)
 {
-	t_minirt *const		minirt = (t_minirt *)context;
-	const t_f			f_x = (t_f)(minirt->map->viewport.start_x + x)
-		/ (minirt->map->viewport.width - 1);
-	const t_f			f_y = (t_f)(minirt->map->viewport.start_y + y)
-		/ (minirt->map->viewport.height - 1);
-	const t_map_normal	normal = get_normal(minirt, f_x, f_y);
-	const t_ray			ray = (t_ray){minirt->map->camera.position, normal};
+	t_minirt *const	minirt = context;
+	size_t			j;
+	size_t			i;
+	t_f3			acc;
+	t_f3			tmp;
 
-	(void)ray;
-	out->x = normal.x / 2 + (t_f)0.5;
-	if (normal.x < 0)
-		out->x = 1;
-	out->y = normal.y / 2 + (t_f)0.5;
-	out->z = normal.z / 2 + (t_f)0.5;
-	if (normal.z < 0)
-		out->z = 1;
+	acc = (t_f3){0, 0, 0};
+	i = -1;
+	while (++i < SS_RATE)
+	{
+		j = -1;
+		while (++j < SS_RATE)
+		{
+			if (ss(minirt->map, x * SS_RATE + i, y * SS_RATE + j, &tmp))
+				return (true);
+			acc = t_f3_add(acc, tmp);
+		}
+	}
+	*out = t_f3_div(acc, SS_RATE * SS_RATE);
 	return (false);
 }
 
