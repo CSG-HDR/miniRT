@@ -10,28 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_color_get.h"
+#include "t_ray.h"
 
-#include "t.h"
-#include "t_f3.h"
-#include "t_map.h"
+#include "ft_types.h"
+#include "ft_memory.h"
 
-t_f3	t_color_get_subtract(
-	const t_context *context,
-	t_map_blend_subtract subtract,
-	t_f x,
-	t_f y
+t_err	t_ray_hit_records_copy_first(
+	t_ray_hit_records src,
+	t_ray_hit_records *dest
 )
 {
-	const t_f3	zero = {(t_f)0, (t_f)0, (t_f)0};
+	t_ray_hit_record *const	node
+		= ft_memory_duplicate(src.hit_records, sizeof(t_ray_hit_record));
 
-	return (
-		t_f3_max(
-			zero,
-			t_f3_sub(
-				t_color_get(context, subtract.from, x, y),
-				t_color_get(context, subtract.subtract, x, y)
-			)
-		)
-	);
+	if (!node)
+		return (true);
+	*dest = (t_ray_hit_records){1, node};
+	return (false);
 }

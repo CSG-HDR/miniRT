@@ -10,28 +10,39 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_color_get.h"
+#include "t_ray.h"
 
-#include "t.h"
-#include "t_f3.h"
-#include "t_map.h"
+#include "ft_types.h"
 
-t_f3	t_color_get_subtract(
-	const t_context *context,
-	t_map_blend_subtract subtract,
-	t_f x,
-	t_f y
+t_err	t_ray_nearest_planes(
+	t_ray ray,
+	t_map_plane *planes,
+	size_t plane_count,
+	t_ray_hit_records *out
 )
 {
-	const t_f3	zero = {(t_f)0, (t_f)0, (t_f)0};
+	t_ray_hit_records	nearest;
+	t_ray_hit_records	current;
+	t_ray_hit_records	tmp;
 
-	return (
-		t_f3_max(
-			zero,
-			t_f3_sub(
-				t_color_get(context, subtract.from, x, y),
-				t_color_get(context, subtract.subtract, x, y)
-			)
-		)
-	);
+	nearest = (t_ray_hit_records){0, NULL};
+	while (plane_count--)
+	{
+		tmp = nearest;
+		if (t_ray_nearest_plane(ray, planes[plane_count], &current))
+		{
+			t_ray_hit_records_free(tmp);
+			return (true);
+		}
+		if (t_ray_nearest(tmp, current, &nearest))
+		{
+			t_ray_hit_records_free(tmp);
+			t_ray_hit_records_free(current);
+			return (true);
+		}
+		t_ray_hit_records_free(tmp);
+		t_ray_hit_records_free(current);
+	}
+	*out = nearest;
+	return (false);
 }

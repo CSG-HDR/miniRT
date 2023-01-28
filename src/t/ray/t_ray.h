@@ -57,6 +57,8 @@ typedef struct s_ray_hit_record
 	t_map_normal	normal;
 	t_ray_material	material;
 	bool			is_front_face;
+	t_f				x;
+	t_f				y;
 }	t_ray_hit_record;
 
 typedef struct s_ray_hit_records
@@ -95,6 +97,12 @@ t_ray			t_ray_get(t_map *map, t_f x, t_f y);
 
 void			t_ray_hit_records_free(
 					t_ray_hit_records records);
+t_err			t_ray_hit_records_copy(
+					t_ray_hit_records src,
+					t_ray_hit_records *dest);
+t_err			t_ray_hit_records_copy_first(
+					t_ray_hit_records src,
+					t_ray_hit_records *dest);
 t_err			t_ray_nearest(
 					t_ray_hit_records a,
 					t_ray_hit_records b,

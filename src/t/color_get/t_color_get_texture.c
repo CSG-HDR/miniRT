@@ -56,7 +56,7 @@ static t_f3	linear(const t_image *image, t_f u, t_f v, bool mirror)
 }
 
 t_f3	t_color_get_texture(
-	t_context *context,
+	const t_context *context,
 	t_map_texture texture,
 	t_f x,
 	t_f y

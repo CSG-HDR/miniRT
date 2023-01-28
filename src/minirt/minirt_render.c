@@ -16,39 +16,48 @@
 #include <stdbool.h>
 
 #include "mlx.h"
+#include "t.h"
+#include "t_color_get.h"
 #include "t_f.h"
 #include "t_f3.h"
 #include "t_image.h"
 #include "t_map.h"
 #include "t_ray.h"
+#include "t_map_get.h"
 
 #define SS_RATE 2
 
 // print normal
-static t_err	ss(t_map *m, size_t x, size_t y, t_f3 *out)
+static t_err	ss(const t_context *c, size_t x, size_t y, t_f3 *out)
 {
-	const t_f	f_x
-		= (t_f)(m->viewport.start_x * SS_RATE + x)
-		/ (m->viewport.width * SS_RATE - 1);
-	const t_f	f_y
-		= (t_f)(m->viewport.start_y * SS_RATE + y)
-		/ (m->viewport.height * SS_RATE - 1);
-	const t_ray	ray = t_ray_get(m, f_x, f_y);
+	const t_f			f_x
+		= (t_f)(c->map->viewport.start_x * SS_RATE + x)
+		/ (c->map->viewport.width * SS_RATE - 1);
+	const t_f			f_y
+		= (t_f)(c->map->viewport.start_y * SS_RATE + y)
+		/ (c->map->viewport.height * SS_RATE - 1);
+	const t_ray			ray = t_ray_get(c->map, f_x, f_y);
+	t_ray_hit_records	records;
 
-	out->x = ray.direction.x / 2 + (t_f)0.5;
-	if (ray.direction.x < 0)
-		out->x = 1;
-	out->y = ray.direction.y / 2 + (t_f)0.5;
-	out->z = ray.direction.z / 2 + (t_f)0.5;
-	if (ray.direction.z < 0)
-		out->z = 1;
+	if (t_map_get(c, ray, &records))
+		return (true);
+	if (!records.hit_record_count)
+		*out = c->map->void_color;
+	else
+		*out = t_color_get_ray(
+				c,
+				records.hit_records[0].material,
+				records.hit_records[0].x,
+				records.hit_records[0].y);
+	t_ray_hit_records_free(records);
 	return (false);
 }
 
 // super sampling
 static t_err	fill(void *context, size_t x, size_t y, t_f3 *out)
 {
-	t_minirt *const	minirt = context;
+	const t_context	ctx = (t_context){
+		((t_minirt *)context)->map, ((t_minirt *)context)->texture_manager};
 	size_t			j;
 	size_t			i;
 	t_f3			acc;
@@ -61,7 +70,7 @@ static t_err	fill(void *context, size_t x, size_t y, t_f3 *out)
 		j = -1;
 		while (++j < SS_RATE)
 		{
-			if (ss(minirt->map, x * SS_RATE + i, y * SS_RATE + j, &tmp))
+			if (ss(&ctx, x * SS_RATE + i, y * SS_RATE + j, &tmp))
 				return (true);
 			acc = t_f3_add(acc, tmp);
 		}

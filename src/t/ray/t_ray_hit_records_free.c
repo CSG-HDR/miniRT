@@ -10,28 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_color_get.h"
+#include "t_ray.h"
 
-#include "t.h"
-#include "t_f3.h"
-#include "t_map.h"
+#include "wrap.h"
 
-t_f3	t_color_get_subtract(
-	const t_context *context,
-	t_map_blend_subtract subtract,
-	t_f x,
-	t_f y
-)
+void	t_ray_hit_records_free(t_ray_hit_records records)
 {
-	const t_f3	zero = {(t_f)0, (t_f)0, (t_f)0};
-
-	return (
-		t_f3_max(
-			zero,
-			t_f3_sub(
-				t_color_get(context, subtract.from, x, y),
-				t_color_get(context, subtract.subtract, x, y)
-			)
-		)
-	);
+	wrap_free(records.hit_records);
 }

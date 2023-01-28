@@ -17,7 +17,7 @@
 #include "t_map.h"
 
 t_f3	t_color_get_maximum(
-	t_context *context,
+	const t_context *context,
 	t_map_blend_maximum maximum,
 	t_f x,
 	t_f y

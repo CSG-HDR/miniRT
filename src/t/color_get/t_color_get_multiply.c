@@ -17,7 +17,7 @@
 #include "t_map.h"
 
 t_f3	t_color_get_multiply(
-	t_context *context,
+	const t_context *context,
 	t_map_blend_multiply multiply,
 	t_f x,
 	t_f y

@@ -14,7 +14,7 @@
 
 #include "t_map.h"
 
-t_f3	t_color_get(t_context *context, t_map_color *color, t_f x, t_f y)
+t_f3	t_color_get(const t_context *context, t_map_color *color, t_f x, t_f y)
 {
 	if (color->type == T_MAP_COLOR_TYPE_COLOR)
 		return (color->color.color);

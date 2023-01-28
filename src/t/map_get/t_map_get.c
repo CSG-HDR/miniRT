@@ -10,28 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_color_get.h"
+#include "t_map_get.h"
 
 #include "t.h"
-#include "t_f3.h"
 #include "t_map.h"
+#include "t_ray.h"
 
-t_f3	t_color_get_subtract(
-	const t_context *context,
-	t_map_blend_subtract subtract,
-	t_f x,
-	t_f y
-)
+t_err	t_map_get(const t_context *context, t_ray ray, t_ray_hit_records *out)
 {
-	const t_f3	zero = {(t_f)0, (t_f)0, (t_f)0};
+	t_ray_hit_records	records;
 
-	return (
-		t_f3_max(
-			zero,
-			t_f3_sub(
-				t_color_get(context, subtract.from, x, y),
-				t_color_get(context, subtract.subtract, x, y)
-			)
-		)
-	);
+	if (t_ray_nearest_planes(
+			ray, context->map->planes, context->map->plane_count, &records))
+		return (true);
+	*out = records;
+	return (false);
 }

@@ -10,28 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_color_get.h"
+#include "t_ray.h"
 
-#include "t.h"
-#include "t_f3.h"
-#include "t_map.h"
+#include "ft_types.h"
 
-t_f3	t_color_get_subtract(
-	const t_context *context,
-	t_map_blend_subtract subtract,
-	t_f x,
-	t_f y
+t_err	t_ray_nearest(
+	t_ray_hit_records a,
+	t_ray_hit_records b,
+	t_ray_hit_records *out
 )
 {
-	const t_f3	zero = {(t_f)0, (t_f)0, (t_f)0};
-
-	return (
-		t_f3_max(
-			zero,
-			t_f3_sub(
-				t_color_get(context, subtract.from, x, y),
-				t_color_get(context, subtract.subtract, x, y)
-			)
-		)
-	);
+	if (!a.hit_record_count || !b.hit_record_count)
+	{
+		if (!a.hit_record_count && b.hit_record_count)
+		{
+			*out = (t_ray_hit_records){0, NULL};
+			return (false);
+		}
+		if (a.hit_record_count)
+			return (t_ray_hit_records_copy_first(a, out));
+		return (t_ray_hit_records_copy_first(b, out));
+	}
+	if (a.hit_records[0].distance < b.hit_records[0].distance)
+		return (t_ray_hit_records_copy_first(a, out));
+	return (t_ray_hit_records_copy_first(b, out));
 }

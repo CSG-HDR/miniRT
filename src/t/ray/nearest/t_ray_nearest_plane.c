@@ -68,10 +68,10 @@ t_err	t_ray_nearest_plane(
 
 	if (t_ray_hit_records_builder_init(&builder))
 		return (true);
-	if (distance > 0 && (t_ray_hit_records_builder_add(
+	if ((distance > 0 && t_ray_hit_records_builder_add(
 				builder, (t_ray_hit_record){distance, plane.normal,
-				t_ray_material_from_computed(plane.material), true})
-		|| t_ray_hit_records_builder_build(builder, out)))
+				t_ray_material_from_computed(plane.material), true, 0, 0})
+	) || t_ray_hit_records_builder_build(builder, out))
 	{
 		t_ray_hit_records_builder_free(builder);
 		return (true);

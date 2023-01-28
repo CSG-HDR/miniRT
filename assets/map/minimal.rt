@@ -1,8 +1,12 @@
 {
   "camera": {
     "position": [0, -1, 1],
-    "rotation": { "type": "lookAt", "position": [0, 0, 1] },
+    "rotation": { "type": "rotation", "rotation": [0.05, 0.01, 0.1] },
     "fov": 0.25
   },
+  "planes": [
+    { "position": [0, 0, 0], "normal": [0, 0, 1] }
+  ],
+  "voidColor": [1, 1, 1],
   "viewport": { "size": [960, 540], "only": [100, 100, 860, 440] }
 }
