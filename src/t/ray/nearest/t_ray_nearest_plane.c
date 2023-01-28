@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   t_ray_nearest_plane.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Updated: 2023/01/28 21:09:26 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ static t_plane	s_plane(t_map_plane plane)
  * f(ray.position + ray.direction * distance) = 0
  * f(p+ut, q+vt, r+wt) = 0
  *
- * t = (pa + qb + rc) / (ua + vb + wc)
+ * t = (pa + qb + rc + d) / (ua + vb + wc)
  */
 static t_f	s_distance(t_plane p, t_ray r)
 {
 	return (
-		(r.origin.x * p.a + r.origin.y * p.b + r.origin.z * p.c + p.d)
+		-(r.origin.x * p.a + r.origin.y * p.b + r.origin.z * p.c + p.d)
 		/ (r.direction.x * p.a + r.direction.y * p.b + r.direction.z * p.c)
 	);
 }
