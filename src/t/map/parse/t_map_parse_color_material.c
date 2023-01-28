@@ -35,5 +35,5 @@ void	t_map_parse_color_material(t_ft_json value, t_map_color_material *out)
 	optional_material_color(value, "ambient", &out->ambient);
 	optional_material_color(value, "diffuse", &out->diffuse);
 	optional_material_color(value, "specular", &out->specular);
-	t_map_parse_optional_specular_lobe(value, &out->specular_lobe);
+	t_map_parse_get_optional_specular_lobe(value, &out->specular_lobe);
 }

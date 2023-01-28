@@ -43,7 +43,7 @@ t_err	t_map_parse_material(t_ft_json value, t_map_material *out)
 		t_map_free_color(out->diffuse);
 		return (true);
 	}
-	t_map_parse_optional_specular_lobe(value, &out->specular_lobe);
+	t_map_parse_get_optional_specular_lobe(value, &out->specular_lobe);
 	out->has_normal = ft_json_dict_has_key(value, "normal");
 	if (t_map_parse_normal_map(ft_json_get_dict(value, "normal"), &out->normal))
 	{

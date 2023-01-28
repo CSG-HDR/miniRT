@@ -45,23 +45,23 @@ void	etc(t_ft_json value, t_map *result)
 
 static t_err	pre(t_ft_json value, t_map *out)
 {
-	if (t_map_parse_optional_models(
+	if (t_map_parse_get_optional_models(
 			value, &out->models, &out->model_count))
 		return (true);
-	if (t_map_parse_optional_lights(
+	if (t_map_parse_get_optional_lights(
 			value, &out->lights, &out->light_count))
 	{
 		t_map_free_models(out->models, out->model_count);
 		return (true);
 	}
-	if (t_map_parse_optional_planes(
+	if (t_map_parse_get_optional_planes(
 			value, &out->planes, &out->plane_count))
 	{
 		t_map_free_models(out->models, out->model_count);
 		t_map_free_lights(out->lights, out->light_count);
 		return (true);
 	}
-	if (t_map_parse_optional_quadrics(
+	if (t_map_parse_get_optional_quadrics(
 			value, &out->quadrics, &out->quadric_count))
 	{
 		t_map_free_models(out->models, out->model_count);

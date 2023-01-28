@@ -84,15 +84,15 @@ t_err	t_map_parse_blend_subtract(t_ft_json value, t_map_blend_subtract *out);
 t_err	t_map_parse_normal_map(t_ft_json value, t_map_normal_map *out);
 t_err	t_map_parse_material(t_ft_json value, t_map_material *out);
 
-t_err	t_map_parse_optional_models(
+t_err	t_map_parse_get_optional_models(
 			t_ft_json value, t_map_model ***out, size_t *out_count);
-t_err	t_map_parse_optional_lights(
+t_err	t_map_parse_get_optional_lights(
 			t_ft_json value, t_map_light **out, size_t *out_count);
-t_err	t_map_parse_optional_planes(
+t_err	t_map_parse_get_optional_planes(
 			t_ft_json value, t_map_plane **out, size_t *out_count);
-t_err	t_map_parse_optional_quadrics(
+t_err	t_map_parse_get_optional_quadrics(
 			t_ft_json value, t_map_quadric **out, size_t *out_count);
-void	t_map_parse_optional_specular_lobe(t_ft_json value, t_f *out);
+void	t_map_parse_get_optional_specular_lobe(t_ft_json value, t_f *out);
 void	t_map_parse_get_position(t_ft_json value, t_map_position *out);
 void	t_map_parse_get_size(t_ft_json value, t_map_size *out);
 void	t_map_parse_get_rotation(t_ft_json value, t_map_rotation *out);

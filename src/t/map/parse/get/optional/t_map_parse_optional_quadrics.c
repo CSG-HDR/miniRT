@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   t_map_parse_optional_quadrics.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Updated: 2023/01/28 23:32:46 by Juyeong Maing    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,35 +17,23 @@
 #include "wrap.h"
 #include "ft_json.h"
 #include "t_map.h"
-#include "t_map_free.h"
 
-t_err	t_map_parse_optional_lights(
+t_err	t_map_parse_get_optional_quadrics(
 	t_ft_json value,
-	t_map_light **out,
+	t_map_quadric **out,
 	size_t *out_count
 )
 {
-	size_t		i;
-
-	if (!ft_json_dict_has_key(value, "lights"))
+	if (!ft_json_dict_has_key(value, "quadrics"))
 	{
 		*out_count = 0;
 		return (false);
 	}
-	*out_count = ft_json_list_length(ft_json_get_dict(value, "lights"));
-	*out = wrap_malloc(sizeof(t_map_light) * *out_count);
-	if (!*out)
-		return (NULL);
-	i = 0;
-	while (i != *out_count)
-	{
-		if (t_map_parse_light(ft_json_get_list(
-					ft_json_get_dict(value, "lights"), i), out[i]))
-		{
-			t_map_free_lights(*out, i);
-			return (true);
-		}
-		i++;
-	}
-	return (false);
+	return (
+		t_map_parse_quadrics(
+			ft_json_get_dict(value, "quadrics"),
+			out,
+			out_count
+		)
+	);
 }
