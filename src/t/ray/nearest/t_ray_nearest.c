@@ -22,7 +22,7 @@ t_err	t_ray_nearest(
 {
 	if (!a.hit_record_count || !b.hit_record_count)
 	{
-		if (!a.hit_record_count && b.hit_record_count)
+		if (!a.hit_record_count && !b.hit_record_count)
 		{
 			*out = (t_ray_hit_records){0, NULL};
 			return (false);

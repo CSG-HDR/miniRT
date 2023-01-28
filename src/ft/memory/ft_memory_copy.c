@@ -18,8 +18,8 @@ void	ft_memory_copy(void *dest, const void *source, size_t size)
 	const char	*s;
 	size_t		i;
 
-	d = (char *) dest;
-	s = (const char *) source;
+	d = (char *)dest;
+	s = (const char *)source;
 	i = 0;
 	while (i < size)
 	{

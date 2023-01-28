@@ -26,6 +26,7 @@
 
 static void	init_mlx(t_minirt *m)
 {
+	minirt_assert(&m->mlx_context, mlx_init(), "Error: on init mlx\n");
 	minirt_assert(
 		&m->mlx_window, mlx_new_window(
 			m->mlx_context,
@@ -57,7 +58,6 @@ void	minirt_init(t_minirt *m, int argc, char **argv)
 
 	if (argc < 2)
 		minirt_die("Error: no input file\n");
-	minirt_assert(&m->mlx_context, mlx_init(), "Error: on init mlx\n");
 	error = minirt_load_map(argv[1], &m->map);
 	if (error)
 		minirt_load_map_die(error);
