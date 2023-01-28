@@ -17,6 +17,23 @@
 #include "ft_json.h"
 #include "t_map.h"
 
+void	revert_if_invalid(t_map_viewport *mut)
+{
+	if (
+		false
+		|| mut->start_x >= mut->end_x
+		|| mut->start_y >= mut->end_y
+		|| mut->width < mut->end_x
+		|| mut->height < mut->end_y
+	)
+	{
+		mut->start_x = 0;
+		mut->start_y = 0;
+		mut->end_x = mut->width;
+		mut->end_y = mut->height;
+	}
+}
+
 void	t_map_parse_viewport(t_ft_json value, t_map_viewport *out)
 {
 	out->width = (size_t)ft_json_get_number(
@@ -33,6 +50,7 @@ void	t_map_parse_viewport(t_ft_json value, t_map_viewport *out)
 				ft_json_get_list(ft_json_get_dict(value, "only"), 2));
 		out->end_y = (size_t)ft_json_get_number(
 				ft_json_get_list(ft_json_get_dict(value, "only"), 3));
+		revert_if_invalid(out);
 	}
 	else
 	{
