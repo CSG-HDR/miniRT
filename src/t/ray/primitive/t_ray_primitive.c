@@ -15,35 +15,28 @@
 #include "ft_types.h"
 #include "t_map.h"
 
-t_err	t_ray_nearest_planes(
+t_err	t_ray_primitive(
 	t_ray ray,
-	t_map_plane *planes,
-	size_t plane_count,
+	t_map_primitive primitive,
 	t_ray_hit_records *out
 )
 {
-	t_ray_hit_records	nearest;
-	t_ray_hit_records	current;
-	t_ray_hit_records	tmp;
-
-	nearest = (t_ray_hit_records){0, NULL};
-	while (plane_count--)
-	{
-		tmp = nearest;
-		if (t_ray_nearest_plane(ray, planes[plane_count], &current))
-		{
-			t_ray_hit_records_free(tmp);
-			return (true);
-		}
-		if (t_ray_nearest(tmp, current, &nearest))
-		{
-			t_ray_hit_records_free(tmp);
-			t_ray_hit_records_free(current);
-			return (true);
-		}
-		t_ray_hit_records_free(tmp);
-		t_ray_hit_records_free(current);
-	}
-	*out = nearest;
-	return (false);
+	if (*primitive.type == T_MAP_PRIMITIVE_TYPE_SPHERE)
+		return (t_ray_primitive_sphere(
+				ray, primitive.sphere->sphere, out));
+	if (*primitive.type == T_MAP_PRIMITIVE_TYPE_ELLIPSOID)
+		return (t_ray_primitive_ellipsoid(
+				ray, primitive.ellipsoid->ellipsoid, out));
+	if (*primitive.type == T_MAP_PRIMITIVE_TYPE_TORUS)
+		return (t_ray_primitive_torus(
+				ray, primitive.torus->torus, out));
+	if (*primitive.type == T_MAP_PRIMITIVE_TYPE_CONE)
+		return (t_ray_primitive_cone(
+				ray, primitive.cone->cone, out));
+	if (*primitive.type == T_MAP_PRIMITIVE_TYPE_CYLINDER)
+		return (t_ray_primitive_cylinder(
+				ray, primitive.cylinder->cylinder, out));
+	else
+		return (t_ray_primitive_cube(
+				ray, primitive.cube->cube, out));
 }

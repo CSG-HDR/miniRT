@@ -15,10 +15,10 @@
 #include "ft_types.h"
 #include "t_map.h"
 
-t_err	t_ray_nearest_planes(
+t_err	t_ray_nearest_quadrics(
 	t_ray ray,
-	t_map_plane *planes,
-	size_t plane_count,
+	t_map_quadric *quadrics,
+	size_t quadric_count,
 	t_ray_hit_records *out
 )
 {
@@ -27,10 +27,10 @@ t_err	t_ray_nearest_planes(
 	t_ray_hit_records	tmp;
 
 	nearest = (t_ray_hit_records){0, NULL};
-	while (plane_count--)
+	while (quadric_count--)
 	{
 		tmp = nearest;
-		if (t_ray_nearest_plane(ray, planes[plane_count], &current))
+		if (t_ray_nearest_quadric(ray, quadrics[quadric_count], &current))
 		{
 			t_ray_hit_records_free(tmp);
 			return (true);

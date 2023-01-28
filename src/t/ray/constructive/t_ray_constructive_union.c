@@ -14,36 +14,37 @@
 
 #include "ft_types.h"
 #include "t_map.h"
+#include "wrap.h"
 
-t_err	t_ray_nearest_planes(
+static t_err	free_and_return(
+	t_ray_hit_records *records,
+	size_t count,
+	t_err result
+)
+{
+	while (count--)
+		t_ray_hit_records_free(records[count]);
+	wrap_free(records);
+	return (result);
+}
+
+t_err	t_ray_constructive_union(
 	t_ray ray,
-	t_map_plane *planes,
-	size_t plane_count,
+	t_map_union _union,
 	t_ray_hit_records *out
 )
 {
-	t_ray_hit_records	nearest;
-	t_ray_hit_records	current;
-	t_ray_hit_records	tmp;
+	t_ray_hit_records *const	each
+		= wrap_malloc(sizeof(t_ray_hit_records) * _union.children_count);
+	size_t						i;
 
-	nearest = (t_ray_hit_records){0, NULL};
-	while (plane_count--)
-	{
-		tmp = nearest;
-		if (t_ray_nearest_plane(ray, planes[plane_count], &current))
-		{
-			t_ray_hit_records_free(tmp);
-			return (true);
-		}
-		if (t_ray_nearest(tmp, current, &nearest))
-		{
-			t_ray_hit_records_free(tmp);
-			t_ray_hit_records_free(current);
-			return (true);
-		}
-		t_ray_hit_records_free(tmp);
-		t_ray_hit_records_free(current);
-	}
-	*out = nearest;
-	return (false);
+	if (!each)
+		return (true);
+	i = -1;
+	while (++i < _union.children_count)
+		if (t_ray_model(ray, _union.children[i], &each[i]))
+			return (free_and_return(each, i, true));
+	if (t_ray_union(each, _union.children_count, out))
+		return (free_and_return(each, _union.children_count, true));
+	return (free_and_return(each, _union.children_count, false));
 }

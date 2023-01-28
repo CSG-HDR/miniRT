@@ -15,35 +15,29 @@
 #include "ft_types.h"
 #include "t_map.h"
 
-t_err	t_ray_nearest_planes(
+t_err	t_ray_constructive_difference(
 	t_ray ray,
-	t_map_plane *planes,
-	size_t plane_count,
+	t_map_difference difference,
 	t_ray_hit_records *out
 )
 {
-	t_ray_hit_records	nearest;
-	t_ray_hit_records	current;
-	t_ray_hit_records	tmp;
+	t_ray_hit_records	from;
+	t_ray_hit_records	subtract;
 
-	nearest = (t_ray_hit_records){0, NULL};
-	while (plane_count--)
+	if (t_ray_model(ray, difference.from, &from))
+		return (true);
+	if (t_ray_model(ray, difference.subtract, &subtract))
 	{
-		tmp = nearest;
-		if (t_ray_nearest_plane(ray, planes[plane_count], &current))
-		{
-			t_ray_hit_records_free(tmp);
-			return (true);
-		}
-		if (t_ray_nearest(tmp, current, &nearest))
-		{
-			t_ray_hit_records_free(tmp);
-			t_ray_hit_records_free(current);
-			return (true);
-		}
-		t_ray_hit_records_free(tmp);
-		t_ray_hit_records_free(current);
+		t_ray_hit_records_free(from);
+		return (true);
 	}
-	*out = nearest;
+	if (t_ray_difference(from, subtract, out))
+	{
+		t_ray_hit_records_free(from);
+		t_ray_hit_records_free(subtract);
+		return (true);
+	}
+	t_ray_hit_records_free(from);
+	t_ray_hit_records_free(subtract);
 	return (false);
 }

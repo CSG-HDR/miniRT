@@ -15,35 +15,14 @@
 #include "ft_types.h"
 #include "t_map.h"
 
-t_err	t_ray_nearest_planes(
+t_err	t_ray_model(
 	t_ray ray,
-	t_map_plane *planes,
-	size_t plane_count,
+	t_map_model *model,
 	t_ray_hit_records *out
 )
 {
-	t_ray_hit_records	nearest;
-	t_ray_hit_records	current;
-	t_ray_hit_records	tmp;
-
-	nearest = (t_ray_hit_records){0, NULL};
-	while (plane_count--)
-	{
-		tmp = nearest;
-		if (t_ray_nearest_plane(ray, planes[plane_count], &current))
-		{
-			t_ray_hit_records_free(tmp);
-			return (true);
-		}
-		if (t_ray_nearest(tmp, current, &nearest))
-		{
-			t_ray_hit_records_free(tmp);
-			t_ray_hit_records_free(current);
-			return (true);
-		}
-		t_ray_hit_records_free(tmp);
-		t_ray_hit_records_free(current);
-	}
-	*out = nearest;
-	return (false);
+	if (model->type == T_MAP_MODEL_TYPE_CONSTRUCTIVE)
+		return (t_ray_constructive(ray, model->constructive.constructive, out));
+	else
+		return (t_ray_primitive(ray, model->primitive.primitive, out));
 }

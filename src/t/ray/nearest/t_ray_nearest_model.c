@@ -15,35 +15,21 @@
 #include "ft_types.h"
 #include "t_map.h"
 
-t_err	t_ray_nearest_planes(
+t_err	t_ray_nearest_model(
 	t_ray ray,
-	t_map_plane *planes,
-	size_t plane_count,
+	t_map_model *model,
 	t_ray_hit_records *out
 )
 {
-	t_ray_hit_records	nearest;
-	t_ray_hit_records	current;
-	t_ray_hit_records	tmp;
+	t_ray_hit_records	multiple;
 
-	nearest = (t_ray_hit_records){0, NULL};
-	while (plane_count--)
+	if (t_ray_model(ray, model, &multiple))
+		return (true);
+	if (t_ray_hit_records_copy_first(multiple, out))
 	{
-		tmp = nearest;
-		if (t_ray_nearest_plane(ray, planes[plane_count], &current))
-		{
-			t_ray_hit_records_free(tmp);
-			return (true);
-		}
-		if (t_ray_nearest(tmp, current, &nearest))
-		{
-			t_ray_hit_records_free(tmp);
-			t_ray_hit_records_free(current);
-			return (true);
-		}
-		t_ray_hit_records_free(tmp);
-		t_ray_hit_records_free(current);
+		t_ray_hit_records_free(multiple);
+		return (true);
 	}
-	*out = nearest;
+	t_ray_hit_records_free(multiple);
 	return (false);
 }

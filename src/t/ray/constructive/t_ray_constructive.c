@@ -15,35 +15,19 @@
 #include "ft_types.h"
 #include "t_map.h"
 
-t_err	t_ray_nearest_planes(
+t_err	t_ray_constructive(
 	t_ray ray,
-	t_map_plane *planes,
-	size_t plane_count,
+	t_map_constructive constructive,
 	t_ray_hit_records *out
 )
 {
-	t_ray_hit_records	nearest;
-	t_ray_hit_records	current;
-	t_ray_hit_records	tmp;
-
-	nearest = (t_ray_hit_records){0, NULL};
-	while (plane_count--)
-	{
-		tmp = nearest;
-		if (t_ray_nearest_plane(ray, planes[plane_count], &current))
-		{
-			t_ray_hit_records_free(tmp);
-			return (true);
-		}
-		if (t_ray_nearest(tmp, current, &nearest))
-		{
-			t_ray_hit_records_free(tmp);
-			t_ray_hit_records_free(current);
-			return (true);
-		}
-		t_ray_hit_records_free(tmp);
-		t_ray_hit_records_free(current);
-	}
-	*out = nearest;
-	return (false);
+	if (*constructive.type == T_MAP_CONSTRUCTIVE_TYPE_UNION)
+		return (t_ray_constructive_union(
+				ray, constructive._union->_union, out));
+	if (*constructive.type == T_MAP_CONSTRUCTIVE_TYPE_INTERSECTION)
+		return (t_ray_constructive_intersection(
+				ray, constructive.intersection->intersection, out));
+	else
+		return (t_ray_constructive_difference(
+				ray, constructive.difference->difference, out));
 }

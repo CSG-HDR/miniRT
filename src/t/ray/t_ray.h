@@ -110,7 +110,7 @@ t_err			t_ray_nearest(
 t_err			t_ray_nearest_model(
 					t_ray ray,
 					t_map_model *model,
-					t_ray_hit_record *out);
+					t_ray_hit_records *out);
 t_err			t_ray_nearest_models(
 					t_ray ray,
 					t_map_model **models,
@@ -134,14 +134,13 @@ t_err			t_ray_nearest_quadrics(
 					t_map_quadric *quadrics,
 					size_t quadric_count,
 					t_ray_hit_records *out);
-
 t_err			t_ray_union(
+					t_ray_hit_records *rays,
 					size_t count,
-					t_ray_hit_records rays,
 					t_ray_hit_records *out);
 t_err			t_ray_intersection(
+					t_ray_hit_records *rays,
 					size_t count,
-					t_ray_hit_records rays,
 					t_ray_hit_records *out);
 t_err			t_ray_difference(
 					t_ray_hit_records from,
@@ -151,20 +150,19 @@ t_err			t_ray_model(
 					t_ray ray,
 					t_map_model *model,
 					t_ray_hit_records *out);
-
 t_err			t_ray_constructive(
 					t_ray ray,
 					t_map_constructive constructive,
 					t_ray_hit_records *out);
-t_err			t_ray_csg_union(
+t_err			t_ray_constructive_union(
 					t_ray ray,
 					t_map_union _union,
 					t_ray_hit_records *out);
-t_err			t_ray_csg_intersection(
+t_err			t_ray_constructive_intersection(
 					t_ray ray,
 					t_map_intersection intersection,
 					t_ray_hit_records *out);
-t_err			t_ray_csg_difference(
+t_err			t_ray_constructive_difference(
 					t_ray ray,
 					t_map_difference difference,
 					t_ray_hit_records *out);
@@ -172,27 +170,27 @@ t_err			t_ray_primitive(
 					t_ray ray,
 					t_map_primitive primitive,
 					t_ray_hit_records *out);
-t_err			t_ray_sphere(
+t_err			t_ray_primitive_sphere(
 					t_ray ray,
 					t_map_sphere sphere,
 					t_ray_hit_records *out);
-t_err			t_ray_ellipsoid(
+t_err			t_ray_primitive_ellipsoid(
 					t_ray ray,
 					t_map_ellipsoid ellipsoid,
 					t_ray_hit_records *out);
-t_err			t_ray_torus(
+t_err			t_ray_primitive_torus(
 					t_ray ray,
 					t_map_torus torus,
 					t_ray_hit_records *out);
-t_err			t_ray_cone(
+t_err			t_ray_primitive_cone(
 					t_ray ray,
 					t_map_cone cone,
 					t_ray_hit_records *out);
-t_err			t_ray_cylinder(
+t_err			t_ray_primitive_cylinder(
 					t_ray ray,
 					t_map_cylinder cylinder,
 					t_ray_hit_records *out);
-t_err			t_ray_cube(
+t_err			t_ray_primitive_cube(
 					t_ray ray,
 					t_map_cube cube,
 					t_ray_hit_records *out);
