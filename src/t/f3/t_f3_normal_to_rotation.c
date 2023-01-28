@@ -10,16 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_f.h"
 #include "t_f3.h"
+
+#include "t_f.h"
 
 t_f3	t_f3_normal_to_rotation(t_f3 normal)
 {
-	// x-axis rotation : roll
-	// y-axis rotation : pitch
-	// z-axis rotaion : yaw
-	const t_f	roll = t_f_atan2(normal.z, normal.y);
-	const t_f	pitch = t_f_atan2(normal.z, normal.x);
-	const t_f	yaw = t_f_atan2(normal.y, normal.x);
-	return ((t_f3){yaw, pitch, roll});
+	const t_f	pitch = t_f_atan2(normal.z, normal.y);
+	const t_f	yaw = t_f_atan2(normal.x, normal.y);
+
+	return ((t_f3){yaw, pitch, 0});
 }
