@@ -15,6 +15,28 @@
 #include "ft_types.h"
 #include "wrap.h"
 
+static void	sort(t_ray_hit_records mut)
+{
+	t_ray_hit_record	tmp;
+	size_t				i;
+	size_t				j;
+
+	i = mut.hit_record_count;
+	while (i--)
+	{
+		j = i;
+		while (j--)
+		{
+			if (mut.hit_records[i].distance < mut.hit_records[j].distance)
+			{
+				tmp = mut.hit_records[i];
+				mut.hit_records[i] = mut.hit_records[j];
+				mut.hit_records[j] = tmp;
+			}
+		}
+	}
+}
+
 t_err	t_ray_hit_records_builder_build(
 	t_ray_hit_records_builder *self,
 	t_ray_hit_records *out
@@ -40,6 +62,7 @@ t_err	t_ray_hit_records_builder_build(
 	}
 	result.hit_record_count = self->count;
 	result.hit_records = nodes;
+	sort(result);
 	*out = result;
 	return (false);
 }

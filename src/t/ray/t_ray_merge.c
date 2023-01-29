@@ -15,37 +15,34 @@
 #include <stddef.h>
 
 #include "ft_types.h"
-#include "t_map.h"
 
-t_err	t_ray_nearest_models(
-	t_ray ray,
-	t_map_model **models,
-	size_t model_count,
+t_err	t_ray_merge(
+	t_ray_hit_records *rays,
+	size_t count,
 	t_ray_hit_records *out
 )
 {
-	t_ray_hit_records	nearest;
-	t_ray_hit_records	current;
-	t_ray_hit_records	tmp;
+	t_ray_hit_records_builder	*builder;
+	size_t						i;
+	size_t						j;
+	t_err						result;
 
-	nearest = (t_ray_hit_records){0, NULL};
-	while (model_count--)
+	if (t_ray_hit_records_builder_init(&builder))
+		return (true);
+	i = -1;
+	while (++i < count)
 	{
-		tmp = nearest;
-		if (t_ray_nearest_model(ray, models[model_count], &current))
+		j = -1;
+		while (++j < rays[i].hit_record_count)
 		{
-			t_ray_hit_records_free(tmp);
-			return (true);
+			if (t_ray_hit_records_builder_add(builder, rays[i].hit_records[j]))
+			{
+				t_ray_hit_records_builder_free(builder);
+				return (true);
+			}
 		}
-		if (t_ray_nearest(tmp, current, &nearest))
-		{
-			t_ray_hit_records_free(tmp);
-			t_ray_hit_records_free(current);
-			return (true);
-		}
-		t_ray_hit_records_free(tmp);
-		t_ray_hit_records_free(current);
 	}
-	*out = nearest;
-	return (false);
+	result = t_ray_hit_records_builder_build(builder, out);
+	t_ray_hit_records_builder_free(builder);
+	return (result);
 }

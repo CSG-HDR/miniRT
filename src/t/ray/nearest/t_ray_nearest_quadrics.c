@@ -12,6 +12,8 @@
 
 #include "t_ray.h"
 
+#include <stddef.h>
+
 #include "ft_types.h"
 #include "t_map.h"
 

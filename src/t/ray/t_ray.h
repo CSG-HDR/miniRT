@@ -138,6 +138,10 @@ t_err			t_ray_nearest_quadrics(
 					t_map_quadric *quadrics,
 					size_t quadric_count,
 					t_ray_hit_records *out);
+t_err			t_ray_merge(
+					t_ray_hit_records *rays,
+					size_t count,
+					t_ray_hit_records *out);
 t_err			t_ray_union(
 					t_ray_hit_records *rays,
 					size_t count,
