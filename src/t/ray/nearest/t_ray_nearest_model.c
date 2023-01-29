@@ -25,6 +25,12 @@ t_err	t_ray_nearest_model(
 
 	if (t_ray_model(ray, model, &multiple))
 		return (true);
+	if (!multiple.hit_record_count)
+	{
+		*out = (t_ray_hit_records){0, NULL};
+		t_ray_hit_records_free(multiple);
+		return (false);
+	}
 	if (t_ray_hit_records_copy_first(multiple, out))
 	{
 		t_ray_hit_records_free(multiple);
