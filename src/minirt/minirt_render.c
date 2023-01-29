@@ -23,7 +23,6 @@
 #include "t_image.h"
 #include "t_map.h"
 #include "t_ray.h"
-#include "t_map_get.h"
 
 #define SS_RATE 2
 
@@ -39,7 +38,7 @@ static t_err	ss(const t_context *c, size_t x, size_t y, t_f3 *out)
 	const t_ray			ray = t_ray_get(c->map, f_x, f_y);
 	t_ray_hit_records	records;
 
-	if (t_map_get(c, ray, &records))
+	if (t_ray_nearest_map(ray, c->map, &records))
 		return (true);
 	if (!records.hit_record_count)
 		*out = c->map->void_color;

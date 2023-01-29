@@ -107,6 +107,10 @@ t_err			t_ray_nearest(
 					t_ray_hit_records a,
 					t_ray_hit_records b,
 					t_ray_hit_records *out);
+t_err			t_ray_nearest_map(
+					t_ray ray,
+					t_map *map,
+					t_ray_hit_records *out);
 t_err			t_ray_nearest_model(
 					t_ray ray,
 					t_map_model *model,
