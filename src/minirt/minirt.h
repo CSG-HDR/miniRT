@@ -16,7 +16,7 @@
 # include "ft_types.h"
 # include "t_image.h"
 # include "t_map.h"
-#include "t_texture_manager.h"
+# include "t_texture_manager.h"
 
 typedef struct s_minirt_mlx_image
 {

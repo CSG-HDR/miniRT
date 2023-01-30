@@ -141,8 +141,8 @@ int	main(int argc, char **argv)
 		line = strtok(NULL, "\n");
 	}
 	free(file_contents);
-	if (array_length != 2 ||
-		t_ray_difference(array[0], array[1], &records) || print(records))
+	if (array_length != 2
+		|| t_ray_difference(array[0], array[1], &records) || print(records))
 		return (EXIT_FAILURE);
 	free(array);
 	t_ray_hit_records_free(records);
