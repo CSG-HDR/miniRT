@@ -659,8 +659,8 @@
         {
           "type": "number",
           "description": "rotation angle for pitch",
-          "exclusiveMinimum": -0.25,
-          "exclusiveMaximum": 0.25
+          "minimum": -0.25,
+          "maximum": 0.25
         },
         {
           "type": "number",
