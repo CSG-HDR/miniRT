@@ -66,4 +66,4 @@ dev: compile_commands.json .vscode/launch.json .vscode/tasks.json
 
 .PHONY: run
 run:
-	$(Q3)ARG='$(ARG)' $(MAKE) -C src run
+	$(Q3)$(MAKE) -C src run
