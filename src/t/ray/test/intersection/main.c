@@ -61,7 +61,7 @@ static t_err	feed_record(
 	if (sscanf(line, "%lf %d %lf %lf", &distance, &is_front_face, &x, &y) != 4)
 		return (true);
 	record.distance = (t_f)distance;
-	record.is_front_face = is_front_face = !!is_front_face;
+	record.is_front_face = !!is_front_face;
 	record.x = (t_f)x;
 	record.y = (t_f)y;
 	if (t_ray_hit_records_builder_add(builder, record))

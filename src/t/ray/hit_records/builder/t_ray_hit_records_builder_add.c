@@ -17,6 +17,12 @@
 #include "ft_types.h"
 #include "wrap.h"
 
+static bool	decrease_count(t_ray_hit_records_builder *self)
+{
+	self->count--;
+	return (true);
+}
+
 static bool	remove_duplicate_record(
 	t_ray_hit_records_builder *self,
 	t_ray_hit_record record
@@ -31,7 +37,7 @@ static bool	remove_duplicate_record(
 		to_remove = self->head;
 		self->head = to_remove->next;
 		wrap_free(to_remove);
-		return (true);
+		return (decrease_count(self));
 	}
 	prev = self->head;
 	while (prev && prev->next)
@@ -42,8 +48,7 @@ static bool	remove_duplicate_record(
 			to_remove = prev->next;
 			prev->next = to_remove->next;
 			wrap_free(to_remove);
-			self->count--;
-			return (true);
+			return (decrease_count(self));
 		}
 		prev = prev->next;
 	}
