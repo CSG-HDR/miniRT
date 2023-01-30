@@ -47,7 +47,10 @@ static t_err	read_file_contents(const char *filename, char **out)
 	return (error);
 }
 
-static t_err	feed_record(t_ray_hit_records_builder *builder, const char *line)
+static t_err	feed_record(
+	t_ray_hit_records_builder *builder,
+	const char *line
+)
 {
 	double				distance;
 	int					is_front_face;
@@ -66,7 +69,10 @@ static t_err	feed_record(t_ray_hit_records_builder *builder, const char *line)
 	return (false);
 }
 
-static t_err	feed_records(char *line, t_ray_hit_records *out)
+static t_err	feed_records(
+	char *line,
+	t_ray_hit_records *out
+)
 {
 	char						*part;
 	t_ray_hit_records_builder	*builder;

@@ -37,11 +37,12 @@ static bool	remove_duplicate_record(
 	while (prev && prev->next)
 	{
 		if (prev->next->record.distance == record.distance
-			&& self->head->record.is_front_face != record.is_front_face)
+			&& prev->next->record.is_front_face != record.is_front_face)
 		{
 			to_remove = prev->next;
 			prev->next = to_remove->next;
-			wrap_free(prev->next);
+			wrap_free(to_remove);
+			self->count--;
 			return (true);
 		}
 		prev = prev->next;
