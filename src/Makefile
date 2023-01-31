@@ -21,6 +21,7 @@ SRCS_LIBWRAP := $(shell find . -name "wrap_*.c" | grep -v /test/ | xargs)
 SRCS_LIBT := $(shell find . -name "t_*.c" | grep -v /test/ | xargs)
 SRCS_LIBFT := $(shell find . -name "ft_*.c" | grep -v /test/ | xargs)
 SRCS_LIBFTO := $(shell find . -name "fto_*.c" | grep -v /test/ | xargs)
+SRCS := $(SRCS_MINIRT) $(SRCS_LIBWRAP) $(SRCS_LIBT) $(SRCS_LIBFT) $(SRCS_LIBFTO)
 
 NAME := minirt
 EXECUTABLE_TARGETS := $(NAME)
@@ -100,6 +101,11 @@ $(OBJ_DIR)/$(NAME)$(SUFFIX).exe: $(patsubst ./%.c,$(OBJ_DIR)/%$(SUFFIX).o,$(SRCS
 $(EXECUTABLE_TARGETS): %: $(OBJ_DIR)/%$(SUFFIX).exe
 	$(Q1)cp $< $@.exe
 .PHONY: $(EXECUTABLE_TARGETS)
+
+.PHONY: norm
+norm: $(patsubst ./%.c,$(OBJ_DIR)/%.norm_flag,$(SRCS))
+$(OBJ_DIR)/%.norm_flag: %.c
+	$(Q2)norminette $< && touch $@
 
 .PHONY: run
 run: $(OBJ_DIR)/$(NAME)$(SUFFIX).exe

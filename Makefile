@@ -63,6 +63,9 @@ compile_commands.json: pre_dev
 	$(Q2)(cat template/tasks.json.before.txt && find src -name tasks.part.json | xargs cat && cat template/tasks.json.after.txt) > $@
 .PHONY: dev
 dev: compile_commands.json .vscode/launch.json .vscode/tasks.json
+.PHONY: norm
+norm:
+	$(Q2)$(MAKE) -C src norm
 
 .PHONY: run
 run:
