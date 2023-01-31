@@ -26,7 +26,6 @@
 
 #define SS_RATE 2
 
-// print normal
 static t_err	ss(const t_context *c, size_t x, size_t y, t_f3 *out)
 {
 	const t_f			f_x
