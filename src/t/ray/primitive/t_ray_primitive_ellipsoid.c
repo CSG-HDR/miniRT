@@ -32,26 +32,27 @@
  */
 typedef struct s_locals
 {
-	t_f		a;
-	t_f		b;
-	t_f		c;
-	t_f		p;
-	t_f		q;
-	t_f		r;
-	t_f		u;
-	t_f		v;
-	t_f		w;
-	t_f		x;
-	t_f		y;
-	t_f		z;
-	t_f		y2_4xz;
-	bool	hit;
-	bool	has_record;
-	bool	in_sphere;
-	t_f		sqrt_y2_4xz;
+	t_f				a;
+	t_f				b;
+	t_f				c;
+	t_f				p;
+	t_f				q;
+	t_f				r;
+	t_f				u;
+	t_f				v;
+	t_f				w;
+	t_f				x;
+	t_f				y;
+	t_f				z;
+	t_f				y2_4xz;
+	bool			hit;
+	bool			has_record;
+	bool			in_sphere;
+	t_f				sqrt_y2_4xz;
+	t_map_material	material;
 }	t_locals;
 
-t_locals	s_locals(t_ray ray, t_map_ellipsoid ellipsoid)
+static t_locals	s_locals(t_ray ray, t_map_ellipsoid ellipsoid)
 {
 	t_locals	l;
 
@@ -67,25 +68,51 @@ t_locals	s_locals(t_ray ray, t_map_ellipsoid ellipsoid)
 	l.x = (l.a * l.u * l.u) + (l.b * l.v * l.v) + (l.c * l.w * l.w);
 	l.y = (2 * l.a * l.p * l.u) + (2 * l.b * l.q * l.v) + (2 * l.c * l.r * l.w);
 	l.z = (l.a * l.p * l.p) + (l.b * l.q * l.q) + (l.c * l.r * l.r) - 1;
-	l.y2_4xz = l.y * l.y + 4 * l.x * l.z;
+	l.y2_4xz = l.y * l.y - 4 * l.x * l.z;
 	l.hit = l.y2_4xz > 0;
-	l.has_record = (l.hit && (l.y < l.sqrt_y2_4xz));
 	if (l.hit)
 		l.sqrt_y2_4xz = t_f_sqrt(l.y2_4xz);
+	l.has_record = (l.hit && (l.y < l.sqrt_y2_4xz));
 	l.in_sphere = (l.has_record && (-l.y - l.sqrt_y2_4xz < 0));
+	l.material = ellipsoid.material;
 	return (l);
 }
 
-t_err	allocate(t_ray ray, const t_locals *l, t_ray_hit_records *out)
+static t_map_normal	normal(t_ray ray, const t_locals *l, t_f distance)
 {
-	t_ray_hit_record *const	result
-		= wrap_malloc(sizeof(t_ray_hit_record) * 2);
+	//
+}
+
+/**
+ * @return t_f texture coord x
+ */
+static t_f	coord(t_ray ray, const t_locals *l, t_f distance, t_f *out_y)
+{
+	//
+}
+
+static t_err	allocate(t_ray ray, const t_locals *l, t_ray_hit_records *out)
+{
+	t_ray_hit_record *const	result = wrap_malloc(sizeof(t_ray_hit_record) * 2);
 
 	if (!result)
 		return (true);
+	result[0] = (t_ray_hit_record){0, (t_map_normal){0, 0, 0},
+		t_ray_material_from_color(l->material), true, 0, 0};
+	if (!l->in_sphere)
+	{
+		result[0].distance = (-l->y - l->sqrt_y2_4xz) / (2 * l->x);
+		result[0].normal = normal(ray, l, result[0].distance);
+		result[0].x = coord(ray, l, result[0].distance, &result[0].y);
+	}
+	result[1] = (t_ray_hit_record){0, (t_map_normal){0, 0, 0},
+		t_ray_material_from_color(l->material), false, 0, 0};
+	result[1].distance = (-l->y + l->sqrt_y2_4xz) / (2 * l->x);
+	result[1].normal = normal(ray, l, result[1].distance);
+	result[1].x = coord(ray, l, result[1].distance, &result[1].y);
 	out->hit_record_count = 2;
 	out->hit_records = result;
-	// TODO:
+	return (false);
 }
 
 t_err	t_ray_primitive_ellipsoid(
@@ -96,7 +123,7 @@ t_err	t_ray_primitive_ellipsoid(
 {
 	const t_locals	l = s_locals(ray, ellipsoid);
 
-	if (l.y2_4xz < 0 || l.y - l.sqrt_y2_4xz > 0)
+	if (!l.hit)
 	{
 		*out = (t_ray_hit_records){0, NULL};
 		return (false);
