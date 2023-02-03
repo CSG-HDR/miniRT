@@ -38,7 +38,9 @@ t_f		t_f3_sqr_length(t_f3 f);
 t_f		t_f3_length(t_f3 f);
 t_f3	t_f3_unit(t_f3 f);
 t_f3	t_f3_rotate(t_f3 point, t_f3 rotation);
+t_f3	t_f3_rotate_reverse(t_f3 point, t_f3 rotation);
 t_f3	t_f3_rotate_from_origin(t_f3 point, t_f3 origin, t_f3 rotation);
+t_f3	t_f3_rotate_reverse_from_origin(t_f3 point, t_f3 origin, t_f3 rotation);
 t_f3	t_f3_normal_to_rotation(t_f3 normal);
 
 #endif

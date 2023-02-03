@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_f.h"
 #include "t_f3x3.h"
 
+#include "t_f.h"
 #include "t_f3.h"
 
 static t_f3x3	rotate_yaw(t_f rad)

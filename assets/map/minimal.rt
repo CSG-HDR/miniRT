@@ -1,11 +1,14 @@
 {
   "camera": {
-    "position": [0, -1, 1],
-    "rotation": { "type": "rotation", "rotation": [0, 0, 0] },
+    "position": [5, -5.5, 4],
+    "rotation": { "type": "rotation", "rotation": [0, -0.05, 0] },
     "fov": 0.25
   },
   "models": [
-    { "type": "sphere", "position": [3, 5, 1], "radius": 1, "material": { "ambient": [0, 0, 1] } },
+    { "type": "ellipsoid", "position": [1, 5, 0], "size": [1, 2, 3], "rotation": [0, 0, 0], "material": { "ambient": [0, 0, 1] } },
+    { "type": "ellipsoid", "position": [4, 5, 0], "size": [1, 2, 3], "rotation": [0.25, 0, 0], "material": { "ambient": [0, 1, 1] } },
+    { "type": "ellipsoid", "position": [7, 5, 0], "size": [1, 2, 3], "rotation": [0, 0.25, 0], "material": { "ambient": [1, 0, 1] } },
+    { "type": "ellipsoid", "position": [10, 5, 0], "size": [1, 2, 3], "rotation": [0, 0, 0.25], "material": { "ambient": [1, 1, 0] } },
     { "type": "intersection", "children": [
       { "type": "ellipsoid", "position": [-3, 5, 0], "size": [2.5, 1.125, 1.125], "rotation": [0, 0, 0], "material": { "ambient": [0, 1, 0] } },
       { "type": "sphere", "position": [-2, 5, 0], "radius": 1.125, "material": { "ambient": [1, 0, 0] } }

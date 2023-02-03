@@ -15,6 +15,7 @@
 #include "wrap.h"
 #include "ft_types.h"
 #include "t_f.h"
+#include "t_f3.h"
 #include "t_map.h"
 
 /**
@@ -59,9 +60,9 @@ static t_locals	s_locals(t_ray ray, t_map_ellipsoid ellipsoid)
 	l.a = 1 / (ellipsoid.size.x * ellipsoid.size.x);
 	l.b = 1 / (ellipsoid.size.y * ellipsoid.size.y);
 	l.c = 1 / (ellipsoid.size.z * ellipsoid.size.z);
-	l.p = ray.origin.x - ellipsoid.position.x;
-	l.q = ray.origin.y - ellipsoid.position.y;
-	l.r = ray.origin.z - ellipsoid.position.z;
+	l.p = ray.origin.x;
+	l.q = ray.origin.y;
+	l.r = ray.origin.z;
 	l.u = ray.direction.x;
 	l.v = ray.direction.y;
 	l.w = ray.direction.z;
@@ -104,7 +105,7 @@ static t_err	allocate(t_ray ray, const t_locals *l, t_ray_hit_records *out)
 
 	if (!result)
 		return (true);
-	result[0] = (t_ray_hit_record){0, (t_map_normal){0, 0, 0},
+	result[0] = (t_ray_hit_record){0, (t_map_normal){0, 0, 1},
 		t_ray_material_from_color(l->material), true, 0, 0};
 	if (!l->in_sphere)
 	{
@@ -112,7 +113,7 @@ static t_err	allocate(t_ray ray, const t_locals *l, t_ray_hit_records *out)
 		result[0].normal = normal(ray, l, result[0].distance);
 		result[0].x = coord(ray, l, result[0].distance, &result[0].y);
 	}
-	result[1] = (t_ray_hit_record){0, (t_map_normal){0, 0, 0},
+	result[1] = (t_ray_hit_record){0, (t_map_normal){0, 0, 1},
 		t_ray_material_from_color(l->material), false, 0, 0};
 	result[1].distance = (-l->y + l->sqrt_y2_4xz) / (2 * l->x);
 	result[1].normal = normal(ray, l, result[1].distance);
@@ -128,7 +129,10 @@ t_err	t_ray_primitive_ellipsoid(
 	t_ray_hit_records *out
 )
 {
-	const t_locals	l = s_locals(ray, ellipsoid);
+	const t_ray		preprocessed
+		= t_ray_preprocess(ray, ellipsoid.position, ellipsoid.rotation);
+	const t_locals	l = s_locals(preprocessed, ellipsoid);
+	size_t			i;
 
 	if (!l.hit)
 	{
@@ -137,5 +141,9 @@ t_err	t_ray_primitive_ellipsoid(
 	}
 	if (allocate(ray, &l, out))
 		return (true);
+	i = -1;
+	while (++i < (*out).hit_record_count)
+		(*out).hit_records[i].normal = t_f3_rotate(
+				ellipsoid.rotation, (*out).hit_records[i].normal);
 	return (false);
 }

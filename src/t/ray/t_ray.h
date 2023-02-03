@@ -95,6 +95,10 @@ void			t_ray_hit_records_builder_free(t_ray_hit_records_builder *self);
  */
 t_ray			t_ray_get(t_map *map, t_f x, t_f y);
 
+t_ray			t_ray_preprocess(
+					t_ray ray,
+					t_map_position position,
+					t_map_rotation rotation);
 void			t_ray_hit_records_free(
 					t_ray_hit_records records);
 t_err			t_ray_hit_records_copy(
