@@ -21,14 +21,22 @@ bool	t_map_validate_material(t_ft_json value)
 	return (
 		true
 		&& ft_json_is_dict(value)
-		&& ft_json_dict_has_key(value, "ambient")
-		&& t_map_validate_color(ft_json_get_dict(value, "ambient"))
-		&& ft_json_dict_has_key(value, "diffuse")
-		&& t_map_validate_color(ft_json_get_dict(value, "diffuse"))
-		&& ft_json_dict_has_key(value, "specular")
-		&& t_map_validate_color(ft_json_get_dict(value, "specular"))
-		&& ft_json_dict_has_key(value, "specularLobe")
-		&& ft_json_is_number(ft_json_get_dict(value, "specularLobe"))
+		&& (
+			!ft_json_dict_has_key(value, "ambient")
+			|| t_map_validate_color(ft_json_get_dict(value, "ambient"))
+		)
+		&& (
+			!ft_json_dict_has_key(value, "diffuse")
+			|| t_map_validate_color(ft_json_get_dict(value, "diffuse"))
+		)
+		&& (
+			!ft_json_dict_has_key(value, "specular")
+			|| t_map_validate_color(ft_json_get_dict(value, "specular"))
+		)
+		&& (
+			!ft_json_dict_has_key(value, "specularLobe")
+			|| ft_json_is_number(ft_json_get_dict(value, "specularLobe"))
+		)
 		&& (!ft_json_dict_has_key(value, "normal")
 			|| t_map_validate_normal_map(ft_json_get_dict(value, "normal")))
 	);

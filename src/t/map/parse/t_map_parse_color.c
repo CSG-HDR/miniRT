@@ -58,7 +58,7 @@ t_err	t_map_parse_color(t_ft_json value, t_map_color **out)
 {
 	t_map_color *const	result = wrap_malloc(sizeof(t_map_color));
 
-	if (t_map_validate_has_type(value, "color"))
+	if (ft_json_is_list(value))
 	{
 		parse_color(value, &result->color);
 	}
