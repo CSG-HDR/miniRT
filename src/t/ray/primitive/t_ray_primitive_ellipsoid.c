@@ -59,9 +59,9 @@ static t_locals	s_locals(t_ray ray, t_map_ellipsoid ellipsoid)
 	l.a = 1 / (ellipsoid.size.x * ellipsoid.size.x);
 	l.b = 1 / (ellipsoid.size.y * ellipsoid.size.y);
 	l.c = 1 / (ellipsoid.size.z * ellipsoid.size.z);
-	l.p = ray.origin.x;
-	l.q = ray.origin.y;
-	l.r = ray.origin.z;
+	l.p = ray.origin.x - ellipsoid.position.x;
+	l.q = ray.origin.y - ellipsoid.position.y;
+	l.r = ray.origin.z - ellipsoid.position.z;
 	l.u = ray.direction.x;
 	l.v = ray.direction.y;
 	l.w = ray.direction.z;
@@ -80,7 +80,10 @@ static t_locals	s_locals(t_ray ray, t_map_ellipsoid ellipsoid)
 
 static t_map_normal	normal(t_ray ray, const t_locals *l, t_f distance)
 {
-	//
+	(void)ray;
+	(void)l;
+	(void)distance;
+	return ((t_map_normal){(t_f)0, (t_f)0, (t_f)0});
 }
 
 /**
@@ -88,7 +91,11 @@ static t_map_normal	normal(t_ray ray, const t_locals *l, t_f distance)
  */
 static t_f	coord(t_ray ray, const t_locals *l, t_f distance, t_f *out_y)
 {
-	//
+	(void)ray;
+	(void)l;
+	(void)distance;
+	(void)out_y;
+	return (*out_y);
 }
 
 static t_err	allocate(t_ray ray, const t_locals *l, t_ray_hit_records *out)

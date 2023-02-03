@@ -4,6 +4,13 @@
     "rotation": { "type": "rotation", "rotation": [0, 0, 0] },
     "fov": 0.25
   },
+  "models": [
+    { "type": "ellipsoid", "position": [0, 5, 1], "size": [1, 1, 1], "rotation": [0, 0, 0], "material": { "ambient": [0, 0, 1] } },
+    { "type": "intersection", "children": [
+      { "type": "ellipsoid", "position": [-0.5, 5, 0], "size": [1.125, 1.125, 1.125], "rotation": [0, 0, 0], "material": { "ambient": [0, 1, 0] } },
+      { "type": "ellipsoid", "position": [0.5, 5, 0], "size": [1.125, 1.125, 1.125], "rotation": [0, 0, 0], "material": { "ambient": [1, 0, 0] } }
+    ] }
+  ],
   "planes": [
     { "position": [0, 0, 0], "normal": [0, 0, 1] }
   ],
