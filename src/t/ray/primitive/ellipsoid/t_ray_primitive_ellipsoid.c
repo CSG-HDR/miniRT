@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   t_ray_primitive_ellipsoid.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Updated: 2023/02/04 01:07:50 by Juyeong Maing    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_locals
 	t_f				y2_4xz;
 	bool			hit;
 	bool			has_record;
-	bool			in_sphere;
+	bool			in_ellipsoid;
 	t_f				sqrt_y2_4xz;
 	t_map_material	material;
 }	t_locals;
@@ -74,7 +74,7 @@ static t_locals	s_locals(t_ray ray, t_map_ellipsoid ellipsoid)
 	if (l.hit)
 		l.sqrt_y2_4xz = t_f_sqrt(l.y2_4xz);
 	l.has_record = (l.hit && (l.y < l.sqrt_y2_4xz));
-	l.in_sphere = (l.has_record && (-l.y - l.sqrt_y2_4xz < 0));
+	l.in_ellipsoid = (l.has_record && (-l.y - l.sqrt_y2_4xz < 0));
 	l.material = ellipsoid.material;
 	return (l);
 }
@@ -87,6 +87,7 @@ static t_map_normal	normal(t_ray ray, const t_locals *l, t_f distance)
 	return ((t_map_normal){(t_f)0, (t_f)0, (t_f)0});
 }
 
+// TODO: implement
 /**
  * @return t_f texture coord x
  */
@@ -107,7 +108,7 @@ static t_err	allocate(t_ray ray, const t_locals *l, t_ray_hit_records *out)
 		return (true);
 	result[0] = (t_ray_hit_record){0, (t_map_normal){0, 0, 1},
 		t_ray_material_from_color(l->material), true, 0, 0};
-	if (!l->in_sphere)
+	if (!l->in_ellipsoid)
 	{
 		result[0].distance = (-l->y - l->sqrt_y2_4xz) / (2 * l->x);
 		result[0].normal = normal(ray, l, result[0].distance);

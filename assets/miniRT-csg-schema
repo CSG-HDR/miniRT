@@ -309,16 +309,6 @@
             "size": {
               "$ref": "#/$defs/size"
             },
-            "offset": {
-              "type": "array",
-              "items": {
-                "type": "number",
-                "description": "offset [x, y], default is [0, 0]",
-                "minimum": 0
-              },
-              "minItems": 2,
-              "maxItems": 2
-            },
             "rotation": {
               "$ref": "#/$defs/rotation"
             },
