@@ -57,7 +57,7 @@ t_err	t_ray_difference(
 				return (true);
 			}
 		}
-		if (subtract.hit_record_count > 0 && from.hit_records[i].distance >= max_subtract)
+		else if (subtract.hit_record_count > 0 && from.hit_records[i].distance <= max_subtract)
 		{
 			if (t_ray_hit_records_builder_add(builder, subtract.hit_records[subtract.hit_record_count - 1]))
 			{
