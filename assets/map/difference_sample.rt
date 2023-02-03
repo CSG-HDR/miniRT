@@ -1,0 +1,17 @@
+{
+  "camera": {
+    "position": [0, -1, 0],
+    "rotation": { "type": "rotation", "rotation": [0, 0, 0] },
+    "fov": 0.25
+  },
+  "models": [
+    { "type": "difference", 
+    "from": 
+      { "type": "ellipsoid", "position": [0, 3, 0], "size": [1, 1, 1], "rotation": [0, 0, 0], "material": { "ambient": [1, 0, 0] } },
+    "subtract":
+      { "type": "ellipsoid", "position": [0, 2, 0], "size": [0.5, 0.5, 0.5], "rotation": [0, 0, 0], "material": { "ambient": [0, 1, 0] } }
+    }
+  ],
+  "voidColor": [0, 0, 0],
+  "viewport": { "size": [960, 540], "only": [100, 100, 860, 440] }
+}
