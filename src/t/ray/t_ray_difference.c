@@ -10,12 +10,82 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_f.h"
 #include "t_ray.h"
+
+#include <stdbool.h>
+#include <stddef.h>
 
 #include "ft_types.h"
 
-#define INFINITY 4294967295
+static t_err	init(
+	t_ray_hit_records from,
+	t_ray_hit_records subtract,
+	t_ray_hit_records_builder **out_builder,
+	t_ray_hit_records *out_merged
+)
+{
+	const t_ray_hit_records		rays[3] = {from, from, subtract};
+	t_ray_hit_records_builder	*builder;
+	t_ray_hit_records			merged;
+
+	if (t_ray_hit_records_builder_init(&builder))
+		return (true);
+	if (t_ray_merge(rays, 3, &merged))
+	{
+		t_ray_hit_records_builder_free(builder);
+		return (true);
+	}
+	*out_builder = builder;
+	*out_merged = merged;
+	return (false);
+}
+
+static t_err	fini_ok(
+	t_ray_hit_records_builder *builder,
+	t_ray_hit_records merged,
+	t_ray_hit_records *out
+)
+{
+	t_err	result;
+
+	result = t_ray_hit_records_builder_build(builder, out);
+	t_ray_hit_records_builder_free(builder);
+	t_ray_hit_records_free(merged);
+	return (result);
+}
+
+static t_err	fini_ko(
+	t_ray_hit_records_builder *builder,
+	t_ray_hit_records merged
+)
+{
+	t_ray_hit_records_builder_free(builder);
+	t_ray_hit_records_free(merged);
+	return (true);
+}
+
+typedef struct s_locals
+{
+	t_ray_hit_records_builder	*builder;
+	t_ray_hit_records			merged;
+	size_t						i;
+	size_t						prev_sum;
+	size_t						sum;
+	bool						is_front_face;
+}	t_locals;
+
+static t_ray_hit_record	enhance(t_ray_hit_record record, t_locals *l)
+{
+	l->is_front_face = !l->is_front_face;
+	return ((t_ray_hit_record){
+		record.distance,
+		record.normal,
+		record.material,
+		l->is_front_face,
+		record.x,
+		record.y
+	});
+}
 
 t_err	t_ray_difference(
 	t_ray_hit_records from,
@@ -23,51 +93,21 @@ t_err	t_ray_difference(
 	t_ray_hit_records *out
 )
 {
-	t_ray_hit_records_builder	*builder;
-	size_t						i;
-	t_err						result;
-	t_f							min_subtract;
-	t_f							max_subtract;
+	t_locals	l;
 
-	if (subtract.hit_record_count == 0)
-	{
-		min_subtract = INFINITY;
-		max_subtract = 0;
-	}
-	else
-	{
-		min_subtract = subtract.hit_records[0].distance;
-		max_subtract = subtract.hit_records[subtract.hit_record_count - 1].distance;
-	}
-	i = 0;
-	if (t_ray_hit_records_builder_init(&builder))
+	l.is_front_face = false;
+	if (init(from, subtract, &l.builder, &l.merged))
 		return (true);
-	while (i < from.hit_record_count)
+	l.sum = 0;
+	l.i = -1;
+	while (++l.i < l.merged.hit_record_count)
 	{
-		if (from.hit_records[i].distance > min_subtract && from.hit_records[i].distance < max_subtract)
-		{
-			++i;
-			continue;
-		}
-		if (from.hit_records[i].distance <= min_subtract)
-		{
-			if (t_ray_hit_records_builder_add(builder, from.hit_records[i]))
-			{
-				t_ray_hit_records_builder_free(builder);
-				return (true);
-			}
-		}
-		else if (subtract.hit_record_count > 0 && from.hit_records[i].distance <= max_subtract)
-		{
-			if (t_ray_hit_records_builder_add(builder, subtract.hit_records[subtract.hit_record_count - 1]))
-			{
-				t_ray_hit_records_builder_free(builder);
-				return (true);
-			}
-		}
-		++i;
+		l.prev_sum = l.sum;
+		l.sum += 2 * (!!l.merged.hit_records[l.i].is_front_face) - 1;
+		if ((l.prev_sum == 2) != (l.sum == 2)
+			&& t_ray_hit_records_builder_add(
+				l.builder, enhance(l.merged.hit_records[l.i], &l)))
+			return (fini_ko(l.builder, l.merged));
 	}
-	result = t_ray_hit_records_builder_build(builder, out);
-	t_ray_hit_records_builder_free(builder);
-	return (result);
+	return (fini_ok(l.builder, l.merged, out));
 }

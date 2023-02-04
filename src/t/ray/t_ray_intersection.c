@@ -17,7 +17,7 @@
 #include "ft_types.h"
 
 static t_err	init(
-	t_ray_hit_records *rays,
+	const t_ray_hit_records *rays,
 	size_t count,
 	t_ray_hit_records_builder **out_builder,
 	t_ray_hit_records *out_merged
@@ -63,7 +63,7 @@ static t_err	fini_ko(
 }
 
 t_err	t_ray_intersection(
-	t_ray_hit_records *rays,
+	const t_ray_hit_records *rays,
 	size_t count,
 	t_ray_hit_records *out
 )

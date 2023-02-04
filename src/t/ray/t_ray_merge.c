@@ -17,7 +17,7 @@
 #include "ft_types.h"
 
 t_err	t_ray_merge(
-	t_ray_hit_records *rays,
+	const t_ray_hit_records *rays,
 	size_t count,
 	t_ray_hit_records *out
 )

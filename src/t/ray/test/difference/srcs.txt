@@ -1,5 +1,6 @@
 main.c
 ../../t_ray_difference.c
+../../t_ray_merge.c
 ../../hit_records/t_ray_hit_records_free.c
 ../../hit_records/builder/t_ray_hit_records_builder_init.c
 ../../hit_records/builder/t_ray_hit_records_builder_add.c

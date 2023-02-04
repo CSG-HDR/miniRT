@@ -17,10 +17,31 @@
 #include "ft_types.h"
 #include "wrap.h"
 
-static bool	decrease_count(t_ray_hit_records_builder *self)
+static void	remove_record_head(t_ray_hit_records_builder *self)
 {
+	t_ray_hit_records_builder_node	*to_remove;
+
+	to_remove = self->head;
+	self->head = to_remove->next;
+	if (!self->head)
+		self->tail = NULL;
+	wrap_free(to_remove);
 	self->count--;
-	return (true);
+}
+
+static void	remove_record_non_head(
+	t_ray_hit_records_builder *self,
+	t_ray_hit_records_builder_node *prev
+)
+{
+	t_ray_hit_records_builder_node	*to_remove;
+
+	to_remove = prev->next;
+	prev->next = to_remove->next;
+	if (!prev->next)
+		self->tail = prev;
+	wrap_free(to_remove);
+	self->count--;
 }
 
 static bool	remove_duplicate_record(
@@ -29,15 +50,12 @@ static bool	remove_duplicate_record(
 )
 {
 	t_ray_hit_records_builder_node	*prev;
-	t_ray_hit_records_builder_node	*to_remove;
 
 	if (self->head && self->head->record.distance == record.distance
 		&& self->head->record.is_front_face != record.is_front_face)
 	{
-		to_remove = self->head;
-		self->head = to_remove->next;
-		wrap_free(to_remove);
-		return (decrease_count(self));
+		remove_record_head(self);
+		return (true);
 	}
 	prev = self->head;
 	while (prev && prev->next)
@@ -45,10 +63,8 @@ static bool	remove_duplicate_record(
 		if (prev->next->record.distance == record.distance
 			&& prev->next->record.is_front_face != record.is_front_face)
 		{
-			to_remove = prev->next;
-			prev->next = to_remove->next;
-			wrap_free(to_remove);
-			return (decrease_count(self));
+			remove_record_non_head(self, prev);
+			return (true);
 		}
 		prev = prev->next;
 	}
