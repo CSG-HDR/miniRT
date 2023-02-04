@@ -74,9 +74,6 @@ t_err				t_texture_manager_preload_sphere(
 t_err				t_texture_manager_preload_ellipsoid(
 						t_texture_manager *self,
 						t_map_ellipsoid ellipsoid);
-t_err				t_texture_manager_preload_torus(
-						t_texture_manager *self,
-						t_map_torus torus);
 t_err				t_texture_manager_preload_cone(
 						t_texture_manager *self,
 						t_map_cone cone);

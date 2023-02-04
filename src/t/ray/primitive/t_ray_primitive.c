@@ -27,9 +27,6 @@ t_err	t_ray_primitive(
 	if (*primitive.type == T_MAP_PRIMITIVE_TYPE_ELLIPSOID)
 		return (t_ray_primitive_ellipsoid(
 				ray, primitive.ellipsoid->ellipsoid, out));
-	if (*primitive.type == T_MAP_PRIMITIVE_TYPE_TORUS)
-		return (t_ray_primitive_torus(
-				ray, primitive.torus->torus, out));
 	if (*primitive.type == T_MAP_PRIMITIVE_TYPE_CONE)
 		return (t_ray_primitive_cone(
 				ray, primitive.cone->cone, out));

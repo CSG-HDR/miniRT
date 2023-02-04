@@ -27,11 +27,6 @@ static void	circle_related(t_map_primitive value)
 		t_map_free_ellipsoid(value.ellipsoid->ellipsoid);
 		wrap_free(value.ellipsoid);
 	}
-	if (*value.type == T_MAP_PRIMITIVE_TYPE_TORUS)
-	{
-		t_map_free_torus(value.torus->torus);
-		wrap_free(value.torus);
-	}
 	if (*value.type == T_MAP_PRIMITIVE_TYPE_CONE)
 	{
 		t_map_free_cone(value.cone->cone);

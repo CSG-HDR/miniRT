@@ -25,9 +25,6 @@ t_err	t_texture_manager_preload_primitive(
 	if (*primitive.type == T_MAP_PRIMITIVE_TYPE_ELLIPSOID)
 		return (t_texture_manager_preload_ellipsoid(
 				self, primitive.ellipsoid->ellipsoid));
-	if (*primitive.type == T_MAP_PRIMITIVE_TYPE_TORUS)
-		return (t_texture_manager_preload_torus(
-				self, primitive.torus->torus));
 	if (*primitive.type == T_MAP_PRIMITIVE_TYPE_CONE)
 		return (t_texture_manager_preload_cone(
 				self, primitive.cone->cone));

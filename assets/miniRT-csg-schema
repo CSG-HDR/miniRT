@@ -268,8 +268,7 @@
               "type": "string",
               "description": "type of solid geometry",
               "enum": [
-                "ellipsoid",
-                "torus"
+                "ellipsoid"
               ]
             },
             "position": {

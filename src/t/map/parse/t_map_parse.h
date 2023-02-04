@@ -33,8 +33,6 @@ t_err	t_map_parse_primitive_internal_fuck_norm_sphere(
 			t_ft_json value, t_map_primitive_sphere **out);
 t_err	t_map_parse_primitive_internal_fuck_norm_ellipsoid(
 			t_ft_json value, t_map_primitive_ellipsoid **out);
-t_err	t_map_parse_primitive_internal_fuck_norm_torus(
-			t_ft_json value, t_map_primitive_torus **out);
 t_err	t_map_parse_primitive_internal_fuck_norm_cone(
 			t_ft_json value, t_map_primitive_cone **out);
 t_err	t_map_parse_primitive_internal_fuck_norm_cylinder(
@@ -43,7 +41,6 @@ t_err	t_map_parse_primitive_internal_fuck_norm_cube(
 			t_ft_json value, t_map_primitive_cube **out);
 t_err	t_map_parse_sphere(t_ft_json value, t_map_sphere *out);
 t_err	t_map_parse_ellipsoid(t_ft_json value, t_map_ellipsoid *out);
-t_err	t_map_parse_torus(t_ft_json value, t_map_torus *out);
 t_err	t_map_parse_cone(t_ft_json value, t_map_cone *out);
 t_err	t_map_parse_cylinder(t_ft_json value, t_map_cylinder *out);
 t_err	t_map_parse_cube(t_ft_json value, t_map_cube *out);

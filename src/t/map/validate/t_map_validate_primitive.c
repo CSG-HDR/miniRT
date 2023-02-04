@@ -22,7 +22,6 @@ bool	t_map_validate_primitive(t_ft_json value)
 		false
 		|| t_map_validate_sphere(value)
 		|| t_map_validate_ellipsoid(value)
-		|| t_map_validate_torus(value)
 		|| t_map_validate_cone(value)
 		|| t_map_validate_cylinder(value)
 		|| t_map_validate_cube(value)

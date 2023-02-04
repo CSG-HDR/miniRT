@@ -25,9 +25,6 @@ t_err	t_map_parse_primitive(t_ft_json value, t_map_primitive *out)
 	if (t_map_validate_has_type(value, "ellipsoid"))
 		return (t_map_parse_primitive_internal_fuck_norm_ellipsoid(
 				value, &out->ellipsoid));
-	if (t_map_validate_has_type(value, "torus"))
-		return (t_map_parse_primitive_internal_fuck_norm_torus(
-				value, &out->torus));
 	if (t_map_validate_has_type(value, "cone"))
 		return (t_map_parse_primitive_internal_fuck_norm_cone(
 				value, &out->cone));

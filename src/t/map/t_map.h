@@ -252,14 +252,6 @@ typedef struct s_map_ellipsoid
 	t_map_material	material;
 }	t_map_ellipsoid;
 
-typedef struct s_map_torus
-{
-	t_map_position	position;
-	t_map_size		size;
-	t_map_rotation	rotation;
-	t_map_material	material;
-}	t_map_torus;
-
 typedef struct s_map_cone
 {
 	t_map_position	position;
@@ -298,7 +290,6 @@ typedef enum e_map_primitive_type
 {
 	T_MAP_PRIMITIVE_TYPE_SPHERE,
 	T_MAP_PRIMITIVE_TYPE_ELLIPSOID,
-	T_MAP_PRIMITIVE_TYPE_TORUS,
 	T_MAP_PRIMITIVE_TYPE_CONE,
 	T_MAP_PRIMITIVE_TYPE_CYLINDER,
 	T_MAP_PRIMITIVE_TYPE_CUBE,
@@ -315,12 +306,6 @@ typedef struct s_map_primitive_ellipsoid
 	t_map_primitive_type	type;
 	t_map_ellipsoid			ellipsoid;
 }	t_map_primitive_ellipsoid;
-
-typedef struct s_map_primitive_torus
-{
-	t_map_primitive_type	type;
-	t_map_torus				torus;
-}	t_map_primitive_torus;
 
 typedef struct s_map_primitive_cone
 {
@@ -345,7 +330,6 @@ typedef union u_map_primitive
 	t_map_primitive_type		*type;
 	t_map_primitive_sphere		*sphere;
 	t_map_primitive_ellipsoid	*ellipsoid;
-	t_map_primitive_torus		*torus;
 	t_map_primitive_cone		*cone;
 	t_map_primitive_cylinder	*cylinder;
 	t_map_primitive_cube		*cube;

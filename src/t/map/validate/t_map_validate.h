@@ -28,7 +28,6 @@ bool	t_map_validate_difference(t_ft_json value);
 bool	t_map_validate_primitive(t_ft_json value);
 bool	t_map_validate_sphere(t_ft_json value);
 bool	t_map_validate_ellipsoid(t_ft_json value);
-bool	t_map_validate_torus(t_ft_json value);
 bool	t_map_validate_cone(t_ft_json value);
 bool	t_map_validate_cylinder(t_ft_json value);
 bool	t_map_validate_cube(t_ft_json value);

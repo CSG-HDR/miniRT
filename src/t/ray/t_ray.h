@@ -190,10 +190,6 @@ t_err			t_ray_primitive_ellipsoid(
 					t_ray ray,
 					t_map_ellipsoid ellipsoid,
 					t_ray_hit_records *out);
-t_err			t_ray_primitive_torus(
-					t_ray ray,
-					t_map_torus torus,
-					t_ray_hit_records *out);
 t_err			t_ray_primitive_cone(
 					t_ray ray,
 					t_map_cone cone,

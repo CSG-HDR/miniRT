@@ -27,7 +27,6 @@ void	t_map_free_difference(t_map_difference value);
 void	t_map_free_primitive(t_map_primitive value);
 void	t_map_free_sphere(t_map_sphere value);
 void	t_map_free_ellipsoid(t_map_ellipsoid value);
-void	t_map_free_torus(t_map_torus value);
 void	t_map_free_cone(t_map_cone value);
 void	t_map_free_cylinder(t_map_cylinder value);
 void	t_map_free_cube(t_map_cube value);
