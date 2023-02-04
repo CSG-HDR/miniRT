@@ -13,6 +13,8 @@
 #include "t_ray_primitive_cone.h"
 
 #include "ft_types.h"
+#include "t_f.h"
+#include "t_f3.h"
 #include "t_map.h"
 #include "t_ray.h"
 
@@ -29,8 +31,7 @@
  * Z = Ap^2 + Bq^2 - Cr^2
  * t = (-Y +- sqrt(Y^2 - 4XZ)) / 2X
  */
-
-typedef struct s_locals
+typedef struct s_locals1
 {
 	t_f			a;
 	t_f			b;
@@ -47,14 +48,13 @@ typedef struct s_locals
 	t_f			y2_4xz;
 	bool		hit;
 	bool		has_record;
-	bool		in_cone;
 	t_f			sqrt_y2_4xz;
 	t_map_cone	self;
-}	t_locals;
+}	t_locals1;
 
-static t_locals	s_locals(t_ray ray, t_map_cone cone)
+static t_locals1	s_locals1(t_ray ray, t_map_cone cone)
 {
-	t_locals	l;
+	t_locals1	l;
 
 	l.self = cone;
 	l.a = 1 / (cone.size.x * cone.size.x);
@@ -74,11 +74,58 @@ static t_locals	s_locals(t_ray ray, t_map_cone cone)
 	if (l.hit)
 		l.sqrt_y2_4xz = t_f_sqrt(l.y2_4xz);
 	l.has_record = (l.hit && (l.y < l.sqrt_y2_4xz));
-	l.in_cone = (l.has_record && (-l.y - l.sqrt_y2_4xz < 0));
 	return (l);
 }
 
-// TODO: implement
+// TODO: normal
+static t_map_normal	normal(t_map_position point, t_locals1 l)
+{
+	(void)point;
+	(void)l;
+	return ((t_map_normal){0, 0, 0});
+}
+
+typedef struct s_locals2
+{
+	t_f				n_distance;
+	t_map_position	n;
+	bool			n_hit;
+	t_f3			n_normal;
+	t_f				n_x;
+	t_f				n_y;
+	t_f				f_distance;
+	t_map_position	f;
+	bool			f_hit;
+	t_f3			f_normal;
+	t_f				f_x;
+	t_f				f_y;
+}	t_locals2;
+
+static t_locals2	s_locals2(t_locals1 a, t_ray ray)
+{
+	t_locals2	l;
+
+	l.n_distance = (-a.y - a.sqrt_y2_4xz) / (2 * a.x);
+	l.n = t_f3_add(ray.origin, t_f3_mul(ray.direction, l.n_distance));
+	l.n_hit = (l.n.z >= 0 && l.n.z <= a.self.size.z);
+	if (l.n_hit)
+	{
+		l.n_normal = normal(l.n, a);
+		l.n_x = t_f_rot(t_f_atan2(l.n.y, l.n.x));
+		l.n_y = l.n.z / a.self.size.z;
+	}
+	l.f_distance = (-a.y + a.sqrt_y2_4xz) / (2 * a.x);
+	l.f = t_f3_add(ray.origin, t_f3_mul(ray.direction, l.f_distance));
+	l.f_hit = (l.f.z >= 0 && l.f.z <= a.self.size.z);
+	if (l.f_hit)
+	{
+		l.f_normal = normal(l.f, a);
+		l.f_x = t_f_rot(t_f_atan2(l.f.y, l.f.x));
+		l.f_y = l.f.z / a.self.size.z;
+	}
+	return (l);
+}
+
 t_err	t_ray_primitive_cone_side(
 	t_ray ray,
 	t_map_cone cone,
@@ -87,7 +134,23 @@ t_err	t_ray_primitive_cone_side(
 {
 	const t_ray		enhanced = {(t_map_position){
 		ray.origin.x, ray.origin.y, ray.origin.z - cone.size.z}, ray.direction};
-	const t_locals	l = s_locals(enhanced, cone);
+	const t_locals1	a = s_locals1(enhanced, cone);
+	t_locals2		l;
 
-	return (false);
+	if (!a.has_record)
+		return (false);
+	l = s_locals2(a, ray);
+	return (
+		false
+		|| (l.n_hit
+			&& t_ray_hit_records_builder_add(builder, (t_ray_hit_record){
+				l.n_distance, l.n_normal,
+				t_ray_material_from_color(cone.material_side),
+				true, l.n_x, l.n_y}))
+		|| (l.f_hit
+			&& t_ray_hit_records_builder_add(builder, (t_ray_hit_record){
+				l.f_distance, l.f_normal,
+				t_ray_material_from_color(cone.material_side),
+				false, l.f_x, l.f_y}))
+	);
 }

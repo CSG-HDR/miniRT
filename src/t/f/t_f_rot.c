@@ -14,7 +14,7 @@
 
 #include <math.h>
 
-t_f	t_f_rad(t_f f)
+t_f	t_f_rot(t_f f)
 {
-	return ((t_f)(f * M_PI * 2));
+	return ((t_f)(f / M_PI / 2));
 }
