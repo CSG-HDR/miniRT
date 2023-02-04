@@ -18,27 +18,27 @@
 
 t_err	t_ray_primitive_cube_top(
 			t_ray ray,
-			t_map_cone cone,
+			t_map_cube cube,
 			t_ray_hit_records_builder *builder);
 t_err	t_ray_primitive_cube_bottom(
 			t_ray ray,
-			t_map_cone cone,
+			t_map_cube cube,
 			t_ray_hit_records_builder *builder);
 t_err	t_ray_primitive_cube_left(
 			t_ray ray,
-			t_map_cone cone,
+			t_map_cube cube,
 			t_ray_hit_records_builder *builder);
 t_err	t_ray_primitive_cube_right(
 			t_ray ray,
-			t_map_cone cone,
+			t_map_cube cube,
 			t_ray_hit_records_builder *builder);
 t_err	t_ray_primitive_cube_front(
 			t_ray ray,
-			t_map_cone cone,
+			t_map_cube cube,
 			t_ray_hit_records_builder *builder);
 t_err	t_ray_primitive_cube_back(
 			t_ray ray,
-			t_map_cone cone,
+			t_map_cube cube,
 			t_ray_hit_records_builder *builder);
 
 #endif
