@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   t_ray_primitive_cone.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Updated: 2023/02/04 20:05:53 by seongyle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ t_err	t_ray_primitive_cone(
 {
 	t_locals	l;
 
-	l.preprocessed
-		= t_ray_preprocess(ray, cone.position, cone.rotation);
+	l.preprocessed = t_ray_preprocess(ray, cone.position, cone.rotation);
 	if (t_ray_hit_records_builder_init(&l.builder))
 		return (true);
 	if (append_records(l.preprocessed, cone, l.builder))
