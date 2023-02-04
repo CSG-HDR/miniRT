@@ -32,7 +32,6 @@ test:
 	$(Q2)$(MAKE) -C test
 	@echo "Some test might need manual review"
 prepare_publish:
-	$(Q2)$(MAKE) fclean
 	$(Q2)rm -rf tmp
 	$(Q2)mkdir tmp
 	$(Q2)sh src/build/script/copy_src_to_tmp_flatten.sh
