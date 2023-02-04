@@ -14,6 +14,7 @@
 
 #include "ft_types.h"
 #include "t_map.h"
+#include "t_ray.h"
 
 /**
  * f(x, y, z) = x^2/a^2 + y^2/b^2 - z^2/c^2 = 0
@@ -78,13 +79,15 @@ static t_locals	s_locals(t_ray ray, t_map_cone cone)
 }
 
 // TODO: implement
-t_err	t_ray_primitive_cone(
+t_err	t_ray_primitive_cone_side(
 	t_ray ray,
 	t_map_cone cone,
-	t_ray_hit_records *out
+	t_ray_hit_records_builder *builder
 )
 {
-	(void)s_locals(ray, cone);
-	*out = (t_ray_hit_records){0, NULL};
+	const t_ray		enhanced = {(t_map_position){
+		ray.origin.x, ray.origin.y, ray.origin.z - cone.size.z}, ray.direction};
+	const t_locals	l = s_locals(enhanced, cone);
+
 	return (false);
 }
