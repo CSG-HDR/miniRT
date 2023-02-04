@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_ray.h"
+#include "t_ray_primitive_cube.h"
 
+#include "t_ray.h"
 #include "ft_types.h"
 #include "t_map.h"
-#include "t_ray_primitice_cube.h"
 
 static t_err	append_records(
 	t_ray ray,
