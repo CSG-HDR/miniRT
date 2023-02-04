@@ -82,7 +82,7 @@ t_err	t_ray_intersection(
 	{
 		prev_sum = sum;
 		sum += 2 * (!!merged.hit_records[i].is_front_face) - 1;
-		if ((prev_sum == count) != (sum == count)
+		if ((prev_sum == count || sum == count)
 			&& t_ray_hit_records_builder_add(builder, merged.hit_records[i]))
 			return (fini_ko(builder, merged));
 	}

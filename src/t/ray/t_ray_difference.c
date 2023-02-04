@@ -104,7 +104,7 @@ t_err	t_ray_difference(
 	{
 		l.prev_sum = l.sum;
 		l.sum += 2 * (!!l.merged.hit_records[l.i].is_front_face) - 1;
-		if ((l.prev_sum == 2) != (l.sum == 2)
+		if ((l.prev_sum == 2 || l.sum == 2)
 			&& t_ray_hit_records_builder_add(
 				l.builder, enhance(l.merged.hit_records[l.i], &l)))
 			return (fini_ko(l.builder, l.merged));
