@@ -13,6 +13,8 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# include <stdbool.h>
+
 # include "ft_types.h"
 # include "t_image.h"
 # include "t_map.h"
@@ -35,6 +37,7 @@ typedef struct s_minirt
 	t_image				*tmp;
 	t_map				*map;
 	t_texture_manager	*texture_manager;
+	bool				rendered;
 }	t_minirt;
 
 typedef enum e_minirt_load_map_error

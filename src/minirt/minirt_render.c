@@ -79,10 +79,14 @@ static t_err	fill(void *context, size_t x, size_t y, t_f3 *out)
 
 void	minirt_render(t_minirt *minirt)
 {
-	if (t_image_fill(minirt->tmp, fill, minirt))
-		minirt_die("Error: failed to render scene\n");
-	if (minirt_image_to_mlx_image(minirt->tmp, &minirt->image))
-		minirt_die("Error: unrecognized mlx BPP\n");
+	if (!minirt->rendered)
+	{
+		if (t_image_fill(minirt->tmp, fill, minirt))
+			minirt_die("Error: failed to render scene\n");
+		if (minirt_image_to_mlx_image(minirt->tmp, &minirt->image))
+			minirt_die("Error: unrecognized mlx BPP\n");
+		minirt->rendered = true;
+	}
 	mlx_put_image_to_window(
 		minirt->mlx_context, minirt->mlx_window, minirt->mlx_image, 0, 0);
 }

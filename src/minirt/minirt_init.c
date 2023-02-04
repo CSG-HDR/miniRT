@@ -77,4 +77,5 @@ void	minirt_init(t_minirt *m, int argc, char **argv)
 			NULL,
 			NULL),
 		"Error: on init image\n");
+	m->rendered = false;
 }
