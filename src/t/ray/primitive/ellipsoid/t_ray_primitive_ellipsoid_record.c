@@ -45,7 +45,6 @@ static t_locals	s_locals(t_ray ray, t_map_ellipsoid ellipsoid)
 	return (l);
 }
 
-// TODO: implement
 static void	calculate_coord(
 	t_map_position point,
 	t_map_size size,
@@ -53,10 +52,10 @@ static void	calculate_coord(
 	t_f *out_y
 )
 {
-	(void)point;
-	(void)size;
-	(void)out_x;
-	(void)out_y;
+	const t_f3	p = t_f3_div3(point, size);
+
+	*out_x = t_f_rot(t_f_atan2(p.y, p.x));
+	*out_y = t_f_rot(t_f_asin(p.z));
 }
 
 static t_err	front(t_locals l, t_ray ray, t_ray_hit_records_builder *builder)
