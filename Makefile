@@ -64,7 +64,7 @@ compile_commands.json: pre_dev
 dev: compile_commands.json .vscode/launch.json .vscode/tasks.json
 .PHONY: norm
 norm:
-	$(Q2)$(MAKE) -C src norm
+	$(Q2)$(MAKE) -C src norm -k
 
 .PHONY: run
 run:
