@@ -16,34 +16,56 @@
 #include "t_map.h"
 #include "t_ray_primitive_cone.h"
 
+static t_err	append_records(
+	t_ray ray,
+	t_map_cone cone,
+	t_ray_hit_records_builder *builder
+)
+{
+	return (
+		false
+		|| t_ray_primitive_cone_side(ray, cone, builder)
+		|| t_ray_primitive_cone_bottom(ray, cone, builder)
+	);
+}
+
+typedef struct s_locals
+{
+	t_ray_hit_records_builder	*builder;
+	t_err						result;
+	t_ray						preprocessed;
+	size_t						i;
+}	t_locals;
+
 t_err	t_ray_primitive_cone(
 	t_ray ray,
 	t_map_cone cone,
 	t_ray_hit_records *out
 )
 {
-	t_ray_hit_records_builder	*builder;
-	t_err						result;
+	t_locals	l;
 
-	if (t_ray_hit_records_builder_init(&builder))
+	l.preprocessed
+		= t_ray_preprocess(ray, cone.position, cone.rotation);
+	if (t_ray_hit_records_builder_init(&l.builder))
 		return (true);
-	if (t_ray_primitive_cone_side(ray, cone, builder))
+	if (append_records(l.preprocessed, cone, l.builder))
 	{
-		t_ray_hit_records_builder_free(builder);
-		return (true);
-	}
-	if (t_ray_primitive_cone_bottom(ray, cone, builder))
-	{
-		t_ray_hit_records_builder_free(builder);
+		t_ray_hit_records_builder_free(l.builder);
 		return (true);
 	}
-	if (builder->count != 0 && builder->count != 2)
+	if (l.builder->count != 0 && l.builder->count != 2)
 	{
-		t_ray_hit_records_builder_free(builder);
+		t_ray_hit_records_builder_free(l.builder);
 		*out = (t_ray_hit_records){0, NULL};
 		return (false);
 	}
-	result = t_ray_hit_records_builder_build(builder, out);
-	t_ray_hit_records_builder_free(builder);
-	return (result);
+	l.result = t_ray_hit_records_builder_build(l.builder, out);
+	t_ray_hit_records_builder_free(l.builder);
+	l.i = -1;
+	if (!l.result)
+		while (++l.i < (*out).hit_record_count)
+			(*out).hit_records[l.i].normal = t_f3_rotate(
+					cone.rotation, (*out).hit_records[l.i].normal);
+	return (l.result);
 }
