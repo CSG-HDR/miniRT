@@ -62,7 +62,7 @@ static t_locals	s_locals(t_vars a, t_ray ray)
 
 	l.n_distance = (-a.y - a.sqrt_y2_4xz) / (2 * a.x);
 	l.n = t_f3_add(ray.origin, t_f3_mul(ray.direction, l.n_distance));
-	l.n_hit = (l.n.z >= 0 && l.n.z <= a.self.size.z);
+	l.n_hit = (l.n_distance >= 0 && l.n.z >= 0 && l.n.z <= a.self.size.z);
 	if (l.n_hit)
 	{
 		l.n_normal = t_ray_primitive_cylinder_side_normal(a, l.n);
@@ -71,7 +71,7 @@ static t_locals	s_locals(t_vars a, t_ray ray)
 	}
 	l.f_distance = (-a.y + a.sqrt_y2_4xz) / (2 * a.x);
 	l.f = t_f3_add(ray.origin, t_f3_mul(ray.direction, l.f_distance));
-	l.f_hit = (l.f.z >= 0 && l.f.z <= a.self.size.z);
+	l.f_hit = (l.f_distance >= 0 && l.f.z >= 0 && l.f.z <= a.self.size.z);
 	if (l.f_hit)
 	{
 		l.f_normal = t_ray_primitive_cylinder_side_normal(a, l.f);
