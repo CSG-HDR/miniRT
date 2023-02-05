@@ -54,9 +54,9 @@ static t_err	single(t_ft_json value, t_map_cone *out)
 
 t_err	t_map_parse_cone(t_ft_json value, t_map_cone *out)
 {
-	t_map_parse_position(ft_json_get_dict(value, "position"), &out->position);
-	t_map_parse_size(ft_json_get_dict(value, "size"), &out->size);
-	t_map_parse_rotation(ft_json_get_dict(value, "rotation"), &out->rotation);
+	t_map_parse_get_optional_position(value, &out->position);
+	t_map_parse_get_optional_size(value, &out->size);
+	t_map_parse_get_optional_rotation(value, &out->rotation);
 	if (!ft_json_dict_has_key(value, "material"))
 		return (zero(out));
 	if (ft_json_is_list(ft_json_get_dict(value, "material")))

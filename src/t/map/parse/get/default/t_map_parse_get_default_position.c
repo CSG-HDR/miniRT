@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   t_map_parse_get_default_position.c                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Updated: 2023/02/05 23:42:48 by Juyeong Maing    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_validate.h"
+#include "t_map_parse.h"
 
-#include <stdbool.h>
+#include "t_f.h"
+#include "t_map.h"
 
-#include "ft_cstring.h"
-
-bool	t_map_validate_ellipsoid(t_ft_json value)
+void	t_map_parse_get_default_position(t_map_position *out)
 {
-	return (
-		true
-		&& t_map_validate_has_type(value, "ellipsoid")
-		&& t_map_validate_has_optional_position(value)
-		&& t_map_validate_has_optional_size(value)
-		&& t_map_validate_has_optional_rotation(value)
-		&& t_map_validate_has_optional_material(value)
-	);
+	*out = (t_map_position){(t_f)0, (t_f)0, (t_f)0};
 }

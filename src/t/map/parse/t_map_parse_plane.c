@@ -15,11 +15,20 @@
 #include "ft_json.h"
 #include "t_map.h"
 
+static void	t_map_parse_get_optional_direction(
+	t_ft_json value,
+	t_map_normal *out
+)
+{
+	if (!ft_json_dict_has_key(value, "direction"))
+		*out = (t_map_normal){(t_f)0, (t_f)0, (t_f)1};
+	else
+		t_map_parse_normal(ft_json_get_dict(value, "direction"), out);
+}
+
 void	t_map_parse_plane(t_ft_json value, t_map_plane *out)
 {
-	t_map_parse_position(
-		ft_json_get_dict(value, "position"), &out->position);
-	t_map_parse_normal(
-		ft_json_get_dict(value, "normal"), &out->normal);
+	t_map_parse_get_position(value, &out->position);
+	t_map_parse_get_optional_direction(value, &out->normal);
 	t_map_parse_get_optional_color_material(value, &out->material);
 }

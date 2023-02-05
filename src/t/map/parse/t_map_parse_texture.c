@@ -24,7 +24,7 @@ t_err	t_map_parse_texture(t_ft_json value, t_map_texture *out)
 	out->width = ft_json_get_number(
 			ft_json_get_list(ft_json_get_dict(value, "size"), 0));
 	out->height = ft_json_get_number(
-			ft_json_get_list(ft_json_get_dict(value, "size"), 0));
+			ft_json_get_list(ft_json_get_dict(value, "size"), 1));
 	out->nearest = (ft_json_dict_has_key(value, "nearest")
 			&& ft_json_get_bool(ft_json_get_dict(value, "nearest")));
 	out->mirror = (ft_json_dict_has_key(value, "mirror")

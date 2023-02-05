@@ -10,24 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_map_validate.h"
+#include "t_map_parse.h"
 
-#include <stdbool.h>
+#include "ft_json.h"
+#include "t_map.h"
 
-#include "ft_cstring.h"
-
-bool	t_map_validate_sphere(t_ft_json value)
+void	t_map_parse_get_optional_position(
+	t_ft_json value,
+	t_map_position *out
+)
 {
-	return (
-		true
-		&& t_map_validate_has_type(value, "sphere")
-		&& t_map_validate_has_optional_position(value)
-		&& (!ft_json_dict_has_key(value, "radius")
-			|| (
-				ft_json_is_number(ft_json_get_dict(value, "radius"))
-				&& ft_json_get_number(ft_json_get_dict(value, "radius")) > 0
-			)
-		)
-		&& t_map_validate_has_optional_material(value)
-	);
+	if (ft_json_dict_has_key(value, "position"))
+		t_map_parse_position(ft_json_get_dict(value, "position"), out);
+	else
+		t_map_parse_get_default_position(out);
 }

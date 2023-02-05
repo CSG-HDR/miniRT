@@ -43,9 +43,9 @@ bool	t_map_validate_cube(t_ft_json value)
 	return (
 		true
 		&& t_map_validate_has_type(value, "cube")
-		&& t_map_validate_has_position(value)
-		&& t_map_validate_has_size(value)
-		&& t_map_validate_has_rotation(value)
+		&& t_map_validate_has_optional_position(value)
+		&& t_map_validate_has_optional_size(value)
+		&& t_map_validate_has_optional_rotation(value)
 		&& has_optional_material(value)
 	);
 }

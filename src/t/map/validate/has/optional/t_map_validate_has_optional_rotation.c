@@ -14,20 +14,15 @@
 
 #include <stdbool.h>
 
-#include "ft_cstring.h"
+#include "ft_json.h"
 
-bool	t_map_validate_sphere(t_ft_json value)
+bool	t_map_validate_has_optional_rotation(t_ft_json value)
 {
 	return (
 		true
-		&& t_map_validate_has_type(value, "sphere")
-		&& t_map_validate_has_optional_position(value)
-		&& (!ft_json_dict_has_key(value, "radius")
-			|| (
-				ft_json_is_number(ft_json_get_dict(value, "radius"))
-				&& ft_json_get_number(ft_json_get_dict(value, "radius")) > 0
-			)
+		&& ft_json_is_dict(value)
+		&& (!ft_json_dict_has_key(value, "rotation")
+			|| t_map_validate_rotation(ft_json_get_dict(value, "rotation"))
 		)
-		&& t_map_validate_has_optional_material(value)
 	);
 }

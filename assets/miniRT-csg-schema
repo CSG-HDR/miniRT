@@ -255,9 +255,7 @@
             }
           },
           "required": [
-            "type",
-            "position",
-            "radius"
+            "type"
           ]
         },
         {
@@ -285,10 +283,7 @@
             }
           },
           "required": [
-            "type",
-            "position",
-            "size",
-            "rotation"
+            "type"
           ]
         },
         {
@@ -329,10 +324,7 @@
             }
           },
           "required": [
-            "type",
-            "position",
-            "size",
-            "rotation"
+            "type"
           ]
         },
         {
@@ -373,10 +365,7 @@
             }
           },
           "required": [
-            "type",
-            "position",
-            "size",
-            "rotation"
+            "type"
           ]
         },
         {
@@ -417,10 +406,7 @@
             }
           },
           "required": [
-            "type",
-            "position",
-            "size",
-            "rotation"
+            "type"
           ]
         }
       ]
@@ -529,7 +515,7 @@
         "position": {
           "$ref": "#/$defs/position"
         },
-        "normal": {
+        "direction": {
           "$ref": "#/$defs/normal"
         },
         "material": {
@@ -540,8 +526,7 @@
         }
       },
       "required": [
-        "position",
-        "normal"
+        "position"
       ]
     },
     "quadric": {
