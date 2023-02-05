@@ -46,7 +46,8 @@ t_err	t_ray_primitive_cylinder(
 {
 	t_locals	l;
 
-	l.preprocessed = t_ray_preprocess(ray, cylinder.position, cylinder.rotation);
+	l.preprocessed
+		= t_ray_preprocess(ray, cylinder.position, cylinder.rotation);
 	if (t_ray_hit_records_builder_init(&l.builder))
 		return (true);
 	if (append_records(l.preprocessed, cylinder, l.builder))

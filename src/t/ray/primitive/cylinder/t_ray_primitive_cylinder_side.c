@@ -88,11 +88,7 @@ t_err	t_ray_primitive_cylinder_side(
 	t_ray_hit_records_builder *builder
 )
 {
-	const t_ray		enhanced = {(t_map_position)
-	{
-		ray.origin.x, ray.origin.y, ray.origin.z - cylinder.size.z
-	}, ray.direction};
-	const t_vars	a = s_vars(enhanced, cylinder);
+	const t_vars	a = s_vars(ray, cylinder);
 	t_locals		l;
 
 	if (!a.has_record)
