@@ -24,6 +24,7 @@ static t_err	append_records(
 {
 	return (
 		false
+		|| t_ray_primitive_cone_inside(ray, cone, builder)
 		|| t_ray_primitive_cone_side(ray, cone, builder)
 		|| t_ray_primitive_cone_bottom(ray, cone, builder)
 	);

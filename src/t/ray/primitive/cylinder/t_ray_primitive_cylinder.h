@@ -47,6 +47,10 @@ typedef struct s_vars
 	t_map_cylinder	self;
 }	t_vars;
 
+t_err			t_ray_primitive_cylinder_inside(
+					t_ray ray,
+					t_map_cylinder cylinder,
+					t_ray_hit_records_builder *builder);
 t_err			t_ray_primitive_cylinder_side(
 					t_ray ray,
 					t_map_cylinder cylinder,

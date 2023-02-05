@@ -81,7 +81,6 @@ static t_locals	s_locals(t_vars a, t_ray ray)
 	return (l);
 }
 
-// TODO: in cylinder
 t_err	t_ray_primitive_cylinder_side(
 	t_ray ray,
 	t_map_cylinder cylinder,

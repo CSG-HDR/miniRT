@@ -50,6 +50,10 @@ typedef struct s_vars
 	t_map_cone	self;
 }	t_vars;
 
+t_err			t_ray_primitive_cone_inside(
+					t_ray ray,
+					t_map_cone cone,
+					t_ray_hit_records_builder *builder);
 t_err			t_ray_primitive_cone_side(
 					t_ray ray,
 					t_map_cone cone,

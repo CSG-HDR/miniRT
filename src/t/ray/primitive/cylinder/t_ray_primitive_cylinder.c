@@ -24,6 +24,7 @@ static t_err	append_records(
 {
 	return (
 		false
+		|| t_ray_primitive_cylinder_inside(ray, cylinder, builder)
 		|| t_ray_primitive_cylinder_side(ray, cylinder, builder)
 		|| t_ray_primitive_cylinder_top(ray, cylinder, builder)
 		|| t_ray_primitive_cylinder_bottom(ray, cylinder, builder)
