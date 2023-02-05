@@ -16,7 +16,7 @@
 #include "t_map.h"
 
 /*
- * f(x) = Ax^2 + By^2 + Cz^2 - 1 = 0
+ * f(x) = Ax^2 + By^2 + Cz^2 - 1
  * f'(x) = 2Ax
  */
 static t_f	x(t_vars l, t_map_position point)
@@ -25,7 +25,7 @@ static t_f	x(t_vars l, t_map_position point)
 }
 
 /*
- * f(y) = Ax^2 + By^2 + Cz^2 - 1 = 0
+ * f(y) = Ax^2 + By^2 + Cz^2 - 1
  * f'(y) = 2By
  */
 static t_f	y(t_vars l, t_map_position point)
@@ -34,7 +34,7 @@ static t_f	y(t_vars l, t_map_position point)
 }
 
 /*
- * f(z) = Ax^2 + By^2 + Cz^2 - 1 = 0
+ * f(z) = Ax^2 + By^2 + Cz^2 - 1
  * f'(z) = 2Cz
  */
 static t_f	z(t_vars l, t_map_position point)
