@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   t_ray_primitive_ellipsoid_outside.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Updated: 2023/02/06 01:12:16 by Juyeong Maing    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static t_vars	s_vars(t_ray ray, t_map_ellipsoid ellipsoid)
 	if (l.hit)
 		l.sqrt_y2_4xz = t_f_sqrt(l.y2_4xz);
 	l.has_record = (l.hit && (l.y < l.sqrt_y2_4xz));
-	l.in_ellipsoid = (l.has_record && (-l.y - l.sqrt_y2_4xz < 0));
 	l.self = ellipsoid;
 	return (l);
 }
@@ -55,8 +54,7 @@ static t_err	front(t_vars l, t_ray ray, t_ray_hit_records_builder *builder)
 	t_f						coord_y;
 
 	if (distance <= 0)
-		return (t_ray_hit_records_builder_add(
-				builder, t_ray_default_hit_record(l.self.material)));
+		return (false);
 	normal = t_ray_primitive_ellipsoid_normal(l, point);
 	t_ray_primitive_ellipsoid_coord(point, l.self.size, &coord_x, &coord_y);
 	return (
@@ -94,7 +92,7 @@ static t_err	back(t_vars l, t_ray ray, t_ray_hit_records_builder *builder)
 	);
 }
 
-t_err	t_ray_primitive_ellipsoid_record(
+t_err	t_ray_primitive_ellipsoid_outside(
 	t_ray ray,
 	t_map_ellipsoid ellipsoid,
 	t_ray_hit_records_builder *builder

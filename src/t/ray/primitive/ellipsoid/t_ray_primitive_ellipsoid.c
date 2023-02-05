@@ -24,7 +24,8 @@ static t_err	append_records(
 {
 	return (
 		false
-		|| t_ray_primitive_ellipsoid_record(ray, ellipsoid, builder)
+		|| t_ray_primitive_ellipsoid_inside(ray, ellipsoid, builder)
+		|| t_ray_primitive_ellipsoid_outside(ray, ellipsoid, builder)
 	);
 }
 

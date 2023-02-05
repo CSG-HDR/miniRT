@@ -47,12 +47,15 @@ typedef struct s_vars
 	t_f				y2_4xz;
 	bool			hit;
 	bool			has_record;
-	bool			in_ellipsoid;
 	t_f				sqrt_y2_4xz;
 	t_map_ellipsoid	self;
 }	t_vars;
 
-t_err			t_ray_primitive_ellipsoid_record(
+t_err			t_ray_primitive_ellipsoid_inside(
+					t_ray ray,
+					t_map_ellipsoid ellipsoid,
+					t_ray_hit_records_builder *builder);
+t_err			t_ray_primitive_ellipsoid_outside(
 					t_ray ray,
 					t_map_ellipsoid ellipsoid,
 					t_ray_hit_records_builder *builder);
