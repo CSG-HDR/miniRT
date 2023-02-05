@@ -1,18 +1,12 @@
 {
   "camera": {
-    "position": [0, -1, 1],
+    "position": [0, -3, 1],
     "rotation": { "type": "rotation", "rotation": [0, 0, 0] },
     "fov": 0.25
   },
   "models": [
-    { "type": "intersection", "children": [
-      { "type": "ellipsoid", "position": [-3, 5, 0], "size": [2.5, 1.125, 1.125], "rotation": [0, 0, 0], "material": { "ambient": [0, 1, 0] } },
-      { "type": "sphere", "position": [-2, 5, 0], "radius": 1.125, "material": { "ambient": [1, 0, 0] } }
-    ] },
-    { "type": "cone", "position": [2, 5, 0], "size": [1, 1, 2], "rotation": [0, 0, 0] }
-  ],
-  "planes": [
-    { "position": [0, 0, 0], "normal": [0, 0, 1], "material": { "ambient": [0.75, 1, 0.5] } }
+    { "type": "cone", "position": [-2, 3, 0], "size": [1, 1, 2], "rotation": [0, 0, 0], "material": [{ "ambient": [1, 1, 0] }, { "ambient": [0, 1, 1] }] },
+    { "type": "cone", "position": [2, 3, 2], "size": [1, 1, 2], "rotation": [0, 0, 0], "material": [{ "ambient": [1, 1, 0] }, { "ambient": [0, 1, 1] }] }
   ],
   "voidColor": [0, 0, 0],
   "viewport": { "size": [960, 540], "only": [100, 100, 860, 440] }

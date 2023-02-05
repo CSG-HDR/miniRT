@@ -24,6 +24,22 @@
 
 #define TITLE "CSG+HDR minirt!"
 
+#ifdef DEBUG
+
+static void	init_mouse_hook(t_minirt *m)
+{
+	mlx_mouse_hook(m->mlx_window, &minirt_hooks_mouse, m);
+}
+
+#else
+
+static void	init_mouse_hook(t_minirt *m)
+{
+	(void)m;
+}
+
+#endif
+
 static void	init_mlx(t_minirt *m)
 {
 	minirt_assert(&m->mlx_context, mlx_init(), "Error: on init mlx\n");
@@ -50,6 +66,7 @@ static void	init_mlx(t_minirt *m)
 	mlx_expose_hook(m->mlx_window, &minirt_hooks_init, m);
 	mlx_hook(m->mlx_window, MLX_EVENT_ON_DESTROY, 0, &minirt_hooks_exit, m);
 	mlx_hook(m->mlx_window, MLX_EVENT_ON_KEYDOWN, 0, &minirt_hooks_key, m);
+	init_mouse_hook(m);
 }
 
 void	minirt_init(t_minirt *m, int argc, char **argv)

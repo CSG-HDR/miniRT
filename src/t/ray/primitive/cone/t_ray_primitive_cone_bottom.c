@@ -25,7 +25,7 @@ typedef struct s_locals
 	t_map_position	point;
 	t_f				x;
 	t_f				y;
-	t_f				eccentricity;
+	t_f				sqr_eccentricity;
 	t_map_normal	normal;
 	bool			is_front_face;
 }	t_locals;
@@ -38,12 +38,12 @@ t_err	t_ray_primitive_cone_bottom(
 {
 	t_locals	l;
 
-	l.distance = ray.origin.z / ray.direction.z;
+	l.distance = -ray.origin.z / ray.direction.z;
 	l.point = t_f3_add(ray.origin, t_f3_mul(ray.direction, l.distance));
 	l.x = l.point.x / cone.size.x;
 	l.y = l.point.y / cone.size.y;
-	l.eccentricity = (l.x * l.x) + (l.y * l.y);
-	if (l.distance < 0 || l.eccentricity > 1)
+	l.sqr_eccentricity = (l.x * l.x) + (l.y * l.y);
+	if (l.distance < 0 || l.sqr_eccentricity > 1)
 		return (false);
 	l.is_front_face = ray.direction.z > 0;
 	if (l.is_front_face)
