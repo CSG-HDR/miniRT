@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_ray_primitive_cone.h"
+#include "t_ray_primitive_cylinder.h"
 
 #include "ft_types.h"
 #include "t_f.h"
@@ -18,23 +18,20 @@
 #include "t_map.h"
 #include "t_ray.h"
 
-static t_vars	s_vars(t_ray ray, t_map_cone cone)
+static t_vars	s_vars(t_ray ray, t_map_cylinder cylinder)
 {
 	t_vars	l;
 
-	l.self = cone;
-	l.a = 1 / (cone.size.x * cone.size.x);
-	l.b = 1 / (cone.size.y * cone.size.y);
-	l.c = 1 / (cone.size.z * cone.size.z);
+	l.self = cylinder;
+	l.a = 1 / (cylinder.size.x * cylinder.size.x);
+	l.b = 1 / (cylinder.size.y * cylinder.size.y);
 	l.p = ray.origin.x;
 	l.q = ray.origin.y;
-	l.r = ray.origin.z;
 	l.u = ray.direction.x;
 	l.v = ray.direction.y;
-	l.w = ray.direction.z;
-	l.x = (l.a * l.u * l.u) + (l.b * l.v * l.v) - (l.c * l.w * l.w);
-	l.y = (2 * l.a * l.p * l.u) + (2 * l.b * l.q * l.v) - (2 * l.c * l.r * l.w);
-	l.z = (l.a * l.p * l.p) + (l.b * l.q * l.q) - (l.c * l.r * l.r);
+	l.x = (l.a * l.u * l.u) + (l.b * l.v * l.v);
+	l.y = (2 * l.a * l.p * l.u) + (2 * l.b * l.q * l.v);
+	l.z = (l.a * l.p * l.p) + (l.b * l.q * l.q) - 1;
 	l.y2_4xz = l.y * l.y - 4 * l.x * l.z;
 	l.hit = l.y2_4xz > 0;
 	if (l.hit)
@@ -68,7 +65,7 @@ static t_locals	s_locals(t_vars a, t_ray ray)
 	l.n_hit = (l.n.z >= 0 && l.n.z <= a.self.size.z);
 	if (l.n_hit)
 	{
-		l.n_normal = t_ray_primitive_cone_side_normal(a, l.n);
+		l.n_normal = t_ray_primitive_cylinder_side_normal(a, l.n);
 		l.n_x = t_f_rot(t_f_atan2(l.n.y, l.n.x));
 		l.n_y = l.n.z / a.self.size.z;
 	}
@@ -77,23 +74,25 @@ static t_locals	s_locals(t_vars a, t_ray ray)
 	l.f_hit = (l.f.z >= 0 && l.f.z <= a.self.size.z);
 	if (l.f_hit)
 	{
-		l.f_normal = t_ray_primitive_cone_side_normal(a, l.f);
+		l.f_normal = t_ray_primitive_cylinder_side_normal(a, l.f);
 		l.f_x = t_f_rot(t_f_atan2(l.f.y, l.f.x));
 		l.f_y = l.f.z / a.self.size.z;
 	}
 	return (l);
 }
 
-// TODO: in cone
-t_err	t_ray_primitive_cone_side(
+// TODO: in cylinder
+t_err	t_ray_primitive_cylinder_side(
 	t_ray ray,
-	t_map_cone cone,
+	t_map_cylinder cylinder,
 	t_ray_hit_records_builder *builder
 )
 {
-	const t_ray		enhanced = {(t_map_position){
-		ray.origin.x, ray.origin.y, ray.origin.z - cone.size.z}, ray.direction};
-	const t_vars	a = s_vars(enhanced, cone);
+	const t_ray		enhanced = {(t_map_position)
+	{
+		ray.origin.x, ray.origin.y, ray.origin.z - cylinder.size.z
+	}, ray.direction};
+	const t_vars	a = s_vars(enhanced, cylinder);
 	t_locals		l;
 
 	if (!a.has_record)
@@ -104,12 +103,12 @@ t_err	t_ray_primitive_cone_side(
 		|| (l.n_hit
 			&& t_ray_hit_records_builder_add(builder, (t_ray_hit_record){
 				l.n_distance, l.n_normal,
-				t_ray_material_from_color(cone.material_side),
+				t_ray_material_from_color(cylinder.material_side),
 				true, l.n_x, l.n_y}))
 		|| (l.f_hit
 			&& t_ray_hit_records_builder_add(builder, (t_ray_hit_record){
 				l.f_distance, l.f_normal,
-				t_ray_material_from_color(cone.material_side),
+				t_ray_material_from_color(cylinder.material_side),
 				false, l.f_x, l.f_y}))
 	);
 }

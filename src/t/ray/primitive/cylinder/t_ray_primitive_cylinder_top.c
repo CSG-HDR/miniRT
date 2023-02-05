@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_ray_primitive_cone.h"
+#include "t_ray_primitive_cylinder.h"
 
 #include <stdbool.h>
 
@@ -27,35 +27,35 @@ typedef struct s_locals
 	t_f				y;
 	t_f				sqr_eccentricity;
 	t_map_normal	normal;
-	bool			is_front_face;
+	bool			is_back_face;
 }	t_locals;
 
-t_err	t_ray_primitive_cone_bottom(
+t_err	t_ray_primitive_cylinder_top(
 	t_ray ray,
-	t_map_cone cone,
+	t_map_cylinder cylinder,
 	t_ray_hit_records_builder *builder
 )
 {
 	t_locals	l;
 
-	l.distance = -ray.origin.z / ray.direction.z;
+	l.distance = (-ray.origin.z + cylinder.size.z) / ray.direction.z;
 	l.point = t_f3_add(ray.origin, t_f3_mul(ray.direction, l.distance));
-	l.x = l.point.x / cone.size.x;
-	l.y = l.point.y / cone.size.y;
+	l.x = l.point.x / cylinder.size.x;
+	l.y = l.point.y / cylinder.size.y;
 	l.sqr_eccentricity = (l.x * l.x) + (l.y * l.y);
 	if (l.distance < 0 || l.sqr_eccentricity > 1)
 		return (false);
-	l.is_front_face = ray.direction.z > 0;
-	if (l.is_front_face)
-		l.normal = (t_map_normal){0, 0, -1};
-	else
+	l.is_back_face = ray.direction.z > 0;
+	if (l.is_back_face)
 		l.normal = (t_map_normal){0, 0, 1};
+	else
+		l.normal = (t_map_normal){0, 0, -1};
 	return (t_ray_hit_records_builder_add(builder, (t_ray_hit_record){
 			l.distance,
 			l.normal,
-			t_ray_material_from_color(cone.material_bottom),
-			l.is_front_face,
-			-l.x,
+			t_ray_material_from_color(cylinder.material_top),
+			!l.is_back_face,
+			l.x,
 			l.y
 		})
 	);

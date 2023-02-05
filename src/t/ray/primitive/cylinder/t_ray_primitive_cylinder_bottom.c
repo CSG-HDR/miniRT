@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_ray_primitive_cone.h"
+#include "t_ray_primitive_cylinder.h"
 
 #include <stdbool.h>
 
@@ -30,9 +30,9 @@ typedef struct s_locals
 	bool			is_front_face;
 }	t_locals;
 
-t_err	t_ray_primitive_cone_bottom(
+t_err	t_ray_primitive_cylinder_bottom(
 	t_ray ray,
-	t_map_cone cone,
+	t_map_cylinder cylinder,
 	t_ray_hit_records_builder *builder
 )
 {
@@ -40,8 +40,8 @@ t_err	t_ray_primitive_cone_bottom(
 
 	l.distance = -ray.origin.z / ray.direction.z;
 	l.point = t_f3_add(ray.origin, t_f3_mul(ray.direction, l.distance));
-	l.x = l.point.x / cone.size.x;
-	l.y = l.point.y / cone.size.y;
+	l.x = l.point.x / cylinder.size.x;
+	l.y = l.point.y / cylinder.size.y;
 	l.sqr_eccentricity = (l.x * l.x) + (l.y * l.y);
 	if (l.distance < 0 || l.sqr_eccentricity > 1)
 		return (false);
@@ -53,7 +53,7 @@ t_err	t_ray_primitive_cone_bottom(
 	return (t_ray_hit_records_builder_add(builder, (t_ray_hit_record){
 			l.distance,
 			l.normal,
-			t_ray_material_from_color(cone.material_bottom),
+			t_ray_material_from_color(cylinder.material_bottom),
 			l.is_front_face,
 			-l.x,
 			l.y
