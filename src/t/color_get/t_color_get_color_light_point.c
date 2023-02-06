@@ -16,6 +16,7 @@
 #include "t_f.h"
 #include "t_f3.h"
 #include "t_map.h"
+#include "t_ray.h"
 
 static t_f3	diffuse(const t_color_get_context *context, t_map_point light)
 {
@@ -69,6 +70,19 @@ t_err	t_color_get_color_light_point(
 	t_f3 *out
 )
 {
-	*out = t_f3_add(diffuse(context, light), specular(context, light));
+	const t_map_position	point = t_f3_add(context->ray.origin,
+			t_f3_mul(context->ray.direction, context->record.distance));
+	const t_map_normal		normal = t_f3_unit(t_f3_sub(light.position, point));
+	const t_ray				ray = {point, normal};
+	t_ray_hit_records		records;
+
+	if (t_ray_nearest_map(ray, context->context->map, &records))
+		return (true);
+	if (records.hit_record_count && records.hit_records[0].distance
+		< t_f3_length(t_f3_sub(light.position, point)))
+		*out = (t_f3){(t_f)0, (t_f)0, (t_f)0};
+	else
+		*out = t_f3_add(diffuse(context, light), specular(context, light));
+	t_ray_hit_records_free(records);
 	return (false);
 }

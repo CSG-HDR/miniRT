@@ -13,11 +13,21 @@
 #include "minirt_hooks.h"
 
 #include "ft_types.h"
+#include "t.h"
+#include "t_f3.h"
 #include "t_ray.h"
+#include "t_color_get.h"
 
 #include <stdlib.h>
 
 #ifdef DEBUG
+
+static t_f3	*unused(void)
+{
+	static t_f3	dummy;
+
+	return (&dummy);
+}
 
 static t_err	debug_render_pixel(t_minirt *c, size_t x, size_t y)
 {
@@ -29,9 +39,19 @@ static t_err	debug_render_pixel(t_minirt *c, size_t x, size_t y)
 		/ (c->map->viewport.height - 1);
 	const t_ray			ray = t_ray_get(c->map, f_x, f_y);
 	t_ray_hit_records	records;
+	const t_context		context = {c->map, c->texture_manager};
 
 	if (t_ray_nearest_map(ray, c->map, &records))
+	{
+		t_ray_hit_records_free(records);
 		return (true);
+	}
+	if (records.hit_record_count
+		&& t_color_get_color(&context, ray, records.hit_records[0], unused()))
+	{
+		t_ray_hit_records_free(records);
+		return (true);
+	}
 	t_ray_hit_records_free(records);
 	return (false);
 }
