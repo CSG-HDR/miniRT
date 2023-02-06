@@ -8,7 +8,7 @@
     { "type": "difference",
       "from": { "type": "intersection", "children": [
         { "type": "sphere", "material": { "ambient": [0, 0, 1] } },
-        { "type": "cube", "position": [-0.8, -0.8, -0.8], "size": [1.6, 1.6, 1.6], "material": { "ambient": [1, 0, 0] } }
+        { "type": "cube", "position": [-0.55, -0.55, -0.55], "size": [1.1, 1.1, 1.1], "material": { "ambient": [1, 0, 0] } }
       ] },
       "subtract": { "type": "union", "children": [
         { "type": "cylinder", "position": [0, 0, -1], "size": [0.5, 0.5, 2], "material": { "ambient": [0, 1, 0] } },
@@ -17,7 +17,10 @@
       ] }
     }
   ],
-  "ambientLight": [1, 1, 1],
+  "lights": [
+    { "type": "point", "position": [2, 2, 2], "range": 5, "color": [0.5, 0.5, 0.5] }
+  ],
+  "ambientLight": [0.5, 0.5, 0.5],
   "voidColor": [0, 0, 0],
   "viewport": { "size": [960, 540], "only": [100, 100, 860, 440] }
 }
