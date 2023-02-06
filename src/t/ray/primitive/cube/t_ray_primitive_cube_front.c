@@ -25,7 +25,7 @@ typedef struct s_locals
 	bool			is_front_face;
 }	t_locals;
 
-static bool is_inside(t_map_cube cube, t_map_position point)
+static bool is_in_square(t_map_cube cube, t_map_position point)
 {
 	if (point.y < cube.position.y || point.y > cube.position.y + cube.size.y)
 		return (false);
@@ -47,7 +47,7 @@ t_err	t_ray_primitive_cube_front(
 
 	l.x = l.point.x / cube.size.x;
 	l.y = l.point.y / cube.size.y;
-	if (l.distance < 0 || !is_inside(cube, l.point))
+	if (l.distance < 0 || !is_in_square(cube, l.point))
 		return (false);
 	l.is_front_face = ray.direction.z > 0;
 	return (t_ray_hit_records_builder_add(builder, (t_ray_hit_record){
