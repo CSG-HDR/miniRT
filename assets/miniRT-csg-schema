@@ -520,9 +520,6 @@
         },
         "material": {
           "$ref": "#/$defs/color-material"
-        },
-        "limit": {
-          "$ref": "#/$defs/model"
         }
       },
       "required": [
@@ -589,9 +586,6 @@
         },
         "material": {
           "$ref": "#/$defs/color-material"
-        },
-        "limit": {
-          "$ref": "#/$defs/model"
         }
       },
       "required": [
