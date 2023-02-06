@@ -41,6 +41,7 @@ t_f	t_f_sqrt(t_f f);
 t_f	t_f_rad(t_f f);
 // radian to rotation(0~1)
 t_f	t_f_rot(t_f f);
+t_f	t_f_abs(t_f f);
 t_f	t_f_max(t_f a, t_f b);
 t_f	t_f_min(t_f a, t_f b);
 
