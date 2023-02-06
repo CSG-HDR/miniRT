@@ -41,7 +41,7 @@ t_err	t_ray_primitive_cube_left(
 {
 		t_locals	l;
 
-	// plan's normal : (0,-1,0)
+	// plane's normal : (0,-1,0)
 	l.distance = - (ray.origin.y * -1 - cube.position.y) / (ray.direction.y * -1);
 	l.point = t_f3_add(ray.origin, t_f3_mul(ray.direction, l.distance));
 
