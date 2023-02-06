@@ -12,19 +12,18 @@
 
 #include "t_color_get.h"
 
+#include "ft_types.h"
+#include "t_f3.h"
 #include "t_map.h"
-#include "t_ray.h"
 
-// TODO: lighting
-t_f3	t_color_get_ray(
-	const t_context *context,
-	t_ray_material color,
-	t_f x,
-	t_f y
+t_err	t_color_get_color_light_spot(
+	const t_color_get_context *context,
+	t_map_spot light,
+	t_f3 *out
 )
 {
-	if (color.type == T_RAY_MATERIAL_TYPE_COMPUTED)
-		return (color.computed.computed.ambient);
-	else
-		return (t_color_get(context, color.color.color.ambient, x, y));
+	(void)context;
+	(void)light;
+	*out = (t_f3){0, 0, 0};
+	return (false);
 }

@@ -36,19 +36,19 @@ static t_err	ss(const t_context *c, size_t x, size_t y, t_f3 *out)
 		/ (c->map->viewport.height * SS_RATE - 1);
 	const t_ray			ray = t_ray_get(c->map, f_x, f_y);
 	t_ray_hit_records	records;
+	t_err				result;
 
 	if (t_ray_nearest_map(ray, c->map, &records))
 		return (true);
 	if (!records.hit_record_count)
+	{
 		*out = c->map->void_color;
-	else
-		*out = t_color_get_ray(
-				c,
-				records.hit_records[0].material,
-				records.hit_records[0].x,
-				records.hit_records[0].y);
+		t_ray_hit_records_free(records);
+		return (false);
+	}
+	result = t_color_get_color(c, ray, records.hit_records[0], out);
 	t_ray_hit_records_free(records);
-	return (false);
+	return (result);
 }
 
 // super sampling
