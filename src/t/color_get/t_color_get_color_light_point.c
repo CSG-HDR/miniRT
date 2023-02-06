@@ -70,8 +70,10 @@ t_err	t_color_get_color_light_point(
 	t_f3 *out
 )
 {
-	const t_map_position	point = t_f3_add(context->ray.origin,
+	const t_map_position	real_point = t_f3_add(context->ray.origin,
 			t_f3_mul(context->ray.direction, context->record.distance));
+	const t_map_position	point = t_f3_add(real_point,
+			t_f3_mul(context->record.normal, (t_f)0.0078125));
 	const t_map_normal		normal = t_f3_unit(t_f3_sub(light.position, point));
 	const t_ray				ray = {point, normal};
 	t_ray_hit_records		records;

@@ -68,6 +68,6 @@ t_err	t_ray_primitive_cylinder(
 	if (!l.result)
 		while (++l.i < (*out).hit_record_count)
 			(*out).hit_records[l.i].normal = t_f3_rotate(
-					cylinder.rotation, (*out).hit_records[l.i].normal);
+					(*out).hit_records[l.i].normal, cylinder.rotation);
 	return (l.result);
 }

@@ -66,6 +66,6 @@ t_err	t_ray_primitive_cone(
 	if (!l.result)
 		while (++l.i < (*out).hit_record_count)
 			(*out).hit_records[l.i].normal = t_f3_rotate(
-					cone.rotation, (*out).hit_records[l.i].normal);
+					(*out).hit_records[l.i].normal, cone.rotation);
 	return (l.result);
 }

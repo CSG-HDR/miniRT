@@ -69,6 +69,6 @@ t_err	t_ray_primitive_cube(
 	if (!l.result)
 		while (++l.i < (*out).hit_record_count)
 			(*out).hit_records[l.i].normal = t_f3_rotate(
-					cube.rotation, (*out).hit_records[l.i].normal);
+					(*out).hit_records[l.i].normal, cube.rotation);
 	return (l.result);
 }
