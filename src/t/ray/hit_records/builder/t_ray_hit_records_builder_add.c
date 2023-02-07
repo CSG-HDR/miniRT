@@ -15,6 +15,7 @@
 #include <stdbool.h>
 
 #include "ft_types.h"
+#include "t_f.h"
 #include "wrap.h"
 
 static void	remove_record_head(t_ray_hit_records_builder *self)
@@ -51,8 +52,8 @@ static bool	remove_duplicate_record(
 {
 	t_ray_hit_records_builder_node	*prev;
 
-	if (self->head && self->head->record.distance == record.distance
-		&& self->head->record.is_front_face != record.is_front_face)
+	if (self->head && self->head->record.is_front_face != record.is_front_face
+		&& t_f_abs(self->head->record.distance - record.distance) < T_F_EPSILON)
 	{
 		remove_record_head(self);
 		return (true);
