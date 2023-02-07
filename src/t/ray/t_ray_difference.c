@@ -115,7 +115,7 @@ t_err	t_ray_difference(
 		{
 			if (t_ray_hit_records_builder_add(
 					l.builder, enhance(l.merged.hit_records[l.i], &l)))
-			return (fini_ko(l.builder, l.merged));
+				return (fini_ko(l.builder, l.merged));
 		}
 	}
 	return (fini_ok(l.builder, l.merged, out));
