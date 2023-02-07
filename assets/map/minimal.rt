@@ -18,7 +18,8 @@
     }
   ],
   "lights": [
-    { "type": "point", "position": [4, -5, 10], "range": 50, "color": [0.3, 0.3, 0.3] }
+    { "type": "point", "position": [4, -5, 10], "range": 50, "color": [0.2, 0.2, 0.2] },
+    { "type": "directional", "direction": [-0.2, -0.3, -1], "color": [0.1, 0.1, 0.1] }
   ],
   "planes": [
     { "position": [0, 0, -2], "direction": [0, 0, 1] }

@@ -93,8 +93,8 @@ t_err	t_color_get_color_light_point(
 	if (t_ray_nearest_map(
 			(t_ray){point, normal}, context->context->map, &records))
 		return (true);
-	if (!f || (records.hit_record_count && records.hit_records[0].distance
-			< t_f3_length(t_f3_sub(light.position, point))))
+	if (records.hit_record_count && records.hit_records[0].distance
+		< t_f3_length(t_f3_sub(light.position, point)))
 		*out = (t_f3){(t_f)0, (t_f)0, (t_f)0};
 	else
 		*out = t_f3_mul(t_f3_add(
