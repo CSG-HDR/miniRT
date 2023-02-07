@@ -40,7 +40,7 @@ t_err	t_map_parse_get_optional_lights(
 	while (i != *out_count)
 	{
 		if (t_map_parse_light(ft_json_get_list(
-					ft_json_get_dict(value, "lights"), i), out[i]))
+					ft_json_get_dict(value, "lights"), i), &(*out)[i]))
 		{
 			t_map_free_lights(*out, i);
 			return (true);
