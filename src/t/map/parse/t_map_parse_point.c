@@ -18,6 +18,6 @@
 void	t_map_parse_point(t_ft_json value, t_map_point *out)
 {
 	t_map_parse_get_color(value, &out->color);
-	t_map_parse_get_color(value, &out->position);
+	t_map_parse_get_position(value, &out->position);
 	t_map_parse_get_optional_range(value, &out->has_range, &out->range);
 }
