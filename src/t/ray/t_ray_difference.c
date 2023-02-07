@@ -16,6 +16,8 @@
 #include <stddef.h>
 
 #include "ft_types.h"
+#include "t_f3.h"
+#include "t_map.h"
 
 static t_err	init(
 	t_ray_hit_records from,
@@ -76,10 +78,15 @@ typedef struct s_locals
 
 static t_ray_hit_record	enhance(t_ray_hit_record record, t_locals *l)
 {
+	t_map_normal	normal;
+
+	normal = record.normal;
 	l->is_front_face = !l->is_front_face;
+	if (l->is_front_face != record.is_front_face)
+		normal = t_f3_neg(normal);
 	return ((t_ray_hit_record){
 		record.distance,
-		record.normal,
+		normal,
 		record.material,
 		l->is_front_face,
 		record.x,
@@ -104,10 +111,12 @@ t_err	t_ray_difference(
 	{
 		l.prev_sum = l.sum;
 		l.sum += 2 * (!!l.merged.hit_records[l.i].is_front_face) - 1;
-		if ((l.prev_sum == 2 || l.sum == 2)
-			&& t_ray_hit_records_builder_add(
-				l.builder, enhance(l.merged.hit_records[l.i], &l)))
+		if (l.prev_sum == 2 || l.sum == 2)
+		{
+			if (t_ray_hit_records_builder_add(
+					l.builder, enhance(l.merged.hit_records[l.i], &l)))
 			return (fini_ko(l.builder, l.merged));
+		}
 	}
 	return (fini_ok(l.builder, l.merged, out));
 }
