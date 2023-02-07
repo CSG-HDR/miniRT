@@ -24,7 +24,7 @@ static t_f3	diffuse(const t_color_get_context *context, t_map_point light)
 			t_f3_mul(context->ray.direction, context->record.distance));
 	const t_map_normal		normal = t_f3_unit(t_f3_sub(light.position, point));
 	const t_f				factor
-		= t_f3_dot(normal, t_f3_neg(context->ray.direction));
+		= t_f_max((t_f)0, t_f3_dot(normal, t_f3_neg(context->ray.direction)));
 	const t_f3				color
 		= t_f3_mul3(light.color, context->material.diffuse);
 	const t_f3				result = t_f3_mul(color, factor);
@@ -51,8 +51,8 @@ static t_f3	specular(const t_color_get_context *context, t_map_point light)
 		= t_f3_unit(t_f3_sub(point, light.position));
 	const t_map_normal		reflection_normal
 		= reflection(context->ray.direction, context->record.normal);
-	const t_f				factor = t_f_pow(t_f3_dot(normal,
-				reflection_normal), context->material.specular_lobe);
+	const t_f				factor = t_f_pow(t_f_max((t_f)0, -t_f3_dot(normal,
+					reflection_normal)), context->material.specular_lobe);
 	const t_f3				result
 		= t_f3_mul(t_f3_mul3(light.color, context->material.specular), factor);
 
