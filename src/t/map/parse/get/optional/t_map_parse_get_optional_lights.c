@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_map_parse_optional_lights.c                      :+:      :+:    :+:   */
+/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
+/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 2023/01/28 23:32:28 by Juyeong Maing    ###   ########.fr       */
+/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_err	t_map_parse_get_optional_lights(
 	*out_count = ft_json_list_length(ft_json_get_dict(value, "lights"));
 	*out = wrap_malloc(sizeof(t_map_light) * *out_count);
 	if (!*out)
-		return (NULL);
+		return (true);
 	i = 0;
 	while (i != *out_count)
 	{
