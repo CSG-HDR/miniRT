@@ -1,7 +1,7 @@
 {
   "camera": {
     "position": [-4, -5, 2],
-    "rotation": { "type": "rotation", "rotation": [0.1, -0.05, 0] },
+    "rotation": { "type": "lookAt", "position": [0, 0, 0] },
     "fov": 0.25
   },
   "models": [
@@ -18,7 +18,10 @@
     }
   ],
   "lights": [
-    { "type": "point", "position": [0, -1, 1], "range": 5, "color": [0.3, 0.3, 0.3] }
+    { "type": "point", "position": [4, -5, 10], "range": 50, "color": [0.3, 0.3, 0.3] }
+  ],
+  "planes": [
+    { "position": [0, 0, -2], "direction": [0, 0, 1] }
   ],
   "ambientLight": [0.4, 0.4, 0.4],
   "voidColor": [0, 0, 0],
