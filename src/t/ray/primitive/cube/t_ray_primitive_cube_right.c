@@ -46,12 +46,13 @@ t_err	t_ray_primitive_cube_right(
 
 	// plane's normal : (1,0,0)
 	l.distance = t_f_abs(ray.origin.x * 1 - cube.position.x);
-	l.point = t_f3_add(ray.origin, t_f3_mul(ray.direction, l.distance));
+	l.point = t_f3_add(ray.origin, t_f3_mul((t_map_normal){1,0,0}, l.distance));
 
 	l.x = l.point.x / cube.size.x;
 	l.y = l.point.y / cube.size.y;
-	if (!is_in_square(cube, l.point))
-		return (false);
+	// if (!is_in_square(cube, l.point))
+	//	return (false);
+(void)is_in_square(cube, l.point);
 	l.is_front_face = ray.direction.z > 0;
 	return (t_ray_hit_records_builder_add(builder, (t_ray_hit_record){
 		l.distance,
