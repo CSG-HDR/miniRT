@@ -158,6 +158,31 @@
     },
     "voidColor": {
       "$ref": "#/$defs/material-color"
+    },
+    "renderOptions": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "superSampling": {
+          "type": "integer",
+          "description": "super sampling rate, default is 2 (4x slow)",
+          "minimum": 1
+        },
+        "shadow": {
+          "type": "boolean",
+          "description": "default is true"
+        },
+        "gamma": {
+          "type": "number",
+          "description": "gamma parameter for HDR rendering, default is 2.2",
+          "exclusiveMinimum": 0
+        },
+        "exposure": {
+          "type": "number",
+          "description": "exposure parameter for HDR rendering, default is 1",
+          "exclusiveMinimum": 0
+        }
+      }
     }
   },
   "required": [

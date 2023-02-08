@@ -80,6 +80,7 @@ t_err	t_map_parse_blend_minimum(t_ft_json value, t_map_blend_minimum *out);
 t_err	t_map_parse_blend_subtract(t_ft_json value, t_map_blend_subtract *out);
 t_err	t_map_parse_normal_map(t_ft_json value, t_map_normal_map *out);
 t_err	t_map_parse_material(t_ft_json value, t_map_material *out);
+void	t_map_parse_render_options(t_ft_json value, t_map_render_options *out);
 
 t_err	t_map_parse_get_optional_models(
 			t_ft_json value, t_map_model ***out, size_t *out_count);
@@ -102,11 +103,14 @@ void	t_map_parse_get_optional_color_material(
 			t_ft_json value, t_map_color_material *out);
 void	t_map_parse_get_optional_range(
 			t_ft_json value, bool *out_has_range, t_f *out_range);
+void	t_map_parse_get_optional_render_options(
+			t_ft_json value, t_map_render_options *out);
 void	t_map_parse_get_default_position(t_map_position *out);
 void	t_map_parse_get_default_size(t_map_size *out);
 void	t_map_parse_get_default_rotation(t_map_rotation *out);
 t_err	t_map_parse_get_default_color(t_map_color **out);
 t_err	t_map_parse_get_default_material(t_map_material *out);
 void	t_map_parse_get_default_color_material(t_map_color_material *out);
+void	t_map_parse_get_default_render_options(t_map_render_options *out);
 
 #endif

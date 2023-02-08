@@ -24,16 +24,16 @@
 #include "t_map.h"
 #include "t_ray.h"
 
-#define SS_RATE 2
-
 static t_err	ss(const t_context *c, size_t x, size_t y, t_f3 *out)
 {
 	const t_f			f_x
-		= (t_f)(c->map->viewport.start_x * SS_RATE + x)
-		/ (c->map->viewport.width * SS_RATE - 1);
+		= (t_f)(c->map->viewport.start_x * c->map->render_options.super_sampling
+			+ x)
+		/ (c->map->viewport.width * c->map->render_options.super_sampling - 1);
 	const t_f			f_y
-		= (t_f)(c->map->viewport.start_y * SS_RATE + y)
-		/ (c->map->viewport.height * SS_RATE - 1);
+		= (t_f)(c->map->viewport.start_y * c->map->render_options.super_sampling
+			+ y)
+		/ (c->map->viewport.height * c->map->render_options.super_sampling - 1);
 	const t_ray			ray = t_ray_get(c->map, f_x, f_y);
 	t_ray_hit_records	records;
 	t_err				result;
@@ -63,17 +63,19 @@ static t_err	fill(void *context, size_t x, size_t y, t_f3 *out)
 
 	acc = (t_f3){0, 0, 0};
 	i = -1;
-	while (++i < SS_RATE)
+	while (++i < ctx.map->render_options.super_sampling)
 	{
 		j = -1;
-		while (++j < SS_RATE)
+		while (++j < ctx.map->render_options.super_sampling)
 		{
-			if (ss(&ctx, x * SS_RATE + i, y * SS_RATE + j, &tmp))
+			if (ss(&ctx, x * ctx.map->render_options.super_sampling + i,
+					y * ctx.map->render_options.super_sampling + j, &tmp))
 				return (true);
 			acc = t_f3_add(acc, tmp);
 		}
 	}
-	*out = t_f3_div(acc, SS_RATE * SS_RATE);
+	*out = t_f3_div(acc, ctx.map->render_options.super_sampling
+			* ctx.map->render_options.super_sampling);
 	return (false);
 }
 

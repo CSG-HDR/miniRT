@@ -26,5 +26,8 @@
   ],
   "ambientLight": [0.4, 0.4, 0.4],
   "voidColor": [0, 0, 0],
-  "viewport": { "size": [960, 540], "only": [100, 100, 860, 440] }
+  "viewport": { "size": [960, 540], "only": [100, 100, 860, 440] },
+  "renderOptions": {
+    "shadow": true
+  }
 }

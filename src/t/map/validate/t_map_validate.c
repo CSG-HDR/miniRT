@@ -91,5 +91,6 @@ bool	t_map_validate(t_ft_json value)
 		&& (!ft_json_dict_has_key(value, "voidColor")
 			|| t_map_validate_material_color(
 				ft_json_get_dict(value, "voidColor")))
+		&& t_map_validate_has_optional_render_options(value)
 	);
 }

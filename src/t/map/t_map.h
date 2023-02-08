@@ -470,6 +470,14 @@ typedef struct s_map_viewport
 	size_t	actual_height;
 }	t_map_viewport;
 
+typedef struct s_map_render_options
+{
+	size_t	super_sampling;
+	bool	shadow;
+	t_f		gamma;
+	t_f		exposure;
+}	t_map_render_options;
+
 typedef struct s_map
 {
 	size_t					model_count;
@@ -484,6 +492,7 @@ typedef struct s_map
 	t_map_viewport			viewport;
 	t_map_light_color		ambient_light;
 	t_map_material_color	void_color;
+	t_map_render_options	render_options;
 }	t_map;
 
 #endif

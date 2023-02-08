@@ -41,6 +41,7 @@ void	etc(t_ft_json value, t_map *result)
 			ft_json_get_dict(value, "voidColor"), &result->void_color);
 	else
 		result->void_color = (t_f3){(t_f)0, (t_f)0, (t_f)0};
+	t_map_parse_render_options(value, &result->render_options);
 }
 
 static t_err	pre(t_ft_json value, t_map *out)
