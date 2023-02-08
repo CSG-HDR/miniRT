@@ -24,6 +24,7 @@ static t_err	append_records(
 {
 	return (
 		false
+		|| t_ray_primitive_cube_inside(ray, cube, builder)
 		|| t_ray_primitive_cube_top(ray, cube, builder)
 		|| t_ray_primitive_cube_bottom(ray, cube, builder)
 		|| t_ray_primitive_cube_left(ray, cube, builder)

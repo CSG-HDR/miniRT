@@ -40,5 +40,9 @@ t_err	t_ray_primitive_cube_back(
 			t_ray ray,
 			t_map_cube cube,
 			t_ray_hit_records_builder *builder);
+t_err	t_ray_primitive_cube_inside(
+			t_ray ray,
+			t_map_cube cube,
+			t_ray_hit_records_builder *builder);
 
 #endif
