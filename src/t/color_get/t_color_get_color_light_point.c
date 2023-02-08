@@ -32,15 +32,15 @@ static t_f3	diffuse(const t_color_get_context *context, t_map_point light)
 	return (result);
 }
 
-// TODO: fix
 static t_f3	reflection(const t_map_normal incidence, const t_map_normal normal)
 {
-	t_map_normal	neg;
-	t_map_normal	direction;
+	const t_map_normal	neg = t_f3_neg(normal);
+	const t_f			length = t_f3_dot(normal, incidence);
+	const t_f3			sum = t_f3_mul(t_f3_mul(neg, 2), length);
+	const t_f3			neg_direction = t_f3_sub(sum, incidence);
+	const t_map_normal	result = t_f3_neg(t_f3_unit(neg_direction));
 
-	neg = t_f3_neg(normal);
-	direction = t_f3_sub(t_f3_mul(neg, 2), incidence);
-	return (t_f3_neg(t_f3_unit(direction)));
+	return (result);
 }
 
 static t_f3	specular(const t_color_get_context *context, t_map_point light)

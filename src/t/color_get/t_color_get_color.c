@@ -40,5 +40,6 @@ t_err	t_color_get_color(
 			return (true);
 		*out = t_f3_add(*out, tmp);
 	}
+	// *out = t_f3_div(t_f3_add(record.normal, (t_f3){(t_f)1, (t_f)1, (t_f)1}), 2);
 	return (false);
 }
