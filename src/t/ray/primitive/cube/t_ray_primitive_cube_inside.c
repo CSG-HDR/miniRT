@@ -10,39 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_RAY_PRIMITIVE_CUBE_H
-# define T_RAY_PRIMITIVE_CUBE_H
+#include "t_ray_primitive_cube.h"
 
-# include "t_ray.h"
-# include "ft_types.h"
-# define SMALL_NUM 0.0001
-t_err	t_ray_primitive_cube_top(
-			t_ray ray,
-			t_map_cube cube,
-			t_ray_hit_records_builder *builder);
-t_err	t_ray_primitive_cube_bottom(
-			t_ray ray,
-			t_map_cube cube,
-			t_ray_hit_records_builder *builder);
-t_err	t_ray_primitive_cube_left(
-			t_ray ray,
-			t_map_cube cube,
-			t_ray_hit_records_builder *builder);
-t_err	t_ray_primitive_cube_right(
-			t_ray ray,
-			t_map_cube cube,
-			t_ray_hit_records_builder *builder);
-t_err	t_ray_primitive_cube_front(
-			t_ray ray,
-			t_map_cube cube,
-			t_ray_hit_records_builder *builder);
-t_err	t_ray_primitive_cube_back(
-			t_ray ray,
-			t_map_cube cube,
-			t_ray_hit_records_builder *builder);
+#include <stdbool.h>
+
+#include "ft_types.h"
+#include "t_f3.h"
+#include "t_map.h"
+#include "t_ray.h"
+
 t_err	t_ray_primitive_cube_inside(
-			t_ray ray,
-			t_map_cube cube,
-			t_ray_hit_records_builder *builder);
+	t_ray ray,
+	t_map_cube cube,
+	t_ray_hit_records_builder *builder
+)
+{
+	t_f	x;
+	t_f	y;
 
-#endif
+	if (0 > ray.origin.z || ray.origin.z > cube.size.z)
+		return (false);
+	x = ray.origin.x / cube.size.x;
+	y = ray.origin.y / cube.size.y;
+	return (
+		(x * x) + (y * y) < 1
+		&& t_ray_hit_records_builder_add(
+			builder,
+			t_ray_default_hit_record(cube.material_top)
+		)
+	);
+}
