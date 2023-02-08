@@ -18,16 +18,13 @@
     }
   ],
   "lights": [
-    { "type": "point", "position": [4, -5, 10], "range": 50, "color": [0.2, 0.2, 0.2] },
-    { "type": "directional", "direction": [-0.2, -0.3, -1], "color": [0.1, 0.1, 0.1] }
+    { "type": "point", "position": [4, -5, 10], "range": 15, "color": [2, 2, 2] },
+    { "type": "directional", "direction": [-0.2, -0.3, -1], "color": [0.6, 0.6, 0.6] }
   ],
   "planes": [
     { "position": [0, 0, -2], "direction": [0, 0, 1] }
   ],
   "ambientLight": [0.4, 0.4, 0.4],
   "voidColor": [0, 0, 0],
-  "viewport": { "size": [960, 540], "only": [100, 100, 860, 440] },
-  "renderOptions": {
-    "shadow": true
-  }
+  "viewport": { "size": [960, 540], "only": [100, 100, 860, 440] }
 }

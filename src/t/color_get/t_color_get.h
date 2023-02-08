@@ -97,5 +97,8 @@ t_err					t_color_get_color_light_spot(
 t_f3					t_color_get_util_reflect(
 							const t_map_normal incidence,
 							const t_map_normal normal);
+t_map_material_color	t_color_get_to_ldr(
+							const t_context *context,
+							t_f3 color);
 
 #endif

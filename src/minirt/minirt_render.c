@@ -48,6 +48,7 @@ static t_err	ss(const t_context *c, size_t x, size_t y, t_f3 *out)
 	}
 	result = t_color_get_color(c, ray, records.hit_records[0], out);
 	t_ray_hit_records_free(records);
+	*out = t_color_get_to_ldr(c, *out);
 	return (result);
 }
 
