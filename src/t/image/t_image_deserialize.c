@@ -47,6 +47,13 @@ static t_err	fill(void *context, size_t x, size_t y, t_f3 *out)
 	return (false);
 }
 
+static size_t	abs(int32_t i)
+{
+	if (i < 0)
+		return (-i);
+	return (i);
+}
+
 t_err	t_image_deserialize(const char *str, size_t length, t_image **out)
 {
 	t_context	l;
@@ -55,8 +62,8 @@ t_err	t_image_deserialize(const char *str, size_t length, t_image **out)
 		|| *((uint16_t *)&str[28]) != 24 || *((uint32_t *)&str[30]) != 0)
 		return (true);
 	l.offset = *((uint32_t *)&str[10]);
-	l.width = *((uint32_t *)&str[18]);
-	l.height = *((uint32_t *)&str[22]);
+	l.width = abs(*((int32_t *)&str[18]));
+	l.height = abs(*((int32_t *)&str[22]));
 	l.row_padding = (4 - (l.width * 3) % 4) % 4;
 	l.row_size = l.width * 3 + l.row_padding;
 	l.whole_size = l.row_size * l.height - l.row_padding;
