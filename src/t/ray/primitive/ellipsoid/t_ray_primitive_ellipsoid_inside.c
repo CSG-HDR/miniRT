@@ -30,7 +30,7 @@ t_err	t_ray_primitive_ellipsoid_inside(
 	const t_f	z = ray.origin.z / ellipsoid.size.z;
 
 	return (
-		(x * x) + (y * y) + (z * z) < 0
+		(x * x) + (y * y) + (z * z) < 1
 		&& t_ray_hit_records_builder_add(
 			builder,
 			t_ray_default_hit_record(ellipsoid.material)
