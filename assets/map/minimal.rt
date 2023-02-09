@@ -8,7 +8,7 @@
     { "type": "difference",
       "from": { "type": "intersection", "children": [
         { "type": "sphere", "material": { "ambient": [0, 0, 1], "specularLobe": 3 } },
-        { "type": "sphere", "radius": 0.9, "material": { "ambient": [1, 0, 0], "specularLobe": 3 } }
+        { "type": "cube", "position": [-0.75, -0.75, -0.75], "size": [1.5, 1.5, 1.5], "material": { "ambient": [1, 0, 0], "specularLobe": 3 } }
       ] },
       "subtract": { "type": "union", "children": [
         { "type": "cylinder", "position": [0, 0, -1], "size": [0.5, 0.5, 2], "material": { "ambient": [0, 1, 0], "specularLobe": 3 } },
