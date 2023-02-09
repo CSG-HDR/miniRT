@@ -7,19 +7,21 @@
   "models": [
     { "type": "difference",
       "from": { "type": "intersection", "children": [
-        { "type": "sphere", "material": { "ambient": [0, 0, 1], "specularLobe": 3 } },
-        { "type": "cube", "position": [-0.75, -0.75, -0.75], "size": [1.5, 1.5, 1.5], "material": { "ambient": [1, 0, 0], "specularLobe": 3 } }
+        { "type": "sphere", "material": { "ambient": [0, 0, 1], "diffuse": [0.5, 0.5, 1], "specularLobe": 3 } },
+        { "type": "cube", "position": [-0.75, -0.75, -0.75], "size": [1.5, 1.5, 1.5], "material": { "ambient": [1, 0, 0], "diffuse": [1, 0.5, 0.5], "specularLobe": 3 } }
       ] },
       "subtract": { "type": "union", "children": [
-        { "type": "cylinder", "position": [0, 0, -1], "size": [0.5, 0.5, 2], "material": { "ambient": [0, 1, 0], "specularLobe": 3 } },
-        { "type": "cylinder", "position": [0, -1, 0], "size": [0.5, 0.5, 2], "rotation": [0, -0.25, 0], "material": { "ambient": [0, 1, 0], "specularLobe": 3 } },
-        { "type": "cylinder", "position": [-1, 0, 0], "size": [0.5, 0.5, 2], "rotation": [0, 0, 0.25], "material": { "ambient": [0, 1, 0], "specularLobe": 3 } }
+        { "type": "cylinder", "position": [0, 0, -1], "size": [0.5, 0.5, 2], "material": { "ambient": [0, 1, 0], "diffuse": [0.5, 1, 0.5], "specularLobe": 3 } },
+        { "type": "cylinder", "position": [0, -1, 0], "size": [0.5, 0.5, 2], "rotation": [0, -0.25, 0], "material": { "ambient": [0, 1, 0], "diffuse": [0.5, 1, 0.5], "specularLobe": 3 } },
+        { "type": "cylinder", "position": [-1, 0, 0], "size": [0.5, 0.5, 2], "rotation": [0, 0, 0.25], "material": { "ambient": [0, 1, 0], "diffuse": [0.5, 1, 0.5], "specularLobe": 3 } }
       ] }
     }
   ],
   "lights": [
-    { "type": "point", "position": [4, -5, 10], "range": 15, "color": [2, 2, 2] },
-    { "type": "directional", "direction": [-0.2, -0.3, -1], "color": [0.6, 0.6, 0.6] }
+    { "type": "point", "position": [4, -5, 5], "range": 15, "color": [2, 0, 0] },
+    { "type": "point", "position": [-5, 4, 5], "range": 15, "color": [0, 2, 0] },
+    { "type": "point", "position": [4, 5, 5], "range": 15, "color": [0, 0, 2] },
+    { "type": "directional", "direction": [-0.2, -0.3, -1], "color": [0.2, 0.2, 0.2] }
   ],
   "planes": [
     { "position": [0, 0, -2], "direction": [0, 0, 1] }
