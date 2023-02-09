@@ -22,17 +22,15 @@ static t_err	append_records(
 	t_ray_hit_records_builder *builder
 )
 {
-	t_map_cube temp_cube = cube;
-	temp_cube.position = (t_map_position){0,0,0};
 	return (
 		false
-		|| t_ray_primitive_cube_inside(ray, temp_cube, builder)
-		|| t_ray_primitive_cube_top(ray, temp_cube, builder)
-		|| t_ray_primitive_cube_bottom(ray, temp_cube, builder)
-		|| t_ray_primitive_cube_left(ray, temp_cube, builder)
-		|| t_ray_primitive_cube_right(ray, temp_cube, builder)
-		|| t_ray_primitive_cube_front(ray, temp_cube, builder)
-		|| t_ray_primitive_cube_back(ray, temp_cube, builder)
+		|| t_ray_primitive_cube_inside(ray, cube, builder)
+		|| t_ray_primitive_cube_top(ray, cube, builder)
+		|| t_ray_primitive_cube_bottom(ray, cube, builder)
+		|| t_ray_primitive_cube_left(ray, cube, builder)
+		|| t_ray_primitive_cube_right(ray, cube, builder)
+		|| t_ray_primitive_cube_front(ray, cube, builder)
+		|| t_ray_primitive_cube_back(ray, cube, builder)
 	);
 }
 

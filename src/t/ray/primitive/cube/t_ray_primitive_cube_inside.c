@@ -25,15 +25,18 @@ t_err	t_ray_primitive_cube_inside(
 	t_ray_hit_records_builder *builder
 )
 {
-	t_f	x;
-	t_f	y;
+	const t_f	x = ray.origin.x / cube.size.x;
+	const t_f	y = ray.origin.y / cube.size.y;
+	const t_f	z = ray.origin.z / cube.size.z;
 
-	if (0 > ray.origin.z || ray.origin.z > cube.size.z)
-		return (false);
-	x = ray.origin.x / cube.size.x;
-	y = ray.origin.y / cube.size.y;
 	return (
-		(x * x) + (y * y) < 1
+		true
+		&& x > 0
+		&& y > 0
+		&& z > 0
+		&& x < 1
+		&& y < 1
+		&& z < 1
 		&& t_ray_hit_records_builder_add(
 			builder,
 			t_ray_default_hit_record(cube.material_top)

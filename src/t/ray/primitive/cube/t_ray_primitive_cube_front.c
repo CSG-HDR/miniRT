@@ -26,39 +26,25 @@ typedef struct s_locals
 	bool			is_front_face;
 }	t_locals;
 
-static bool is_in_square(t_map_cube cube, t_map_position point)
-{
-	if (point.x < cube.position.x ||
-		point.x > cube.position.x + cube.size.x)
-		return (false);
-	if (point.z < cube.position.z ||
-		point.z > cube.position.z + cube.size.z)
-		return (false);
-	if (point.y < cube.position.y - SMALL_NUM ||
-		point.y < cube.position.y + SMALL_NUM)
-		return (false);
-	return (true);
-}
-
 t_err	t_ray_primitive_cube_front(
-			t_ray ray,
-			t_map_cube cube,
-			t_ray_hit_records_builder *builder)
+	t_ray ray,
+	t_map_cube cube,
+	t_ray_hit_records_builder *builder
+)
 {
-	t_locals	l;
+	t_locals			l;
+	const t_map_normal	normal = {(t_f)0, (t_f)-1, (t_f)0};
 
-	// plane's normal : (0,-1,0)
-	l.distance = (ray.origin.y * -1) / ray.origin.y;
+	l.distance = -ray.origin.y / ray.origin.y;
 	l.point = t_f3_add(ray.origin, t_f3_mul(ray.direction, l.distance));
-
 	l.x = l.point.x / cube.size.x;
-	l.y = l.point.y / cube.size.y;
-	if (!is_in_square(cube, l.point))
+	l.y = l.point.z / cube.size.z;
+	if (l.x < 0 || l.y < 0 || l.x > 1 || l.y > 1)
 		return (false);
-	l.is_front_face = ray.direction.z > 0;
+	l.is_front_face = ray.direction.y > 0;
 	return (t_ray_hit_records_builder_add(builder, (t_ray_hit_record){
 		l.distance,
-		(t_map_normal){0, -1, 0},
+		normal,
 		t_ray_material_from_color(cube.material_front),
 		l.is_front_face,
 		l.x,
