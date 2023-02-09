@@ -5,8 +5,9 @@
     "fov": 0.25
   },
   "models": [
-    { "type": "cube", "position": [-2, 3, 0], "size": [1, 1, 2], "rotation": [0, 0, 0], "material": [{ "ambient": [1, 0, 0] }, { "ambient": [0, 1, 0] }, { "ambient": [0, 0, 1] }, { "ambient": [1, 1, 0] }, { "ambient": [0, 1, 1] }, { "ambient": [1, 0, 1] } ] },
-    { "type": "cube", "position": [2, 3, 2], "size": [1, 1, 2], "rotation": [0, 0, 0], "material": [{ "ambient": [1, 0, 0] }, { "ambient": [0, 1, 0] }, { "ambient": [0, 0, 1] }, { "ambient": [1, 1, 0] }, { "ambient": [0, 1, 1] }, { "ambient": [1, 0, 1] } ] }
+    { "type": "cube", "position": [-2, 3, 0], "material": [{ "ambient": [1, 0, 0] }, { "ambient": [0, 1, 0] }, { "ambient": [0, 0, 1] }, { "ambient": [1, 1, 0] }, { "ambient": [0, 1, 1] }, { "ambient": [1, 0, 1] } ] },
+    { "type": "cube", "position": [2, 3, 2], "material": [{ "ambient": [1, 0, 0] }, { "ambient": [0, 1, 0] }, { "ambient": [0, 0, 1] }, { "ambient": [1, 1, 0] }, { "ambient": [0, 1, 1] }, { "ambient": [1, 0, 1] } ] },
+    { "type": "cube", "position": [2, 3, -2], "material": [{ "ambient": [1, 0, 0] }, { "ambient": [0, 1, 0] }, { "ambient": [0, 0, 1] }, { "ambient": [1, 1, 0] }, { "ambient": [0, 1, 1] }, { "ambient": [1, 0, 1] } ] }
   ],
   "ambientLight": [1, 1, 1],
   "voidColor": [0, 0, 0],

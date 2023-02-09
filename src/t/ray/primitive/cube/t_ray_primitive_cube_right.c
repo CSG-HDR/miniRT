@@ -34,7 +34,7 @@ t_err	t_ray_primitive_cube_right(
 	t_locals			l;
 	const t_map_normal	normal = {(t_f)1, (t_f)0, (t_f)0};
 
-	l.distance = -(ray.origin.x + cube.size.x) / ray.direction.x;
+	l.distance = -(ray.origin.x - cube.size.x) / ray.direction.x;
 	l.point = t_f3_add(ray.origin, t_f3_mul(ray.direction, l.distance));
 	l.x = l.point.y / cube.size.y;
 	l.y = l.point.z / cube.size.z;

@@ -34,10 +34,10 @@ t_err	t_ray_primitive_cube_back(
 	t_locals			l;
 	const t_map_normal	normal = {(t_f)0, (t_f)1, (t_f)0};
 
-	l.distance = -(ray.origin.y + cube.size.y) / ray.direction.y;
+	l.distance = -(ray.origin.y - cube.size.y) / ray.direction.y;
 	l.point = t_f3_add(ray.origin, t_f3_mul(ray.direction, l.distance));
-	l.x = (t_f)1 - l.point.x / cube.size.x;
-	l.y = (l.point.z / cube.size.z);
+	l.x = (t_f)1 - (l.point.x / cube.size.x);
+	l.y = l.point.z / cube.size.z;
 	if (l.x < 0 || l.y < 0 || l.x > 1 || l.y > 1)
 		return (false);
 	l.is_front_face = ray.direction.y < 0;
