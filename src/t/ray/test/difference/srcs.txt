@@ -6,5 +6,7 @@ main.c
 ../../hit_records/builder/t_ray_hit_records_builder_add.c
 ../../hit_records/builder/t_ray_hit_records_builder_build.c
 ../../hit_records/builder/t_ray_hit_records_builder_free.c
+../../../../t/f/t_f_abs.c
+../../../../t/f3/t_f3_neg.c
 ../../../../wrap/wrap_malloc.c
 ../../../../wrap/wrap_free.c

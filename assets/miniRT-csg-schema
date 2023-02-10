@@ -853,9 +853,6 @@
         "specularLobe": {
           "type": "number",
           "description": "specular lobe"
-        },
-        "normal": {
-          "$ref": "#/$defs/normal-map"
         }
       }
     }
