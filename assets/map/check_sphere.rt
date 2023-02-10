@@ -1,0 +1,12 @@
+{
+  "camera": {
+    "position": [0, -3, 1],
+    "rotation": { "type": "lookAt", "position": [0, 0, 0] },
+    "fov": 0.25
+  },
+  "models": [
+    { "type": "sphere", "material": { "ambient": { "type": "texture", "src": "texture/check.bmp", "size": [0.25, 0.25] } } }
+  ],
+  "ambientLight": [1, 1, 1],
+  "viewport": { "size": [960, 540] }
+}
