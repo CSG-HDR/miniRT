@@ -1,11 +1,15 @@
 {
   "camera": {
-    "position": [0, -3, 1],
-    "rotation": { "type": "rotation", "rotation": [0, 0, 0] },
+    "position": [-2, -2, -2],
+    "rotation": { "type": "direction", "direction": [1, 1, 1] },
     "fov": 0.25
   },
-  "quadrics": [ { "properties": [1, 1, 1, 0, 0, 0, 0, 0, 0, 0], "material": { "ambient": [1,0,0] } } ],
-  "ambientLight": [1, 1, 1],
+  "quadrics": [ { "properties": [1, 1, 1, 0, 0, 0, 0, 0, 0, -2] } ],
+  "lights": [
+    { "type": "directional", "direction": [-0.2, -0.3, -1], "color": [0.3, 0.3, 0.3] },
+    { "type": "point", "position": [1, 1, 1], "color": [1, 0, 0] }
+  ],
+  "ambientLight": [0.1, 0.1, 0.1],
   "voidColor": [0, 0, 0],
   "viewport": { "size": [960, 540], "only": [100, 100, 860, 440] }
 }
