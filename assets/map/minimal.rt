@@ -1,0 +1,8 @@
+{
+  "camera": {
+    "position": [0, -1, 1],
+    "rotation": { "type": "lookAt", "position": [0, 0, 0] },
+    "fov": 0.25
+  },
+  "viewport": { "size": [960, 540] }
+}
