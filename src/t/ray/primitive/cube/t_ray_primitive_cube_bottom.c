@@ -43,13 +43,14 @@ t_err	t_ray_primitive_cube_bottom(
 	if (l.x < 0 || l.y < 0 || l.x > 1 || l.y > 1)
 		return (false);
 	l.is_front_face = ray.direction.z > 0;
-	return (t_ray_hit_records_builder_add(builder, (t_ray_hit_record){
-		l.distance,
-		normal,
-		t_ray_material_from_color(cube.material_bottom),
-		l.is_front_face,
-		l.x,
-		l.y
+	return (
+		t_ray_hit_records_builder_add(builder, (t_ray_hit_record){
+			l.distance,
+			normal,
+			t_ray_material_from_color(cube.material_bottom),
+			l.is_front_face,
+			l.x,
+			l.y
 		})
 	);
 }
