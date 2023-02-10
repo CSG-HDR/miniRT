@@ -22,7 +22,7 @@ t_f3	t_color_get_util_reflect(
 )
 {
 	const t_map_normal	neg = t_f3_neg(normal);
-	const t_f			length = t_f3_dot(normal, incidence);
+	const t_f			length = t_f3_dot(neg, incidence);
 	const t_f3			sum = t_f3_mul(t_f3_mul(neg, 2), length);
 	const t_f3			neg_direction = t_f3_sub(sum, incidence);
 	const t_map_normal	result = t_f3_neg(t_f3_unit(neg_direction));
