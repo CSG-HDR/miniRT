@@ -15,7 +15,7 @@
 
 # include "t_ray.h"
 # include "ft_types.h"
-# define SMALL_NUM 0.0001
+
 t_err	t_ray_primitive_cube_top(
 			t_ray ray,
 			t_map_cube cube,
