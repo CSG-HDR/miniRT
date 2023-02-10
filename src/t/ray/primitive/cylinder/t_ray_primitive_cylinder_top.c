@@ -46,10 +46,7 @@ t_err	t_ray_primitive_cylinder_top(
 	if (l.distance < 0 || l.sqr_eccentricity > 1)
 		return (false);
 	l.is_back_face = ray.direction.z > 0;
-	if (l.is_back_face)
-		l.normal = (t_map_normal){0, 0, 1};
-	else
-		l.normal = (t_map_normal){0, 0, -1};
+	l.normal = (t_map_normal){0, 0, 1};
 	return (t_ray_hit_records_builder_add(builder, (t_ray_hit_record){
 			l.distance,
 			l.normal,
