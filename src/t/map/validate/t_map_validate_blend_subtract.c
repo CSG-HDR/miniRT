@@ -20,7 +20,7 @@ bool	t_map_validate_blend_subtract(t_ft_json value)
 {
 	return (
 		true
-		&& t_map_validate_has_type(value, "add")
+		&& t_map_validate_has_type(value, "subtract")
 		&& ft_json_dict_has_key(value, "from")
 		&& t_map_validate_color(ft_json_get_dict(value, "from"))
 		&& ft_json_dict_has_key(value, "subtract")
