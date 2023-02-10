@@ -4,7 +4,7 @@
     "rotation": { "type": "rotation", "rotation": [0, 0, 0] },
     "fov": 0.25
   },
-  "quadrics": [ { "properties": [1, 1, 1, 0, 0, 0, 0, 0, 0, 0]  } ],
+  "quadrics": [ { "properties": [1, 1, 1, 0, 0, 0, 0, 0, 0, 0], "material": { "ambient": [1,0,0] } } ],
   "ambientLight": [1, 1, 1],
   "voidColor": [0, 0, 0],
   "viewport": { "size": [960, 540], "only": [100, 100, 860, 440] }
