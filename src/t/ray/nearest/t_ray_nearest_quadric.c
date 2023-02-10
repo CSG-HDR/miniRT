@@ -67,7 +67,7 @@ static t_f	s_distance(t_map_quadric q, t_ray r)
 	const t_f					discriminant = equa.b * equa.b - 4 * equa.a * equa.c;
 	if (discriminant < 0)
 		return (0);
-	return ((-equa.b + t_f_sqrt(discriminant)) / (2 * equa.a));
+	return (-equa.b + t_f_sqrt(discriminant) / 2 * equa.a);
 }
 
 t_err	t_ray_nearest_quadric(
