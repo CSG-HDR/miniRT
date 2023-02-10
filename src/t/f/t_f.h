@@ -18,22 +18,22 @@
 # endif
 
 # if PRECISION == 0
-#  define T_F_EPSILON 0.0078125
+#  define T_F_EPSILON 0.00001
 
 typedef long double	t_f;
 
 # elif PRECISION == 1
-#  define T_F_EPSILON 0.0078125
+#  define T_F_EPSILON 0.00001
 
 typedef double		t_f;
 
 # elif PRECISION == 2
-#  define T_F_EPSILON 0.0625
+#  define T_F_EPSILON 0.001
 
 typedef float		t_f;
 
 # elif PRECISION == 3
-#  define T_F_EPSILON 0.125
+#  define T_F_EPSILON 0.1
 
 typedef _Float16	t_f;
 
