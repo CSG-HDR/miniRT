@@ -70,6 +70,14 @@ static t_f	s_distance(t_map_quadric q, t_ray r)
 	return (-equa.b + t_f_sqrt(discriminant) / 2 * equa.a);
 }
 
+static t_map_normal s_normal(t_map_quadric q, t_map_position p)
+{
+	return ((t_map_normal){ 2 * q.a * p.x + q.d * p.y + q.g,
+							2 * q.b * p.y + q.h * p.z + q.h,
+							2 * q.c * p.z + q.e * p.x + q.i
+							});
+}
+
 t_err	t_ray_nearest_quadric(
 	t_ray ray,
 	t_map_quadric quadric,
@@ -78,11 +86,13 @@ t_err	t_ray_nearest_quadric(
 {
 	t_ray_hit_records_builder	*builder;
 	const t_f					distance = s_distance(quadric, ray);
+	const t_map_position		point = t_f3_add(ray.origin, t_f3_mul(ray.direction, distance));
+	const t_map_normal			normal = s_normal(quadric, point);
 
 	if (t_ray_hit_records_builder_init(&builder))
 		return (true);
 	if ((distance > 0 && t_ray_hit_records_builder_add(
-				builder, (t_ray_hit_record){distance, (t_map_normal){1,0,0},
+				builder, (t_ray_hit_record){distance, normal,
 				t_ray_material_from_computed(quadric.material), true, 0, 0})
 	) || t_ray_hit_records_builder_build(builder, out))
 	{
