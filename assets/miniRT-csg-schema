@@ -710,16 +710,6 @@
         }
       ]
     },
-    "normal-map": {
-      "oneOf": [
-        {
-          "$ref": "#/$defs/normal"
-        },
-        {
-          "$ref": "#/$defs/color"
-        }
-      ]
-    },
     "texture": {
       "type": "object",
       "unevaluatedProperties": false,
@@ -831,9 +821,6 @@
         "specularLobe": {
           "type": "number",
           "description": "specular lobe"
-        },
-        "normal": {
-          "$ref": "#/$defs/normal-map"
         }
       }
     },
