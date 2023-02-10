@@ -56,7 +56,6 @@ bool	t_map_validate_blend_multiply(t_ft_json value);
 bool	t_map_validate_blend_maximum(t_ft_json value);
 bool	t_map_validate_blend_minimum(t_ft_json value);
 bool	t_map_validate_blend_subtract(t_ft_json value);
-bool	t_map_validate_normal_map(t_ft_json value);
 bool	t_map_validate_material(t_ft_json value);
 
 bool	t_map_validate_has_type(t_ft_json value, const char *type);

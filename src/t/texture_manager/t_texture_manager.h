@@ -86,9 +86,6 @@ t_err				t_texture_manager_preload_cube(
 t_err				t_texture_manager_preload_material(
 						t_texture_manager *self,
 						t_map_material material);
-t_err				t_texture_manager_preload_normal_map(
-						t_texture_manager *self,
-						t_map_normal_map normal_map);
 t_err				t_texture_manager_preload_colors(
 						t_texture_manager *self,
 						t_map_color **color,

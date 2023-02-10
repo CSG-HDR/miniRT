@@ -78,7 +78,6 @@ t_err	t_map_parse_blend_multiply(t_ft_json value, t_map_blend_multiply *out);
 t_err	t_map_parse_blend_maximum(t_ft_json value, t_map_blend_maximum *out);
 t_err	t_map_parse_blend_minimum(t_ft_json value, t_map_blend_minimum *out);
 t_err	t_map_parse_blend_subtract(t_ft_json value, t_map_blend_subtract *out);
-t_err	t_map_parse_normal_map(t_ft_json value, t_map_normal_map *out);
 t_err	t_map_parse_material(t_ft_json value, t_map_material *out);
 void	t_map_parse_render_options(t_ft_json value, t_map_render_options *out);
 

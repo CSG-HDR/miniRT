@@ -133,39 +133,12 @@ typedef union u_map_color
 	t_map_color_blend	blend;
 }	t_map_color;
 
-typedef enum e_map_normal_map_type
-{
-	T_MAP_NORMAL_MAP_TYPE_NORMAL,
-	T_MAP_NORMAL_MAP_TYPE_COLOR,
-}	t_map_normal_map_type;
-
-typedef struct s_map_normal_map_normal
-{
-	t_map_normal_map_type	type;
-	t_map_normal			normal;
-}	t_map_normal_map_normal;
-
-typedef struct s_map_normal_map_color
-{
-	t_map_normal_map_type	type;
-	t_map_color				*color;
-}	t_map_normal_map_color;
-
-typedef union u_map_normal_map
-{
-	t_map_normal_map_type	*type;
-	t_map_normal_map_normal	*normal;
-	t_map_normal_map_color	*color;
-}	t_map_normal_map;
-
 typedef struct s_map_material
 {
 	t_map_color			*ambient;
 	t_map_color			*diffuse;
 	t_map_color			*specular;
 	t_f					specular_lobe;
-	bool				has_normal;
-	t_map_normal_map	normal;
 }	t_map_material;
 
 typedef struct s_map_color_material

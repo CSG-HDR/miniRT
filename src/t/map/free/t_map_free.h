@@ -43,7 +43,6 @@ void	t_map_free_blend_multiply(t_map_blend_multiply value);
 void	t_map_free_blend_maximum(t_map_blend_maximum value);
 void	t_map_free_blend_minimum(t_map_blend_minimum value);
 void	t_map_free_blend_subtract(t_map_blend_subtract value);
-void	t_map_free_normal_map(t_map_normal_map value);
 void	t_map_free_material(t_map_material value);
 
 #endif

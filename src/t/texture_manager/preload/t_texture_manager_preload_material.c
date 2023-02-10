@@ -24,9 +24,5 @@ t_err	t_texture_manager_preload_material(
 		|| t_texture_manager_preload_color(self, material.ambient)
 		|| t_texture_manager_preload_color(self, material.diffuse)
 		|| t_texture_manager_preload_color(self, material.specular)
-		|| (
-			material.has_normal
-			&& t_texture_manager_preload_normal_map(self, material.normal)
-		)
 	);
 }

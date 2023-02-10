@@ -20,6 +20,4 @@ void	t_map_free_material(t_map_material value)
 	t_map_free_color(value.ambient);
 	t_map_free_color(value.diffuse);
 	t_map_free_color(value.specular);
-	if (value.has_normal)
-		t_map_free_normal_map(value.normal);
 }

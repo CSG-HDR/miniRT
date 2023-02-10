@@ -37,7 +37,5 @@ bool	t_map_validate_material(t_ft_json value)
 			!ft_json_dict_has_key(value, "specularLobe")
 			|| ft_json_is_number(ft_json_get_dict(value, "specularLobe"))
 		)
-		&& (!ft_json_dict_has_key(value, "normal")
-			|| t_map_validate_normal_map(ft_json_get_dict(value, "normal")))
 	);
 }
