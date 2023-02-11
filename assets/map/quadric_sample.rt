@@ -1,15 +1,20 @@
 {
   "camera": {
-    "position": [-2, -2, -2],
-    "rotation": { "type": "direction", "direction": [1, 1, 1] },
-    "fov": 0.25
+    "position": [0, -7, 0],
+    "rotation": { "type": "rotation", "rotation": [0, 0, 0] },
+    "fov": 0.4
   },
-  "quadrics": [ { "properties": [1, 1, 1, 0, 0, 0, 0, 0, 0, -2] } ],
+  "models": [
+    { "type": "sphere", "radius": 2, "material": { "ambient": [1, 0, 0], "specularLobe": 10 } }
+  ],
+  "planes": [
+    { "position": [0, 0, -3], "direction": [0, 0, 1], "material": { "ambient": [0, 1, 0], "specularLobe": 10 } }
+  ],
+  "quadrics": [ { "properties": [1, 1, -1, 0, 0, 0, 0, 0, 0, -1], "material": { "specularLobe": 10 } } ],
   "lights": [
-    { "type": "directional", "direction": [-0.2, -0.3, -1], "color": [0.3, 0.3, 0.3] },
-    { "type": "point", "position": [1, 1, 1], "color": [1, 0, 0] }
+    { "type": "point", "position": [1, -4, 3], "color": [1, 1, 1] }
   ],
   "ambientLight": [0.1, 0.1, 0.1],
   "voidColor": [0, 0, 0],
-  "viewport": { "size": [960, 540], "only": [100, 100, 860, 440] }
+  "viewport": { "size": [960, 540] }
 }
