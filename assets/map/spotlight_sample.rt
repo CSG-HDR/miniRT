@@ -1,0 +1,19 @@
+{
+  "camera": {
+    "position": [-4, -5, 2],
+    "rotation": { "type": "lookAt", "position": [0, 0, 0] },
+    "fov": 0.25
+  },
+  "models": [
+    { "type": "cube", "position": [0, 0, 0], "material": { "ambient": [1, 0, 0] } }
+  ],
+  "planes": [
+    { "position": [0, 0, -2], "direction": [0, 0, 1] }
+  ],
+  "lights": [
+    { "type": "spot", "color": [0, 1, 0], "position": [4, -5, 5], "angle": 0.42, "direction": [-0.2, -0.3, -1] }
+  ],
+  "ambientLight": [1, 1, 1],
+  "voidColor": [0, 0, 0],
+  "viewport": { "size": [960, 540], "only": [100, 100, 860, 440] }
+}
