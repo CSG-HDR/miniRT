@@ -22,6 +22,5 @@ bool	t_map_validate_light(t_ft_json value)
 		false
 		|| t_map_validate_point(value)
 		|| t_map_validate_directional(value)
-		|| t_map_validate_spot(value)
 	);
 }

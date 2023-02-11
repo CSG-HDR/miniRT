@@ -165,21 +165,10 @@ typedef struct s_map_directional
 	t_map_normal		direction;
 }	t_map_directional;
 
-typedef struct s_map_spot
-{
-	t_map_light_color	color;
-	t_map_position		position;
-	t_map_normal		direction;
-	t_map_angle			angle;
-	bool				has_range;
-	t_f					range;
-}	t_map_spot;
-
 typedef enum e_map_light_type
 {
 	T_MAP_LIGHT_TYPE_POINT,
 	T_MAP_LIGHT_TYPE_DIRECTIONAL,
-	T_MAP_LIGHT_TYPE_SPOT,
 }	t_map_light_type;
 
 typedef struct s_map_light_point
@@ -194,18 +183,11 @@ typedef struct s_map_light_directional
 	t_map_directional	directional;
 }	t_map_light_directional;
 
-typedef struct s_map_light_spot
-{
-	t_map_light_type	type;
-	t_map_spot			spot;
-}	t_map_light_spot;
-
 typedef union u_map_light
 {
 	t_map_light_type		*type;
 	t_map_light_point		*point;
 	t_map_light_directional	*directional;
-	t_map_light_spot		*spot;
 }	t_map_light;
 
 ////////////////////////////////////////////////////////////// model - primitive

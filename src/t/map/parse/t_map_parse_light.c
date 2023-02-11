@@ -49,27 +49,9 @@ static t_err	parse_directional(
 	return (false);
 }
 
-static t_err	parse_spot(
-	t_ft_json value,
-	t_map_light_spot **out
-)
-{
-	t_map_light_spot *const	result
-		= wrap_malloc(sizeof(t_map_light_spot));
-
-	if (!result)
-		return (true);
-	result->type = T_MAP_LIGHT_TYPE_SPOT;
-	t_map_parse_spot(value, &result->spot);
-	*out = result;
-	return (false);
-}
-
 t_err	t_map_parse_light(t_ft_json value, t_map_light *out)
 {
 	if (t_map_validate_has_type(value, "point"))
 		return (parse_point(value, &out->point));
-	if (t_map_validate_has_type(value, "directional"))
-		return (parse_directional(value, &out->directional));
-	return (parse_spot(value, &out->spot));
+	return (parse_directional(value, &out->directional));
 }

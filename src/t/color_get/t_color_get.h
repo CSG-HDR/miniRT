@@ -90,10 +90,6 @@ t_err					t_color_get_color_light_directional(
 							const t_color_get_context *context,
 							t_map_directional light,
 							t_f3 *out);
-t_err					t_color_get_color_light_spot(
-							const t_color_get_context *context,
-							t_map_spot light,
-							t_f3 *out);
 t_f3					t_color_get_util_reflect(
 							const t_map_normal incidence,
 							const t_map_normal normal);

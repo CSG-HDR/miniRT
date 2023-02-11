@@ -490,46 +490,6 @@
             "color",
             "direction"
           ]
-        },
-        {
-          "type": "object",
-          "unevaluatedProperties": false,
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "type of light",
-              "enum": [
-                "spot"
-              ]
-            },
-            "color": {
-              "$ref": "#/$defs/light-color"
-            },
-            "position": {
-              "$ref": "#/$defs/position"
-            },
-            "angle": {
-              "type": "number",
-              "description": "angle for the spot light",
-              "exclusiveMinimum": 0,
-              "exclusiveMaximum": 1
-            },
-            "direction": {
-              "$ref": "#/$defs/normal"
-            },
-            "range": {
-              "type": "number",
-              "description": "default is infinity",
-              "exclusiveMinimum": 0
-            }
-          },
-          "required": [
-            "type",
-            "color",
-            "position",
-            "angle",
-            "direction"
-          ]
         }
       ]
     },

@@ -19,8 +19,6 @@ void	t_map_free_light(t_map_light value)
 {
 	if (*value.type == T_MAP_LIGHT_TYPE_POINT)
 		wrap_free(value.point);
-	if (*value.type == T_MAP_LIGHT_TYPE_DIRECTIONAL)
-		wrap_free(value.directional);
 	else
-		wrap_free(value.spot);
+		wrap_free(value.directional);
 }

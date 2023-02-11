@@ -34,7 +34,6 @@ bool	t_map_validate_cube(t_ft_json value);
 bool	t_map_validate_light(t_ft_json value);
 bool	t_map_validate_point(t_ft_json value);
 bool	t_map_validate_directional(t_ft_json value);
-bool	t_map_validate_spot(t_ft_json value);
 bool	t_map_validate_plane(t_ft_json value);
 bool	t_map_validate_quadric(t_ft_json value);
 bool	t_map_validate_camera(t_ft_json value);

@@ -25,10 +25,7 @@ t_err	t_color_get_color_light(
 	if (*light.type == T_MAP_LIGHT_TYPE_POINT)
 		return (t_color_get_color_light_point(
 				context, light.point->point, out));
-	if (*light.type == T_MAP_LIGHT_TYPE_DIRECTIONAL)
+	else
 		return (t_color_get_color_light_directional(
 				context, light.directional->directional, out));
-	else
-		return (t_color_get_color_light_spot(
-				context, light.spot->spot, out));
 }
