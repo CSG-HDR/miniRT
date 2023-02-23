@@ -37,7 +37,7 @@ re:
 	$(Q3)$(MAKE) NO_ADDITIONAL_J=1 fclean
 	$(Q3)$(MAKE) NO_ADDITIONAL_J=1 all
 test:
-	$(Q1)find . -type d -mindepth 1 -name "test" | xargs -L1 -I {} $(MAKE) -C {} test
+	$(Q1)find . -type d -mindepth 1 -name "test" | xargs -n 1 -I {} $(MAKE) -C {} test
 .PHONY: all bonus clean fclean re test
 
 .cache/mlx:

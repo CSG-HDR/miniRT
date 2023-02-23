@@ -12,7 +12,7 @@ clean:
 	$(Q2)$(MAKE) -C assets/leak_test clean
 	$(Q2)find src \( -type f \( -name compile_commands.json -o -name "*.part.json" -o -name "*.exe" \) -o -type d -name .cache \) -delete
 	$(Q2)find src -type d -empty -delete
-	$(Q2)find src -type d -name test | xargs -L1 -I {} $(MAKE) -C {} clean
+	$(Q2)find src -type d -name test | xargs -n 1 -I {} $(MAKE) -C {} clean
 	@printf "\033[0m"
 fclean:
 	$(Q2)rm -f compile_commands.json .vscode/launch.json .vscode/tasks.json
@@ -20,13 +20,13 @@ fclean:
 	$(Q2)$(MAKE) -C assets/leak_test fclean
 	$(Q2)find src \( -type f \( -name compile_commands.json -o -name "*.part.json" -o -name "*.exe" \) -o -type d -name .cache \) -delete
 	$(Q2)find src -type d -empty -delete
-	$(Q2)find src -type d -name test | xargs -L1 -I {} $(MAKE) -C {} fclean
+	$(Q2)find src -type d -name test | xargs -n 1 -I {} $(MAKE) -C {} fclean
 	@printf "\033[0m"
 re:
 	$(Q3)$(MAKE) fclean
 	$(Q3)$(MAKE) all
 test:
-	$(Q2)find src -type d -name test | sort | xargs -L1 $(MAKE) -C
+	$(Q2)find src -type d -name test | sort | xargs -n 1 $(MAKE) -C
 	$(Q2)$(MAKE) prepare_publish
 	$(Q2)$(MAKE) -C tmp
 	$(Q2)$(MAKE) -C test
@@ -50,7 +50,7 @@ publish:
 
 .PHONY: pre_dev
 pre_dev:
-	$(Q2)find src -type d -name test | xargs -L1 -I {} $(MAKE) -C {} dev
+	$(Q2)find src -type d -name test | xargs -n 1 -I {} $(MAKE) -C {} dev
 .PHONY: compile_commands.json
 compile_commands.json: pre_dev
 	$(Q2)$(MAKE) -C src -k PROFILE=debug TARGET=development PRECISION=0 all bonus ; (printf "[" && find src/.cache -name "*.development.debug.0.o.compile_commands.part.json" | xargs cat && printf "]") > $@
