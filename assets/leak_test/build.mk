@@ -2,7 +2,7 @@ MAKEFLAGS += --no-builtin-rules
 Q := $(if $(filter 1,$(V) $(VERBOSE)),,@)
 MAKE := $(MAKE) $(if $(filter 1,$(V) $(VERBOSE)),,--no-print-directory)
 
-SRCS := $(shell find .. -maxdepth 1 -type f -name "*.c")
+SRCS := $(shell find .. -depth 1 -type f -name "*.c")
 NAME := leak_test
 
 CC := clang
