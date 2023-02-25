@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_map_parse.h                                      :+:      :+:    :+:   */
+/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
+/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 2023/02/25 16:29:35 by Juyeong Maing    ###   ########.fr       */
+/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ t_err	t_map_parse_get_optional_planes(
 			t_ft_json value, t_map_plane **out, size_t *out_count);
 t_err	t_map_parse_get_optional_quadrics(
 			t_ft_json value, t_map_quadric **out, size_t *out_count);
+t_err	t_map_parse_get_optional_quartics(
+			t_ft_json value, t_map_quartic **out, size_t *out_count);
 void	t_map_parse_get_optional_specular_lobe(t_ft_json value, t_f *out);
 void	t_map_parse_get_position(t_ft_json value, t_map_position *out);
 void	t_map_parse_get_rotation(t_ft_json value, t_map_rotation *out);
