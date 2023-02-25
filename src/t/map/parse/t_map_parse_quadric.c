@@ -29,7 +29,7 @@ static void	list(t_ft_json value, t_map_quadric *out)
 	out->j = ft_json_get_number(ft_json_get_list(value, 9));
 }
 
-static void dict_a_to_f(t_ft_json value, t_map_quadric *out)
+static void	dict_a_to_f(t_ft_json value, t_map_quadric *out)
 {
 	out->a = 0;
 	if (ft_json_dict_has_key(value, "A"))
