@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   t_map.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Updated: 2023/02/25 15:29:10 by Juyeong Maing    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -440,6 +440,46 @@ typedef struct s_map_quadric
 	t_map_color_material	material;
 }	t_map_quadric;
 
+typedef struct s_map_quartic
+{
+	t_f						c400;
+	t_f						c040;
+	t_f						c004;
+	t_f						c310;
+	t_f						c301;
+	t_f						c130;
+	t_f						c031;
+	t_f						c103;
+	t_f						c013;
+	t_f						c220;
+	t_f						c022;
+	t_f						c202;
+	t_f						c211;
+	t_f						c121;
+	t_f						c112;
+	t_f						c300;
+	t_f						c030;
+	t_f						c003;
+	t_f						c210;
+	t_f						c201;
+	t_f						c120;
+	t_f						c021;
+	t_f						c102;
+	t_f						c012;
+	t_f						c111;
+	t_f						c200;
+	t_f						c020;
+	t_f						c002;
+	t_f						c110;
+	t_f						c011;
+	t_f						c101;
+	t_f						c100;
+	t_f						c010;
+	t_f						c001;
+	t_f						c000;
+	t_map_color_material	material;
+}	t_map_quartic;
+
 typedef enum e_map_fov_type
 {
 	T_MAP_FOV_TYPE_MAX,
@@ -488,6 +528,8 @@ typedef struct s_map
 	t_map_plane				*planes;
 	size_t					quadric_count;
 	t_map_quadric			*quadrics;
+	size_t					quartic_count;
+	t_map_quartic			*quartics;
 	t_map_camera			camera;
 	t_map_viewport			viewport;
 	t_map_light_color		ambient_light;
