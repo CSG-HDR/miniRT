@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   t_ray_nearest_quadric.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Updated: 2023/02/25 13:11:15 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 
 typedef struct s_quadric_vars
 {
-	t_f	a;
-	t_f	b;
-	t_f	c;
+	t_f	p;
+	t_f	q;
+	t_f	r;
 	t_f	u;
 	t_f	v;
 	t_f	w;
@@ -39,9 +39,9 @@ static t_quadric_vars	s_quadric_vars(t_ray r)
 {
 	t_quadric_vars	v;
 
-	v.a = r.origin.x;
-	v.b = r.origin.y;
-	v.c = r.origin.z;
+	v.p = r.origin.x;
+	v.q = r.origin.y;
+	v.r = r.origin.z;
 	v.u = r.direction.x;
 	v.v = r.direction.y;
 	v.w = r.direction.z;
@@ -55,12 +55,12 @@ static t_quadric_equation	s_equation(t_map_quadric q, t_ray r)
 
 	equation.a = q.a * v.u * v.u + q.b * v.v * v.v + q.c * v.w * v.w
 		+ q.d * v.u * v.v + q.e * v.v * v.w + q.f * v.u * v.w;
-	equation.b = 2 * q.a * v.a * v.u + 2 * q.b * v.b * v.v + 2 * q.c * v.c * v.w
-		+ q.d * v.a * v.v + q.d * v.b * v.u + q.e * v.b * v.w + q.e * v.c * v.v
-		+ q.f * v.a * v.w + q.f * v.c * v.u + q.g * v.u + q.h * v.v + q.i * v.w;
-	equation.c = q.a * v.a * v.a + q.b * v.b * v.b + q.c * v.c * v.c
-		+ q.d * v.a * v.b + q.e * v.b * v.c + q.f * v.a * v.c
-		+ q.g * v.a + q.h * v.b + q.i * v.c + q.j;
+	equation.b = 2 * q.a * v.p * v.u + 2 * q.b * v.q * v.v + 2 * q.c * v.r * v.w
+		+ q.d * v.p * v.v + q.d * v.q * v.u + q.e * v.q * v.w + q.e * v.r * v.v
+		+ q.f * v.p * v.w + q.f * v.r * v.u + q.g * v.u + q.h * v.v + q.i * v.w;
+	equation.c = q.a * v.p * v.p + q.b * v.q * v.q + q.c * v.r * v.r
+		+ q.d * v.p * v.q + q.e * v.q * v.r + q.f * v.p * v.r
+		+ q.g * v.p + q.h * v.q + q.i * v.r + q.j;
 	return (equation);
 }
 
@@ -76,12 +76,12 @@ static bool	s_distance(
 
 	if (discriminant < 0)
 		return (false);
-	*out_distance = (-eq.b - t_f_sqrt(discriminant)) / 2 * eq.a;
-	if (*out_distance < 0)
+	*out_distance = (-eq.b - t_f_sqrt(discriminant)) / (2 * eq.a);
+	if (*out_distance > 0)
 		*out_is_front_face = true;
 	else
 	{
-		*out_distance = (-eq.b + t_f_sqrt(discriminant)) / 2 * eq.a;
+		*out_distance = (-eq.b + t_f_sqrt(discriminant)) / (2 * eq.a);
 		if (*out_distance < 0)
 			return (false);
 		*out_is_front_face = false;
