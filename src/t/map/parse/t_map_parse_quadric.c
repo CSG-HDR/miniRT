@@ -29,11 +29,17 @@ static void	list(t_ft_json value, t_map_quadric *out)
 	out->j = ft_json_get_number(ft_json_get_list(value, 9));
 }
 
-static void	dict(t_ft_json value, t_map_quadric *out)
+static void dict_a_to_f(t_ft_json value, t_map_quadric *out)
 {
-	out->a = ft_json_get_number(ft_json_get_dict(value, "A"));
-	out->b = ft_json_get_number(ft_json_get_dict(value, "B"));
-	out->c = ft_json_get_number(ft_json_get_dict(value, "C"));
+	out->a = 0;
+	if (ft_json_dict_has_key(value, "A"))
+		out->a = ft_json_get_number(ft_json_get_dict(value, "A"));
+	out->b = 0;
+	if (ft_json_dict_has_key(value, "B"))
+		out->b = ft_json_get_number(ft_json_get_dict(value, "B"));
+	out->c = 0;
+	if (ft_json_dict_has_key(value, "C"))
+		out->c = ft_json_get_number(ft_json_get_dict(value, "C"));
 	out->d = 0;
 	if (ft_json_dict_has_key(value, "D"))
 		out->d = ft_json_get_number(ft_json_get_dict(value, "D"));
@@ -43,6 +49,11 @@ static void	dict(t_ft_json value, t_map_quadric *out)
 	out->f = 0;
 	if (ft_json_dict_has_key(value, "F"))
 		out->f = ft_json_get_number(ft_json_get_dict(value, "F"));
+}
+
+static void	dict(t_ft_json value, t_map_quadric *out)
+{
+	dict_a_to_f(value, out);
 	out->g = 0;
 	if (ft_json_dict_has_key(value, "G"))
 		out->g = ft_json_get_number(ft_json_get_dict(value, "G"));

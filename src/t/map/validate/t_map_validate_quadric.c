@@ -37,9 +37,9 @@ static bool	valid_dict(t_ft_json value)
 {
 	return (
 		true
-		&& t_map_validate_has_number_dict(value, "A")
-		&& t_map_validate_has_number_dict(value, "B")
-		&& t_map_validate_has_number_dict(value, "C")
+		&& t_map_validate_has_optional_number(value, "A")
+		&& t_map_validate_has_optional_number(value, "B")
+		&& t_map_validate_has_optional_number(value, "C")
 		&& t_map_validate_has_optional_number(value, "D")
 		&& t_map_validate_has_optional_number(value, "E")
 		&& t_map_validate_has_optional_number(value, "F")
