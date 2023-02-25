@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   t_map_validate.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Updated: 2023/02/25 16:32:07 by Juyeong Maing    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ bool	t_map_validate_directional(t_ft_json value);
 bool	t_map_validate_spot(t_ft_json value);
 bool	t_map_validate_plane(t_ft_json value);
 bool	t_map_validate_quadric(t_ft_json value);
+bool	t_map_validate_quartic(t_ft_json value);
 bool	t_map_validate_camera(t_ft_json value);
 bool	t_map_validate_viewport(t_ft_json value);
 bool	t_map_validate_position(t_ft_json value);

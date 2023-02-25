@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   t_map_parse.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Updated: 2023/02/25 16:29:35 by Juyeong Maing    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ void	t_map_parse_plane(t_ft_json value, t_map_plane *out);
 t_err	t_map_parse_quadrics(
 			t_ft_json value, t_map_quadric **out, size_t *out_count);
 void	t_map_parse_quadric(t_ft_json value, t_map_quadric *out);
+t_err	t_map_parse_quartics(
+			t_ft_json value, t_map_quartic **out, size_t *out_count);
+void	t_map_parse_quartic(t_ft_json value, t_map_quartic *out);
 void	t_map_parse_point(t_ft_json value, t_map_point *out);
 void	t_map_parse_directional(t_ft_json value, t_map_directional *out);
 void	t_map_parse_spot(t_ft_json value, t_map_spot *out);

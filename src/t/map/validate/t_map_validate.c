@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
+/*   t_map_validate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
+/*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
+/*   Updated: 2023/02/25 16:36:02 by Juyeong Maing    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,6 @@
 #include <stdbool.h>
 
 #include "ft_json.h"
-
-static bool	validate_models(t_ft_json value)
-{
-	size_t	count;
-
-	if (!ft_json_is_list(value))
-		return (false);
-	count = ft_json_list_length(value);
-	while (count--)
-		if (!t_map_validate_model(ft_json_get_list(value, count)))
-			return (false);
-	return (true);
-}
 
 static bool	validate_lights(t_ft_json value)
 {
@@ -68,19 +55,34 @@ static bool	validate_quadrics(t_ft_json value)
 	return (true);
 }
 
+static bool	validate_quartics(t_ft_json value)
+{
+	size_t	count;
+
+	if (!ft_json_is_list(value))
+		return (false);
+	count = ft_json_list_length(value);
+	while (count--)
+		if (!t_map_validate_quartic(ft_json_get_list(value, count)))
+			return (false);
+	return (true);
+}
+
 bool	t_map_validate(t_ft_json value)
 {
 	return (
 		true
 		&& ft_json_is_dict(value)
 		&& (!ft_json_dict_has_key(value, "models")
-			|| validate_models(ft_json_get_dict(value, "models")))
+			|| t_map_validate_models(ft_json_get_dict(value, "models")))
 		&& (!ft_json_dict_has_key(value, "lights")
 			|| validate_lights(ft_json_get_dict(value, "lights")))
 		&& (!ft_json_dict_has_key(value, "planes")
 			|| validate_planes(ft_json_get_dict(value, "planes")))
 		&& (!ft_json_dict_has_key(value, "quadrics")
 			|| validate_quadrics(ft_json_get_dict(value, "quadrics")))
+		&& (!ft_json_dict_has_key(value, "quartics")
+			|| validate_quartics(ft_json_get_dict(value, "quartics")))
 		&& ft_json_dict_has_key(value, "camera")
 		&& t_map_validate_camera(ft_json_get_dict(value, "camera"))
 		&& ft_json_dict_has_key(value, "viewport")
