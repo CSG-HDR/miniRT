@@ -1,18 +1,18 @@
 {
   "camera": {
-    "position": [0, -7, 0],
+    "position": [0, -10, 0],
     "rotation": { "type": "rotation", "rotation": [0, 0, 0] },
     "fov": 0.4
   },
   "models": [
-    { "type": "sphere", "radius": 2, "material": { "ambient": [1, 0, 0], "specularLobe": 10 } }
+    { "type": "sphere", "radius": 2, "material": { "ambient": [1, 0, 0], "diffuse": [1, 0, 0], "specularLobe": 10 } }
   ],
   "planes": [
-    { "position": [0, 0, -3], "direction": [0, 0, 1], "material": { "ambient": [0, 1, 0], "specularLobe": 10 } }
+    { "position": [0, 0, -6], "direction": [0, 0, 1], "material": { "ambient": [0, 1, 0], "diffuse": [0, 1, 0], "specularLobe": 10 } }
   ],
-  "quadrics": [ { "properties": [1, 1, -1, 0, 0, 0, 0, 0, 0, -1], "material": { "specularLobe": 10 } } ],
+  "quadrics": [ { "properties": [1, 1, -1, 0, 0, 0, 0, 0, 0, 9], "material": { "ambient": [0.5, 0.5, 1], "diffuse": [0.5, 0.5, 1], "specularLobe": 10 } } ],
   "lights": [
-    { "type": "point", "position": [1, -4, 3], "color": [1, 1, 1] }
+    { "type": "point", "position": [2, -8, 6], "color": [1, 1, 1], "range": 50 }
   ],
   "ambientLight": [0.1, 0.1, 0.1],
   "voidColor": [0, 0, 0],

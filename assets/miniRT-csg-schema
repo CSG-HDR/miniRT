@@ -30,6 +30,12 @@
         "$ref": "#/$defs/quadric"
       }
     },
+    "quartics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/quartic"
+      }
+    },
     "camera": {
       "type": "object",
       "unevaluatedProperties": false,
@@ -600,14 +606,30 @@
                 "J": {
                   "type": "number"
                 }
-              },
-              "required": [
-                "A",
-                "B",
-                "C"
-              ]
+              }
             }
           ]
+        },
+        "material": {
+          "$ref": "#/$defs/color-material"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "quartic": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "coefficients": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "description": "the coefficient of [x⁴, y⁴, z⁴, x³y, x³z, xy³, y³z, xz³, yz³, x²y², y²z², x²z², x²yz, xy²z, xyz², x³, y³, z³, x²y, x²z, xy², y²z, xz², yz², xyz, x², y², z², xy, yz, xz, x, y, z, 1]"
+          },
+          "minItems": 35,
+          "maxItems": 35
         },
         "material": {
           "$ref": "#/$defs/color-material"

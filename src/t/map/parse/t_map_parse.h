@@ -54,6 +54,9 @@ void	t_map_parse_plane(t_ft_json value, t_map_plane *out);
 t_err	t_map_parse_quadrics(
 			t_ft_json value, t_map_quadric **out, size_t *out_count);
 void	t_map_parse_quadric(t_ft_json value, t_map_quadric *out);
+t_err	t_map_parse_quartics(
+			t_ft_json value, t_map_quartic **out, size_t *out_count);
+void	t_map_parse_quartic(t_ft_json value, t_map_quartic *out);
 void	t_map_parse_point(t_ft_json value, t_map_point *out);
 void	t_map_parse_directional(t_ft_json value, t_map_directional *out);
 void	t_map_parse_spot(t_ft_json value, t_map_spot *out);
@@ -90,6 +93,8 @@ t_err	t_map_parse_get_optional_planes(
 			t_ft_json value, t_map_plane **out, size_t *out_count);
 t_err	t_map_parse_get_optional_quadrics(
 			t_ft_json value, t_map_quadric **out, size_t *out_count);
+t_err	t_map_parse_get_optional_quartics(
+			t_ft_json value, t_map_quartic **out, size_t *out_count);
 void	t_map_parse_get_optional_specular_lobe(t_ft_json value, t_f *out);
 void	t_map_parse_get_position(t_ft_json value, t_map_position *out);
 void	t_map_parse_get_rotation(t_ft_json value, t_map_rotation *out);

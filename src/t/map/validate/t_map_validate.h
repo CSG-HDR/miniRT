@@ -37,6 +37,7 @@ bool	t_map_validate_directional(t_ft_json value);
 bool	t_map_validate_spot(t_ft_json value);
 bool	t_map_validate_plane(t_ft_json value);
 bool	t_map_validate_quadric(t_ft_json value);
+bool	t_map_validate_quartic(t_ft_json value);
 bool	t_map_validate_camera(t_ft_json value);
 bool	t_map_validate_viewport(t_ft_json value);
 bool	t_map_validate_position(t_ft_json value);

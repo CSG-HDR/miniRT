@@ -84,6 +84,16 @@ t_err	t_map_parse(t_ft_json value, t_map **out)
 		wrap_free(result);
 		return (true);
 	}
+	if (t_map_parse_get_optional_quartics(
+			value, &result->quartics, &result->quartic_count))
+	{
+		t_map_free_models(result->models, result->model_count);
+		t_map_free_lights(result->lights, result->light_count);
+		t_map_free_planes(result->planes, result->plane_count);
+		t_map_free_quadrics(result->quadrics, result->quadric_count);
+		wrap_free(result);
+		return (true);
+	}
 	etc(value, result);
 	*out = result;
 	return (false);
