@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_ray_nearest_quadric.c                            :+:      :+:    :+:   */
+/*   fake_file_name (file name is useless too)          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: 42header-remover <whatever@example.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:00 by VCS handles       #+#    #+#             */
-/*   Updated: 2023/02/25 14:49:15 by juwkim           ###   ########.fr       */
+/*   Updated: 1970/01/01 00:00:00 by file history     ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,52 @@
 #include "t_f.h"
 #include "t_map.h"
 
-typedef struct s_quadric_vars
-{
-	t_f	p;
-	t_f	q;
-	t_f	r;
-	t_f	u;
-	t_f	v;
-	t_f	w;
-}	t_quadric_vars;
+typedef void		(*t_func)(
+	t_ray_nearest_quartic_vars v,
+	t_map_quartic q,
+	t_ray_nearest_quartic_equation *mut_result);
 
-typedef struct s_quadric_equation
-{
-	t_f	a;
-	t_f	b;
-	t_f	c;
-}	t_quadric_equation;
+static const t_func	g_funcs[35] = {
+	t_ray_nearest_quartic_c400,
+	t_ray_nearest_quartic_c040,
+	t_ray_nearest_quartic_c004,
+	t_ray_nearest_quartic_c310,
+	t_ray_nearest_quartic_c301,
+	t_ray_nearest_quartic_c130,
+	t_ray_nearest_quartic_c031,
+	t_ray_nearest_quartic_c103,
+	t_ray_nearest_quartic_c013,
+	t_ray_nearest_quartic_c220,
+	t_ray_nearest_quartic_c022,
+	t_ray_nearest_quartic_c202,
+	t_ray_nearest_quartic_c211,
+	t_ray_nearest_quartic_c121,
+	t_ray_nearest_quartic_c112,
+	t_ray_nearest_quartic_c300,
+	t_ray_nearest_quartic_c030,
+	t_ray_nearest_quartic_c003,
+	t_ray_nearest_quartic_c210,
+	t_ray_nearest_quartic_c201,
+	t_ray_nearest_quartic_c120,
+	t_ray_nearest_quartic_c021,
+	t_ray_nearest_quartic_c102,
+	t_ray_nearest_quartic_c012,
+	t_ray_nearest_quartic_c111,
+	t_ray_nearest_quartic_c200,
+	t_ray_nearest_quartic_c020,
+	t_ray_nearest_quartic_c002,
+	t_ray_nearest_quartic_c110,
+	t_ray_nearest_quartic_c011,
+	t_ray_nearest_quartic_c101,
+	t_ray_nearest_quartic_c100,
+	t_ray_nearest_quartic_c010,
+	t_ray_nearest_quartic_c001,
+	t_ray_nearest_quartic_c000,
+};
 
-static t_quadric_vars	s_quadric_vars(t_ray r)
+static t_ray_nearest_quartic_vars	quartic_vars(t_ray r)
 {
-	t_quadric_vars	v;
+	t_ray_nearest_quartic_vars	v;
 
 	v.p = r.origin.x;
 	v.q = r.origin.y;
@@ -48,59 +74,49 @@ static t_quadric_vars	s_quadric_vars(t_ray r)
 	return (v);
 }
 
-static t_quadric_equation	s_equation(t_map_quadric q, t_ray r)
+static t_ray_nearest_quartic_equation	equation(t_map_quartic q, t_ray r)
 {
-	const t_quadric_vars	v = s_quadric_vars(r);
-	t_quadric_equation		equation;
+	const t_ray_nearest_quartic_vars	v = quartic_vars(r);
+	t_ray_nearest_quartic_equation		equation;
+	size_t								i;
 
-	equation.a = q.a * v.u * v.u + q.b * v.v * v.v + q.c * v.w * v.w
-		+ q.d * v.u * v.v + q.e * v.v * v.w + q.f * v.u * v.w;
-	equation.b = 2 * q.a * v.p * v.u + 2 * q.b * v.q * v.v + 2 * q.c * v.r * v.w
-		+ q.d * v.p * v.v + q.d * v.q * v.u + q.e * v.q * v.w + q.e * v.r * v.v
-		+ q.f * v.p * v.w + q.f * v.r * v.u + q.g * v.u + q.h * v.v + q.i * v.w;
-	equation.c = q.a * v.p * v.p + q.b * v.q * v.q + q.c * v.r * v.r
-		+ q.d * v.p * v.q + q.e * v.q * v.r + q.f * v.p * v.r
-		+ q.g * v.p + q.h * v.q + q.i * v.r + q.j;
+	equation.a = (t_f)0;
+	equation.b = (t_f)0;
+	equation.c = (t_f)0;
+	equation.d = (t_f)0;
+	equation.e = (t_f)0;
+	i = -1;
+	while (++i < 35)
+		g_funcs[i](v, q, &equation);
 	return (equation);
 }
 
 static bool	s_distance(
-	t_map_quadric q,
+	t_map_quartic q,
 	t_ray r,
 	t_f *out_distance,
 	bool *out_is_front_face
 )
 {
-	const t_quadric_equation	eq = s_equation(q, r);
-	const t_f					discriminant = eq.b * eq.b - 4 * eq.a * eq.c;
+	const t_ray_nearest_quartic_equation	eq = equation(q, r);
 
-	if (discriminant < 0)
-		return (false);
-	*out_distance = (-eq.b - t_f_sqrt(discriminant)) / (2 * eq.a);
-	if (*out_distance > 0)
-		*out_is_front_face = true;
-	else
-	{
-		*out_distance = (-eq.b + t_f_sqrt(discriminant)) / (2 * eq.a);
-		if (*out_distance < 0)
-			return (false);
-		*out_is_front_face = false;
-	}
-	return (true);
+	(void)out_distance;
+	(void)out_is_front_face;
+	(void)eq;
+	(void)g_funcs;
+	return (false);
 }
 
-static t_map_normal	s_normal(t_map_quadric q, t_map_position p)
+static t_map_normal	s_normal(t_map_quartic q, t_map_position p)
 {
-	return (t_f3_unit((t_map_normal){
-			2 * q.a * p.x + q.d * p.y + q.f * p.z + q.g,
-			2 * q.b * p.y + q.d * p.x + q.e * p.z + q.h,
-			2 * q.c * p.z + q.e * p.y + q.f * p.x + q.i
-		}));
+	(void)p;
+	(void)q;
+	return (t_f3_unit((t_map_normal){(t_f)0, (t_f)0, (t_f)0}));
 }
 
-t_err	t_ray_nearest_quadric(
+t_err	t_ray_nearest_quartic(
 	t_ray ray,
-	t_map_quadric quadric,
+	t_map_quartic quartic,
 	t_ray_hit_records *out
 )
 {
@@ -110,14 +126,14 @@ t_err	t_ray_nearest_quadric(
 	t_map_position				point;
 	t_map_normal				normal;
 
-	if (s_distance(quadric, ray, &distance, &is_front_face))
+	if (s_distance(quartic, ray, &distance, &is_front_face))
 	{
 		if (t_ray_hit_records_builder_init(&builder))
 			return (true);
 		point = t_f3_add(ray.origin, t_f3_mul(ray.direction, distance));
-		normal = s_normal(quadric, point);
+		normal = s_normal(quartic, point);
 		if ((t_ray_hit_records_builder_add(builder, (t_ray_hit_record){distance,
-					normal, t_ray_material_from_computed(quadric.material),
+					normal, t_ray_material_from_computed(quartic.material),
 					is_front_face, 0, 0})
 		) || t_ray_hit_records_builder_build(builder, out))
 		{

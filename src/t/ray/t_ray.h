@@ -80,6 +80,25 @@ typedef struct s_ray_hit_records_builder
 	size_t							count;
 }	t_ray_hit_records_builder;
 
+typedef struct s_ray_nearest_quartic_vars
+{
+	t_f	p;
+	t_f	q;
+	t_f	r;
+	t_f	u;
+	t_f	v;
+	t_f	w;
+}	t_ray_nearest_quartic_vars;
+
+typedef struct s_ray_nearest_quartic_equation
+{
+	t_f	a;
+	t_f	b;
+	t_f	c;
+	t_f	d;
+	t_f	e;
+}	t_ray_nearest_quartic_equation;
+
 t_ray_material		t_ray_material_from_computed(t_map_color_material material);
 t_ray_material		t_ray_material_from_color(t_map_material material);
 t_ray_hit_record	t_ray_default_hit_record(t_map_material material);
@@ -146,6 +165,155 @@ t_err				t_ray_nearest_quadrics(
 						t_ray ray,
 						t_map_quadric *quadrics,
 						size_t quadric_count,
+						t_ray_hit_records *out);
+t_err				t_ray_nearest_quartic(
+						t_ray ray,
+						t_map_quartic quartic,
+						t_ray_hit_records *out);
+void				t_ray_nearest_quartic_c400(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c040(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c004(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c310(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c301(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c130(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c031(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c103(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c013(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c220(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c022(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c202(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c211(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c121(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c112(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c300(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c030(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c003(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c210(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c201(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c120(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c021(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c102(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c012(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c111(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c200(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c020(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c002(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c110(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c011(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c101(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c100(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c010(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c001(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+void				t_ray_nearest_quartic_c000(
+						t_ray_nearest_quartic_vars v,
+						t_map_quartic q,
+						t_ray_nearest_quartic_equation *mut_result);
+t_err				t_ray_nearest_quartics(
+						t_ray ray,
+						t_map_quartic *quartics,
+						size_t quartic_count,
 						t_ray_hit_records *out);
 t_err				t_ray_merge(
 						const t_ray_hit_records *rays,
